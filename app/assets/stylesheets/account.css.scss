@@ -1,0 +1,63 @@
+.account-index {
+	background: url(asset-path('home.jpg')) no-repeat center center;
+	background-size: cover;
+	background-position: center;
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+}
+
+.account-index-overlay {
+	background-color: rgba(0,0,0,0.3);
+	background-size: cover;
+	background-position: center;
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+	.logo-text {
+		color: white;
+		font-size: 90px;
+		width: 30%;
+		margin-left: 35%;
+		margin-top: 7%;
+		text-align: center;
+		font-weight: lighter;
+	}
+	.login-field {
+		margin-top: 80px;
+		input {
+			background: rgba(255,255,255,0.4);
+			border: none;
+			border-radius: 5px;
+			display: block;
+			margin: 10px;
+			width: 24%;
+			height: 40px;
+			margin-left: 38%;
+			padding-left: 10px;
+			color: white;
+			outline: none;
+		}
+		button {
+			background: rgba(255,255,255,0.3);
+			color: rgba(255,255,255,0.3);
+			margin-left: 57%;
+			margin-right: 38%;
+			width: 5%;
+			outline: none;
+		}
+		button:hover {
+			background: rgba(255,255,255,1);
+			color: black;
+			-webkit-transition: all 0.5s ease;
+			-moz-transition: all 0.5s ease;
+			-o-transition: all 0.5s ease;
+			transition: all 0.5s ease;
+		}
+	}
+
+}
