@@ -1,2 +1,38 @@
-<h1>Account#login</h1>
-<p>Find me in app/views/account/login.html.erb</p>
+<div class="account-index">
+
+</div>
+
+<div class="account-index-overlay">
+	<div class="row">
+		<div class="logo-text">
+			CareerNet
+		</div>
+	</div>	
+	<div class="row">
+		<% if !flash[:notice].blank? %>
+			<div class="notice">
+			  <%= flash[:notice] %>
+			</div>
+		<% end %>
+		<div class="login">
+			<div class="title">
+				Log In
+			</div>
+			<%= form_tag(:action => 'login') do %>
+			  <div class="form-group has-feedback">
+			    <%= text_field_tag :email, params[:email], class: 'form-control', placeholder: 'Email' %>
+			  </div>
+			  <div class="form-group has-feedback">
+			    <%= password_field_tag :password, params[:password], class: 'form-control', placeholder: 'Password' %>
+			  </div>
+			  <div class="actions">
+			    <%= submit_tag "Log In", class: "btn" %>
+			  </div>
+			 <% end %>
+		</div>
+		<div class="to-signup">
+			Don't have an account? <%= link_to 'Sign up here.', account_signup_path %>
+		</div>
+		</div>
+	</div>
+</div>

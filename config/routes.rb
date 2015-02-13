@@ -2,12 +2,12 @@ Rails.application.routes.draw do
 
   root 'account#index'
 
+  get 'account' => 'account#index'
   get 'account/index'
-
-  get 'account/login'
-
-  get 'account/signup'
-
+  get 'account/login' => 'account#login', :as => :account_login
+  post 'account/login' => 'account#confirm_login', :as => :account_confirm_login
+  get 'account/signup' => 'account#signup', :as => :account_signup
+  post 'account/signup' => 'account#confirm_signup', :as => :account_confirm_signup
   get 'account/logout'
 
   # The priority is based upon order of creation: first created -> highest priority.

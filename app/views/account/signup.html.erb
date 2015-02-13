@@ -1,2 +1,33 @@
-<h1>Account#signup</h1>
-<p>Find me in app/views/account/signup.html.erb</p>
+<% if !flash[:notice].blank? %>
+	<div class="notice">
+	  <%= flash[:notice] %>
+	</div>
+<% end %>
+<div class="signup">
+	<div class="title">
+		Sign Up
+	</div>
+	<%= form_for @new_account, url: account_confirm_signup_path do %>
+		<div class="form-group has-feedback">
+			<%= text_field_tag :email, params[:email], class: 'form-control', placeholder: 'Email'%>
+		</div>
+		<div class="form-group has-feedback">
+			<%= label_tag 'Sign Up As?' %><br>
+			<%= select_tag :account_type, options_for_select(
+				[
+					["Student", 1], 
+					["Staff", 2],
+					["Company", 3],
+				], 1) %>
+		</div>
+		<div class="form-group has-feedback">
+			<%= password_field_tag :password, params[:password], class: 'form-control', placeholder: 'Password' %>
+		</div>
+	  	<div class="form-group has-feedback">
+	    	<%= password_field_tag :password2, params[:password2], class: 'form-control', placeholder: 'Re-type Password' %>
+	  	</div>
+	  	<div class="actions">
+	    	<%= submit_tag "Sign Up", class: "btn pull-right" %>
+	  	</div>
+	<% end %>
+</div>

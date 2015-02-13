@@ -27,8 +27,14 @@
 		text-align: center;
 		font-weight: lighter;
 	}
-	.login-field {
+	.login {
 		margin-top: 80px;
+		.title {
+			text-align: center;
+			color: white;
+			font-size: 25px;
+			font-weight: lighter;
+		}
 		input {
 			background: rgba(255,255,255,0.4);
 			border: none;
@@ -42,15 +48,12 @@
 			color: white;
 			outline: none;
 		}
-		button {
-			background: rgba(255,255,255,0.3);
-			color: rgba(255,255,255,0.3);
-			margin-left: 57%;
-			margin-right: 38%;
-			width: 5%;
+		input.btn {
+			background: rgba(255,255,255,0.4);
+			color: rgba(255,255,255,0.4);
 			outline: none;
 		}
-		button:hover {
+		input.btn:hover {
 			background: rgba(255,255,255,1);
 			color: black;
 			-webkit-transition: all 0.5s ease;
@@ -58,6 +61,10 @@
 			-o-transition: all 0.5s ease;
 			transition: all 0.5s ease;
 		}
+	}
+	.to-signup {
+		text-align: center;
+		color: white;
 	}
 
 }
