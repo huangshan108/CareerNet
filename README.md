@@ -8,6 +8,7 @@ Project setup
 * `bundle install`
 * `rake db:migrate`
 * `rails server`
+
 Then open web browser, go to `localhost:3000`
 
 TO commit to this repo
