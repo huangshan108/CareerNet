@@ -1,5 +1,7 @@
 # CareerNet
 
+Client Interview Link: http://youtu.be/nVIXn0le4u8 
+
 Project setup
 * `git remote add careernet https://github.com/huangshan108/CareerNet.git`
 * `git pull`
