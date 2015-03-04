@@ -6,10 +6,10 @@ Feature: View Events
 
 Background: Events have been added to the database.
  Given the following events exist:
- | Title           | Date
- | Job Fair        | 2/28/2015 12:00-4:00
- | Resume Workshop | 3/1/2015 1:00-3:00
- | Mock Interviews | 3/3/2015 12:00-6:00
+ | Title           | Date                 |
+ | Job Fair        | 2/28/2015 12:00-4:00 |
+ | Resume Workshop | 3/1/2015 1:00-3:00   |
+ | Mock Interviews | 3/3/2015 12:00-6:00  |
 
 Scenario: I want to view a recruiting event
  Given I am on the home screen
