@@ -1,4 +1,4 @@
-class AccountController < ApplicationController
+class AccountsController < ApplicationController
 	before_action :confirm_logged_in, :except => [:login, :confirm_login, :signup, :confirm_signup, :logout]
 	before_action :setup_new_account
 
