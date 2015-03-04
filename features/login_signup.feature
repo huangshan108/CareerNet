@@ -7,7 +7,7 @@ Feature: User sign up and log in
 
 Background: account shuang@berkeley.edu is not in the account table
 	
-Scenario: I don’t have an account and I want to signup for one
+Scenario: I don’t have an account and I try to login
 
 	When I click to signup button
 	Then I should go to the signup page
@@ -17,6 +17,8 @@ Scenario: I don’t have an account and I want to signup for one
 	Then I fill out my email shuang@berkeley.edu
 	And I click signup button
 	Then I should get an error
+
+Scenario: I don’t have an account and I want to signup for one
 
 	Then I enter password and re-enter a different password
 	And I click signup button
