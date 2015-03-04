@@ -11,15 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213063652) do
+ActiveRecord::Schema.define(version: 20150304233657) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
     t.string   "email"
-    t.integer  "type"
+    t.integer  "account_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
+  end
+
+  create_table "events_tables", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "datetime"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "jobs_tables", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "company"
+    t.string   "salary"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "students_tables", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "major"
+    t.date     "graduation_date"
+    t.string   "university"
+    t.string   "resume_link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
