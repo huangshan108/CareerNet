@@ -1,13 +1,15 @@
 # CareerNet
 
-Client Interview Link: http://youtu.be/nVIXn0le4u8 
+Herokuapp Link: http://careernet.herokuapp.com/
+
+Client Interview Link: http://youtu.be/nVIXn0le4u8/
 
 Clone into CareerNet
 * `git remote add careernet https://github.com/huangshan108/CareerNet.git`
 * `git clone careernet`
 
 Project and database setup
-**Note: We are using Ruby >= 2.0.0 and Rails >= 4.0.0**
+* **Note: We are using Ruby >= 2.0.0 and Rails >= 4.0.0**
 * `bundle install`
 * `rake db:migrate`
 * `rails server`
