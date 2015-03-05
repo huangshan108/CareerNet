@@ -22,15 +22,17 @@ ActiveRecord::Schema.define(version: 20150304233657) do
     t.string   "password_digest"
   end
 
-  create_table "events_tables", force: true do |t|
+  create_table "events", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "datetime"
+    t.time     "time_start"
+    t.time     "time_end"
+    t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "jobs_tables", force: true do |t|
+  create_table "jobs", force: true do |t|
     t.string   "title"
     t.text     "description"
     t.string   "company"
@@ -39,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150304233657) do
     t.datetime "updated_at"
   end
 
-  create_table "students_tables", force: true do |t|
+  create_table "students", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "major"
