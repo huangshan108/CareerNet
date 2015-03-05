@@ -15,7 +15,6 @@ random_majors.each_line do |line|
 end
 
 random_dates = File.open(File.join(Rails.root, 'db', 'seeds', 'db_seed_data/random_dates.txt')).read
-students = []
 random_names = File.open(File.join(Rails.root, 'db', 'seeds', 'db_seed_data/random_names.txt')).read
 
 random_names.each_line do |line|
@@ -27,11 +26,9 @@ random_names.each_line do |line|
 	student[:graduation_date] = random_dates_list.sample
 	student[:university] = university
 	student[:resume_link] = resume_link
-	students << student
-end
-
-students.each do |student|
 	Student.create!(student)
 end
+
+
 
 puts "Done!"
