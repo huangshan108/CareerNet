@@ -10,8 +10,16 @@ Background: User has logged in with account student@berkeley.edu
 Scenario: Navingating CareerNet with navigation tabs
 
 	When I am on the main page
-    And I click on the "" tab
-	Then I should be directed to "" page
+    And I click on the "Jobs" tab
+	Then I should be directed to "Jobs" page
+
+	When I am on the main page
+    And I click on the "Events" tab
+	Then I should be directed to "Events" page
+
+	When I am on the main page
+    And I click on the "My Profile" tab
+	Then I should be directed to "My Profile" page
 
 Scenario: Account info display on main page
 
