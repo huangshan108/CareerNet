@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   post 'account/login' => 'accounts#confirm_login', :as => :account_confirm_login
   get 'account/signup' => 'accounts#signup', :as => :account_signup
   post 'account/signup' => 'accounts#confirm_signup', :as => :account_confirm_signup
+  get 'account/forgot-password' => 'accounts#forgot_password', :as => :account_forgot_password
+  post 'account/reset-password' => 'accounts#reset_password', :as => :account_reset_password
   get 'account/logout' => 'accounts#logout'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-	before_action :confirm_logged_in, :except => [:login, :confirm_login, :signup, :confirm_signup, :logout]
+	before_action :confirm_logged_in, :except => [:login, :confirm_login, :signup, :confirm_signup, :forgot_password, :reset_password, :logout]
 	before_action :setup_new_account
 
 	def index
@@ -30,6 +30,12 @@ class AccountsController < ApplicationController
 	end
 
 	def confirm_signup
+		found_user = Account.where(:email =>params[:email]).first
+		if found_user
+			flash[:notice] = "Email already exist."
+			redirect_to(:back)
+			return
+		end
 		# byebug
 		if params[:password] != params[:password2] or params[:password] == ""
 			flash[:notice] = "Password does not match!"
@@ -40,6 +46,7 @@ class AccountsController < ApplicationController
 		@new_account.email = params[:email]
 		@new_account.account_type = params[:account_type]
 		@new_account.password = params[:password]
+		@new_account.name = params[:username]
 		if @new_account.valid?
 			if @new_account.save
 				flash[:notice] = "Account successfully created!"
@@ -51,22 +58,39 @@ class AccountsController < ApplicationController
 				return
 			end
 		else
-			flash[:notice] = "Invalid field. Please try again."
+			flash[:notice] = "Invalid field. Please check your email or password."
 			redirect_to(:back)
 			return
 		end
 
 	end
 
+	def forgot_password
+
+	end
+
+	def reset_password
+		found_user = Account.where(:email => params[:email]).first
+		if not found_user
+			flash[:notice] = "Account not found!"
+			redirect_to(:back)
+			return
+		end
+		@reset_password_email = params[:email]
+		render 'reset_password_confirmation'
+		# TODO
+		# Send account reset password email
+	end
+
 	def logout
-	session[:user_id] = nil
-	session[:email] = nil
-	flash[:notice] = "Logged out"
-	redirect_to(:action => "login")
+		session[:user_id] = nil
+		session[:email] = nil
+		flash[:notice] = "Logged out"
+		redirect_to(:action => "login")
 	end
 	
 	private
 	def setup_new_account
 		@new_account = Account.new		
-	end	
+	end
 end
