@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-	before_action :confirm_logged_in, :except => [:login, :confirm_login, :signup, :confirm_signup, :forgot_password, :reset_password, :logout]
+	before_action :confirm_logged_in, :except => [:login, :confirm_login, :signup, :confirm_signup, :forgot_password, :reset_password, :start_reset_password, :submit_reset_password, :logout]
 	before_action :setup_new_account
 
 	def index
@@ -77,9 +77,32 @@ class AccountsController < ApplicationController
 			return
 		end
 		@reset_password_email = params[:email]
+		found_user.send_password_reset
 		render 'reset_password_confirmation'
-		# TODO
-		# Send account reset password email
+	end
+
+	def start_reset_password
+		@account = Account.find_by_password_reset_token!(params[:password_reset_token])
+	end
+
+	def submit_reset_password
+		@account = Account.find_by_password_reset_token!(params[:password_reset_token])
+		if @account.password_reset_sent_at < 2.hours.ago
+		redirect_to account_forgot_password_path, :notice => "Password reset link has expired."
+		else
+			if params[:password] != params[:password2] or params[:password] == ""
+				flash[:notice] = "Password does not match!"
+				redirect_to(:back)
+				return
+			end
+			if @account.update_attributes(:password => params[:password])
+				redirect_to account_login_path, :notice => "Password reset successfully!"
+				return
+			else
+				redirect_to :back, :notice => "Fail to save new password, please try again."
+				return
+			end
+		end		
 	end
 
 	def logout
