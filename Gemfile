@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -51,3 +51,6 @@ gem 'autoprefixer-rails'
 gem 'email_validator'
 gem 'newrelic_rpm'
 gem 'tzinfo-data'
+
+# Hye: added for timezone
+gem 'rspec-rails', '~> 2.14.0', group: [:development, :test]
