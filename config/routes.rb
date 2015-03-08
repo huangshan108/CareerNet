@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'profiles/staff'
+
+  get 'profiles/company'
+
+  get 'profiles/school'
+
+  get 'profiles/student'
+
   root 'accounts#index'
 
   get 'accounts' => 'accounts#index'
