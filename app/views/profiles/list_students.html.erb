@@ -1,7 +1,7 @@
 <% #  This file is app/views/profiles/students.html.haml %>
 <h1> All Students </h1>
 
-<table border = "1" id = "students">
+<table class = "table">
   <thead>
     <tr>
       <th> Name </th>
@@ -15,10 +15,10 @@
     <% for student in @all_students -%>
       <tr>
         <td><%= student.first_name + ' ' + student.last_name -%>
-        <td><%= student.university -%>
-        <td><%= student.major -%>
+        <td><%= student.college.school_name -%>
+        <td><%= student.major_id -%>
         <td><%= student.graduation_date -%>
-        <td><%= link_to "More details", profiles_students_path(student) -%>
+        <td><%= link_to "More details", single_student_profile_path(student) -%>
       </tr>
     <% end -%>
   </tbody>
