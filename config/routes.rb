@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'profiles/staff'
-
-  get 'profiles/company'
-
-  get 'profiles/school'
-
-  get 'profiles/student'
-
   root 'accounts#index'
 
   get 'accounts' => 'accounts#index'
@@ -21,6 +13,10 @@ Rails.application.routes.draw do
   get 'account/start-reset-password/:password_reset_token' => 'accounts#start_reset_password', :as => :account_start_reset_password
   post 'account/start-reset-password/:password_reset_token' => 'accounts#submit_reset_password', :as => :account_submit_reset_password
   get 'account/logout' => 'accounts#logout'
+
+
+  get 'profiles/students/' => 'profiles#list_students'
+  get 'profiles/student/:id' => 'profiles#student'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

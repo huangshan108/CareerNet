@@ -1,2 +1,23 @@
-<h1>Profiles#student</h1>
-<p>Find me in app/views/profiles/student.html.erb</p>
+<% #  This file is app/views/profiles/students.html.haml %>
+<h1> Students </h1>
+
+<table border = "1" id = "students">
+  <thead>
+    <tr>
+      <th> Name </th>
+      <th> University </th>
+      <th> Major </th>
+      <th> Graduation Date </th>
+      <th> More Info </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @student.first_name + ' ' + @student.last_name -%>
+      <td><%= @student.university -%>
+      <td><%= @student.major -%>
+      <td><%= @student.graduation_date -%>
+      <td><%= link_to "More details", profiles_students_path(@student) -%>
+    </tr>
+  </tbody>
+</table>
