@@ -8,12 +8,6 @@ random_dates.each_line do |line|
 	random_dates_list << Date.parse(line)
 end
 
-random_majors_list = []
-random_majors = File.open(File.join(Rails.root, 'db', 'seeds', 'db_seed_data/random_majors.txt')).read
-random_majors.each_line do |line|
-	random_majors_list << line.strip
-end
-
 random_dates = File.open(File.join(Rails.root, 'db', 'seeds', 'db_seed_data/random_dates.txt')).read
 random_names = File.open(File.join(Rails.root, 'db', 'seeds', 'db_seed_data/random_names.txt')).read
 
@@ -22,9 +16,9 @@ random_names.each_line do |line|
 	first_name, last_name = line.split()
 	student[:first_name] = first_name
 	student[:last_name] = last_name 
-	student[:major] = random_majors_list.sample
+	student[:major_id] = rand(1963)
 	student[:graduation_date] = random_dates_list.sample
-	student[:university] = university
+	student[:college_id] = rand(14754)
 	student[:resume_link] = resume_link
 	Student.create!(student)
 end
