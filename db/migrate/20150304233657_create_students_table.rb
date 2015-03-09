@@ -3,9 +3,9 @@ class CreateStudentsTable < ActiveRecord::Migration
     create_table :students do |t|
     	t.string :first_name
       t.string :last_name
-      t.string :major
+      t.integer :major_id
       t.date :graduation_date
-      t.string :university
+      t.integer :college_id
       t.string :resume_link
       t.timestamps
     end
