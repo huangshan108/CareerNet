@@ -8,7 +8,6 @@ random_dates.each_line do |line|
 	random_dates_list << Date.parse(line)
 end
 
-random_dates = File.open(File.join(Rails.root, 'db', 'seeds', 'db_seed_data/random_dates.txt')).read
 random_names = File.open(File.join(Rails.root, 'db', 'seeds', 'db_seed_data/random_names.txt')).read
 
 random_names.each_line do |line|
