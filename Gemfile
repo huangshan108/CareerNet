@@ -50,3 +50,6 @@ gem 'bootstrap-sass', '~> 3.3.1'
 gem 'autoprefixer-rails'
 gem 'email_validator'
 gem 'newrelic_rpm'
+gem 'cucumber-rails', :require => false
+gem 'rspec-rails','~>2.14.0'
+gem 'simplecov', :require => false
