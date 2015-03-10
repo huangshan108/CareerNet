@@ -14,11 +14,11 @@
   <tbody>
     <% for student in @all_students -%>
       <tr>
-        <td><%= student.first_name + ' ' + student.last_name -%>
-        <td><%= student.college.school_name -%>
-        <td><%= student.major_id -%>
-        <td><%= student.graduation_date -%>
-        <td><%= link_to "More details", single_student_profile_path(student) -%>
+        <td><%= student.first_name + ' ' + student.last_name -%></td>
+        <td><%= student.college.school_name -%></td>
+        <td><%= student.major.name -%></td>
+        <td><%= student.graduation_date -%></td>
+        <td><%= link_to "More details", single_student_profile_path(student) -%></td>
       </tr>
     <% end -%>
   </tbody>
