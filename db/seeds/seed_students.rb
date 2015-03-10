@@ -15,7 +15,7 @@ random_names.each_line do |line|
 	first_name, last_name = line.split()
 	student[:first_name] = first_name
 	student[:last_name] = last_name 
-	student[:major_id] = 1 + rand(1962)
+	student[:major_id] = 1 + rand(1915)
 	student[:graduation_date] = random_dates_list.sample
 	student[:college_id] = 1 + rand(14753)
 	student[:resume_link] = resume_link
