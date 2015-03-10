@@ -28,7 +28,7 @@
   });
 </script>
 <p></p>
-<%= form_tag(:action => 'student') do %>
+<%= form_tag(:action => 'update_student') do %>
   <div>
     <label>First Name</label>
     <%= text_field_tag :first_name, params[:first_name], class: 'form-control', value: @student.first_name %>

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'profiles/students/' => 'profiles#list_students'
   get 'profiles/student/:id' => 'profiles#student', :as => :single_student_profile
   get 'profiles/student/:id/edit' => 'profiles#edit_student', :as => :edit_student_profile
+  post 'profiles/student/:id/update' => 'profiles#update_student', :as => :update_student_profile
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
