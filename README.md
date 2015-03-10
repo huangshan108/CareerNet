@@ -5,8 +5,7 @@ Herokuapp Link: http://careernet.herokuapp.com/
 Client Interview Link: http://youtu.be/nVIXn0le4u8/
 
 Clone into CareerNet
-* `git remote add careernet https://github.com/huangshan108/CareerNet.git`
-* `git clone careernet`
+* `git clone careernet https://github.com/huangshan108/CareerNet.git`
 
 Project and database setup
 * **Note: We are using Ruby >= 2.0.0 and Rails >= 4.0.0**
@@ -22,8 +21,10 @@ Currently avalible seed_scripts are:
 * `seed_students`
 * `seed_events`
 * `seed_jobs`
+* `seed_colleges`
+* `seed_majors`
 
 To commit to this repo (if you are a collaborator)
 * `git add <file-name>`
 * `git commit -m <message>`
-* `git push careernet <branch>`
+* `git push origin <branch>`
