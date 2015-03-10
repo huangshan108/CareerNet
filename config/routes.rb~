@@ -1,19 +1,25 @@
 Rails.application.routes.draw do
 
-  root 'account#index'
+  root 'accounts#index'
 
-  get 'account' => 'account#index'
-  get 'account/index'
-  get 'account/login' => 'account#login', :as => :account_login
-  post 'account/login' => 'account#confirm_login', :as => :account_confirm_login
-  get 'account/signup' => 'account#signup', :as => :account_signup
-  post 'account/signup' => 'account#confirm_signup', :as => :account_confirm_signup
-  get 'account/logout'
+  
   resources :jobs do
     member do
       get 'apply'
     end
   end
+
+  get 'account/login' => 'accounts#login', :as => :account_login
+  post 'account/login' => 'accounts#confirm_login', :as => :account_confirm_login
+  get 'account/signup' => 'accounts#signup', :as => :account_signup
+  post 'account/signup' => 'accounts#confirm_signup', :as => :account_confirm_signup
+  get 'account/forgot-password' => 'accounts#forgot_password', :as => :account_forgot_password
+  post 'account/reset-password' => 'accounts#reset_password', :as => :account_reset_password
+  get 'account/start-reset-password/:password_reset_token' => 'accounts#start_reset_password', :as => :account_start_reset_password
+  post 'account/start-reset-password/:password_reset_token' => 'accounts#submit_reset_password', :as => :account_submit_reset_password
+  get 'account/logout' => 'accounts#logout'
+
+>>>>>>> 57f9336343e0f8fa48415310a095e5022d7d7703
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

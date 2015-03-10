@@ -26,4 +26,14 @@ class JobsController < ApplicationController
     flash[:notice] = "Job '#{@job.title}' deleted."
     redirect_to jobs_path
   end
+
+  def user_params
+    params.require(:job).permit(:title, :company, :description, :salary)
+  end
+
+
+
+
+
+
 end

@@ -14,9 +14,9 @@ class JobsController < ApplicationController
     @id = params[:id]
     @job = Jobs.find params[:id]
     #@student.update_attributes!(params[:click])
-    flash[:notice] = "You've applied #{job.title}."
-    flash.keep
-    redirect_to action:"show", id: @id
+    #flash[:notice] = "You've applied #{job.title}."
+    #flash.keep
+    #redirect_to action:"show", id: @id
   end
   
   
@@ -26,4 +26,14 @@ class JobsController < ApplicationController
     flash[:notice] = "Job '#{@job.title}' deleted."
     redirect_to jobs_path
   end
+
+  def user_params
+    params.require(:job).permit(:title, :company, :description, :salary)
+  end
+
+
+
+
+
+
 end
