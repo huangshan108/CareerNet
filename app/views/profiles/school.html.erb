@@ -6,12 +6,16 @@
       <td><%= @college.school_name -%></td>
     </tr>
     <tr>
-      <th> Type </th>
-      <td><%= @college.school_year + ' ' + @college.school_type -%></td>
+      <th> Year </th>
+      <td><%= @college.school_year ? @college.school_year : "N/A" -%>
+    </tr>
+    <tr>
+    	<th>Type</th>
+    	<td><%= @college.school_type ? @college.school_type : "N/A" -%></td></td>
     </tr>
     <tr>
       <th> Address </th>
-      <td><%= @college.address -%></td>
+      <td><%= @college.address ? @college.address : "N/A" -%></td>
     </tr>
   </tbody>
 </table>
