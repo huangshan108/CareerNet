@@ -39,12 +39,12 @@
   </div>
   <div>
     <label>University</label>
-    <input type="text" id="college_name" class='form-control' value= <%= @student.college.school_name %> ></input>
+    <input type="text" id="college_name" class='form-control' value="<%= @student.college.school_name %>" ></input>
     <%= hidden_field_tag :college_id, params[:college_id], id: "college_id", value: @student.college_id %>
   </div>
   <div>
     <label>Major</label>
-    <input type="text" id="major_name" class='form-control' value= <%= @student.major.name %> ></input>
+    <input type="text" id="major_name" class='form-control' value="<%= @student.major.name %>" ></input>
     <%= hidden_field_tag :major_id, params[:major_id], id: "major_id", value: @student.major_id %>
   </div>
   <div>

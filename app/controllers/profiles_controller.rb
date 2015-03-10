@@ -38,5 +38,7 @@ class ProfilesController < ApplicationController
   end
 
   def school
+    id = params[:id] # retrieve student ID from URI route
+    @college = College.find(id)
   end
 end

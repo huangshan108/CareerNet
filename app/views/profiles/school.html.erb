@@ -1,2 +1,17 @@
-<h1>Profiles#school</h1>
-<p>Find me in app/views/profiles/school.html.erb</p>
+<h1> School Profile </h1>
+<table class = "table">
+  <tbody>
+    <tr>
+      <th> Name </th>
+      <td><%= @college.school_name -%></td>
+    </tr>
+    <tr>
+      <th> Type </th>
+      <td><%= @college.school_year + ' ' + @college.school_type -%></td>
+    </tr>
+    <tr>
+      <th> Address </th>
+      <td><%= @college.address -%></td>
+    </tr>
+  </tbody>
+</table>
