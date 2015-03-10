@@ -4,6 +4,10 @@ class ProfilesController < ApplicationController
   	@student = Student.find(id)
   end
 
+  def students
+    redirect_to(list_students_path(1))
+  end
+
   def edit_student
     id = params[:id] # retrieve student ID from URI route
     @student = Student.find(id)
@@ -28,7 +32,7 @@ class ProfilesController < ApplicationController
   end
 
   def list_students
-  	@all_students = Student.all
+  	@all_students = Student.paginate(:page => params[:page], :per_page => 10)
   end
 
   def staff
