@@ -7,6 +7,8 @@ class ProfilesController < ApplicationController
   def edit_student
     id = params[:id] # retrieve student ID from URI route
     @student = Student.find(id)
+    @all_schools = College.all
+    @all_majors = Major.all
   end
 
   def list_students
