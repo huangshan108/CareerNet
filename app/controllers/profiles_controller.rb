@@ -21,6 +21,7 @@ class ProfilesController < ApplicationController
                               :last_name => params[:last_name],
                               :college_id => params[:college_id],
                               :major_id => params[:major_id],
+                              :graduation_date => params[:graduation_date],
                               :resume_link => params[:resume_link])
     if student.save
       flash[:notice] = "Profile Updated!"

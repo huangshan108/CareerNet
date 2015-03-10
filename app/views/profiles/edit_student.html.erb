@@ -25,6 +25,9 @@
         $("#major_id").val(ui.item.id)
       }
     });
+    $("#graduation_date").datepicker({
+      dateFormat: "yy-mm-dd"
+    });
   });
 </script>
 <p></p>
@@ -46,6 +49,10 @@
     <label>Major</label>
     <input type="text" id="major_name" class='form-control' value="<%= @student.major.name %>" ></input>
     <%= hidden_field_tag :major_id, params[:major_id], id: "major_id", value: @student.major_id %>
+  </div>
+  <div>
+    <label>Graduation Date</label>
+    <%= text_field_tag :graduation_date, params[:graduation_date], class: 'form-control', id: "graduation_date", value: @student.graduation_date %>
   </div>
   <div>
     <label>Resume Link</label>
