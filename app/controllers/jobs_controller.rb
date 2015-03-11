@@ -2,7 +2,7 @@ class JobsController < ApplicationController
 
   def show
     id = params[:id] # retrieve job ID from URI route
-    @job = Jobs.find(id) # look up job by unique ID
+    @job = Job.find_by_id(id) # look up job by unique ID
   end
 
 
@@ -10,30 +10,17 @@ class JobsController < ApplicationController
     
   end
 
-  def apply
-    @id = params[:id]
-    @job = Jobs.find params[:id]
-    #@student.update_attributes!(params[:click])
-    #flash[:notice] = "You've applied #{job.title}."
-    #flash.keep
-    #redirect_to action:"show", id: @id
+  def create
+      @job = Job.create!(params[:job])
   end
-  
-  
-  def destroy
-    @job = Jobs.find(params[:id])
-    @job.destroy
-    flash[:notice] = "Job '#{@job.title}' deleted."
-    redirect_to jobs_path
+
+  def apply
+    id = params[:id]
+    @job = Job.find_by_id(id)
   end
 
   def user_params
-    params.require(:job).permit(:title, :company, :description, :salary)
+    params.require(:jobs).permit(:title, :company, :description, :salary)
   end
-
-
-
-
-
 
 end

@@ -15,7 +15,7 @@ end
 
 group :assets do
   gem 'therubyracer'
-
+  gem 'coffee-rails'
 end
 
 
