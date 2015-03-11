@@ -1,6 +1,10 @@
 Welcome to CareerNet
+
+
 <p></p>
 <head>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" ></script>
+  <script src="http://dotdotdot.frebsite.nl/js/jquery.dotdotdot-1.2.1.js" ></script>
 <style>
 table, th, td {
     border: 1px solid black;
@@ -13,7 +17,8 @@ th, td {
 </head>
 
 
-<table border = "1" style="width: 700px";>
+<table class="job_list" border = "1" style="width: 700px";>
+   
   <tr>
   	<th> Job </th>
   	<th> Company </th>
@@ -26,11 +31,16 @@ th, td {
 	  <tr>
 	    <td><div class="job_title"><%= job.title %><div></td>
 	    <td><div class="company"><%= job.company %><div></td>
-	    <td><div class="desc"><%= job.description %></div></td>
+	    <td><div id ="descbox" class="desc"><%= job.description %></div></td>
 	    <td><div class="salary"><%= job.salary %><div></td>
 	    <td><div class="date"><%= job.created_at %><div></td>
 	    <td><div class="date"><%= job.updated_at %><div></td>
 	  </tr>
 	  <% end %>
+    <script type="text/javascript">
+     $(".desc").dotdotdot()
+    </script>
+
 </table>
+
 <%= will_paginate @jobs %>
