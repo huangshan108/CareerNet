@@ -23,7 +23,7 @@ Currently avalible seed_scripts are (It's highly recommended that you reset your
 * `seed_colleges`
 * `seed_majors`
 
-To test this app with tests accounts:
+To test this app with test accounts:
 * For students, use `careernet.student+<id>@gmail.com`
 * For companies, use `careernet.company+<id>@gmail.com`
 * All test account passwords are `careernet`
@@ -35,5 +35,5 @@ To commit to this repo (if you are a collaborator)
 
 **Note:**
 * We are using Ruby >= 2.0.0 and Rails >= 4.0.0
-* ActionMailer on dev env will only work via port 3000
+* I have configured the default host for this app on dev env to be `localhost:3000`
 * No ActionMailer for test env are configured
