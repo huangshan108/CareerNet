@@ -8,7 +8,13 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /^the apply page$/ then "/jobs/#{@job.id}/apply"
+    when /(.+) apply page/ then 
+      split_page = page_name.split(' ').map(&:strip)
+      job_id = split_page[1]
+      '/jobs/' + job_id + '/apply'
+    when /jobs page/ then
+      '/jobs/'
+
    
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
