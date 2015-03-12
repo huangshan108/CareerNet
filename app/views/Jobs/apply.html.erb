@@ -1,5 +1,5 @@
 <h2> Details about 
-<%= #{@job.title} %>
+<%= @job.title %>
 </h2>
 
 <ul>
@@ -10,7 +10,7 @@
 
 <li> 
 <b>Salary:</b>
-<%= @job.salary %>
+<%= @job.salary + " $" %>
 </li>
 
 <h3>
@@ -18,11 +18,7 @@
  <%= @job.description %>
 </h3>
 
-<!-- will do action later -->
-<form action="apply">
-  <input type="file" name="pic" >
-  <input type="submit" value = "APPLY">
-</form>
 
+<button type="button" onclick="alert('You've submmited your application')">Apply</button>
 
-<% link_to "Back to the Job list", job_path %>
+<%= link_to "Back to the Job list", job_path %>
