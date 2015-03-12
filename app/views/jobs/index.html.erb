@@ -29,7 +29,7 @@ th, td {
   </tr>
   <% @jobs.each do |job| %>
 	  <tr>
-	    <td><div class="job_title"><%= job.title %><div></td>
+	    <td><div class="job_title"><%=link_to "#{job.title}", apply_job_path(job.id) %><div></td>
 	    <td><div class="company"><%= job.company %><div></td>
 	    <td><div id ="descbox" class="desc"><%= job.description %></div></td>
 	    <td><div class="salary"><%= job.salary %><div></td>
