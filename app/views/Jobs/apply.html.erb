@@ -1,0 +1,28 @@
+<h2> Details about 
+<%= #{@job.title} %>
+</h2>
+
+<ul>
+<li> 
+<b>Company:</b>
+<%= @job.company %>
+</li>
+
+<li> 
+<b>Salary:</b>
+<%= @job.salary %>
+</li>
+
+<h3>
+ <b> Description:</b>
+ <%= @job.description %>
+</h3>
+
+<!-- will do action later -->
+<form action="apply">
+  <input type="file" name="pic" >
+  <input type="submit" value = "APPLY">
+</form>
+
+
+<% link_to "Back to the Job list", job_path %>
