@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post 'account/start-reset-password/:password_reset_token' => 'accounts#submit_reset_password', :as => :account_submit_reset_password
   get 'account/logout' => 'accounts#logout'
   get 'jobs/' => 'jobs#index', :as => :job_list
+  get 'jobs/sort' => 'jobs#job_sort', :as => :job_sort
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

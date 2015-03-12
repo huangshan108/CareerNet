@@ -20,10 +20,10 @@ th, td {
 <table class="job_list" border = "1" style="width: 700px";>
    
   <tr>
-  	<th> Job </th>
-  	<th> Company </th>
+  	<th> <%=link_to 'Job', job_list_path(:sort => 'title', :page => params[:page])%> </th>
+  	<th> <%=link_to 'Company', job_list_path(:sort => 'company', :page => params[:page])%> </th>
   	<th> Description </th>
-  	<th> Salary </th>
+  	<th> <%=link_to 'Salary', job_list_path(:sort => 'salary', :page => params[:page])%> </th>
   	<th> Created </th>
   	<th> Added </th>
   </tr>
