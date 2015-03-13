@@ -8,6 +8,8 @@ group :development, :test do
   gem 'sqlite3'
   gem 'database_cleaner'
   gem 'cucumber-rails', :require => false
+	gem 'rspec-rails', '~> 2.14.0'
+	gem 'simplecov'
 end
 
 group :production do
@@ -15,11 +17,11 @@ group :production do
   gem 'rails_12factor'
 end
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+group :assets do
+	gem 'therubyracer'
+	gem 'sass-rails'
+	gem 'coffee-rails'
+end
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
