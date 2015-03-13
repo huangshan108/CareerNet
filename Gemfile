@@ -53,4 +53,11 @@ gem 'newrelic_rpm'
 gem 'tzinfo-data'
 
 # Hye: added for timezone
-gem 'rspec-rails', '~> 2.14.0', group: [:development, :test]
+gem 'rspec-rails', group: [:development, :test]
+group :development, :test do
+    gem 'simplecov', :require => false
+    gem 'cucumber-rails', :require => false
+    gem 'factory_girl_rails', :require => false
+    gem 'database_cleaner'
+    gem 'capybara'
+end
