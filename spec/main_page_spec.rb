@@ -5,19 +5,19 @@ describe "MainPage" do
     it 'should direct to jobs page when click jobs' do
         pending("paths for navigation to be added")
         click_link('jobs')
-        expect(response).to render_template jobs_path
+        expect(page).to have_content 'Jobs'
     end
 
     it 'should direct to jobs page when click events' do
         pending("paths for navigation to be added")
         click_link('events')
-        expect(response).to render_template events_path
+        expect(page).to have_content 'Events'
     end
 
     it 'should direct to jobs page when click my_profile' do
         pending("paths for navigation to be added")
         click_link('my_profile')
-        expect(response).to render_template accounts_profile_path
+        expect(page).to have_content 'Student Profile'
     end
 
     it 'should direct to logout page when click logout' do
