@@ -1,7 +1,7 @@
 {
   "Cucumber Features": {
     "coverage": {
-      "/home/saasbook/temp/CareerNet/app/models/account.rb": [
+      "/home/saasbook/CareerNet/app/models/account.rb": [
         1,
         1,
         1,
@@ -17,7 +17,7 @@
         null,
         null
       ],
-      "/home/saasbook/temp/CareerNet/app/controllers/accounts_controller.rb": [
+      "/home/saasbook/CareerNet/app/controllers/accounts_controller.rb": [
         1,
         1,
         1,
@@ -135,7 +135,7 @@
         null,
         null
       ],
-      "/home/saasbook/temp/CareerNet/app/controllers/application_controller.rb": [
+      "/home/saasbook/CareerNet/app/controllers/application_controller.rb": [
         1,
         null,
         null,
@@ -154,15 +154,15 @@
         null,
         null
       ],
-      "/home/saasbook/temp/CareerNet/app/helpers/application_helper.rb": [
+      "/home/saasbook/CareerNet/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/home/saasbook/temp/CareerNet/app/helpers/account_helper.rb": [
+      "/home/saasbook/CareerNet/app/helpers/account_helper.rb": [
         1,
         null
       ],
-      "/home/saasbook/temp/CareerNet/app/mailers/accounts_mailer.rb": [
+      "/home/saasbook/CareerNet/app/mailers/accounts_mailer.rb": [
         1,
         1,
         1,
@@ -172,22 +172,22 @@
         null,
         null
       ],
-      "/home/saasbook/temp/CareerNet/app/models/event.rb": [
+      "/home/saasbook/CareerNet/app/models/event.rb": [
         1,
         null
       ],
-      "/home/saasbook/temp/CareerNet/app/models/job.rb": [
+      "/home/saasbook/CareerNet/app/models/job.rb": [
         1,
         1,
         null
       ],
-      "/home/saasbook/temp/CareerNet/app/models/company.rb": [
+      "/home/saasbook/CareerNet/app/models/company.rb": [
         1,
         1,
         null
       ]
     },
-    "timestamp": 1426226376
+    "timestamp": 1426227185
   },
   "RSpec": {
     "coverage": {
