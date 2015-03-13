@@ -12,12 +12,6 @@ group :development, :test do
   gem 'simplecov'
 end
 
-group :assets do
-  gem 'therubyracer'
-
-end
-
-
 group :production do
   gem 'pg'
   gem 'rails_12factor'
