@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'accounts#index'
+  #root 'accounts#index'
 
   get 'accounts' => 'accounts#index'
   get 'account/index'
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'account/start-reset-password/:password_reset_token' => 'accounts#start_reset_password', :as => :account_start_reset_password
   post 'account/start-reset-password/:password_reset_token' => 'accounts#submit_reset_password', :as => :account_submit_reset_password
   get 'account/logout' => 'accounts#logout'
+  root :to => 'main#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
