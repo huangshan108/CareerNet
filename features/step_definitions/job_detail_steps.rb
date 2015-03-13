@@ -3,11 +3,20 @@ Given /the following jobs exist/ do |jobs_table|
   jobs_table.hashes.each do |job|
     # each returned element will be a hash whose key is the table header.
     # you should arrange to add that movie to the database here.
-    new_job = Job.create!(title: job[:title], description: job[:description],  company: job[:company], salary: job[:salary])
+    new_job = Job.create!(title: job[:title], description: job[:description],  company_id: job[:company_id], salary: job[:salary])
     new_job.save
   end
 end
 
+
+Given /the following companies exist/ do |company_table|
+  company_table.hashes.each do |company|
+    # each returned element will be a hash whose key is the table header.
+    # you should arrange to add that movie to the database here.
+    new_company = Company.create!(name: company[:name])
+    new_company.save
+  end
+end
 
 #see job
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
