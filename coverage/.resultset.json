@@ -1,0 +1,73 @@
+{
+  "Cucumber Features": {
+    "coverage": {
+      "/Users/Mushuwushu/CareerNet/app/models/job.rb": [
+        1,
+        null
+      ],
+      "/Users/Mushuwushu/CareerNet/app/controllers/jobs_controller.rb": [
+        1,
+        null,
+        1,
+        5,
+        5,
+        2,
+        null,
+        5,
+        2,
+        null,
+        3,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/Mushuwushu/CareerNet/app/controllers/application_controller.rb": [
+        1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/Mushuwushu/CareerNet/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/Mushuwushu/CareerNet/app/helpers/account_helper.rb": [
+        1,
+        null
+      ]
+    },
+    "timestamp": 1426219256
+  }
+}

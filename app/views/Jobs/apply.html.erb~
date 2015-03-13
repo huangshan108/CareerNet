@@ -1,0 +1,24 @@
+<h2> Details about 
+<%= @job.title %>
+</h2>
+
+<ul>
+<li> 
+<b>Company:</b>
+<%= @job.company %>
+</li>
+
+<li> 
+<b>Salary:</b>
+<%= @job.salary + " $" %>
+</li>
+
+<h3>
+ <b> Description:</b>
+ <%= @job.description %>
+</h3>
+
+
+<button type="button" onclick="alert('You've submmited your application')">Apply</button>
+
+<%= link_to "Back to the Job list", job_path %>
