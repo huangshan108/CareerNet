@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_action :confirm_logged_in
   def student
   	id = params[:id] # retrieve student ID from URI route
   	@student = Student.find(id)

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-
+  before_action :confirm_logged_in
   def show
     id = params[:id]
     @event = Event.find(id)

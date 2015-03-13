@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-
+	before_action :confirm_logged_in
 	def index
 		pages = 10
 		if params[:sort]
