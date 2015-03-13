@@ -5,44 +5,63 @@ Feature: User sign up and log in
 	I can login if I have an account already or signup if I don’t have one.
 	I should be able to successfully signup/login and go to the home page.
 
-Background: account shuang@berkeley.edu is not in the account table
+Background:
+	Given the following accounts exist:
+	|name         |email               |account_type |
+	|huangshan108 |shuang@berkeley.edu |1            |
+	|expired      |expired@berkeley.edu|2            |
 	
-Scenario: I don’t have an account and I try to login
+Scenario: I don't input anything and try to login
+	I am on the CareerNet "/account/login" page 
+	When I press "Log In" button
+	Then I should see "Invalid username/password combination."
 
-	When I click to signup button
-	Then I should go to the signup page
-	If I don’t fill out email or password
-	Then I should get an error
+Scenario: I type a wrong password
+	I am on the CareerNet "/account/login" page
+	Then I enter "shuang@berkeley.edu" into "email" and I enter "wrongpassword" into "password" and I press "Log In" button
+	Then I should see "Invalid username/password combination."
 
-	Then I fill out my email shuang@berkeley.edu
-	And I click signup button
-	Then I should get an error
+Scenario: I type a correct password
+	I am on the CareerNet "/account/login" page
+	Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+	Then I should see "Welcome to CareerNet"
 
-Scenario: I don’t have an account and I want to signup for one
+Scenario: I want to signup but type in invalid email
+	I am on the CareerNet "/account/signup" page
+	When I fill in signup form with invalid email
+	Then I should see "Invalid field. Please check your email or password."
 
-	Then I enter password and re-enter a different password
-	And I click signup button
-	Then I should get an error
+Scenario: I want to signup with an existing account
+	I am on the CareerNet "/account/signup" page
+	When I fill in signup form with email "shuang@berkeley.edu"
+	Then I should see "Email already exist."
 
-	Then I enter the password `mypassword` twice
-	And I click signup button
-	Then I should be successfully signup up with email shuang@berkeley.edu and password `mypassword`
-	Then I should be redirected to ‘create profile page’
+Scenario: I successfully signed up
+	I am on the CareerNet "/account/signup" page
+	When I fill in signup form with email "careernet@berkeley.edu"
+	Then I should see "Account successfully created!"
 
-Scenario: I have an account and I want to login
+Scenario: I want to reset my password but I type in a invalid email.
+	I am on the CareerNet "/account/forgot-password" page
+	When I fill in reset password form with email "careernet@berkeley.edu"
+	Then I should see "Account not found!"
 
-	When I click the login button without filling out username or password
-	Then I should get an error
-	When I enter email shuang@berkeley.edu and a random password
-	And I click login button
-	Then I should get an error
-	When I enter email shuang@berkeley.edu and password `mypassword`
-	I should see the profile page
+Scenario: I want to reset my password and I type in a valid email.
+	I am on the CareerNet "/account/forgot-password" page
+	When I fill in reset password form with email "shuang@berkeley.edu"
+	Then I should see "follow the instructions to reset your password."
 
-# we will not have a separated onboarding page. Instead, we will redirect people who haven’t completed their profile to the profile page.
-# we will not have a skip button either. Instead, people can always skip by clicking another section in the navbar
+Scenario: I am successfully reset a password
+	I am on the CareerNet "account/start-reset-password/test_token" page.
+	When I fill in reset password form with password1 "careernet" and password2 "careernet"
+	Then I should see "Password reset successfully!"
 
-Scenario: I just signed up and login
+Scenario: I fail to reset a password
+	I am on the CareerNet "account/start-reset-password/test_token" page.
+	When I fill in reset password form with password1 "careernet" and password2 "careernet2"
+	Then I should see "Password does not match!"
 
-	When I click the home button in the navbar
-	I should go to the home page
+Scenario: I reset password on an expired link
+	I am on the CareerNet "account/start-reset-password/test_token_expired" page.
+	When I fill in reset password form with password1 "careernet" and password2 "careernet" in the expired link
+	Then I should see "Password reset link has expired."
