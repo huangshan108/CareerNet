@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get 'jobs/sort' => 'jobs#job_sort', :as => :job_sort
 
 
+
+  resources :events
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

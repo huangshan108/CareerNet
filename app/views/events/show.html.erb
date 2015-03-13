@@ -1,0 +1,13 @@
+<h1><%= @event.title %></h1>
+
+<h5>
+    <%= @event.time_start %> to <%= @event.time_end %> at <%= @event.location %>
+</h5>
+<ul>
+  <li>
+    <%= @event.description %>
+  </li>
+</ul>
+<%= link_to 'Register', events_path %> </br>
+<%= link_to 'Back to Events', events_path %></br></br>
+<%= button_to 'Delete', event_path(@event), :method => :delete %>
