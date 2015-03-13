@@ -1,21 +1,24 @@
 require 'spec_helper'
+include Warden::Test::Helpers
 
 describe "MainPage" do
-    before(:each) {visit root_path}
+    before(:each) {
+        visit root_path
+    }
     it 'should direct to jobs page when click jobs' do
-        pending("paths for navigation to be added")
-        click_link('jobs')
-        expect(page).to have_content 'Jobs'
+        click_link('Jobs')
+        expect(page).to have_content 'Job'
+        expect(page).to have_content 'Company'
+        expect(page).to have_content 'Description'
     end
 
     it 'should direct to jobs page when click events' do
-        pending("paths for navigation to be added")
-        click_link('events')
-        expect(page).to have_content 'Events'
+        click_link('Events')
+        expect(page).to have_content 'All Events'
     end
 
     it 'should direct to jobs page when click my_profile' do
-        pending("paths for navigation to be added")
+        pending("add link to my_profile")
         click_link('my_profile')
         expect(page).to have_content 'Student Profile'
     end
@@ -23,10 +26,5 @@ describe "MainPage" do
     it 'should direct to logout page when click logout' do
         click_link('Logout')
         expect(page).to have_content 'Logged out'
-    end
-
-    it 'should direct to forgot password path when click forgot password' do
-        click_link('Forgot Password?')
-        expect(page).to have_selector("input[value='Reset Password']")
     end
 end

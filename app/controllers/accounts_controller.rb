@@ -18,7 +18,8 @@ class AccountsController < ApplicationController
     if authorized_user 
         session[:user_id] = authorized_user.id
         session[:email] = authorized_user.email
-        redirect_to(:action => 'index')
+        # After logging in, directed to main page instead of account#index
+        redirect_to(root_path)
     else
         flash[:error] = "Invalid username/password combination."
         redirect_to(:action => 'login')
