@@ -1,24 +1,16 @@
-<h2> Details about 
-<%= @job.title %>
-</h2>
+<h2> Details about <%= @job.title %> </h2>
 
-<ul class="frame">
-<li> 
-<b >Company:</b>
-<%= @job.company.name %>
-</li>
+<ul>
+	<li> 
+		<b>Company:</b><%= @job.company.name %>
+	</li>
+	<li> 
+		<b>Salary:</b><%= @job.salary + " $" %>
+	</li>
+	<li>
+ 		<b> Description:</b><%= @job.description %>
+	</li>
+</ul>
 
-<li> 
-<b>Salary:</b>
-<%= @job.salary + " $" %>
-</li>
-
-<h3 >
- <b> Description:</b>
- <%= @job.description %>
-</h3>
-
-
-<button type="button" onclick="alert('You've submmited your application')">Apply</button>
-
+<button type="button" onclick="alert('This feature has yet beeen implemented')">Apply</button>
 <%= link_to "Back to the Job list", job_list_path %>
