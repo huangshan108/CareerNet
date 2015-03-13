@@ -28,12 +28,23 @@ end
 
 #assume we have a job table in database
 
+Then /I should see "(.*?)" before "(.*?)"/ do |e1, e2|
+  #  ensure that that e1 occurs before e2.
+  #  page.body is the entire content of the page as a string.
+  e1_index = page.body.index(e1)
+  e2_index = page.body.index(e2)
+end
+
 Given /^(?:|I )am on the (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
 And /^(?:|I )should see the button "(.*?)"/ do 
   #page.should have_button()
+end
+
+When /^(?:|I )follow "([^"]*)"$/ do |link|
+  click_link(link)
 end
 
 

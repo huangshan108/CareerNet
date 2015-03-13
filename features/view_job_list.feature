@@ -20,6 +20,5 @@ Scenario: Go to jobs page
 
 Scenario: Sort jobs by title
   Given I am on the jobs page
-  When I follow "title"
-  I should see "Back-End developer" before "Web Designer"
-  And I should see "Front-End developer" before " Software Engineer"
+  When I follow "Job"
+  Then I should see "Backend Developer" before "Data Scientist"
