@@ -18,23 +18,6 @@ Given /the following companies exist/ do |company_table|
   end
 end
 
-#see job
-Then /^(?:|I )should see "([^"]*)"$/ do |text|
-  if page.respond_to? :should
-    page.should have_content(text)
-  else
-    assert page.has_content?(text)
-  end
-end
-
-Then /^(?:|I )should not see "([^"]*)"$/ do |text|
-  if page.respond_to? :should
-    page.should have_no_content(text)
-  else
-    assert page.has_no_content?(text)
-  end
-end
-
 #assume we have a job table in database
 
 Then /I should see "(.*?)" before "(.*?)"/ do |e1, e2|
@@ -47,16 +30,8 @@ Then /I should see "(.*?)" before "(.*?)"/ do |e1, e2|
   end
 end
 
-Given /^(?:|I )am on the (.+)$/ do |page_name|
-  visit path_to(page_name)
-end
-
 And /^(?:|I )should see the button "(.*?)"/ do 
   #page.should have_button()
-end
-
-When /^(?:|I )follow "([^"]*)"$/ do |link|
-  click_link(link)
 end
 
 
