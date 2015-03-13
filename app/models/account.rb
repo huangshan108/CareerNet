@@ -3,6 +3,8 @@ class Account < ActiveRecord::Base
 	validates :email, presence: true, email: true
 	validates_presence_of :password, :on => :create
 
+	has_one :student
+
 	def send_password_reset
 	  self.password_reset_sent_at = Time.zone.now
 	  self.password_reset_token = SecureRandom.urlsafe_base64

@@ -2,18 +2,26 @@ Rails.application.routes.draw do
 
   root 'accounts#index'
 
-  get 'accounts' => 'accounts#index'
-  get 'account/index'
+  
+  resources :jobs do
+    member do
+      get 'apply'
+    end
+  end
+
   get 'account/login' => 'accounts#login', :as => :account_login
   post 'account/login' => 'accounts#confirm_login', :as => :account_confirm_login
   get 'account/signup' => 'accounts#signup', :as => :account_signup
   post 'account/signup' => 'accounts#confirm_signup', :as => :account_confirm_signup
   get 'account/forgot-password' => 'accounts#forgot_password', :as => :account_forgot_password
   post 'account/reset-password' => 'accounts#reset_password', :as => :account_reset_password
+  get 'account/reset_password_confirmation' => 'accounts#reset_password_confirmation', :as => :reset_password_confirmation
   get 'account/start-reset-password/:password_reset_token' => 'accounts#start_reset_password', :as => :account_start_reset_password
   post 'account/start-reset-password/:password_reset_token' => 'accounts#submit_reset_password', :as => :account_submit_reset_password
   get 'account/logout' => 'accounts#logout'
 
+  get 'jobs/' => 'jobs#index', :as => :job_list
+  get 'jobs/sort' => 'jobs#job_sort', :as => :job_sort
 
   get 'profiles/students/' => 'profiles#students'
   get 'profiles/students/page/:page' => 'profiles#list_students', :as => :list_students
@@ -21,7 +29,8 @@ Rails.application.routes.draw do
   get 'profiles/student/:id/edit' => 'profiles#edit_student', :as => :edit_student_profile
   post 'profiles/student/:id/update' => 'profiles#update_student', :as => :update_student_profile
   get 'profiles/school/:id' => 'profiles#school', :as => :single_school_profile
-
+  
+  resources :events
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,7 @@
+<h1>Create New Event</h1>
+
+<%= form_tag events_path do %>
+  <%= text_field_tag :title, params[:title], class: 'form-control', placeholder: 'Title' %>
+  <%= text_field_tag :description, params[:description], class: 'form-control', placeholder: 'Description' %>
+  <%= submit_tag "Create", class: "btn pull-right" %>
+<% end %>

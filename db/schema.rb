@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309052630) do
-  
-  create_table "accounts", force: true do |t|
+ActiveRecord::Schema.define(version: 20150312165338) do
+
+  create_table "accounts", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.integer  "account_type"
@@ -24,14 +24,24 @@ ActiveRecord::Schema.define(version: 20150309052630) do
     t.datetime "password_reset_sent_at"
   end
 
-  create_table "colleges", force: true do |t|
+  create_table "colleges", force: :cascade do |t|
     t.string "address"
     t.string "school_name"
     t.string "school_type"
     t.string "school_year"
   end
 
-  create_table "events", force: true do |t|
+  create_table "companies", force: :cascade do |t|
+    t.string   "name"
+    t.string   "website"
+    t.string   "address"
+    t.integer  "account_id"
+    t.text     "brief"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.time     "time_start"
@@ -41,22 +51,22 @@ ActiveRecord::Schema.define(version: 20150309052630) do
     t.datetime "updated_at"
   end
 
-  create_table "jobs", force: true do |t|
+  create_table "jobs", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "company"
     t.string   "salary"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
-  create_table "majors", force: true do |t|
+  create_table "majors", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "students", force: true do |t|
+  create_table "students", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "major_id"
@@ -65,6 +75,7 @@ ActiveRecord::Schema.define(version: 20150309052630) do
     t.string   "resume_link"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
 end
