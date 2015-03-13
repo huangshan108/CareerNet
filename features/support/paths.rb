@@ -17,6 +17,10 @@ module NavigationHelpers
     when /^signup page/ then '/account/signup'
     when /^forgot password page/ then '/account/forgot-password'
     when /^logout page/ then '/account/logout'
+    when /^list students page/ then '/profiles/students'
+    when /^student profile page/ then '/profiles/student/1'
+    when /^school profile page/ then '/profiles/school/1'
+    when /^edit profile page/ then '/profiles/student/1/edit'
     when /(.+) apply page/ then 
       split_page = page_name.split(' ').map(&:strip)
       job_id = split_page[1]
