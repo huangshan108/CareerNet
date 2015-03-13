@@ -20,7 +20,7 @@ class AccountsController < ApplicationController
         session[:email] = authorized_user.email
         redirect_to(:action => 'index')
     else
-        flash[:notice] = "Invalid username/password combination."
+        flash[:error] = "Invalid username/password combination."
         redirect_to(:action => 'login')
     end
     end
@@ -31,7 +31,7 @@ class AccountsController < ApplicationController
     def confirm_signup
         found_user = Account.where(:email =>params[:email]).first
         if found_user
-            flash[:notice] = "Email already exist."
+            flash[:error] = "Email already exist."
             redirect_to(:back)
             return
         end
@@ -47,7 +47,7 @@ class AccountsController < ApplicationController
                 redirect_to(:action => 'login')
                 return
         else
-            flash[:notice] = "Invalid field. Please check your email or password."
+            flash[:error] = "Invalid field. Please check your email or password."
             redirect_to(:back)
             return
         end
@@ -60,7 +60,7 @@ class AccountsController < ApplicationController
     def reset_password
         found_user = Account.where(:email => params[:email]).first
         if not found_user
-            flash[:notice] = "Account not found!"
+            flash[:error] = "Account not found!"
             redirect_to(:back)
             return
         end
@@ -95,7 +95,7 @@ class AccountsController < ApplicationController
 
     def compare_retyped_passwords? password, password2
         if password != password2 or password == ""
-            flash[:notice] = "Password does not match!"
+            flash[:error] = "Password does not match!"
             redirect_to(:back)
             return false
         end
