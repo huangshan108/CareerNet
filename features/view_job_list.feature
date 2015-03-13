@@ -22,3 +22,10 @@ Scenario: Sort jobs by title
   Given I am on the jobs page
   When I follow "Job"
   Then I should see "Backend Developer" before "Data Scientist"
+  And I should see "Frontend Developer" before "Software Engineer"
+
+Scenario: Sort jobs by Company
+  Given I am on the jobs page
+  When I follow "Company"
+  Then I should see "Apple" before "Facebook"
+  And I should see "Intel" before "Microsoft"

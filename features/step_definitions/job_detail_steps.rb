@@ -33,6 +33,9 @@ Then /I should see "(.*?)" before "(.*?)"/ do |e1, e2|
   #  page.body is the entire content of the page as a string.
   e1_index = page.body.index(e1)
   e2_index = page.body.index(e2)
+  if e1_index > e2_index
+    raise Error
+  end
 end
 
 Given /^(?:|I )am on the (.+)$/ do |page_name|
