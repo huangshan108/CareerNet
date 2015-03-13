@@ -13,7 +13,6 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-<<<<<<< HEAD
     when /^login page/ then '/account/login'
     when /^signup page/ then '/account/signup'
     when /^forgot password page/ then '/account/forgot-password'
@@ -24,9 +23,7 @@ module NavigationHelpers
       '/jobs/' + job_id + '/apply'
     when /jobs page/ then
       '/jobs/'
-=======
     when /^the events page$/ then '/events'
->>>>>>> iteration1-2-view_events
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
