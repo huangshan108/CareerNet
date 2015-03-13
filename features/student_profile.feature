@@ -26,15 +26,15 @@ Background: Adding jobs to database
         Given I am on list students page
         When I follow "More details"
         Then I should be on student profile page
-        And I should see the student "Mark Sharp"
+        And I should see "Mark Sharp"
    
     Scenario: Edit student profile
         Given I am on student profile page
         When I follow "Edit profile"
         Then I should be on edit profile page
-        When I fill in First Name with "Mark"
+        When I fill in First Name with "Amy"
         And I press "Submit"
-        Then I should see "Mark"
+        Then I should see "Amy"
 
     Scenario: View university profile
         Given I am on student profile page

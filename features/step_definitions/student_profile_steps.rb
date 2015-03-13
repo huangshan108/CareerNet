@@ -19,14 +19,6 @@ Given /the following majors exist/ do |majors_table|
   end
 end
 
-Then(/^I should see the student "(.*?)"$/) do |arg1|
-  true
-end
-
 When(/^I fill in First Name with "(.*?)"$/) do |arg1|
-  true
-end
-
-Then(/^I should see the school "(.*?)"$/) do |arg1|
-  true
+  fill_in "first_name", :with => arg1
 end
