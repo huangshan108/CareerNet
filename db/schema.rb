@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309045325) do
+ActiveRecord::Schema.define(version: 20150312165338) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(version: 20150309045325) do
     t.string "school_year"
   end
 
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.string   "website"
+    t.string   "address"
+    t.integer  "account_id"
+    t.text     "brief"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "events", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -44,8 +54,14 @@ ActiveRecord::Schema.define(version: 20150309045325) do
   create_table "jobs", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "company"
     t.string   "salary"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
+  end
+
+  create_table "majors", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -53,12 +69,13 @@ ActiveRecord::Schema.define(version: 20150309045325) do
   create_table "students", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "major"
+    t.integer  "major_id"
     t.date     "graduation_date"
-    t.string   "university"
+    t.integer  "college_id"
     t.string   "resume_link"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
 end
