@@ -23,7 +23,7 @@ module NavigationHelpers
     when /^edit profile page/ then '/profiles/student/1/edit'
     when /(.+) apply page/ then 
       split_page = page_name.split(' ').map(&:strip)
-      job_id = split_page[1]
+      job_id = split_page[2]
       '/jobs/' + job_id + '/apply'
     when /jobs page/ then
       '/jobs/'
