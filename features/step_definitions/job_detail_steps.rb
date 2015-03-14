@@ -34,3 +34,7 @@ And /^(?:|I )should see the button "(.*?)"/ do
   #page.should have_button()
 end
 
+Given /I am logged in/ do
+
+end
+
