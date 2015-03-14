@@ -27,8 +27,7 @@ Background: Adding jobs and com to database
 
 Scenario: View job details
   I am on the CareerNet "/account/login" page
-  Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
-  Then I should see "Welcome to CareerNet"
+  And I log in
   Given I am on the job 2 apply page
   Then I should see "Data Scientist"
   And I should see "Intel"
