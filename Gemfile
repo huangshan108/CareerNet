@@ -21,6 +21,7 @@ group :assets do
 	gem 'therubyracer'
 	gem 'sass-rails'
 	gem 'coffee-rails'
+  gem 'uglifier'
 end
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
