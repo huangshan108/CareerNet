@@ -14,21 +14,34 @@ Background: Adding jobs to database
     Given the following majors exist:
     | name                            |
     | Humanities/Humanistic Studiesd  |
-
-
+    
+    Given the following accounts exist:
+    |name         |email               |account_type |
+    |huangshan108 |shuang@berkeley.edu |1            |
+    |expired      |expired@berkeley.edu|2            |
+  
     Scenario: Go to students page
+        I am on the CareerNet "/account/login" page
+        Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+        Then I should see "Welcome to CareerNet"
         Given I am on list students page
         Then I should see "Mark Sharp"
         Then I should see "Humanities/Humanistic Studiesd"
         Then I should see "More details"
 
     Scenario: View student profile
+        I am on the CareerNet "/account/login" page
+        Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+        Then I should see "Welcome to CareerNet"
         Given I am on list students page
         When I follow "More details"
         Then I should be on student profile page
         And I should see "Mark Sharp"
    
     Scenario: Edit student profile
+        I am on the CareerNet "/account/login" page
+        Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+        Then I should see "Welcome to CareerNet"
         Given I am on student profile page
         When I follow "Edit profile"
         Then I should be on edit profile page
@@ -37,6 +50,9 @@ Background: Adding jobs to database
         Then I should see "Amy"
 
     Scenario: View university profile
+        I am on the CareerNet "/account/login" page
+        Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+        Then I should see "Welcome to CareerNet"
         Given I am on student profile page
         When I follow "Cambridge College-Portland"
         Then I should be on school profile page

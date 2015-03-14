@@ -19,8 +19,16 @@ Background: Adding jobs and com to database
   | Intel         |
   | Microsoft     |
   | Facebook      |
+  
+   Given the following accounts exist:
+  |name         |email               |account_type |
+  |huangshan108 |shuang@berkeley.edu |1            |
+  |expired      |expired@berkeley.edu|2            |
 
 Scenario: View job details
+  I am on the CareerNet "/account/login" page
+  Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+  Then I should see "Welcome to CareerNet"
   Given I am on the job 2 apply page
   Then I should see "Data Scientist"
   And I should see "Intel"

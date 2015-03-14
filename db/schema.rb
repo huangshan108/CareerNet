@@ -69,9 +69,9 @@ ActiveRecord::Schema.define(version: 20150312165338) do
   create_table "students", force: :cascade do |t|
     t.string   "first_name",      limit: 255
     t.string   "last_name",       limit: 255
-    t.string   "major",           limit: 255
+    t.integer  "major_id"
     t.date     "graduation_date"
-    t.string   "university",      limit: 255
+    t.integer  "college_id"
     t.string   "resume_link",     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
