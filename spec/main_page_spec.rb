@@ -25,9 +25,8 @@ describe "MainPage" do
         expect(page).to have_content 'All Events'
     end
 
-    it 'should direct to jobs page when click my_profile' do
-        pending("add link to my_profile")
-        click_link('my_profile')
+    it 'should direct to profile page when click My Profile' do
+        click_link('My Profile')
         expect(page).to have_content 'Student Profile'
     end
 
