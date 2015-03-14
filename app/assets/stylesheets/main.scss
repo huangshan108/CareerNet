@@ -1,6 +1,28 @@
-.notice {
-	background-color: rgb(68, 157, 68);
-	color: white;
-	padding: 5px;
-	text-align: center;
+.flash-message {
+  position: fixed;
+  top: 20%;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  width: 30%;
+  margin-left: 35%;
+  font-weight: bold;
+  text-align: center;
+	.notice {
+
+	}
+	.error {
+
+	}
+}
+
+.nav-bar-offset {
+  height: 50px;
+}
+
+.field_with_errors {
+	display: inline;
+	input, textarea {
+		border: 1px solid #EF4F4F;
+	}
 }

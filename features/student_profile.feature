@@ -1,75 +1,51 @@
 Feature: Students can create and/or modify profiles
+    As a student, I want to update my profiles so that companies can know me better when I submit an application
 
-	As a student, I want to update my profiles so that companies can know me better when I submit an application
+Background: Adding jobs to database
 
-Background: I have already created a CareerNet account
+    Given the following students exist:
+    | first_name   | last_name  | college_id   | major_id     | graduation_date   | resume_link |
+    | Mark         | Sharp      | 1            | 1            | 2016-10-10        | example.com |
 
-Scenario: I just signed up, and I don't have a profile yet
+    Given the following schools exist:
+    | school_name                   | school_type   | school_year  | address    |
+    | Cambridge College-Portland    | public        | 4-year       | NONE       |
 
-	Given that I am on the 'create profile page' page
-	Then I should see a form for entering my information
-	
-	And I should see a section called 'Basic information' in the form
-	And I should see the following text boxes under 'Basic information' section: 'First name', 'Last name', 'Date of birth', 'Major', 'Graduation date'
-	
-	And I should see a section called 'Experiences' in the form
-	And I should see the 'add experience' button under 'Experiences' section
-	When I click on 'add experience' button
-	Then I should see a block with following text boxes: 'Company', 'Start date', 'End date', 'Role', 'Description', 'Income', 'Supervisor'
-	Then I should be able to enter information in the boxes
-	And I should see a button called 'Remove experience'
-	When I click on 'Remove experience'
-	Then the block should disappear
-	
-	And I should see radio buttons with following options: 'Looking for jobs', 'I already have a job', 'Don't put me into the job marcket'
-	And I should be able to make selections and change my selections
-	And only one option should be highlighted at any given time
+    Given the following majors exist:
+    | name                            |
+    | Humanities/Humanistic Studiesd  |
+    
+    Given the following accounts exist:
+    |name         |email               |account_type |
+    |huangshan108 |shuang@berkeley.edu |1            |
+    |expired      |expired@berkeley.edu|2            |
+  
+    And I am on the account_login page
+    Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+    Then I should see "Welcome to CareerNet"
 
-	And I should see a button called 'upload resume'
-	When I click on 'upload resume'
-	I should be able to browse files on my local machine
-	When I select a file and confirm
-	I should see “Resume uploaded” along with the filename
+    Scenario: Go to students page
+        Given I am on list students page
+        Then I should see "Mark Sharp"
+        Then I should see "Humanities/Humanistic Studiesd"
+        Then I should see "More details"
 
-	Then I should see the following buttons: 'Save profile', 'Discard changes'
-	When I click on 'Save profile' or 'Discard changes'
-	Then I should be redirected to the home page
-	Given that I clicked on 'Save changes'
-	Then I should see a prompt “Profile saved”
-	
-Scenario: I already have a profile, but I want to change my profile
+    Scenario: View student profile
+        Given I am on list students page
+        When I follow "More details"
+        Then I should be on student profile page
+        And I should see "Mark Sharp"
+   
+    Scenario: Edit student profile
+        Given I am on student profile page
+        When I follow "Edit profile"
+        Then I should be on edit profile page
+        When I fill in First Name with "Amy"
+        And I press "Submit"
+        Then I should see "Amy"
 
-	Given that I am on the modify profile page' page
-	Then I should see a form for entering my information
-	
-	And I should see a section called 'Basic information' in the form
-	And I should see the following text boxes under 'Basic information' section: 'First name' => 'Randy', 'Last name' => 'Wei', 'Date of birth' => '0X-XX-1992', 'Major' => 'EECS', 'Graduation date' => 'May 2015'
-	
-	And I should see a section called 'Experiences' in the form
-	And I should see a block with my existing experience: 'Company' => 'XXX', 'Start date' => '05-19-2014', 'End date' => '08-22-2014', 'Role' => 'Developer', 'Description' => 'abcde fghijklmnopqrst uvwxyz', 'Income' => '$X', 'Supervisor' => 'Carol'
-
-	And I should see the 'add experience' button under 'Experiences' section
-	When I click on 'add experience' button
-	Then I should see a block with following text boxes: 'Company', 'Start date', 'End date', 'Role', 'Description', 'Income', 'Supervisor'
-	Then I should be able to enter information in the boxes
-	And I should see a button called 'Remove experience'
-	When I click on 'Remove experience'
-	Then the block should disappear
-	
-	And I should see radio buttons with following options: 'Looking for jobs', 'I already have a job', 'Don't put me into the job marcket'
-	And I should see my previous selection 'Looking for jobs'
-	And I should be able to change my selections
-	And only one option should be highlighted at any given time
-
-	And I should see my old resume 'resume.pdf'
-	And I should see a button called 'upload resume'
-	When I click on 'upload resume'
-	I should be able to browse files on my local machine
-	When I select a file and confirm
-	I should see “Resume uploaded” along with the filename of new resume
-
-	Then I should see the following buttons: 'Save profile', 'Discard changes'
-	When I click on 'Save profile' or 'Discard changes'
-	Then I should be redirected to the home page
-	Given that I clicked on 'Save changes'
-	Then I should see a prompt “Profile saved”
+    Scenario: View university profile
+        Given I am on student profile page
+        When I follow "Cambridge College-Portland"
+        Then I should be on school profile page
+        And I should see "4-year"

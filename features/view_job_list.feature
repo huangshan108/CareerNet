@@ -4,29 +4,38 @@ Feature: Open Job List
   I want to view all available job listings
   so that I can see what jobs I can apply for.
 
-Background:Jobs have been added to database
- Given the following jobs exist:
- |title                                |  Company   |
- | Software Engineer                   |  Google    |       
- | Web designer                        |  Apple     |
- | Back-End developer                  |  FaceBook  |
- | Front-End developer                 |  Riot      |
- | Full Stack Engineer                 |   Amazon   |
+Background: Adding jobs to database
+
+  Given the following jobs exist:
+  | title                   | description | company_id    | salary |
+  | Software Engineer       | Good        | 1          | 100000 |
+  | Data Scientist          | Great       | 2          | 150000 |
+  | Backend Developer       | Bad         | 3          | 120000 |
+  | Frontend Developer      | Average     | 4          | 200000 |
+
+  Given the following companies exist:
+  | name          | 
+  | Apple         | 
+  | Intel         |
+  | Microsoft     |
+  | Facebook      |
+
+  Given the following accounts exist:
+  |name         |email               |account_type |
+  |huangshan108 |shuang@berkeley.edu |1            |
+  |expired      |expired@berkeley.edu|2            |
+
+  And I am on the account_login page
+  Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+  Then I should see "Welcome to CareerNet"
 
 Scenario: Go to jobs page
-  Given I am on the homepage
-  When I follow "Jobs"
-  Then I should see "Software Engineering"
-  And I should see "Web designer"
+  Given I am on the jobs page
+  Then I should see "Software Engineer"
+  And I should see "Data Scientist"
 
 Scenario: Sort jobs by title
   Given I am on the jobs page
-  When I follow "title"
-  I should see "Back-End developer" before "Web Designer"
-  And I should see "Front-End developer" before " Software Engineer"
-
-Scenario: View job details
-  Given I am on the jobs page
-  When i follow "Software Engineer"
-  Then I should be on the "Software Engineer" details page
-  And I should see the company "Google"
+  When I follow "Job"
+  Then I should see "Backend Developer" before "Data Scientist"
+  And I should see "Frontend Developer" before "Software Engineer"

@@ -1,13 +1,11 @@
-<% if !flash[:notice].blank? %>
-	<div class="notice">
-	  <%= flash[:notice] %>
-	</div>
-<% end %>
 <div class="signup">
 	<div class="title">
 		Sign Up
 	</div>
 	<%= form_for @new_account, url: account_confirm_signup_path do %>
+		<div class="form-group has-feedback">
+			<%= text_field_tag :username, params[:username], class: 'form-control', placeholder: 'Username'%>
+		</div>	
 		<div class="form-group has-feedback">
 			<%= text_field_tag :email, params[:email], class: 'form-control', placeholder: 'Email'%>
 		</div>
