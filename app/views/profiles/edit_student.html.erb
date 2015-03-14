@@ -30,24 +30,23 @@
     });
   });
 </script>
-<p></p>
-<%= form_tag(:action => 'update_student') do %>
+<%= form_tag(:action => 'update_student', :id => @student.id) do %>
   <div>
     <label>First Name</label>
     <%= text_field_tag :first_name, params[:first_name], class: 'form-control', value: @student.first_name %>
   </div>
   <div>
     <label>Last Name</label>
-    <%= text_field_tag :last_name, params[:last_name], class: 'form-control', value: @student.last_name %>
+    <%= text_field_tag :last_name, params[:last_name], class: 'form-control', value: @student.last_name ? @student.last_name : nil %>
   </div>
   <div>
     <label>University</label>
-    <input type="text" id="college_name" class='form-control' value="<%= @student.college.school_name %>" ></input>
+    <input type="text" id="college_name" class='form-control' value="<%= @student.college ? @student.college.school_name : nil %>" ></input>
     <%= hidden_field_tag :college_id, params[:college_id], id: "college_id", value: @student.college_id %>
   </div>
   <div>
     <label>Major</label>
-    <input type="text" id="major_name" class='form-control' value="<%= @student.major.name %>" ></input>
+    <input type="text" id="major_name" class='form-control' value="<%= @student.major ? @student.major.name : nil %>" ></input>
     <%= hidden_field_tag :major_id, params[:major_id], id: "major_id", value: @student.major_id %>
   </div>
   <div>

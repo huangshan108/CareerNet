@@ -4,23 +4,33 @@
   <tbody>
     <tr>
       <th> Name </th>
-      <td><%= @student.first_name + ' ' + @student.last_name -%></td>
+      <% if @student.first_name and @student.last_name %>
+        <td><%= @student.first_name + ' ' + @student.last_name -%></td>
+      <% end %>
     </tr>
     <tr>
       <th> University </th>
-      <td><%= link_to @student.college.school_name, single_school_profile_path(@student.college) -%></td>
+      <% if @student.college %>
+        <td><%= link_to @student.college.school_name, single_school_profile_path(@student.college) -%></td>
+      <% end %>
     </tr>
     <tr>
       <th> Major </th>
-      <td><%= @student.major.name -%></td>
+      <% if @student.major %>
+        <td><%= @student.major.name -%></td>
+      <% end %>
     </tr>
     <tr>
       <th> Graduation Date </th>
-      <td><%= @student.graduation_date -%></td>
+      <% if @student.graduation_date %>
+        <td><%= @student.graduation_date -%></td>
+      <% end %>
     </tr>
     <tr>
       <th> Resume Link </th>
-      <td><%= link_to(@student.resume_link, @student.resume_link) -%></td>
+      <% if @student.resume_link %>
+        <td><%= link_to(@student.resume_link, @student.resume_link) -%></td>
+      <% end %>
     </tr>
   </tbody>
 </table>

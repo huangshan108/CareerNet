@@ -19,6 +19,48 @@
 		</div>
 	<% end %>
 </div>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CareerNet</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/jobs">Browse Jobs</a></li>
+        <li><a href="/events">Browse Events</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      <% if logged_in? %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+          	<% if current_user.student %>
+            	<li><%= link_to 'My Profile', single_student_profile_path(current_user.student.id) %></a></li>
+            <% else %>
+            	<li><%= link_to 'My Profile', new_student_path %></a></li>
+            <% end %>
+            <li class="divider"></li>
+            <li><a href="/account/logout">Log Out</a></li>
+          </ul>
+        </li>
+      <% else %>
+      	<li><a href="/account/login">Log In</a></li>
+      <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="nav-bar-offset">
+</div>
 <%= yield %>
 
 </body>

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  #root 'accounts#index'
-
+  root :to => 'main#index'
   
   resources :jobs do
     member do
@@ -19,13 +18,14 @@ Rails.application.routes.draw do
   get 'account/start-reset-password/:password_reset_token' => 'accounts#start_reset_password', :as => :account_start_reset_password
   post 'account/start-reset-password/:password_reset_token' => 'accounts#submit_reset_password', :as => :account_submit_reset_password
   get 'account/logout' => 'accounts#logout'
-  root :to => 'main#index'
 
   get 'jobs/' => 'jobs#index', :as => :job_list
   get 'jobs/sort' => 'jobs#job_sort', :as => :job_sort
 
   get 'profiles/students/' => 'profiles#students'
   get 'profiles/students/page/:page' => 'profiles#list_students', :as => :list_students
+  get 'profiles/student/new' => 'profiles#new', :as => :new_student
+  post 'profiles/student/new' => 'profiles#create_student',:as => :create_student
   get 'profiles/student/:id' => 'profiles#student', :as => :single_student_profile
   get 'profiles/student/:id/edit' => 'profiles#edit_student', :as => :edit_student_profile
   post 'profiles/student/:id/update' => 'profiles#update_student', :as => :update_student_profile

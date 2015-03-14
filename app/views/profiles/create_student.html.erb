@@ -1,0 +1,62 @@
+<% #  This file is app/views/profiles/students.html.haml %>
+<h1> Create Profile </h1>
+<%= javascript_tag "var all_schools = #{ @all_schools.to_json };" %>
+<%= javascript_tag "var all_majors = #{ @all_majors.to_json };" %>
+<script>
+  $(function() {
+    for (var i = 0; i < all_schools.length; i++){
+      all_schools[i].label = all_schools[i].school_name
+    }
+    for (var i = 0; i < all_majors.length; i++){
+      all_majors[i].label = all_majors[i].name
+    }
+    $("#college_name").autocomplete({
+      minLength: 3,
+      source: all_schools,
+      select: function(event, ui) {
+        $("#college_id").val(ui.item.id)
+      }
+    });
+    $("#major_name").autocomplete({
+      minLength: 3,
+      source: all_majors,
+      select: function(event, ui) {
+        $("#major_id").val(ui.item.id)
+      }
+    });
+    $("#graduation_date").datepicker({
+      dateFormat: "yy-mm-dd"
+    });
+  });
+</script>
+<%= form_tag(:action => 'create_student') do %>
+  <div>
+    <label>First Name</label>
+    <%= text_field_tag :first_name, params[:first_name], class: 'form-control' %>
+  </div>
+  <div>
+    <label>Last Name</label>
+    <%= text_field_tag :last_name, params[:last_name], class: 'form-control' %>
+  </div>
+  <div>
+    <label>University</label>
+    <input type="text" id="college_name" class='form-control' ></input>
+    <%= hidden_field_tag :college_id, params[:college_id], id: "college_id" %>
+  </div>
+  <div>
+    <label>Major</label>
+    <input type="text" id="major_name" class='form-control'></input>
+    <%= hidden_field_tag :major_id, params[:major_id], id: "major_id" %>
+  </div>
+  <div>
+    <label>Graduation Date</label>
+    <%= text_field_tag :graduation_date, params[:graduation_date], class: 'form-control', id: "graduation_date"  %>
+  </div>
+  <div>
+    <label>Resume Link</label>
+    <%= text_field_tag :resume_link, params[:resume_link], class: 'form-control' %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Submit", class: "btn" %>
+  </div>
+<% end %>
