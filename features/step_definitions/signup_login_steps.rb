@@ -32,6 +32,14 @@ Then /^I enter "(.+)" into "(.+)" and I enter "(.+)" into "(.+)" and I press "(.
   press_button selector
 end
 
+And /^I log in$/ do
+  visit current_page
+  enter_stuff "shuang@berkeley.edu", "email"
+  enter_stuff "careernet", "password"
+  press_button "Log In"
+end
+
+
 When(/^I fill in signup form with invalid email$/) do
   visit "account/signup"
   enter_stuff "careernet", "username"
