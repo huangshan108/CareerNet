@@ -1,3 +1,5 @@
+puts "Seeding Majors..."
+
 all_majors = File.open(File.join(Rails.root, 'db', 'seeds', 'db_seed_data/all_majors.txt')).read
 all_majors.each_line do |line|
 	major = {}
