@@ -63,10 +63,17 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
           	<% if current_user.student %>
-            	<li><%= link_to 'My Profile', single_student_profile_path(current_user.student.id) %></a></li>
+            	<li><%= link_to 'My Profile', single_student_profile_path(current_user.student.id), name: "my-profile-button" %></a></li>
             <% else %>
-            	<li><%= link_to 'My Profile', new_student_path %></a></li>
+            	<li><%= link_to 'My Profile', new_student_path, name: "new-profile-button" %></a></li>
             <% end %>
+            <script type="text/javascript">
+            $(document).ready(function() {
+              $('a[name="new-profile-button"]').click(function() {
+                $('.spinner-model').show();
+              });
+            })
+            </script>
             <li class="divider"></li>
             <li><a href="/account/logout">Logout</a></li>
           </ul>
