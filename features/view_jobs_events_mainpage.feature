@@ -7,16 +7,16 @@ Feature: Display upcoming jobs and events on main page
 Background:
 
 	Given the following events exist:
-	| title 		      | description 	| 
-	| Job Fair 		    | a	      	    |
-	| Resume Workshop	| b		          |
-	| Mock Interviews	| c		          |
+	| title 		| description 	| 
+	| Job Fair 		| a	      	|
+	| Resume Workshop	| b		|
+	| Mock Interviews	| c		|
 	
 	And the following jobs exist:
 	| title			| description	|
-	| Job1			| d		        |
-	| Job2			| e 		      |
-	| Job3			| f		        |
+	| Job1			| d		|
+	| Job2			| e 		|
+	| Job3			| f		|
 
 Scenario: I want to view an upcoming event
 	
