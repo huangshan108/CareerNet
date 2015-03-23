@@ -1,4 +1,13 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :staff do
+    
+  end
+  factory :appointment do
+    time_slot 1
+day "2015-03-22"
+description "MyText"
+note "MyText"
+  end
+
     factory :account do
         name "Quasimodo"
         email "humpback@notredame.edu"
