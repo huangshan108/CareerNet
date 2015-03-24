@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   get 'profiles/school/:id' => 'profiles#school', :as => :single_school_profile
   
   resources :events
+
+  get 'appointments/staff/:id' => 'appointments#index_staff', :as => :staff_appointments
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
