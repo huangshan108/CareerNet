@@ -1,6 +1,6 @@
 <table class="event_list" border = "1" style="width: 700px";>
   <tr>
-    <th> Title </th>
+    <th> <%=link_to 'Event', events_path(:event_sort => 'title', :page => params[:page])%> </th>
     <th> Time Start </th>
     <th> Time End </th>
   </tr>
