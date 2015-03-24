@@ -6,7 +6,15 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all
+    pages = 10
+    if params[:sort]
+      session[:sort] = params[:sort]
+    end
+    if session[:sort]
+      @events = Event.order(session[:sort]).paginate(page: params[:page], per_page: pages)
+    else
+      @events = Event.all.paginate(page: params[:page], per_page: pages)
+    end
   end
 
   def new
