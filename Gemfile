@@ -58,6 +58,7 @@ gem 'email_validator'
 gem 'newrelic_rpm'
 gem 'tzinfo-data'
 gem 'factory_girl_rails'
+gem 'faker'
 
 # Gem for FullCalendar
 gem 'fullcalendar-rails', '~> 2.0.2.0'
