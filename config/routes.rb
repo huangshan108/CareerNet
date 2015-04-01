@@ -34,6 +34,10 @@ Rails.application.routes.draw do
   resources :events
 
   get 'appointments/staff/:id' => 'appointments#index_staff', :as => :staff_appointments
+  get 'appointments/student/' => 'appointments#student_show', :as => :appointment_student_show
+  get 'appointments/student/new' => 'appointments#student_new', :as => :appointment_student_new
+  get 'appointments/student/book/:id' => 'appointments#student_book', :as => :appointment_student_book
+  get 'appointments/student/cancel/:id' => 'appointments#student_cancel', :as => :appointment_student_cancel
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
