@@ -12,7 +12,9 @@
 	</li>
 </ul>
 
-<%= button_to 'Delete the Job', job_path(@job), :method => :delete %>
+<% if @current_user.account_type == 3 %>
+	<%= button_to 'Delete the Job', job_path(@job), :method => :delete %>
+<% end %>
 <br>
 
 <button type="button" onclick="alert('This feature has yet beeen implemented')">Apply</button>

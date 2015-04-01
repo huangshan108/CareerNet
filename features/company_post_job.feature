@@ -15,7 +15,7 @@ Background: Adding jobs and com to database
   
    Given the following accounts exist:
   |name         |email               |account_type |
-  |huangshan108 |shuang@berkeley.edu |1            |
+  |huangshan108 |shuang@berkeley.edu |3            |
   |expired      |expired@berkeley.edu|2            |
 
   And I am on the account_login page

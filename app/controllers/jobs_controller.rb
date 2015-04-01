@@ -33,6 +33,7 @@ class JobsController < ApplicationController
 	def apply
 		id = params[:id]
 		@job = Job.find_by_id(id)
+        @current_user = Account.find(session[:user_id])
 	end
 
 	def destroy
