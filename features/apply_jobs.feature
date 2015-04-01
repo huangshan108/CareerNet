@@ -1,3 +1,4 @@
+Feature: Apply The Job
 As a student
 I want to apply for jobs I am interested in.
 

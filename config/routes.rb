@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root :to => 'main#index'
-  
+  resources :jobs
   resources :jobs do
     member do
       get 'apply'
