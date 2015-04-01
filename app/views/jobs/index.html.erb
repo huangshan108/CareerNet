@@ -9,12 +9,14 @@
   </tr>
   <% @jobs.each do |job| %>
 	  <tr>
+	   <% if !job.company.nil? %>
 	    <td><div class="job_title"><%=link_to "#{job.title}", apply_job_path(job.id) %><div></td>
 	    <td><div class="company"><%= job.company.name %><div></td>
 	    <td><div id ="descbox" class="desc"><%= job.description %></div></td>
 	    <td><div class="salary"><%= job.salary %><div></td>
 	    <td><div class="date"><%= job.created_at %><div></td>
 	    <td><div class="date"><%= job.updated_at %><div></td>
+	    <% end %>
 	  </tr>
 	  <% end %>
     <script src="http://dotdotdot.frebsite.nl/js/jquery.dotdotdot-1.2.1.js" ></script>

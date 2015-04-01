@@ -12,5 +12,8 @@
 	</li>
 </ul>
 
+<%= button_to 'Delete the Job', job_path(@job), :method => :delete %>
+<br>
+
 <button type="button" onclick="alert('This feature has yet beeen implemented')">Apply</button>
 <%= link_to "Back to the Job list", job_list_path %>
