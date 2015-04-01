@@ -1,16 +1,16 @@
 <table class="job_list" border = "1" style="width: 700px";>   
   <tr>
-  	<th> <%=link_to 'Job', job_list_path(:sort => 'title', :page => params[:page])%> </th>
+  	<th> Position </th>
   	<th> Company </th>
   	<th> Description </th>
-  	<th> <%=link_to 'Salary', job_list_path(:sort => 'salary', :page => params[:page])%> </th>
+  	<th> Salary </th>
   	<th> Created </th>
   	<th> Added </th>
   </tr>
   <% @jobs.each do |job| %>
 	  <tr>
 	   <% if !job.company.nil? %>
-	    <td><div class="job_title"><%=link_to "#{job.title}", apply_job_path(job.id) %><div></td>
+	    <td><div class="job_title"><%=link_to "#{job.title}", view_single_job_path(job.id) %><div></td>
 	    <td><div class="company"><%= job.company.name %><div></td>
 	    <td><div id ="descbox" class="desc"><%= job.description %></div></td>
 	    <td><div class="salary"><%= job.salary %><div></td>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312165338) do
+ActiveRecord::Schema.define(version: 20150401071611) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20150312165338) do
     t.string   "password_digest"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+  end
+
+  create_table "applications", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "job_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "colleges", force: :cascade do |t|

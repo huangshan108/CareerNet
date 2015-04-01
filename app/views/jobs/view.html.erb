@@ -1,0 +1,35 @@
+<h2> Details about <%= @job.title %> </h2>
+
+<ul>
+	<li> 
+		<b>Company:</b><%= @job.company.name %>
+	</li>
+	<li> 
+		<b>Salary:</b><%= @job.salary + " $" %>
+	</li>
+	<li>
+ 		<b> Description:</b><%= @job.description %>
+	</li>
+</ul>
+
+<%= button_to 'Delete the Job', delete_job_path(@job), :method => :delete %>
+<br>
+
+<%= link_to "Apply", apply_job_path(:job_id => params[:job_id]), :method => :post %>
+<%= link_to "Back to the Job list", job_list_path %>
+
+<h2> Job Applications </h2>
+<table class="job_list" border = "1" style="width: 700px";>   
+  <tr>
+  	<th> Applicant Name </th>
+  	<th> Applied Position </th>
+  	<th> Applied Date </th>
+  </tr>
+  <% @job.applications.each do |application| %>
+	  <tr>
+	    <td><%=link_to "#{application.student.first_name} #{application.student.last_name}", single_student_profile_path(application.student.account.id) %></td>
+	    <td><%= @job.title %></td>
+	    <td><%= application.created_at %></td>
+	  </tr>
+	<% end %>
+</table>
