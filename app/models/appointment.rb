@@ -14,7 +14,8 @@ class Appointment < ActiveRecord::Base
             :title => title,
             :start => start_datetime,
             :end => end_datetime,
-            :allDay => false
+            :allDay => false,
+            :id => id
         }
     end
 

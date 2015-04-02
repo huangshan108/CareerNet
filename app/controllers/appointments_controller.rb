@@ -1,6 +1,8 @@
 class AppointmentsController < ApplicationController
   before_action :confirm_logged_in
 
+  respond_to :html, :js, :json
+
   def new
     @appointment = Appointment.new
 
@@ -63,4 +65,10 @@ class AppointmentsController < ApplicationController
         format.json { render :json => @appt_this_week }
       end
   end
+
+  def destroy
+    Appointment.find(params[:id]).destroy
+    respond_with layout: false
+  end
+
 end

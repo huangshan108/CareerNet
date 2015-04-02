@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
   get 'appointments/staff' => 'appointments#index_staff', :as => :staff_appointments
   post 'appointments/staff/new' => 'appointments#staff_new', :as => :new_staff_appointments
+  delete 'appointments/staff/:id' => 'appointments#destroy', :as => :cancel_appointment
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
