@@ -42,4 +42,17 @@ describe Appointment do
       end
   end
 
+  describe 'string_to_timeslot' do
+      it 'should return 4 for 11:00:00' do
+          @result = Appointment.string_to_timeslot("11:00:00")
+          expect(@result).to eq(4)
+      end
+
+      it 'should return 5 for 11:20:00' do
+          @result = Appointment.string_to_timeslot("11:20:00")
+          expect(@result).to eq(5)
+
+      end
+  end
+
 end

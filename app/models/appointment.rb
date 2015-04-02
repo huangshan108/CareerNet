@@ -8,12 +8,13 @@ class Appointment < ActiveRecord::Base
         #time_slot 1 -> 10 a.m.
         # 20 minute increment until 4p.m.
         # min 0, max 18
-        start_datetime = self.day.to_s + "T" + self.timeslot_to_string(self.time_slot)
-        end_datetime = self.day.to_s + "T" + self.timeslot_to_string(self.time_slot + 1)
+        start_datetime = self.day.to_s + " " + Appointment.timeslot_to_string(self.time_slot)
+        end_datetime = self.day.to_s + " " + Appointment.timeslot_to_string(self.time_slot + 1)
         {
             :title => title,
             :start => start_datetime,
-            :end => end_datetime
+            :end => end_datetime,
+            :allDay => false
         }
     end
 
@@ -22,6 +23,21 @@ class Appointment < ActiveRecord::Base
         min = time_slot % 3 * 20
         time = hour.to_s + ":" + min.to_s + ":00"
         time
+    end
+
+    def self.string_to_timeslot(time_string)
+        match = /.*(\d\d):(\d\d):(\d\d)/.match(time_string)
+        if match
+            hour = match[1].to_i - 10
+            min = match[2].to_i / 20
+            if hour >= 0 and hour < 7
+                hour * 3 + min + 1
+            else
+                0
+            end
+        else
+            0
+        end
     end
 
     def self.appointments_this_week(user)
