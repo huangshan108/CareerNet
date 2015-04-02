@@ -26,7 +26,7 @@ Scenario: I want to post a new event
 	Given I am on the events page
 	Then I should not see "Tech Talk"
 	When I follow "Add an event"
-	And I enter "Tech Talk" into "Title"
+	And I enter event title "Tech Talk" into "title"
 	And I press "Create"
 	Then I am on the events page
 	And I should see "Tech Talk"
