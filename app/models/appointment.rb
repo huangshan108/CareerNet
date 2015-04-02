@@ -19,9 +19,9 @@ class Appointment < ActiveRecord::Base
     end
 
     def self.timeslot_to_string(time_slot)
-        hour = time_slot / 3 + 10 
-        min = time_slot % 3 * 20
-        time = hour.to_s + ":" + min.to_s + ":00"
+        hour = (time_slot - 1) / 3 + 10 
+        min = (time_slot - 1)  % 3 * 20
+        time = hour.to_s.rjust(2, "0") + ":" + min.to_s.rjust(2, "0") + ":00"
         time
     end
 

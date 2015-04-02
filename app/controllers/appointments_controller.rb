@@ -11,13 +11,20 @@ class AppointmentsController < ApplicationController
   end
 
   def staff_new
-      daytime_str = params[:start].to_s
-      timeslot = Appointment.string_to_timeslot(daytime_str)
-      appt_params = { day: daytime_str, time_slot: timeslot, staff: curr_staff }
-      @appt = Appointment.new(appt_params)
+      starttime_str = params[:start].to_s
+      endtime_str = params[:end].to_s
+      timeslot = Appointment.string_to_timeslot(starttime_str)
+      endslot = Appointment.string_to_timeslot(endtime_str)
+      error = false
+      while timeslot < endslot do
+        appt_params = { day: starttime_str, time_slot: timeslot, staff: curr_staff }
+        @appt = Appointment.new(appt_params)
+        timeslot += 1
+        error = @appt.save and error
+      end
       
       respond_to do |format|
-        if @appt.save
+        if error
             format.json { render json: {msg: 'You have successfully registed your slot.'} }
         else
             format.json { render json: {msg: 'Error. Your appointment was not registered.'}, :status => 500 }
