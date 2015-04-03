@@ -26,7 +26,9 @@ Background:
   |Fake               |Staff          |staff1@berkeley.edu |2          |
 
   And I am on the account_login page
-  Then I enter "staff1@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+  Then I enter "staff1@berkeley.edu" into "email" 
+  And I enter "careernet" into "password" 
+  And I press "Log In" button
   Then I should see "Welcome to CareerNet"
 
 Scenario: I want to post a new event
@@ -34,7 +36,7 @@ Scenario: I want to post a new event
   Given I am on the events page
   Then I should not see "Tech Talk"
   When I follow "Add an event"
-  And I enter "Tech Talk" into "Title"
+  And I enter "Tech Talk" into "title"
   And I press "Create"
   Then I am on the events page
   And I should see "Tech Talk"

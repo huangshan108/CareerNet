@@ -26,7 +26,9 @@ Background: Adding jobs to database
   | 1              | 1             |
 
   And I am on the account_login page
-  Then I enter "company@careernet.com" into "email" and I enter "careernet" into "password" and I press "Log In" button
+  Then I enter "company@careernet.com" into "email" 
+  And I enter "careernet" into "password" 
+  And I press "Log In" button
   Then I should see "Welcome to CareerNet"
 
 Scenario: Company view applied jobs
