@@ -21,14 +21,14 @@ module NavigationHelpers
     when /^student profile page/ then '/profiles/student/1'
     when /^school profile page/ then '/profiles/school/1'
     when /^edit profile page/ then '/profiles/student/1/edit'
-    when /(.+) apply page/ then 
+    when /(.+) view page/ then 
       split_page = page_name.split(' ').map(&:strip)
       job_id = split_page[2]
-      '/jobs/' + job_id + '/apply'
+      '/jobs/' + job_id + '/view'
     when /jobs page/ then
       '/jobs/'
     when /^the events page$/ then '/events'
-    when /^the main page$/ then'/'
+    when /^the main dashboard page$/ then'/'
     when /^the job create page$/ then '/jobs/new'
 
     # Add more mappings here.

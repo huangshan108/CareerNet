@@ -65,7 +65,6 @@
           	<% if current_user.student %>
             	<li><%= link_to 'My Profile', single_student_profile_path(current_user.student.id), name: "my-profile-button" %></a></li>
             <% else %>
-            	<li><%= link_to 'My Profile', new_student_path, name: "new-profile-button" %></a></li>
             <% end %>
             <script type="text/javascript">
             $(document).ready(function() {

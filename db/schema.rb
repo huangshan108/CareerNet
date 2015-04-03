@@ -31,6 +31,20 @@ ActiveRecord::Schema.define(version: 20150401071611) do
     t.datetime "updated_at"
   end
 
+  create_table "appointments", force: :cascade do |t|
+    t.integer  "staff_id"
+    t.integer  "student_id"
+    t.integer  "time_slot"
+    t.date     "day"
+    t.text     "description"
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "appointments", ["staff_id"], name: "index_appointments_on_staff_id"
+  add_index "appointments", ["student_id"], name: "index_appointments_on_student_id"
+
   create_table "colleges", force: :cascade do |t|
     t.string "address"
     t.string "school_name"
@@ -72,6 +86,17 @@ ActiveRecord::Schema.define(version: 20150401071611) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "staffs", force: :cascade do |t|
+    t.integer  "account_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "staffs", ["account_id"], name: "index_staffs_on_account_id"
 
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
