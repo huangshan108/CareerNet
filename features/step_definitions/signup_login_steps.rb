@@ -45,7 +45,6 @@ When(/^I fill in signup form with invalid email$/) do
   enter_stuff "careernet", "username"
   enter_stuff "careernet@", "email"
   enter_stuff "careernet", "password"
-  enter_stuff "careernet", "password2"
   press_button "Sign Up"
 end
 
@@ -54,7 +53,6 @@ When(/^I fill in signup form with two different passwords$/) do
   enter_stuff "careernet", "username"
   enter_stuff "careernet@berkeley.edu", "email"
   enter_stuff "careernet1", "password"
-  enter_stuff "careernet2", "password2"
   press_button "Sign Up"
 end
 
@@ -63,7 +61,6 @@ When(/^I fill in signup form with email "(.*?)"$/) do |email|
   enter_stuff "careernet", "username"
   enter_stuff email, "email"
   enter_stuff "careernet", "password"
-  enter_stuff "careernet", "password2"
   press_button "Sign Up"
 end
 
@@ -76,14 +73,12 @@ end
 When(/^I fill in reset password form with password1 "(.*?)" and password2 "(.*?)"$/) do |password1, password2|
   visit "account/start-reset-password/test_token"
   enter_stuff password1, "password"
-  enter_stuff password2, "password2"
   press_button "Reset Password"
 end
 
 When(/^I fill in reset password form with password1 "(.*?)" and password2 "(.*?)" in the expired link$/) do |password1, password2|
   visit "account/start-reset-password/test_token_expired"
   enter_stuff password1, "password"
-  enter_stuff password2, "password2"
   press_button "Reset Password"
 end
 

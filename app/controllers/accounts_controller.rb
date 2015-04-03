@@ -45,9 +45,6 @@ class AccountsController < ApplicationController
             redirect_to(:back)
             return
         end
-        if !compare_retyped_passwords? params[:password], params[:password2]
-            return
-        end
         @new_account.email = params[:email]
         @new_account.account_type = params[:account_type]
         @new_account = associate_roll params[:account_type], @new_account
@@ -109,24 +106,10 @@ class AccountsController < ApplicationController
         if @account.password_reset_sent_at < 2.hours.ago
             redirect_to account_forgot_password_path, :notice => "Password reset link has expired."
             return
-        else
-            if !compare_retyped_passwords? params[:password], params[:password2]
-                return
-            end
-            if @account.update_attributes(:password => params[:password])
-                redirect_to account_login_path, :notice => "Password reset successfully!"
-                return
-            end
+        elsif @account.update_attributes(:password => params[:password])
+            redirect_to account_login_path, :notice => "Password reset successfully!"
+            return
         end     
-    end
-
-    def compare_retyped_passwords? password, password2
-        if password != password2 or password == ""
-            flash[:error] = "Password does not match!"
-            redirect_to(:back)
-            return false
-        end
-        true
     end
 
     def logout

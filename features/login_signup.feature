@@ -62,11 +62,6 @@ Scenario: I am successfully reset a password
 	When I fill in reset password form with password1 "careernet" and password2 "careernet"
 	Then I should see "Password reset successfully!"
 
-Scenario: I fail to reset a password
-	I am on the CareerNet "account/start-reset-password/test_token" page.
-	When I fill in reset password form with password1 "careernet" and password2 "careernet2"
-	Then I should see "Password does not match!"
-
 Scenario: I reset password on an expired link
 	I am on the CareerNet "account/start-reset-password/test_token_expired" page.
 	When I fill in reset password form with password1 "careernet" and password2 "careernet" in the expired link
