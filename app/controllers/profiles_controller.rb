@@ -24,13 +24,9 @@ class ProfilesController < ApplicationController
                               :major_id => params[:major_id],
                               :graduation_date => params[:graduation_date],
                               :resume_link => params[:resume_link])
-    if student.save
-      flash[:notice] = "Profile Updated!"
-      redirect_to(single_student_profile_path(student))
-    else
-      flash[:error] = "Profile failed to update!"
-      redirect_to(edit_student_profile_path(student))
-    end
+    student.save
+    flash[:notice] = "Profile Updated!"
+    redirect_to(single_student_profile_path(student))
   end
 
   def list_students
