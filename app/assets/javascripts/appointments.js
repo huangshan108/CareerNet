@@ -17,7 +17,7 @@ $(document).ready(function() {
         header: {
           left: 'prev,next today',
           center: 'title',
-          right: ''
+          right: 'Click on appointments to delete'
         },
         selectable: true,
         selectHelper: true,
