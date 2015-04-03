@@ -14,15 +14,17 @@ describe "MainPage" do
         visit root_path
     }
     it 'should direct to jobs page when click jobs' do
-        click_link('Jobs')
+        click_link('Browse Jobs')
         expect(page).to have_content 'Job'
         expect(page).to have_content 'Company'
         expect(page).to have_content 'Description'
     end
 
     it 'should direct to jobs page when click events' do
-        click_link('Events')
-        expect(page).to have_content 'All Events'
+        click_link('Browse Events')
+        expect(page).to have_content 'Event'
+        expect(page).to have_content 'Time Start'
+        expect(page).to have_content 'Time End'
     end
 
     it 'should direct to logout page when click logout' do
