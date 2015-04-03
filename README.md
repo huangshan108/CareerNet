@@ -22,7 +22,6 @@ Currently avalible seed_scripts are (It's highly recommended that you reset your
 * `seed_jobs_and_companies`
 * `seed_colleges`
 * `seed_majors`
-* `seed_skills`
 
 To test this app with test accounts:
 * For students, use `careernet.student+<id>@gmail.com`
