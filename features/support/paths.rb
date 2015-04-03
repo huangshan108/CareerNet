@@ -28,6 +28,8 @@ module NavigationHelpers
     when /jobs page/ then
       '/jobs/'
     when /^the events page$/ then '/events'
+    when /^the main page$/ then'/'
+    when /^the job create page$/ then '/jobs/new'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

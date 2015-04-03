@@ -4,7 +4,8 @@ class Account < ActiveRecord::Base
 	validates_presence_of :password, :on => :create
 
 	has_one :student
-    has_one :staff
+  has_one :staff
+	has_one :company
 
 	def send_password_reset
 	  self.password_reset_sent_at = Time.zone.now

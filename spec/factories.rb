@@ -21,6 +21,9 @@ FactoryGirl.define do
       email "humpback@notredame.edu"
       password "Esmeralda"
   end
+end
+
+
 
 
     #factory :student do
@@ -47,4 +50,3 @@ FactoryGirl.define do
     #    end
     #end
 
-end

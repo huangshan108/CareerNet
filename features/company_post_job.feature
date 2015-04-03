@@ -1,13 +1,17 @@
-As a company
-I want to post the new job in jobs page
-so that I hire a candidate
+Feature: Company Post Job
+  As a company
+  I want to post the new job in jobs page
+  so that I hire a candidate
 
 Background: Adding jobs and com to database
 
-  Given the following comapny exist:
-  | title          | brief       | website          | address |          
-  | Google         | Search      | Google.com       |  Soda   |
+  Given the following companies exist:
+  | name   |          
+  | Google |
   
+  Given the following jobs exist:
+  | title                   | description | company_id    | salary |
+  | Software Engineer       | Good        | 1             | 100000 |
   
    Given the following accounts exist:
   |name         |email               |account_type |
@@ -19,16 +23,21 @@ Background: Adding jobs and com to database
   Then I should see "Welcome to CareerNet"
 
 Scenario: Posting Jobs
-  Given I am on the main page
-  And I press "Post a new Job" button
-  And I should on job create page
+  When I go to the main page
+  And I press "Post a New Job"
+  Then I am on the job create page
 
 Scenario: Creating Jobs
   Given I am on the job create page
-  And I fill in "Job title" with "Software Engineering"
-  And I fill in "Job description" with "Good"
-  And I fill in "Job salary "with "100000$"
-  And I fill in "company name" with "Google"
-  Then I press "Post " button
-  Then I should be redirect to "Jobs Page"
-  And I should be able to see "Software" on "Jobs Page"
+  And I fill in "title" with "Software Engineering"
+  And I fill in "description" with "Good"
+  And I fill in "salary" with "10000"
+  And I fill in "company_id" with "2"
+  Then I press "Post the Job"
+  Then I should see "Software Engineering was successfully created"
+
+Scenario: Deleting Jobs
+  Given I am on the job 1 apply page
+  And I press "Delete the Job"
+  Then I should see "The Job Software Engineer deleted."
+

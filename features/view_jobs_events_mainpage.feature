@@ -20,7 +20,7 @@ Background:
 
 Scenario: I want to view an upcoming event
 	
-	Given I am on the main page
+	Given I am on the "main page"
 	Then I should see "Job Fair"
 	When I follow "Job Fair"
 	Then I should see "a"

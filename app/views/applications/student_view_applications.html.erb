@@ -1,0 +1,15 @@
+<h2> My Applications </h2>
+<table class="job_list" border = "1" style="width: 700px";>   
+  <tr>
+  	<th> Applied Company </th>
+  	<th> Applied Position </th>
+  	<th> Applied Date </th>
+  </tr>
+  <% @applications.each do |application| %>
+	  <tr>
+	    <td><%= application.job.company.name %></td>
+	    <td><%= application.job.title %></td>
+	    <td><%= application.created_at %></td>
+	  </tr>
+	<% end %>
+</table>

@@ -18,6 +18,15 @@ class AccountsController < ApplicationController
     if authorized_user 
         session[:user_id] = authorized_user.id
         session[:email] = authorized_user.email
+        case authorized_user.account_type
+        when 1
+            session[:roll_id] = authorized_user.student.id
+        when 2
+            session[:roll_id] = authorized_user.staff.id
+        when 3
+            session[:roll_id] = authorized_user.company.id
+        else
+        end
         # After logging in, directed to main page instead of account#index
         redirect_to(root_path)
     else
@@ -106,6 +115,7 @@ class AccountsController < ApplicationController
     def logout
         session[:user_id] = nil
         session[:email] = nil
+        session[:roll_id] = nil
         flash[:notice] = "Logged out"
         redirect_to(:action => "login")
     end

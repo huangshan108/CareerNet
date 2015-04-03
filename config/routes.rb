@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
   root :to => 'main#index'
-  
-  resources :jobs do
-    member do
-      get 'apply'
-    end
-  end
+  # resources :jobs
+  # resources :jobs do
+  #   member do
+  #     get 'apply'
+  #   end
+  # end
 
   get 'account/login' => 'accounts#login', :as => :account_login
   post 'account/login' => 'accounts#confirm_login', :as => :account_confirm_login
@@ -20,7 +20,13 @@ Rails.application.routes.draw do
   get 'account/logout' => 'accounts#logout'
 
   get 'jobs/' => 'jobs#index', :as => :job_list
+  get 'jobs/new' => 'jobs#new', :as => :new_job
+  post 'jobs/create' => 'jobs#create', :as => :create_job
+  delete 'jobs/delete' => 'jobs#delete', :as => :delete_job
   get 'jobs/sort' => 'jobs#job_sort', :as => :job_sort
+  get 'jobs/:job_id/view' => 'jobs#view', :as => :view_single_job
+  get 'jobs/company/:company_id' => 'jobs#view_posted_jobs', :as => :view_posted_jobs
+  post 'jobs/apply/:job_id' => 'jobs#apply', :as => :apply_job
 
   get 'profiles/students/' => 'profiles#students'
   get 'profiles/students/page/:page' => 'profiles#list_students', :as => :list_students
@@ -30,7 +36,7 @@ Rails.application.routes.draw do
   get 'profiles/student/:id/edit' => 'profiles#edit_student', :as => :edit_student_profile
   post 'profiles/student/:id/update' => 'profiles#update_student', :as => :update_student_profile
   get 'profiles/school/:id' => 'profiles#school', :as => :single_school_profile
-  
+
   resources :events
 
   get 'appointments/student/' => 'appointments#student_show', :as => :appointment_student_show
@@ -41,6 +47,9 @@ Rails.application.routes.draw do
   get 'appointments/staff' => 'appointments#index_staff', :as => :staff_appointments
   post 'appointments/staff/new' => 'appointments#staff_new', :as => :new_staff_appointments
   delete 'appointments/staff/:id' => 'appointments#destroy', :as => :cancel_appointment
+  
+  get 'applications/company/:company_id' => 'applications#index', :as => :company_view_applications
+  get 'applications/student/:student_id' => 'applications#index', :as => :student_view_applications
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
