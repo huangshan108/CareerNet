@@ -28,8 +28,10 @@ Background: Adding jobs to database
 
 
     And I am on the account_login page
-    Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
-    Then I should see "Welcome to CareerNet"
+  Then I enter "shuang@berkeley.edu" into "email" 
+And I enter "careernet" into "password" 
+And I press "Log In" button
+  Then I should see "Welcome to CareerNet"
 
     Scenario: Adding an existing skill
       Given I am on student profile page
