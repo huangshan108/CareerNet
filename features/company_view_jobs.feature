@@ -1,8 +1,7 @@
-Feature: Apply for jobs
+Feature: Company view jobs
 
-  Apply The Job
-  As a student
-  I want to apply for jobs I am interested in.
+  As a company
+  I want to view applications.
 
 Background: Adding jobs to database
   Given the following accounts exist:
@@ -22,14 +21,14 @@ Background: Adding jobs to database
   | title          | description       | salary          | company_id |          
   | Director       | Frond-end         | 80000           |  1         |
 
+  Given the following applications exist
+  | student_id     | job_id        |
+  | 1              | 1             |
+
   And I am on the account_login page
-  Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+  Then I enter "company@careernet.com" into "email" and I enter "careernet" into "password" and I press "Log In" button
   Then I should see "Welcome to CareerNet"
 
-Scenario: Apply for jobs
-  Given I am on the job 1 view page
-	When I follow "Apply"
-	Then I should see "You application has been submitted!"
-  When I am on the main dashboard page
-  When I follow "View Applications"
-  Then I should see "Director"
+Scenario: Company view applied jobs
+	When I follow "View Applications"
+	Then I should see "Director"

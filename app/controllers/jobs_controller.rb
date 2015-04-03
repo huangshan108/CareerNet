@@ -35,8 +35,8 @@ class JobsController < ApplicationController
   def apply
     @application = Application.create(:student_id => session[:roll_id], :job_id => params[:job_id])
     flash[:notice] = "You application has been submitted!"
-    ApplicationsMailer.application_confirmation_email_student(@application).deliver
-    ApplicationsMailer.application_confirmation_email_company(@application).deliver
+    ApplicationsMailer.application_confirmation_email_student(@application).deliver_now
+    ApplicationsMailer.application_confirmation_email_company(@application).deliver_now
     redirect_to view_single_job_path(params[:job_id])
   end
 

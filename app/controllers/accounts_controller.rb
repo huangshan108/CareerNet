@@ -109,7 +109,7 @@ class AccountsController < ApplicationController
         elsif @account.update_attributes(:password => params[:password])
             redirect_to account_login_path, :notice => "Password reset successfully!"
             return
-        end     
+        end
     end
 
     def logout

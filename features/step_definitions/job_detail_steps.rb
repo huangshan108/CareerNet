@@ -8,25 +8,13 @@ Given /the following jobs exist/ do |jobs_table|
   end
 end
 
-
-Given /the following companies exist/ do |company_table|
-  company_table.hashes.each do |company|
-    # each returned element will be a hash whose key is the table header.
-    # you should arrange to add that movie to the database here.
-    new_company = Company.create!(name: company[:name])
-    new_company.save
-  end
-end
-
-#assume we have a job table in database
-
 Then /I should see "(.*?)" before "(.*?)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
   e1_index = page.body.index(e1)
   e2_index = page.body.index(e2)
   if e1_index > e2_index
-    raise Error
+    raise Exception.new("Page Element Order Error")
   end
 end
 
@@ -37,4 +25,3 @@ end
 Given /I am logged in/ do
 
 end
-
