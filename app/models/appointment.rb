@@ -41,16 +41,6 @@ class Appointment < ActiveRecord::Base
         end
     end
 
-    def self.appointments_this_week(user)
-        self.where("day >= ?", Date.today.at_beginning_of_week)
-    end
-
-    def self.appointments_weeks_ago(user, weeks_ago)
-        self.where("day >= ? AND day < ?", 
-                   Date.today.at_beginning_of_week.days_ago(7 * weeks_ago),
-                   Date.today.at_beginning_of_week.days_ago(7 * (weeks_ago-1)))
-    end
-
     def self.between(start_day, end_day)
       self.where("day >= ? AND day <= ?", start_day.to_date, end_day.to_date)
     end
