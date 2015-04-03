@@ -52,6 +52,9 @@ class AppointmentsController < ApplicationController
       elsif @account.staff == nil
           Staff.new(account: @account)
       else
+          #@account.staff.first_name = "Hye"
+          #@account.staff.last_name = "Cho"
+          #@account.staff.save
           @account.staff
       end
   end

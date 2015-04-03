@@ -68,10 +68,10 @@ class AccountsController < ApplicationController
             student = Student.create
             new_account.student = student
         when "2"
-            roll_record = Staff.create
+            staff = Staff.create
             new_account.staff = staff
         when "3"
-            roll_record = Company.create
+            company = Company.create
             new_account.company = company
         end
         return new_account
