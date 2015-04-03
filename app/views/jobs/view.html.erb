@@ -12,9 +12,7 @@
 	</li>
 </ul>
 
-<%= button_to 'Delete the Job', delete_job_path(@job), :method => :delete %>
-<br>
-
+<%= link_to "Delete", delete_job_path(@job), :method => :delete %>
 <%= link_to "Apply", apply_job_path(:job_id => params[:job_id]), :method => :post %>
 <%= link_to "Back to the Job list", job_list_path %>
 

@@ -21,8 +21,8 @@ class JobsController < ApplicationController
     @current_user = Account.find(session[:user_id])
   end
 
-  def destroy
-    @job = Job.find params[:id]
+  def delete
+    @job = Job.find params[:job_id]
     @job.destroy
     flash[:notice] = "The Job #{@job.title} deleted."
     redirect_to job_list_path

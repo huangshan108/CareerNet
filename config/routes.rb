@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
 
   root :to => 'main#index'
-  # resources :jobs
-  # resources :jobs do
-  #   member do
-  #     get 'apply'
-  #   end
-  # end
 
   get 'account/login' => 'accounts#login', :as => :account_login
   post 'account/login' => 'accounts#confirm_login', :as => :account_confirm_login
@@ -22,11 +16,12 @@ Rails.application.routes.draw do
   get 'jobs/' => 'jobs#index', :as => :job_list
   get 'jobs/new' => 'jobs#new', :as => :new_job
   post 'jobs/create' => 'jobs#create', :as => :create_job
-  delete 'jobs/delete' => 'jobs#delete', :as => :delete_job
   get 'jobs/sort' => 'jobs#job_sort', :as => :job_sort
   get 'jobs/:job_id/view' => 'jobs#view', :as => :view_single_job
   get 'jobs/company/:company_id' => 'jobs#view_posted_jobs', :as => :view_posted_jobs
   post 'jobs/apply/:job_id' => 'jobs#apply', :as => :apply_job
+  delete 'jobs/delete/:job_id' => 'jobs#delete', :as => :delete_job
+  resources :jobs
 
   get 'profiles/students/' => 'profiles#students'
   get 'profiles/students/page/:page' => 'profiles#list_students', :as => :list_students

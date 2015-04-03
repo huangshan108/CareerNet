@@ -16,15 +16,18 @@ Background: Adding jobs and com to database
    Given the following accounts exist:
   |name         |email               |account_type |
   |huangshan108 |shuang@berkeley.edu |3            |
-  |expired      |expired@berkeley.edu|2            |
+
+  Given the following companies exist
+  | title          | brief       | website          | address |account_id |          
+  | Google         | Search      | Google.com       |  Soda   |1          |
 
   And I am on the account_login page
   Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
   Then I should see "Welcome to CareerNet"
 
 Scenario: Posting Jobs
-  When I go to the main page
-  And I press "Post a New Job"
+  When I go to the main dashboard page
+  And I follow "Post a New Job"
   Then I am on the job create page
 
 Scenario: Creating Jobs
@@ -33,12 +36,12 @@ Scenario: Creating Jobs
   And I fill in "description" with "Good"
   And I fill in "salary" with "77000"
   And I fill in "company_id" with "2"
-  Then I press "Post the Job"
+  Then I press "Post"
   Then I should see "Software Engineering was successfully created"
 
 
 Scenario: Deleting Jobs
-  Given I am on the job 1 apply page
-  And I press "Delete the Job"
+  Given I am on the job 1 view page
+  And I follow "Delete"
   Then I should see "The Job Software Engineer deleted."
 
