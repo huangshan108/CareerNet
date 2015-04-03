@@ -1,6 +1,8 @@
-Feature: Apply The Job
-As a student
-I want to apply for jobs I am interested in.
+Feature: Apply for jobs
+
+  Apply The Job
+  As a student
+  I want to apply for jobs I am interested in.
 
 Background: Adding jobs to database
 
@@ -29,9 +31,9 @@ Scenario: Apply for jobs
 Scenario: Student view applied jobs
 	I am on the "main page" for student
 	When I press "View Applied Jobs"
-	I should see "Engineer" and "Google" and "Applied"
+	Then I should see "Engineer" and "Google" and "Applied"
 
 Scenario: Company view applied jobs
 	I am ont the "main page" for companies
 	When I press "View Applications"
-	I should see "Shan Hunag" and "Front-end" and "Applied"
+	Then I should see "Shan Hunag" and "Front-end" and "Applied"
