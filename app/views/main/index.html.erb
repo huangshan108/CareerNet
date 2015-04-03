@@ -9,15 +9,15 @@
   <h2>Recent Job Postings</h2>
   <article class="content-container">
     <%@jobs.each do |job| %>
-    <h5><a href="#"><%=job.title%></a></h3>
-    <h6>Posted by <a href="#"><%=job.company_id%></a> on <%=job.created_at%></h6>
+    <h5><%=link_to job.title, apply_job_path(job.id)%></a></h3>
+    <h6>Posted by <%=job.company_id%>on <%=job.created_at%></h6>
     <% end %>
   </article>
   <h2>Upcoming Events </h2>
   <article class="content-container">
     <%@events.each do |event| %>
-    <h5><a href="#"><%=event.title%></a></h3>
-    <h6>Starts at <a href="#"><%=event.time_start%></a></h6>
+    <h5><%=link_to event.title, event_path(event)%></a></h3>
+    <h6>Starts at <%=event.time_start%></a></h6>
     <% end %>
   </article>
 </div>
