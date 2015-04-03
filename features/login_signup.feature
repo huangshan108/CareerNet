@@ -29,6 +29,8 @@ Scenario: I type a correct password
 	I am on the CareerNet "/account/login" page
 	Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
 	Then I should see "Welcome to CareerNet"
+	When I follow "Logout"
+	Then I should see "Logged out"
 
 Scenario: I want to signup but type in invalid email
 	I am on the CareerNet "/account/signup" page
