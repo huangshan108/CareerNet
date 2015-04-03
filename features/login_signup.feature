@@ -10,7 +10,11 @@ Background:
 	|name         |email               |account_type |
 	|huangshan108 |shuang@berkeley.edu |1            |
 	|expired      |expired@berkeley.edu|2            |
-	
+
+	Given the following students exist:
+	|first_name         |last_name			|email               |account_id |
+	|shuang             |Huang          |shuang@berkeley.edu |1          |
+
 Scenario: I don't input anything and try to login
 	I am on the CareerNet "/account/login" page 
 	When I press "Log In" button

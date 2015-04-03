@@ -50,17 +50,34 @@ class AccountsController < ApplicationController
         end
         @new_account.email = params[:email]
         @new_account.account_type = params[:account_type]
+        @new_account = associate_roll params[:account_type], @new_account
         @new_account.password = params[:password]
         @new_account.name = params[:username]
         if @new_account.valid? and @new_account.save
-                flash[:notice] = "Account successfully created!"
-                redirect_to(:action => 'login')
-                return
+            flash[:notice] = "Account successfully created!"
+            redirect_to(:action => 'login')
+            return
         else
             flash[:error] = "Invalid field. Please check your email or password."
             redirect_to(:back)
             return
         end
+    end
+
+    def associate_roll account_type, new_account
+        # byebug
+        case account_type
+        when "1"
+            student = Student.create
+            new_account.student = student
+        when "2"
+            roll_record = Staff.create
+            new_account.staff = staff
+        when "3"
+            roll_record = Company.create
+            new_account.company = company
+        end
+        return new_account
     end
 
     def forgot_password
