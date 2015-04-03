@@ -31,10 +31,11 @@ Scenario: Creating Jobs
   Given I am on the job create page
   And I fill in "title" with "Software Engineering"
   And I fill in "description" with "Good"
-  And I fill in "salary" with "10000"
+  And I fill in "salary" with "77000"
   And I fill in "company_id" with "2"
   Then I press "Post the Job"
   Then I should see "Software Engineering was successfully created"
+
 
 Scenario: Deleting Jobs
   Given I am on the job 1 apply page
