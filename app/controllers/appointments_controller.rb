@@ -75,6 +75,9 @@ class AppointmentsController < ApplicationController
   def student_show
   	account = Account.find(session[:user_id])
   	if account.account_type == 1
+      if account.student == nil
+        Student.new(account: account)
+      end
   		@student = account.student
   		@appointments = @student.appointments
   	else
