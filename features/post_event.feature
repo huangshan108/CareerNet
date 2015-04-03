@@ -18,7 +18,9 @@ Background:
   	| staff1	| staff1@berkeley.edu	  | 2		  |
 
   	And I am on the account_login page
-  	Then I enter "staff1@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+  	Then I enter "staff1@berkeley.edu" into "email"
+    And I enter "careernet" into "password"
+    And I press "Log In" button
   	Then I should see "Welcome to CareerNet"
 
 Scenario: I want to post a new event

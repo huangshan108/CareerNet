@@ -9,7 +9,7 @@
   <h2>Recent Job Postings</h2>
   <article class="content-container">
     <%@jobs.each do |job| %>
-    <h5><%=link_to job.title, apply_job_path(job.id)%></a></h3>
+    <h5><%=link_to job.title, view_single_job_path(job.id)%></a></h3>
     <h6>Posted by <%=job.company_id%>on <%=job.created_at%></h6>
     <% end %>
   </article>
@@ -21,3 +21,19 @@
     <% end %>
   </article>
 </div>
+
+<aside class="aside">
+  <div class="panel">
+  </div>
+  <ul>
+    <% case account_type
+      when 1 %>
+      <li><%= link_to 'View Applications', student_view_applications_path(roll_id) %> </li>
+      <% when 2 %>
+      <% when 3 %>
+        <li><%= link_to 'Post a New Job', new_job_path %></li>
+        <li><%= link_to 'View Applications', company_view_applications_path(roll_id) %></li>
+        <li><%= link_to 'View Posted Jobs', view_posted_jobs_path(roll_id) %></li>
+    <% end %>
+  </ul>
+</aside>

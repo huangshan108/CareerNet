@@ -21,10 +21,11 @@ Background:
   And the following accounts exist:
   | name      | email       | account_type |
   | huangshan108 | shuang@berkeley.edu | 1 |
-  | expired   | expired@berkeley.edu | 2 |
 
   And I am on the account_login page
-  Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+  Then I enter "shuang@berkeley.edu" into "email"
+  And I enter "careernet" into "password"
+  And I press "Log In" button
   Then I should see "Welcome to CareerNet"
 
 Scenario: I want to view an upcoming event
