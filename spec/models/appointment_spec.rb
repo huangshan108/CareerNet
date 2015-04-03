@@ -61,6 +61,7 @@ describe Appointment do
       @appt = FactoryGirl.create(:appointment, day: @day, time_slot: 4)
       @staff = @appt.staff
     end
+
     it 'should correctly convert into json' do
       @result = @appt.as_json
       @expected = {
