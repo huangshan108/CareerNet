@@ -10,7 +10,7 @@
   <article class="content-container">
     <%@jobs.each do |job| %>
     <h5><%=link_to job.title, view_single_job_path(job.id)%></a></h3>
-    <h6>Posted by <%=job.company_id%>on <%=job.created_at%></h6>
+    <h6>Posted by <%=job.company_id%> on <%=job.created_at%></h6>
     <% end %>
   </article>
   <h2>Upcoming Events </h2>
