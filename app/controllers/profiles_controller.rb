@@ -5,13 +5,6 @@ class ProfilesController < ApplicationController
     @student = Student.find(id)
   end
 
-  def new
-    @all_schools = College.all
-    @all_majors = Major.all
-    @is_new = true
-    render 'create_student'
-  end
-
   def students
     redirect_to(list_students_path(1))
   end
@@ -40,13 +33,6 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def create_student
-    @student = Student.create!(student_profile_params)
-    current_user.student = @student
-    flash[:notice] = "Profile Created!"
-    redirect_to root_path
-  end
-
   def list_students
   	@all_students = Student.paginate(:page => params[:page], :per_page => 10)
   end
@@ -60,9 +46,5 @@ class ProfilesController < ApplicationController
   def school
     id = params[:id] # retrieve student ID from URI route
     @college = College.find(id)
-  end
-
-  def student_profile_params
-    params.permit(:first_name, :last_name, :college_id, :major_id, :graduation_date, :resume_link)
   end
 end

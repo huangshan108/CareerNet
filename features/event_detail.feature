@@ -12,10 +12,13 @@ Background: Events have been added to the database.
   | Resume Workshop | foo         | 2000-01-01 15:00:00 UTC | 2000-01-01 16:00:00 UTC | Gold Room       |
   | Mock Interviews | foo         | 2000-01-01 16:00:00 UTC | 2000-01-01 20:00:00 UTC | Wozniak Lounge  |
 
-  And the following accounts exist:
-  | name 	        | email 		            | account_type  |
-  | huangshan108  | shuang@berkeley.edu	  | 1		          |
-  | expired	      | expired@berkeley.edu	| 2		          |
+  Given the following accounts exist:
+  |name         |email               |account_type |
+  |huangshan108 |shuang@berkeley.edu |1            |
+
+  Given the following students exist:
+  |first_name         |last_name      |email               |account_id |
+  |Shan               |Huang          |shuang@berkeley.edu |1          |
 
   And I am on the account_login page
   Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button

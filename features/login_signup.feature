@@ -10,7 +10,11 @@ Background:
 	|name         |email               |account_type |
 	|huangshan108 |shuang@berkeley.edu |1            |
 	|expired      |expired@berkeley.edu|2            |
-	
+
+	Given the following students exist:
+	|first_name         |last_name			|email               |account_id |
+	|shuang             |Huang          |shuang@berkeley.edu |1          |
+
 Scenario: I don't input anything and try to login
 	I am on the CareerNet "/account/login" page 
 	When I press "Log In" button
@@ -25,6 +29,8 @@ Scenario: I type a correct password
 	I am on the CareerNet "/account/login" page
 	Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
 	Then I should see "Welcome to CareerNet"
+	When I follow "Logout"
+	Then I should see "Logged out"
 
 Scenario: I want to signup but type in invalid email
 	I am on the CareerNet "/account/signup" page
@@ -55,11 +61,6 @@ Scenario: I am successfully reset a password
 	I am on the CareerNet "account/start-reset-password/test_token" page.
 	When I fill in reset password form with password1 "careernet" and password2 "careernet"
 	Then I should see "Password reset successfully!"
-
-Scenario: I fail to reset a password
-	I am on the CareerNet "account/start-reset-password/test_token" page.
-	When I fill in reset password form with password1 "careernet" and password2 "careernet2"
-	Then I should see "Password does not match!"
 
 Scenario: I reset password on an expired link
 	I am on the CareerNet "account/start-reset-password/test_token_expired" page.

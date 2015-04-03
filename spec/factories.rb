@@ -1,4 +1,7 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :application do
+    
+  end
+
     factory :account do
         name "Quasimodo"
         email "humpback@notredame.edu"
