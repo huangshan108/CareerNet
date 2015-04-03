@@ -30,8 +30,6 @@ Rails.application.routes.draw do
 
   get 'profiles/students/' => 'profiles#students'
   get 'profiles/students/page/:page' => 'profiles#list_students', :as => :list_students
-  get 'profiles/student/new' => 'profiles#new', :as => :new_student
-  post 'profiles/student/new' => 'profiles#create_student',:as => :create_student
   get 'profiles/student/:id' => 'profiles#student', :as => :single_student_profile
   get 'profiles/student/:id/edit' => 'profiles#edit_student', :as => :edit_student_profile
   post 'profiles/student/:id/update' => 'profiles#update_student', :as => :update_student_profile
