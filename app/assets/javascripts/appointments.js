@@ -46,7 +46,7 @@ $(document).ready(function() {
                 $("#calendar").fullCalendar("refetchEvents");
               },
              error: function(json) {
-               alert(eventData.start);
+               alert('Failed to register appointments');
              }
             });
           $("#calendar").fullCalendar("unselect");
@@ -70,11 +70,24 @@ $(document).ready(function() {
             }
         },
         slotMinutes: 20,
-        eventSources: [
-          {
-            url: '/appointments/staff'
-          }
-        ],
+        events: '/appointments/staff/',
+        //events: function (start, end, timezone, callback){
+        //  $.ajax({
+        //    url: '/appointments/staff',
+        //    type: 'GET'
+        //    dataType: 'json',
+        //    data: {
+        //      start: start.format("YYYY-MM-DD HH:mm:ss"),
+        //      end: end.format("YYYY-MM-DD HH:mm:ss")
+        //    },
+        //    success: function(json){
+        //      callback(json);
+        //    },
+        //    error: function(){
+        //      alert('Failed to load appointments.');
+        //    }
+        //  });
+        //},
         //timeFormat: 'h:mm t{ - h:mm t} ',
         dragOpacity: "0.5"
         })

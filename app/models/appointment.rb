@@ -50,4 +50,8 @@ class Appointment < ActiveRecord::Base
                    Date.today.at_beginning_of_week.days_ago(7 * weeks_ago),
                    Date.today.at_beginning_of_week.days_ago(7 * (weeks_ago-1)))
     end
+
+    def self.between(start_day, end_day)
+      self.where("day >= ? AND day <= ?", start_day.to_date, end_day.to_date)
+    end
 end

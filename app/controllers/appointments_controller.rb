@@ -58,11 +58,12 @@ class AppointmentsController < ApplicationController
 
   def index_staff
       @staff = curr_staff
-      @appt_this_week = Appointment.appointments_this_week(@staff)
+      #@appointments = Appointment.appointments_this_week(@staff)
+      @appointments = @staff.appointments.between(params[:start], params[:end]) if (params[:start] && params[:end])
 
       respond_to do |format|
         format.html
-        format.json { render :json => @appt_this_week }
+        format.json { render :json => @appointments }
       end
   end
 
