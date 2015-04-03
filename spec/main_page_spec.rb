@@ -25,11 +25,6 @@ describe "MainPage" do
         expect(page).to have_content 'All Events'
     end
 
-    it 'should direct to profile page when click My Profile' do
-        click_link('My Profile')
-        expect(page).to have_content 'Student Profile'
-    end
-
     it 'should direct to logout page when click logout' do
         click_link('Logout')
         expect(page).to have_content 'Logged out'
