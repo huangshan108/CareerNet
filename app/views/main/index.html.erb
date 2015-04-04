@@ -28,10 +28,12 @@
   <ul>
     <% case account_type
       when 1 %>
-      <li><%= link_to 'View Applications', student_view_applications_path(roll_id) %> </li>
+        <li><%= link_to 'View Applications', student_view_applications_path(roll_id) %> </li>
+        <li><%= link_to 'Make An Appointment', appointment_student_show_path %></li>
       <% when 2 %>
+        <li><%= link_to 'Post An Appointment', staff_appointments_path %></li>
       <% when 3 %>
-        <li><%= link_to 'Post a New Job', new_job_path %></li>
+        <li><%= link_to 'Post A New Job', new_job_path %></li>
         <li><%= link_to 'View Applications', company_view_applications_path(roll_id) %></li>
         <li><%= link_to 'View Posted Jobs', view_posted_jobs_path(roll_id) %></li>
     <% end %>
