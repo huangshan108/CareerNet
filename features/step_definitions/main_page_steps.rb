@@ -1,6 +1,3 @@
-When /I am on the main page/ do
-    home_path
-end
 And /I click on the "(.*)" tab/ do
     steps %Q{ When I press "#{$1}" }
 end

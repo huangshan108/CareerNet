@@ -1,4 +1,6 @@
 require 'time'
+puts "Seeding Students..."
+
 resume_link = 'http://www.grad.illinois.edu/careerservices/nonacademic/resumes/samples.pdf'
 university = 'University of California, Berkeley'
 base_username = "careernet.student"

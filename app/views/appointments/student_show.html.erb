@@ -1,0 +1,28 @@
+<% #  This file is app/views/appointments/student_show.html.haml %>
+<h1> Appointments </h1>
+<%= link_to "Make a new appointment", appointment_student_new_path -%>
+<table class = "table">
+  <thead>
+    <tr>
+      <th> Staff </th>
+      <th> Appointment Date </th>
+      <th> Starting Time </th>
+      <th> Ending Time </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for a in @appointments -%>
+      <tr>
+        <td><%= a.staff.first_name + ' ' + a.staff.last_name -%></td>
+        <td><%= a.day -%></td>
+        <td><%= ((9*60+40+a.time_slot*20)/60).to_s+':'+((9*60+40+a.time_slot*20)%60).to_s -%></td>
+        <td><%= ((9*60+40+(a.time_slot+1)*20)/60).to_s+':'+((9*60+40+(a.time_slot+1)*20)%60).to_s -%></td>
+        <td><%= link_to "Cancel", appointment_student_cancel_path(a) -%></td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>
+<% if @appointments.length == 0 -%>
+  <center><b>You currently do not have any active appointment.</b></center>
+<% end -%>

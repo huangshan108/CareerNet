@@ -1,11 +1,30 @@
 <h1> Student Profile </h1>
-<%= link_to('Edit profile', edit_student_profile_path(@student)) -%>
+<%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button" -%>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('a[name="edit-profile-button"]').click(function() {
+      $('.spinner-model').show();
+    });
+  });
+</script>
 <table class = "table">
   <tbody>
     <tr>
       <th> Name </th>
       <% if @student.first_name and @student.last_name %>
         <td><%= @student.first_name + ' ' + @student.last_name -%></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th> Skills </th>
+      <% if @student.skills %>
+        <% skill_list = [] %>
+        <% @student.skills.all.each do |s| %>
+        <%skill_list << s.name.gsub("\n", "") %>
+        <% end %>
+        <% if not skill_list.empty? %>
+          <td><%=skill_list%></td>
+        <% end %>
       <% end %>
     </tr>
     <tr>

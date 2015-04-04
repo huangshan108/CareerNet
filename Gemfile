@@ -10,6 +10,8 @@ group :development, :test do
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails', '~> 2.14.0'
   gem 'simplecov'
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :production do
@@ -58,3 +60,9 @@ gem 'email_validator'
 gem 'newrelic_rpm'
 gem 'tzinfo-data'
 gem 'factory_girl_rails'
+gem 'faker'
+
+# Gem for FullCalendar
+gem 'fullcalendar-rails', '~> 2.0.2.0'
+gem 'responders'
+

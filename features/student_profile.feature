@@ -3,10 +3,6 @@ Feature: Students can create and/or modify profiles
 
 Background: Adding jobs to database
 
-    Given the following students exist:
-    | first_name   | last_name  | college_id   | major_id     | graduation_date   | resume_link |
-    | Mark         | Sharp      | 1            | 1            | 2016-10-10        | example.com |
-
     Given the following schools exist:
     | school_name                   | school_type   | school_year  | address    |
     | Cambridge College-Portland    | public        | 4-year       | NONE       |
@@ -18,10 +14,15 @@ Background: Adding jobs to database
     Given the following accounts exist:
     |name         |email               |account_type |
     |huangshan108 |shuang@berkeley.edu |1            |
-    |expired      |expired@berkeley.edu|2            |
+
+    Given the following students exist:
+    | first_name   | last_name  | college_id   | major_id     | graduation_date   | resume_link |account_id |
+    | Mark         | Sharp      | 1            | 1            | 2016-10-10        | example.com |1          |
   
     And I am on the account_login page
-    Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+    Then I enter "shuang@berkeley.edu" into "email" 
+And I enter "careernet" into "password" 
+And I press "Log In" button
     Then I should see "Welcome to CareerNet"
 
     Scenario: Go to students page

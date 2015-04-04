@@ -7,3 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
+require File.join(Rails.root, 'db', 'seeds', 'seed_students.rb')
+require File.join(Rails.root, 'db', 'seeds', 'seed_events.rb')
+require File.join(Rails.root, 'db', 'seeds', 'seed_jobs_and_companies.rb')
+require File.join(Rails.root, 'db', 'seeds', 'seed_colleges.rb')
+require File.join(Rails.root, 'db', 'seeds', 'seed_majors.rb')
+require File.join(Rails.root, 'db', 'seeds', 'seed_skills.rb')
+require File.join(Rails.root, 'db', 'seeds', 'seed_staffs.rb')

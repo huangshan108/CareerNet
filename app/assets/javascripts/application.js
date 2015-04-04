@@ -15,7 +15,9 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+//= require fullcalendar
 
 $(function() {
 	$('.flash-message').delay(2000).fadeOut()
 });
+

@@ -14,7 +14,9 @@ Project and database setup
 
 Then open web browser, go to `localhost:3000`
 
-To seed database, run `rake db:seed:<seed_script>`
+To seed database, run `rake db:seed`
+
+To seed a specific data, run `rake db:seed:<seed_script>`
 
 Currently avalible seed_scripts are (It's highly recommended that you reset your local db before seeding):
 * `seed_students`
@@ -22,6 +24,7 @@ Currently avalible seed_scripts are (It's highly recommended that you reset your
 * `seed_jobs_and_companies`
 * `seed_colleges`
 * `seed_majors`
+* `seed_skills`
 
 To test this app with test accounts:
 * For students, use `careernet.student+<id>@gmail.com`

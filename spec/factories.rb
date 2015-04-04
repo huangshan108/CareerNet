@@ -1,9 +1,29 @@
-FactoryGirl.define do
-    factory :account do
-        name "Quasimodo"
-        email "humpback@notredame.edu"
-        password "Esmeralda"
-    end
+require 'faker'
+
+FactoryGirl.define do  
+  factory :staff do |f|
+    f.first_name Faker::Name.first_name
+    f.last_name Faker::Name.last_name
+    f.description "I specialize in resume review."
+  end
+
+  factory :appointment do |f|
+    f.time_slot 1
+    f.day "2015-03-22"
+    f.description "I want a resume review."
+    f.note "Session notes by staff."
+
+    f.association :staff, :factory => :staff
+  end
+
+  factory :account do
+      name "Quasimodo"
+      email "humpback@notredame.edu"
+      password "Esmeralda"
+  end
+end
+
+
 
 
     #factory :student do
@@ -30,4 +50,3 @@ FactoryGirl.define do
     #    end
     #end
 
-end

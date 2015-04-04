@@ -18,6 +18,15 @@ class AccountsController < ApplicationController
     if authorized_user 
         session[:user_id] = authorized_user.id
         session[:email] = authorized_user.email
+        case authorized_user.account_type
+        when 1
+            session[:roll_id] = authorized_user.student.id
+        when 2
+            session[:roll_id] = authorized_user.staff.id
+        when 3
+            session[:roll_id] = authorized_user.company.id
+        else
+        end
         # After logging in, directed to main page instead of account#index
         redirect_to(root_path)
     else
@@ -36,22 +45,36 @@ class AccountsController < ApplicationController
             redirect_to(:back)
             return
         end
-        if !compare_retyped_passwords? params[:password], params[:password2]
-            return
-        end
         @new_account.email = params[:email]
         @new_account.account_type = params[:account_type]
+        @new_account = associate_roll params[:account_type], @new_account
         @new_account.password = params[:password]
         @new_account.name = params[:username]
         if @new_account.valid? and @new_account.save
-                flash[:notice] = "Account successfully created!"
-                redirect_to(:action => 'login')
-                return
+            flash[:notice] = "Account successfully created!"
+            redirect_to(:action => 'login')
+            return
         else
             flash[:error] = "Invalid field. Please check your email or password."
             redirect_to(:back)
             return
         end
+    end
+
+    def associate_roll account_type, new_account
+        # byebug
+        case account_type
+        when "1"
+            student = Student.create
+            new_account.student = student
+        when "2"
+            staff = Staff.create
+            new_account.staff = staff
+        when "3"
+            company = Company.create
+            new_account.company = company
+        end
+        return new_account
     end
 
     def forgot_password
@@ -83,29 +106,16 @@ class AccountsController < ApplicationController
         if @account.password_reset_sent_at < 2.hours.ago
             redirect_to account_forgot_password_path, :notice => "Password reset link has expired."
             return
-        else
-            if !compare_retyped_passwords? params[:password], params[:password2]
-                return
-            end
-            if @account.update_attributes(:password => params[:password])
-                redirect_to account_login_path, :notice => "Password reset successfully!"
-                return
-            end
-        end     
-    end
-
-    def compare_retyped_passwords? password, password2
-        if password != password2 or password == ""
-            flash[:error] = "Password does not match!"
-            redirect_to(:back)
-            return false
+        elsif @account.update_attributes(:password => params[:password])
+            redirect_to account_login_path, :notice => "Password reset successfully!"
+            return
         end
-        true
     end
 
     def logout
         session[:user_id] = nil
         session[:email] = nil
+        session[:roll_id] = nil
         flash[:notice] = "Logged out"
         redirect_to(:action => "login")
     end

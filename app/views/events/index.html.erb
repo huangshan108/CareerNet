@@ -1,15 +1,25 @@
-<h1>All Events</h1>
-<% @events.each do |event| %>
+<table class="event_list" border = "1" style="width: 700px";>
   <tr>
-    <% if !event.title.nil? %>
-      <td><%= link_to event.title, event_path(event) %></td>
-      <td><%= event.time_start %></td>
-      <td><%= event.time_end %></td><br>
-    <% end %>
+    <th> <%=link_to 'Event', events_path(:event_sort => 'title', :page => params[:page])%> </th>
+    <th> Time Start </th>
+    <th> Time End </th>
   </tr>
-<% end %>
-<br>
+  <% @events.each do |event| %>
+    <% if !event.title.nil? %>
+      <tr>
+        <td><div class="event_title"><%= link_to event.title, event_path(event) %></div></td>
+        <td><div class="time_start"><%= event.time_start %></div></td>
+        <td><div class="time_end"><%= event.time_end %></div></td>
+      </tr>
+      <% end %>
+  <% end %>
+  <br>
+  <script src="http://dotdotdot.frebsite.nl/js/jquery.dotdotdot-1.2.1.js" ></script>
+  <script type=text/javascript">
+    $(".desc").dotdotdot()
+  </script>
+</table>
+<%= will_paginate @events %>
 <div class="add-event">
   <%= link_to 'Add an event', new_event_path %>
 </div>
-
