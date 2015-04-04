@@ -25,7 +25,7 @@ And I press "Log In" button
 
 Scenario: Posting Jobs
   When I go to the main dashboard page
-  And I follow "Post a New Job"
+  And I follow "Post A New Job"
   Then I am on the job create page
 
 Scenario: Creating Jobs
