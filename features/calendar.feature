@@ -40,7 +40,7 @@ Scenario: I should see the event on calendar after posting a new event
     Then I am on the calendar page
     And I should see "Tech Talk"
     When I follow "Tech Talk"
-    I should be on the event page
+    And I should be on the event page
 
 Scenario: I should be able to delete an event on calendar
   
