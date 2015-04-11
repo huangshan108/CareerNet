@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   # Visualization
   get 'visualizations/student_demographic/' => 'visualizations#student_demographic', :as => :vis_student_demo
+  get 'visualizations/student_demographic/data' => 'visualizations#student_demographic_data', :defaults => { :format => 'json' }, :as => :vis_student_demo_data
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
