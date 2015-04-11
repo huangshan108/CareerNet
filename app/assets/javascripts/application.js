@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+//= require d3
 
 $(function() {
 	$('.flash-message').delay(2000).fadeOut()
