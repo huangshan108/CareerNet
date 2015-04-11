@@ -1,8 +1,8 @@
 require 'time'
 puts "Seeding Students..."
-
+require 'references'
 resume_link = 'http://www.grad.illinois.edu/careerservices/nonacademic/resumes/samples.pdf'
-university = 'University of California, Berkeley'
+#university = 'University of California, Berkeley'
 base_username = "careernet.student"
 random_dates_list = []
 random_dates = File.open(File.join(Rails.root, 'db', 'seeds', 'db_seed_data/random_dates.txt')).read
@@ -21,6 +21,22 @@ random_names.each_line do |line|
 	student[:graduation_date] = random_dates_list.sample
 	student[:college_id] = 1 + rand(10000)
 	student[:resume_link] = resume_link
+    # Country and Gender for Data Vis
+    # 85% of times student is domestic
+    if rand(99) < 85
+        student[:country] = 'US'
+    else
+        student[:country] = References::COUNTRY[rand(References::COUNTRY.length)][:iso_two_letter_code]
+    end
+    # 48% of times female, 48% of times male, and 4% others
+    gender = rand(99)
+    if gender < 48
+        student[:gender] = 'F'
+    elsif gender < 96
+        student[:gender] = 'M'
+    else
+        student[:gender] = 'O'
+    end
 	s = Student.create! student
 	account = {}
 	account[:name] = base_username + "." + s.id.to_s
