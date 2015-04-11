@@ -43,6 +43,9 @@ Rails.application.routes.draw do
   
   get 'applications/company/:company_id' => 'applications#index', :as => :company_view_applications
   get 'applications/student/:student_id' => 'applications#index', :as => :student_view_applications
+
+  # Visualization
+  get 'visualizations/student_demographic/' => 'visualizations#student_demographic', :as => :vis_student_demo
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
