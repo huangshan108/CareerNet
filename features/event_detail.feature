@@ -1,8 +1,8 @@
 Feature: View Events
 
-	As a student
-	I want to view and register for upcoming events
-	So that I can improve my chances of landing a job.
+  As a student
+  I want to view and register for upcoming events
+  So that I can improve my chances of landing a job.
 
 Background: Events have been added to the database.
 
@@ -21,35 +21,37 @@ Background: Events have been added to the database.
   |Shan               |Huang          |shuang@berkeley.edu |1          |
 
   And I am on the account_login page
-  Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+  Then I enter "shuang@berkeley.edu" into "email" 
+And I enter "careernet" into "password" 
+And I press "Log In" button
   Then I should see "Welcome to CareerNet"
 
   Scenario: I want to view a recruiting event
 
-	Given I am on the events page
-	When I follow "Job Fair"
-	Then I should see "Job Fair"
-	And I should see "2000-01-01 15:00:00 UTC"
-	And I should see "Register"
-	And I should see "Back to Events"
+  Given I am on the events page
+  When I follow "Job Fair"
+  Then I should see "Job Fair"
+  And I should see "2000-01-01 15:00:00 UTC"
+  And I should see "Register"
+  And I should see "Back to Events"
 
 Scenario: I want to view a resume workshop
 
-	Given I am on the events page
-	When I follow "Resume Workshop"
-	Then I should see "Resume Workshop"
-	And I should see "2000-01-01 15:00:00 UTC"
-	And I should see "Register"
-	And I should see "Back to Events"
+  Given I am on the events page
+  When I follow "Resume Workshop"
+  Then I should see "Resume Workshop"
+  And I should see "2000-01-01 15:00:00 UTC"
+  And I should see "Register"
+  And I should see "Back to Events"
 
 Scenario: I want to register for a mock interview
 
-	Given I am on the events page
-	When I follow "Mock Interviews"
-	Then I should see "Mock Interviews"
-	And I should see "2000-01-01 16:00:00 UTC"
-	And I should see "Register"
-	And I should see "Back to Events"
+  Given I am on the events page
+  When I follow "Mock Interviews"
+  Then I should see "Mock Interviews"
+  And I should see "2000-01-01 16:00:00 UTC"
+  And I should see "Register"
+  And I should see "Back to Events"
   And I should see "foo"
   When I follow "Back to Events"
   Then I am on the events page

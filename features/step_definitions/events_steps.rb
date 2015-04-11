@@ -4,3 +4,7 @@ Given /the following events exist/ do |events_table|
   new_event.save!
   end
 end
+
+Then /^I enter event title "(.+)" into "(.+)"$/ do |value, field|
+  enter_stuff value, field
+end

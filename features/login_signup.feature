@@ -16,49 +16,52 @@ Background:
 	|shuang             |Huang          |shuang@berkeley.edu |1          |
 
 Scenario: I don't input anything and try to login
-	I am on the CareerNet "/account/login" page 
+	Given I am on login page
+	Then I should see "CareerNet" 
 	When I press "Log In" button
 	Then I should see "Invalid username/password combination."
 
 Scenario: I type a wrong password
-	I am on the CareerNet "/account/login" page
-	Then I enter "shuang@berkeley.edu" into "email" and I enter "wrongpassword" into "password" and I press "Log In" button
+	Given I am on login page
+	Then I enter "shuang@berkeley.edu" into "email"
+	And I enter "wrongpassword" into "password"
+	Then I press "Log In" button
 	Then I should see "Invalid username/password combination."
 
 Scenario: I type a correct password
-	I am on the CareerNet "/account/login" page
-	Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+	Given I am on login page
+	Then I enter "shuang@berkeley.edu" into "email"
+	And I enter "careernet" into "password" 
+	And I press "Log In" button
 	Then I should see "Welcome to CareerNet"
-	When I follow "Logout"
-	Then I should see "Logged out"
 
 Scenario: I want to signup but type in invalid email
-	I am on the CareerNet "/account/signup" page
+	Given I am on signup page
 	When I fill in signup form with invalid email
 	Then I should see "Invalid field. Please check your email or password."
 
 Scenario: I want to signup with an existing account
-	I am on the CareerNet "/account/signup" page
+	Given I am on signup page
 	When I fill in signup form with email "shuang@berkeley.edu"
 	Then I should see "Email already exist."
 
 Scenario: I successfully signed up
-	I am on the CareerNet "/account/signup" page
+	Given I am on signup page
 	When I fill in signup form with email "careernet@berkeley.edu"
 	Then I should see "Account successfully created!"
 
 Scenario: I want to reset my password but I type in a invalid email.
-	I am on the CareerNet "/account/forgot-password" page
+	Given I am on forgot password page
 	When I fill in reset password form with email "careernet@berkeley.edu"
 	Then I should see "Account not found!"
 
 Scenario: I want to reset my password and I type in a valid email.
-	I am on the CareerNet "/account/forgot-password" page
+	Given I am on forgot password page
 	When I fill in reset password form with email "shuang@berkeley.edu"
 	Then I should see "follow the instructions to reset your password."
 
 Scenario: I am successfully reset a password
-	I am on the CareerNet "account/start-reset-password/test_token" page.
+	I am on CareerNet "account/start-reset-password/test_token" page.
 	When I fill in reset password form with password1 "careernet" and password2 "careernet"
 	Then I should see "Password reset successfully!"
 
@@ -66,3 +69,12 @@ Scenario: I reset password on an expired link
 	I am on the CareerNet "account/start-reset-password/test_token_expired" page.
 	When I fill in reset password form with password1 "careernet" and password2 "careernet" in the expired link
 	Then I should see "Password reset link has expired."
+
+Scenario: I logged out
+	Given I am on login page
+	Then I enter "shuang@berkeley.edu" into "email" 
+	And I enter "careernet" into "password" 
+	And I press "Log In" button
+	Then I should see "Welcome to CareerNet"
+	When I follow "Logout"
+	Then I should see "Logged out"

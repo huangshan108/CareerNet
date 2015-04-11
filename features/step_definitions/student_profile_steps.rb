@@ -23,6 +23,13 @@ Given /the following majors exist/ do |majors_table|
   end
 end
 
+Given /the following skills exist/ do |skills_table|
+  skills_table.hashes.each do |skill|
+    new_skill = Skill.create!(name: skill[:name])
+    new_skill.save
+  end
+end
+
 When(/^I fill in First Name with "(.*?)"$/) do |arg1|
   fill_in "first_name", :with => arg1
 end

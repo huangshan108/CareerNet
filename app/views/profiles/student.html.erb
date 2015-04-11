@@ -16,6 +16,18 @@
       <% end %>
     </tr>
     <tr>
+      <th> Skills </th>
+      <% if @student.skills %>
+        <% skill_list = [] %>
+        <% @student.skills.all.each do |s| %>
+        <%skill_list << s.name.gsub("\n", "") %>
+        <% end %>
+        <% if not skill_list.empty? %>
+          <td><%=skill_list%></td>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
       <th> University </th>
       <% if @student.college %>
         <td><%= link_to @student.college.school_name, single_school_profile_path(@student.college) -%></td>

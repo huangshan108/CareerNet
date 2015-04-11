@@ -18,12 +18,14 @@ Background: Adding jobs and com to database
   | Software Engineer       | Good        | 1             | 100000 |
 
   And I am on the account_login page
-  Then I enter "shuang@berkeley.edu" into "email" and I enter "careernet" into "password" and I press "Log In" button
+  Then I enter "shuang@berkeley.edu" into "email" 
+And I enter "careernet" into "password" 
+And I press "Log In" button
   Then I should see "Welcome to CareerNet"
 
 Scenario: Posting Jobs
   When I go to the main dashboard page
-  And I follow "Post a New Job"
+  And I follow "Post A New Job"
   Then I am on the job create page
 
 Scenario: Creating Jobs
