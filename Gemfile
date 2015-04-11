@@ -70,3 +70,4 @@ gem "cancan"
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'jquery-ui-rails'
 gem 'momentjs-rails'
+gem 'd3-rails'

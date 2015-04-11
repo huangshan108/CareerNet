@@ -20,6 +20,7 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require moment
+//= require d3
 
 $(function() {
 	$('.flash-message').delay(2000).fadeOut()
