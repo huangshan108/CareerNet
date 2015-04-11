@@ -16,6 +16,7 @@
 //= require_tree .
 //= require bootstrap-sprockets
 //= require fullcalendar
+//= require d3
 
 $(function() {
 	$('.flash-message').delay(2000).fadeOut()
