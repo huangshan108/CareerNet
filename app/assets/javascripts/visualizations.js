@@ -16,8 +16,9 @@ var getData = $.ajax({
     dataType: 'json',
     success: function(json){
         alert('success');
-        console.log(json);
-        draw(json);
+        drawPie([json['percent_us']], "country");
+        percent_others = 1 - json['percent_m'] - json['percent_f'];
+        drawPie([json['percent_m'], json['percent_f'], percent_others], "gender");
         return json;
     },
     error: function(){
@@ -26,7 +27,14 @@ var getData = $.ajax({
     }
 });
 
-function draw(json) {
+//function leftPercent(array) {
+//    percent = 1;
+//    for (i = 0; i < array.length; i++){
+//        percent -= array[i]
+//    }
+//}
+
+function drawPie(data, section) {
 
     var width = 480,
         height = 300
@@ -38,8 +46,8 @@ function draw(json) {
 
     var pie = d3.layout.pie();
 
-    var svg = d3.select("div#country").append("svg")
-        .datum([json['percent_us']])
+    var svg = d3.select("div#" + section).append("svg")
+        .datum(data)
         .attr("width", width)
         .attr("height", height)
         .append("g")
@@ -73,6 +81,5 @@ function draw(json) {
         var i = d3.interpolate({innerRadius: 0}, b);
         return function(t) { return arc(i(t)); };
     }
-    console.log(svg);
 
 }
