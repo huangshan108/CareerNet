@@ -7,6 +7,18 @@ FactoryGirl.define do
     f.description "I specialize in resume review."
   end
 
+  factory :student do |f|
+    f.first_name Faker::Name.first_name
+    f.last_name Faker::Name.last_name
+    f.country "US"
+    f.gender "M"
+  end
+
+  factory :major do |f|
+      f.name "Urban Forestry\r\n"
+      f.id 90
+  end
+
   factory :appointment do |f|
     f.time_slot 1
     f.day "2015-03-22"
