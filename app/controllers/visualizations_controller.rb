@@ -3,7 +3,7 @@ class VisualizationsController < ApplicationController
     end
 
     def student_demographic_data
-        @stud_demo_data = Student.student_demographic_json
+        @stud_demo_data = Student.student_demographic_json(params[:countries], params[:genders], params[:classes])
         respond_to do |format|
             format.json { render :json => @stud_demo_data }
         end
