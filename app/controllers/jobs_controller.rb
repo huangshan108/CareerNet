@@ -2,7 +2,7 @@ class JobsController < ApplicationController
   before_action :confirm_logged_in
   def index
     pages = 10
-    @jobs = Job.all.paginate(page: params[:page], per_page: pages)
+    @jobs = Job.all
   end
     
   def new
@@ -30,7 +30,7 @@ class JobsController < ApplicationController
 
   def view_posted_jobs
     pages = 10
-    @jobs = Company.find(roll_id).jobs.paginate(page: params[:page], per_page: pages)
+    @jobs = Company.find(roll_id)
     render 'index'
   end
 

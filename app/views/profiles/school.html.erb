@@ -1,21 +1,11 @@
-<h1> School Profile </h1>
-<table class = "table">
-  <tbody>
-    <tr>
-      <th> Name </th>
-      <td><%= @college.school_name -%></td>
-    </tr>
-    <tr>
-      <th> Year </th>
-      <td><%= @college.school_year ? @college.school_year : "N/A" -%>
-    </tr>
-    <tr>
-    	<th>Type</th>
-    	<td><%= @college.school_type ? @college.school_type : "N/A" -%></td></td>
-    </tr>
-    <tr>
-      <th> Address </th>
-      <td><%= @college.address ? @college.address : "N/A" -%></td>
-    </tr>
-  </tbody>
-</table>
+<h2> School Profile </h2>
+<dl class="dl-horizontal"> 
+  <dt> Name </dt>
+  <dd><%= @college.school_name -%></dd>
+  <dt> Year </dt>
+  <dd><%= @college.school_year ? @college.school_year : "N/A" -%></dd>
+	<dt>Type</dt>
+	<dd><%= @college.school_type ? @college.school_type : "N/A" -%></dd>
+  <dt> Address </dt>
+  <dd><%= @college.address ? @college.address : "N/A" -%></dd>
+</dl>

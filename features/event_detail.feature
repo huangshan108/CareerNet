@@ -56,10 +56,10 @@ Scenario: I want to register for a mock interview
   When I follow "Back to Events"
   Then I am on the events page
 
-Scenario: As a staff member I want to add an event
+Scenario: As a staff member I want to Create New Event
 
   Given I am on the events page
-  When I follow "Add an event"
+  When I follow "Create New Event"
   Then I should see "Create New Event"
   When I press "Create"
   Then I am on the events page
