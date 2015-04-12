@@ -1,16 +1,16 @@
-<h2><%= "Good " + time_period + "! Welcome to CareerNet" %></h2>
+<h1><%= "Good " + time_period + "! Welcome to CareerNet" %></h1>
 
 <div class="container">
 
 <div class="content">
-  <h2>Recent Job Postings</h2>
+  <h1>Recent Job Postings</h1>
   <article class="content-container">
     <%@jobs.each do |job| %>
     <h5><%=link_to job.title, view_single_job_path(job.id)%></a></h3>
     <h6>Posted by <%=job.company_id%> on <%=job.created_at%></h6>
     <% end %>
   </article>
-  <h2>Upcoming Events </h2>
+  <h1>Upcoming Events </h1>
   <article class="content-container">
     <%@events.each do |event| %>
     <h5><%=link_to event.title, event_path(event)%></a></h3>
