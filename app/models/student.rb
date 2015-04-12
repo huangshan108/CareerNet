@@ -33,10 +33,10 @@ class Student < ActiveRecord::Base
 
     def self.student_demographic_json(countries, genders, classes)
         #Active Relations of students fitting requirements
-        interest_students = Student.where(country: countries, gender: genders).select { |m| classes.include? m.graduation_date.year }
+        interest_students = Student.where(country: countries, gender: genders).select { |m| classes.include? m.graduation_date.year.to_s }
 
         # Breakdown of students of interest
-        num_students = interest_students.count
+        num_students = interest_students.size
 
         student_count = self.student_array_count(interest_students)
         f_students = student_count[:female_count]
@@ -63,11 +63,12 @@ class Student < ActiveRecord::Base
             class_count = class_count + [{ year => student_count }]
         end
 
+
         #json
         {
-            percent_f: perc_f,
-            percent_m: perc_m,
-            percent_us: perc_us,
+            percent_f: perc_f.round(3),
+            percent_m: perc_m.round(3),
+            percent_us: perc_us.round(3),
             majors: major_count,
             classes: class_count
         }
