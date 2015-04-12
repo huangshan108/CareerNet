@@ -42,7 +42,7 @@ $(document).ready(function() {
               data: eventData,
               dataType: "json",
               success: function(json) {
-                alert(json.msg);
+                // alert(json.msg);
                 $("#calendar").fullCalendar("refetchEvents");
               },
              error: function(json) {
@@ -52,22 +52,22 @@ $(document).ready(function() {
           $("#calendar").fullCalendar("unselect");
         },
         eventClick: function (calEvent, jsEvent, view){
-          var result = confirm("Are you sure you want to delete this appointment?");
-            if (result){
+          // var result = confirm("Are you sure you want to delete this appointment?");
+            // if (result){
               $.ajax({
                 url: "/appointments/staff/" + calEvent.id,
                 type: "POST",
                 dataType: "json",
                 data: { "_method": "delete" },
                 success: function() {
-                  alert("Successfully deleted appointment");
+                  // alert("Successfully deleted appointment");
                 },
                 error: function() {
                   alert("Error. Could not delete appointment");
                 }
               });
               $("#calendar").fullCalendar("refetchEvents");
-            }
+            // }
         },
         slotMinutes: 20,
         events: '/appointments/staff/',

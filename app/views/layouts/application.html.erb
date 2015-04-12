@@ -67,7 +67,7 @@
             when 1 %>
               <%= current_user.student.first_name + " " + current_user.student.last_name %>
             <% when 2 %>
-              <%= current_user.staff.name %>
+              <%= current_user.staff.first_name + " " +  current_user.staff.last_name%>
             <% when 3 %>
               <%= current_user.company.name %>
           <% end %>
