@@ -3,7 +3,7 @@ class MainController < ApplicationController
   def index
       @name = Account.name
       @current_user = Account.find(account_id)
-      @jobs = Job.order('created_at')[0..2]
-      @events = Event.order('time_start')[0..2]
+      @jobs = Job.order('created_at')[-3, 3]
+      @events = Event.order('time_start')[-3, 3]
   end
 end
