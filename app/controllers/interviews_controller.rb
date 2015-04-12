@@ -20,9 +20,9 @@ class InterviewsController < ApplicationController
       error = false
       while timeslot < endslot do
         interview_params = { day: starttime_str, time_slot: timeslot, company: curr_company }
-        @interview = Interview.new(interview_params)
+        @intr = Interview.new(interview_params)
         timeslot += 1
-        error = @interview.save and error
+        error = @intr.save and error
       end
       
       respond_to do |format|
