@@ -9,7 +9,12 @@ class JobsController < ApplicationController
   end
   
   def create
-    @job = Job.create!(:title => params[:title], :description => params[:description], :company_id => params[:company_id],:salary => params[:salary])
+    @job = Job.create(
+      :title => params[:title], 
+      :description => params[:description], 
+      :company_id => roll_id,
+      :salary => params[:salary]
+    )
     flash[:notice] = "#{@job.title} was successfully created."
     redirect_to job_list_path
   end
@@ -30,7 +35,7 @@ class JobsController < ApplicationController
 
   def view_posted_jobs
     pages = 10
-    @jobs = Company.find(roll_id)
+    @jobs = Company.find(roll_id).jobs
     render 'index'
   end
 
