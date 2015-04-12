@@ -1,0 +1,4 @@
+<h1><%= @application.job.title %></h1>
+
+<%= link_to 'Offer Interview Times', company_interviews_path %></br>
+<%=link_to 'Back to Job Applications', company_view_applications_path(:company_id => @application.job.company.id) %></br>

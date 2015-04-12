@@ -43,7 +43,13 @@ Rails.application.routes.draw do
   
   get 'applications/company/:company_id' => 'applications#index', :as => :company_view_applications
   get 'applications/student/:student_id' => 'applications#index', :as => :student_view_applications
-  # The priority is based upon order of creation: first created -> highest priority.
+  get 'applications/:application_id' => 'applications#show', :as => :show_application
+
+  get 'interviews/company/new' => 'interviews#index_company', :as => :company_interviews
+  post 'interviews/company/new' => 'interviews#company_new', :as => :new_company_interviews
+  delete 'interviews/company/:id' => 'interviews#destroy', :as => :cancel_interview
+
+# The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
