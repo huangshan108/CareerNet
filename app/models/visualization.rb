@@ -43,7 +43,7 @@ class Visualization < ActiveRecord::Base
 
     # Computes percentage and formats it to 1 decimal place
     def self.percentage_format(num, total)
-        (num.to_f / total.to_f).round(3) * 100
+        (num.to_f / total.to_f * 100.0).round(1)
     end
 
     def self.student_demographic_json(countries, genders, classes)
