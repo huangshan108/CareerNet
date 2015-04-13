@@ -73,6 +73,18 @@ class ApplicationController < ActionController::Base
   end
   
   
+  #only company can post and delete jobs and company can't delete other company's job
+  private
+  def job_restriction
+      id = params[:id]
+      if account_type != 3
+          error_message
+      else
+      #might be more stuff here
+          return true
+      end
+          
+  end
   
   private
   

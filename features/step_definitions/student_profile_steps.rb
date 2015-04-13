@@ -49,3 +49,7 @@ end
 When /^I try Add an event$/ do
     visit "/events/new"
 end
+
+When /^I try vist post job page$/ do
+    visit "/jobs/new"
+end

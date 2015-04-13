@@ -63,3 +63,11 @@ Background: Adding user to  database
     Scenario: student can't delete a job
       Given I am on the job 1 view page
       And I should not see "Delete"
+
+
+    Scenario: student try to post a job
+       When I am on the main dashboard page
+       When I try vist post job page
+       And I should see "You don't have the persmission to perform the action."
+       And I am on the main page
+
