@@ -20,7 +20,10 @@ dd {
   margin-bottom: 10px;
 }
 .container {
+  margin-left: 100px !important;
   margin-bottom: 50px;
+  margin-right: 100px !important;
+  width: calc(100% - 150px) !important;
 }
 .row {
   margin-left: 0px;
