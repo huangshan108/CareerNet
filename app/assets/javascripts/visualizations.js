@@ -60,7 +60,6 @@ function drawPie(data, section) {
         .value(function(d) {
             return d.count;   
         });
-    console.log(pie);
 
     var svg = d3.select("div#" + section).append("svg")
         //.datum(data)
