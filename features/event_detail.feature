@@ -14,11 +14,11 @@ Background: Events have been added to the database.
 
   Given the following accounts exist:
   |name         |email               |account_type |
-  |huangshan108 |shuang@berkeley.edu |1            |
+  |huangshan108 |shuang@berkeley.edu |2            |
 
-  Given the following students exist:
+  Given the following staffs exist:
   |first_name         |last_name      |email               |account_id |
-  |Shan               |Huang          |shuang@berkeley.edu |1          |
+  |Fake               |Staff          |staff1@berkeley.edu |1          |
 
   And I am on the account_login page
   Then I enter "shuang@berkeley.edu" into "email" 

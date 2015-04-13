@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :confirm_logged_in
+  before_action :event_restriction, only:[:create,:destroy,:new]
   def show
     id = params[:id]
     @event = Event.find(id)

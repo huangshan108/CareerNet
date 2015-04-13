@@ -33,3 +33,15 @@ end
 When(/^I fill in First Name with "(.*?)"$/) do |arg1|
   fill_in "first_name", :with => arg1
 end
+
+When /^I try to edit view student C profile page$/ do
+    visit "/profiles/student/101/edit"
+end
+
+When /^I try visit student C application page$/ do
+    visit "applications/student/101"
+end
+
+When /^I try visit random company application page$/ do
+    visit "applications/company/101"
+end

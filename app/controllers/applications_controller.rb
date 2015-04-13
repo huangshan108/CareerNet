@@ -1,4 +1,5 @@
 class ApplicationsController < ApplicationController
+    before_action :application_restriction
 	def index
 		if params[:company_id]
 			@jobs = Company.find(params[:company_id]).jobs
