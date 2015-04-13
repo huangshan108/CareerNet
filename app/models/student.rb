@@ -10,7 +10,9 @@ class Student < ActiveRecord::Base
 
 	has_many :applications
 	has_many :jobs, :through => :applications
-	has_many :interviews, :through => :applications
+	
+  has_many :interviews
+  has_many :companies, :through => :interviews
   
 
   has_many :studentskills

@@ -87,10 +87,10 @@ class InterviewsController < ApplicationController
     if interview.student == nil
       interview.update_attribute(:student, Account.find(session[:user_id]).student)
       flash[:notice] = "Interview has been scheduled."
-      redirect_to(appointment_student_show_path)
+      redirect_to(interview_student_show_path)
     else
       flash[:error] = "Selected interview slot is no longer available."
-      redirect_to(appointment_student_new_path)
+      redirect_to(interview_student_new_path)
     end
   end
 
@@ -102,7 +102,7 @@ class InterviewsController < ApplicationController
     else
       flash[:error] = "You do not have permission to cancel this interview."
     end
-    redirect_to(appointment_student_show_path)
+    redirect_to(interview_student_show_path)
   end
 
 end
