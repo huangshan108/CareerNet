@@ -79,13 +79,13 @@ class Student < ActiveRecord::Base
         major_count = []
         majors.each do |major|
             student_count = Student.where(major_id: major.id).count
-            major_count = major_count + [{major.name => student_count}]
+            major_count = major_count + [{name: major.name, count: student_count}]
         end
 
         class_count = []
         classes.each do |year|
             student_count = Student.class_of(year).count
-            class_count = class_count + [{ year => student_count }]
+            class_count = class_count + [{ name: "Class of " + year, count: student_count }]
         end
 
 
@@ -97,15 +97,6 @@ class Student < ActiveRecord::Base
             majors: major_count,
             classes: class_count
         }
-    end
-
-    def self.all_class_of(years)
-        #result = self.none
-        #years.each do |year|
-        #    result = result + self.class_of(year)
-        #end
-        #result
-        Student.all.select { |m| years.include? m.graduation_date.year }
     end
 
     scope :class_of, lambda { |year| where("graduation_date >= ? and graduation_date <= ?", "#{year}-01-01", "#{year}-12-31") }
