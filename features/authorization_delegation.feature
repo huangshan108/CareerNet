@@ -6,6 +6,10 @@ Feature: Authorization and Delegation
 
 Background: Adding user to  database
 
+    Given the following jobs exist:
+  	| title                   | description | company_id    | salary |
+  	| Software Engineer       | Good        | 1             | 100000 |
+
     Given the following events exist:
     | title           | description   | 
     | Resume Workshop | b             |
@@ -34,14 +38,12 @@ Background: Adding user to  database
 
     Scenario: student can't edit and delete an event
       When I go to the events page
-      And I follow "Add an event"
+      And I try Add an event
       And I should see "You don't have the persmission to perform the action."
       When I go to the events page
       Then I should see "Resume Workshop"
       When I follow "Resume Workshop"
-      And I press "Delete"
-      And I should see "You don't have the persmission to perform the action."
-      And I am on the main page
+      And I should not see "Delete"
 
     Scenario: student can't visit or edit other student's profile
       Given I am on list students page
@@ -57,3 +59,7 @@ Background: Adding user to  database
       When I try visit random company application page
       And I should see "You don't have the persmission to perform the action."
       And I am on the main page
+
+    Scenario: student can't delete a job
+      Given I am on the job 1 view page
+      And I should not see "Delete"

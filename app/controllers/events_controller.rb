@@ -4,9 +4,11 @@ class EventsController < ApplicationController
   def show
     id = params[:id]
     @event = Event.find(id)
+    @current_user = Account.find(account_id)
   end
 
   def index
+    @current_user = Account.find(account_id)
     pages = 10
     if params[:event_sort]
       session[:event_sort] = params[:event_sort]

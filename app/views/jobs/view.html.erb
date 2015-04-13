@@ -12,8 +12,12 @@
 	</li>
 </ul>
 
+<%if @current_user.account_type == 3%>
 <%= link_to "Delete", delete_job_path(@job), :method => :delete %>
+<%end%>
+<%if @current_user.account_type == 1%>
 <%= link_to "Apply", apply_job_path(:job_id => params[:job_id]), :method => :post %>
+<%end%>
 <%= link_to "Back to the Job list", job_list_path %>
 
 <h2> Job Applications </h2>

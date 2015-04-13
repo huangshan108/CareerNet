@@ -45,3 +45,7 @@ end
 When /^I try visit random company application page$/ do
     visit "applications/company/101"
 end
+
+When /^I try Add an event$/ do
+    visit "/events/new"
+end

@@ -10,4 +10,6 @@
 </ul>
 <%= link_to 'Register', events_path %> </br>
 <%= link_to 'Back to Events', events_path %></br></br>
+<%if @current_user.account_type == 2%>
 <%= button_to 'Delete', event_path(@event), :method => :delete %>
+<%end%>

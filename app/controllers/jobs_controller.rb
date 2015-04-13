@@ -3,6 +3,7 @@ class JobsController < ApplicationController
   def index
     pages = 10
     @jobs = Job.all.paginate(page: params[:page], per_page: pages)
+    @current_user = Account.find(account_id)
   end
     
   def new

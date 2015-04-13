@@ -34,14 +34,12 @@ Background: Adding user to  database
 
     Scenario: company can't edit and delete an event
       When I go to the events page
-      And I follow "Add an event"
+      And I try Add an event
       And I should see "You don't have the persmission to perform the action."
       When I go to the events page
       Then I should see "Resume Workshop"
       When I follow "Resume Workshop"
-      And I press "Delete"
-      And I should see "You don't have the persmission to perform the action."
-      And I am on the main page
+      And I should not see "Delete"
 
     Scenario: company can't visit or edit other student's profile
       Given I am on list students page

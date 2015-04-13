@@ -20,6 +20,9 @@
   </script>
 </table>
 <%= will_paginate @events %>
+
+<%if @current_user.account_type == 2%>
 <div class="add-event">
   <%= link_to 'Add an event', new_event_path %>
 </div>
+<%end%>
