@@ -86,10 +86,10 @@ function updateData(reqData){
         dataType: 'json',
         success: function(json){
             alert('success');
-            updateData(json['countries'], "country");
-            updateData(json['genders'], "gender");
-            updateData(json['classes'], "class");
-            updateData(json['majors'], "major");
+            updatePie(json['countries'], "country");
+            updatePie(json['genders'], "gender");
+            updatePie(json['classes'], "class");
+            updatePie(json['majors'], "major");
             return json;
         },
         error: function(){
@@ -115,10 +115,10 @@ function drawPie(data, section) {
     svg.append("g")
         .attr("class", "lines");
 
-    update(data, section);
+    updatePie(data, section);
 }
 
-function update(data, section){
+function updatePie(data, section){
     var width = 480,
         height = 300
         radius = Math.min(width, height) /2 - 10;
