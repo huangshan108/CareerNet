@@ -20,6 +20,8 @@
 <%end%>
 <%= link_to "Back to the Job list", job_list_path %>
 
+
+<%if @current_user.account_type != 1%>
 <h2> Job Applications </h2>
 <table class="job_list" border = "1" style="width: 700px";>   
   <tr>
@@ -35,3 +37,4 @@
 	  </tr>
 	<% end %>
 </table>
+<%end%>
