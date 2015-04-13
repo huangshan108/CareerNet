@@ -109,5 +109,4 @@ class Student < ActiveRecord::Base
     end
 
     scope :class_of, lambda { |year| where("graduation_date >= ? and graduation_date <= ?", "#{year}-01-01", "#{year}-12-31") }
-
 end
