@@ -32,7 +32,7 @@ class ProfilesController < ApplicationController
       if Skill.where(:name => params[:add_skill_name]).empty?
         skill = {}
         skill[:name] = params[:add_skill_name]
-        s = Skill.create!(skill)
+        s = Skill.create(skill)
         s.update_attributes(:id => s.id)
         skill_id_list << s.id.to_i
         student.skill_ids = skill_id_list
@@ -49,66 +49,14 @@ class ProfilesController < ApplicationController
         skill_id_list.delete(s_id.to_i)
         student.skill_ids = skill_id_list
       end
-    end
-
-
-
-    # if not Skill.where(:name => params[:add_skill_name]).empty?
-    #   if not skill_id_list.include? Skill.where(:name => params[:add_skill_name]).first.id
-    #     skill = {}
-    #     skill[:name] = params[:add_skill_name]
-    #     s = Skill.create!(skill)
-    #     s.update_attributes(:id => s.id)
-    #     skill_id_list << s.id.to_i
-    #     student.skill_ids = skill_id_list
-    #   else
-    #     skill_id_list.include? Skill.where(:name => params[:add_skill_name]).first.id
-    #     skill_id_list << params[:skill_id].to_i
-    #     student.skill_ids = skill_id_list
-    #   end
-    # else
-    #   if params[:skill_id] == '-1'
-    #     if not params[:add_skill_name].empty?
-    #       skill = {}
-    #       skill[:name] = params[:add_skill_name]
-    #       s = Skill.create!(skill)
-    #       s.update_attributes(:id => s.id)
-    #       skill_id_list << s.id.to_i
-    #       student.skill_ids = skill_id_list
-    #     end
-    #   else
-    #     if not skill_id_list.include? params[:skill_id].to_i
-    #       skill_id_list << params[:skill_id].to_i
-    #       student.skill_ids = skill_id_list
-    #     end
-    #   end
-    # end
-
-
-
-    # if params[:skill_id_remove] == -1
-    #   if not params[:remove_skill_name].empty?
-    #     if skill_id_list.include? student.skills.where(:name => params[:remove_skill_name] << "\n").first.id
-    #       s_id = student.skills.where(:name => params[:remove_skill_name]).first.id
-    #       skill_id_list.delete(s_id.to_i)
-    #       student.skill_ids = skill_id_list
-    #     end
-    #   end
-    # else
-    #   if skill_id_list.include? params[:skill_id_remove].to_i
-    #     skill_id_list.delete(params[:skill_id_remove].to_i)
-    #     student.skill_ids = skill_id_list
-    #   end
-    # end
-   # end
-      
+    end      
     student.save
     flash[:notice] = "Profile Updated!"
     redirect_to(single_student_profile_path(student))
   end
 
   def list_students
-  	@all_students = Student.paginate(:page => params[:page], :per_page => 10)
+  	@all_students = Student.all
   end
 
   def staff

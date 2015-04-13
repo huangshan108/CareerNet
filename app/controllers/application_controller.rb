@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 	# Prevent CSRF attacks by raising an exception.
 	# For APIs, you may want to use :null_session instead.
 	protect_from_forgery with: :exception
-	helper_method :current_user, :account_type, :logged_in?, :account_id, :roll_id
+	helper_method :current_user, :account_type, :logged_in?, :account_id, :roll_id, :time_period
 	def current_user
 		@current_user = Account.find(account_id)
 	end
@@ -22,6 +22,18 @@ class ApplicationController < ActionController::Base
 
 	def logged_in?
 		account_id != nil
+	end
+
+	# return morning, afternoon or evening
+	def time_period
+		t = Time.new.hour
+		if 5 < t and t <= 12
+			return "Morning"
+		elsif 12 < t and t <= 18
+			return "Afternoon"
+		else
+			return "Evening"
+		end
 	end
 
   private

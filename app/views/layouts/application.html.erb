@@ -6,6 +6,8 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
   <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div class="spinner-model">
@@ -38,55 +40,59 @@
 		</div>
 	<% end %>
 </div>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">CareerNet</a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/jobs">Browse Jobs</a></li>
-        <li><a href="/events">Browse Events</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-      <% if logged_in? %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-          	<% if current_user.student %>
-            	<li><%= link_to 'My Profile', single_student_profile_path(current_user.student.id), name: "my-profile-button" %></a></li>
-            <% else %>
-            <% end %>
-            <script type="text/javascript">
-            $(document).ready(function() {
-              $('a[name="new-profile-button"]').click(function() {
-                $('.spinner-model').show();
-              });
-            })
-            </script>
-            <li class="divider"></li>
-            <li><a href="/account/logout">Logout</a></li>
-          </ul>
+
+<nav class="main-menu">
+  <div class="logo">
+    CareerNet
+  </div>
+  <ul>
+    <li>                                   
+      <i class="fa fa-home fa-lg"></i>
+      <a href="/" class="nav-text">Home</a>
+    </li>
+    <li>                                 
+      <i class="fa fa-briefcase"></i>
+      <a href="/jobs" class="nav-text">Browse Jobs</a>
+    </li>
+    <li>                                 
+      <i class="fa fa-calendar"></i>
+      <a href="/events" class="nav-text">Browse Events</a>
+    </li>
+    <% if logged_in? %>
+      <% if current_user.student %>
+        <li>
+          <i class="fa fa-user"></i>
+          <%= link_to 'My Profile', single_student_profile_path(current_user.student.id), name: "my-profile-button", class: "nav-text" %></a>
         </li>
       <% else %>
-      	<li><a href="/account/login">Log In</a></li>
+
       <% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+      <script type="text/javascript">
+      $(document).ready(function() {
+        $('a[name="new-profile-button"]').click(function() {
+          $('.spinner-model').show();
+        });
+      })
+      </script>
+      <li>
+        <i class="fa fa-hand-o-left"></i>
+        <a href="/account/logout" class="nav-text">Logout</a>
+      </li>
+    <% else %>
+      <li>
+        <i class="fa fa-hand-o-right"></i>
+        <a href="/account/login" class="nav-text">Log In</a>
+      </li>
+    <% end %>
+  </ul>
 </nav>
-<div class="nav-bar-offset">
+
+
+
+<div class="container">
+  <%= yield %>
 </div>
-<%= yield %>
 
 </body>
 </html>

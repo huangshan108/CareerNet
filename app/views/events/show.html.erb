@@ -1,13 +1,18 @@
 <h1><%= @event.title %></h1>
 
-<h5>
-    <%= @event.time_start %> to <%= @event.time_end %> at <%= @event.location %>
-</h5>
-<ul>
-  <li>
-    <%= @event.description %>
-  </li>
-</ul>
-<%= link_to 'Register', events_path %> </br>
-<%= link_to 'Back to Events', events_path %></br></br>
-<%= button_to 'Delete', event_path(@event), :method => :delete %>
+
+<dl class="dl-horizontal"> 
+	<dt>Start</dt>
+	<dd><%= @event.time_start.strftime('%D %H:%M %p') %></dd>
+	<dt>End</dt>
+	<dd><%= @event.time_end.strftime('%D %H:%M %p') %></dd>
+	<dt>Location</dt>
+	<dd><%= @event.location %></dd>
+	<dt>Description</dt>
+	<dd><%= @event.description %></dd>
+</dl>
+<div class="pull-right button-group">
+	<%= link_to 'Register', events_path, class: "button green" %>
+	<%= link_to 'Delete', event_path(@event), class: "button red", :method => :delete %>
+	<%= link_to 'Back', events_path, class: "button default" %>
+</div>
