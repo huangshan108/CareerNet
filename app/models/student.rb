@@ -13,4 +13,5 @@ class Student < ActiveRecord::Base
 	has_many :studentskills
 	has_many :skills, through: :studentskills
 
+
 end

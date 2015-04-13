@@ -1,7 +1,14 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<body>
-<%= javascript_include_tag 'visualizations.js' %>
+<label>Country:</label>
+<button class='request' id='us' >U.S.</button>
+<button class='request' id='intl' >Intl</button>
+<label>Gender:</label>
+<button class='request' id='m' >Male</button>
+<button class='request' id='f' >Female</button>
+<button class='request' id='o' >Others</button>
+<label>Class:</label>
+<button class='request' id='2015' >2015</button>
+<button class='request' id='2016' >2016</button>
+<button class='request' id='2017' >2017</button>
 
 <div style='margin: 40px;'>
     <div id='country' class='visLeft'></div>
@@ -9,4 +16,5 @@
     <div id='major' class='visLeft'></div>
     <div id='class' class='visRight'></div>
 </div>
-</body>
+
+<%= javascript_include_tag 'visualizations.js' %>

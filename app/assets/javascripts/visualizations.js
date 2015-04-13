@@ -1,70 +1,110 @@
 // Require d3 for visualization
 //= require d3
 
-var data;
-
-var reqInitData = {
-    countries: ["US"],
-    genders: ["M", "F", "O"],
-    classes: [2015, 2016, 2017]
+var req = {
+    us: true,
+    intl: true,
+    m: true,
+    f: true,
+    o: true,
+    2015: true,
+    2016: true,
+    2017: true
 };
-var getData = $.ajax({
-    type: "GET",
-    url: '/visualizations/student_demographic/data',
-    data: reqInitData,
-    dataType: 'json',
-    success: function(json){
-        alert('success');
-        drawPie(json['countries'], "country");
-        drawPie(json['genders'], "gender");
-        drawPie(json['classes'], "class");
-        drawPie(json['majors'], "major");
-        return json;
-    },
-    error: function(){
-        alert('error');
-        return;
+
+function reqToreqData(req){
+    var reqData = {
+        countries: ["US"],
+        genders: [],
+        classes: []
+    };
+    if (req["m"]){
+        reqData['genders'].push("M");
     }
-});
+    if (req["f"]){
+        reqData['genders'].push("F");
+    }
+    if (req["o"]){
+        reqData['genders'].push("O");
+    }
+    if (req[2015]){
+        reqData['classes'].push(2015);
+    }
+    if (req[2016]){
+        reqData['classes'].push(2016);
+    }
+    if (req[2017]){
+        reqData['classes'].push(2017);
+    }
+    console.log(reqData);
+    return reqData;
+}
 
-//function leftPercent(array) {
-//    percent = 1;
-//    for (i = 0; i < array.length; i++){
-//        percent -= array[i]
-//    }
-//}
-
-function drawPie(data, section) {
-    console.log(data);
-
-    var width = 480,
-        height = 300
-        radius = Math.min(width, height) /2 - 10;
-
-    var color = d3.scale.ordinal()
-    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
-    var arc = d3.svg.arc().outerRadius(radius * 0.9)
-        .innerRadius(radius * 0.4);
-
-    var outerArc = d3.svg.arc()
-        .innerRadius(radius * 0.9)
-        .outerRadius(radius * 0.9);
-
-    var key = function(d) {
-        return d.data.name; 
+init();
+function init(){
+    var reqInitData = {
+        countries: ["US"],
+        genders: ["M", "F", "O"],
+        classes: [2015, 2016, 2017]
     };
 
-    var pie = d3.layout.pie()
-        .sort(null)
-        .value(function(d) {
-            return d.count;   
+    $.ajax({
+        type: "GET",
+        url: '/visualizations/student_demographic/data',
+        data: reqInitData,
+        dataType: 'json',
+        success: function(json){
+            alert('success');
+            drawPie(json['countries'], "country");
+            drawPie(json['genders'], "gender");
+            drawPie(json['classes'], "class");
+            drawPie(json['majors'], "major");
+            return json;
+        },
+        error: function(){
+            alert('error');
+            return;
+        }
+    });
+
+    var meow = d3.selectAll('.request')
+        .on("click", function() {
+            id = d3.select(this).attr("id");
+            req[id] = !req[id];
+            updateData(reqToreqData(req));
         });
 
+
+}
+
+
+function updateData(reqData){
+    $.ajax({
+        type: "GET",
+        url: '/visualizations/student_demographic/data',
+        data: reqData,
+        dataType: 'json',
+        success: function(json){
+            alert('success');
+            updateData(json['countries'], "country");
+            updateData(json['genders'], "gender");
+            updateData(json['classes'], "class");
+            updateData(json['majors'], "major");
+            return json;
+        },
+        error: function(){
+            alert('error');
+            return;
+        }
+    });
+}
+
+
+function drawPie(data, section) {
+    var width = 480,
+        height = 300;
+
     var svg = d3.select("div#" + section).append("svg")
-        //.datum(data)
-        //.attr("width", width)
-        //.attr("height", height)
         .append("g")
         .attr("transform", "translate(" + width / 2 + ", " + height / 2 + ")");
 
@@ -75,10 +115,35 @@ function drawPie(data, section) {
     svg.append("g")
         .attr("class", "lines");
 
-    //var arcs = svg.selectAll("g.arc")
-    //    .data(pie)
-    //  .enter().append("g")
-    //    .attr("class", "arc");
+    update(data, section);
+}
+
+function update(data, section){
+    var width = 480,
+        height = 300
+        radius = Math.min(width, height) /2 - 10;
+
+    var arc = d3.svg.arc().outerRadius(radius * 0.9)
+        .innerRadius(radius * 0.4);
+
+    var outerArc = d3.svg.arc()
+        .innerRadius(radius * 0.9)
+        .outerRadius(radius * 0.9);
+
+    var svg = d3.select("div#" + section + " svg");
+
+    var pie = d3.layout.pie()
+        .sort(null)
+        .value(function(d) {
+            return d.count;   
+        });
+
+    var key = function(d) {
+        return d.data.name; 
+    };
+
+    var color = d3.scale.ordinal()
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
     var slice = svg.select(".slices").selectAll("path.slice")
         .data(pie(data), key);
@@ -168,4 +233,5 @@ function drawPie(data, section) {
 
     polyline.exit()
         .remove();
+
 }
