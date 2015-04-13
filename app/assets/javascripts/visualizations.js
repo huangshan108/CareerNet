@@ -1,7 +1,6 @@
 // Require d3 for visualization
 //= require d3
 
-
 var data;
 
 var reqInitData = {
@@ -16,10 +15,10 @@ var getData = $.ajax({
     dataType: 'json',
     success: function(json){
         alert('success');
-        //drawPie([json['percent_us']], "country");
-        percent_others = 1 - json['percent_m'] - json['percent_f'];
-        //drawPie([json['percent_m'], json['percent_f'], percent_others], "gender");
+        drawPie(json['countries'], "country");
+        drawPie(json['genders'], "gender");
         drawPie(json['classes'], "class");
+        drawPie(json['majors'], "major");
         return json;
     },
     error: function(){
@@ -170,28 +169,4 @@ function drawPie(data, section) {
 
     polyline.exit()
         .remove();
-    //arcs.append("path")
-    //    .attr("fill", function(d, i) { return color(i); })
-    //  .transition()
-    //    .ease("bounce")
-    //    .duration(2000)
-    //    .attrTween("d", tweenPie)
-    //  .transition()
-    //    .ease("elastic")
-    //    .delay(function(d, i) { return 2000 + i * 50; })
-    //    .duration(750)
-    //    .attrTween("d", tweenDonut);
-
-    //function tweenPie(b) {
-    //    b.innerRadius = 0;
-    //    var i = d3.interpolate({ startAngle: 0, endAngle: 0}, b);
-    //    return function(t) { return arc(i(t)); };
-    //}
-
-    //function tweenDonut(b) {
-    //    b.innerRadius = radius * .6;
-    //    var i = d3.interpolate({innerRadius: 0}, b);
-    //    return function(t) { return arc(i(t)); };
-    //}
-
 }

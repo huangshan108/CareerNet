@@ -65,23 +65,33 @@ class Student < ActiveRecord::Base
 
         student_count = self.student_array_count(interest_students)
         f_students = student_count[:female_count]
-        perc_f = f_students.to_f / num_students.to_f
-
         m_students = student_count[:male_count]
-        perc_m = m_students.to_f / num_students.to_f
-
         us_students = student_count[:us_count]
-        perc_us = us_students.to_f / num_students.to_f
 
         ratio_big_enough = num_students * 0.2
         majors = Major.joins(:students).includes(:students).group('major_id').having('COUNT(*) >= ?', ratio_big_enough)
 
+        # Country json Prep
+        country_count = [
+            {name: "U.S.", count: us_students},
+            {name: "International", count: num_students - us_students}
+        ]
+
+        # Gender json Prep
+        gender_count = [
+            {name: "Male", count: m_students},
+            {name: "Female", count: f_students},
+            {name: "Others", count: num_students - m_students - f_students}
+        ]
+
+        # Major json Prep
         major_count = []
         majors.each do |major|
             student_count = Student.where(major_id: major.id).count
             major_count = major_count + [{name: major.name, count: student_count}]
         end
 
+        # Class json Prep
         class_count = []
         classes.each do |year|
             student_count = Student.class_of(year).count
@@ -91,9 +101,8 @@ class Student < ActiveRecord::Base
 
         #json
         {
-            percent_f: perc_f.round(3),
-            percent_m: perc_m.round(3),
-            percent_us: perc_us.round(3),
+            countries: country_count,
+            genders: gender_count,
             majors: major_count,
             classes: class_count
         }
