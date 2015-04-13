@@ -67,3 +67,5 @@ gem 'fullcalendar-rails', '~> 2.0.2.0'
 gem 'responders'
 
 gem 'd3-rails'
+gem 'by_star', '~> 2.2.1'
+gem 'active_record_union'

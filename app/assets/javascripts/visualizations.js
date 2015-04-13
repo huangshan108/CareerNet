@@ -109,9 +109,9 @@ function drawPie(data, section) {
 
     text.enter()
         .append("text")
-        .attr("dy", ".35em")
+        .attr("dy", ".25em")
         .text(function(d) {
-            return d.data.name;
+            return d.data.name + "  " + d.data.percent + "%";
         });
 
     function midAngle(d){
