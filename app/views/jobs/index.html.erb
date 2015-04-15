@@ -1,27 +1,28 @@
-<table class="job_list" border = "1" style="width: 700px";>   
-  <tr>
-  	<th> Position </th>
-  	<th> Company </th>
-  	<th> Description </th>
-  	<th> Salary </th>
-  	<th> Created </th>
-  	<th> Added </th>
-  </tr>
-  <% @jobs.each do |job| %>
-	  <tr>
-	   <% if !job.company.nil? %>
-	    <td><div class="job_title"><%=link_to "#{job.title}", view_single_job_path(job.id) %><div></td>
-	    <td><div class="company"><%= job.company.name %><div></td>
-	    <td><div id ="descbox" class="desc"><%= job.description %></div></td>
-	    <td><div class="salary"><%= job.salary %><div></td>
-	    <td><div class="date"><%= job.created_at %><div></td>
-	    <td><div class="date"><%= job.updated_at %><div></td>
-	    <% end %>
-	  </tr>
-	  <% end %>
-    <script src="http://dotdotdot.frebsite.nl/js/jquery.dotdotdot-1.2.1.js" ></script>
-    <script type="text/javascript">
-     $(".desc").dotdotdot()
-    </script>
+<h1>Browse Jobs</h1>
+<table class="data-table table table-striped">   
+  <thead>
+    <tr>
+    	<th> Position </th>
+    	<th> Company </th>
+    	<th> Salary </th>
+    	<th> Updated </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @jobs.each do |job| %>
+  	  <tr>
+  	   <% if !job.company.nil? %>
+  	    <td><%=link_to "#{job.title}", view_single_job_path(job.id) %></td>
+  	    <td><%= job.company.name %></td>
+  	    <td><%= job.salary %></td>
+  	    <td><%= job.updated_at.strftime('%D') %></td>
+  	    <% end %>
+  	  </tr>
+  	  <% end %>
+  </tbody>
 </table>
-<%= will_paginate @jobs %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.data-table').dataTable();
+  })
+</script>
