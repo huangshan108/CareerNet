@@ -35,7 +35,7 @@ Scenario: I want to post a new event
   
   Given I am on the events page
   Then I should not see "Tech Talk"
-  When I follow "Add an event"
+  When I follow "Create New Event"
   And I enter "Tech Talk" into "title"
   And I press "Create"
   Then I am on the events page

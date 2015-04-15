@@ -16,8 +16,13 @@
 //= require_tree .
 //= require bootstrap-sprockets
 //= require fullcalendar
+//= require jquery-ui
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require moment
 
 $(function() {
 	$('.flash-message').delay(2000).fadeOut()
 });
+
 
