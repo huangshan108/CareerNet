@@ -5,6 +5,7 @@
 	  	<th> Applied Company </th>
 	  	<th> Applied Position </th>
 	  	<th> Applied Date </th>
+      <th> Interview Status </th>
 	  </tr>
 	</thead>
 	<tbody>
@@ -13,6 +14,7 @@
 		    <td><%= application.job.company.name %></td>
 		    <td><%= application.job.title %></td>
 		    <td><%= application.created_at.strftime('%D') %></td>
+        <td><%= link_to "View Details", interview_student_show_path %></td>
 		  </tr>
 		<% end %>
 	</tbody>

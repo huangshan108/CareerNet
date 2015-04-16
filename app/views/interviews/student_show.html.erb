@@ -1,0 +1,27 @@
+<h1> Interviews </h1>
+<%= link_to "Schedule a New Interview", interview_student_new_path -%>
+<table class = "table">
+  <thead>
+    <tr>
+      <th> Show </th>
+      <th> Interview Date </th>
+      <th> Starting Time </th>
+      <th> Ending Time </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for a in @interviews -%>
+      <tr>
+        <td><%= a.company.name -%></td>
+        <td><%= a.day -%></td>
+        <td><%= ((9*60+40+a.time_slot*20)/60).to_s+':'+((9*60+40+a.time_slot*20)%60).to_s -%></td>
+        <td><%= ((9*60+40+(a.time_slot+1)*20)/60).to_s+':'+((9*60+40+(a.time_slot+1)*20)%60).to_s -%></td>
+        <td><%= link_to "Cancel", interview_student_cancel_path(a) -%></td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>
+<% if @interviews.length == 0 -%>
+  <center><b>You currently do not have any scheduled interviews.</b></center>
+<% end -%>

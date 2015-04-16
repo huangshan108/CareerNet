@@ -10,7 +10,12 @@ class Student < ActiveRecord::Base
 
 	has_many :applications
 	has_many :jobs, :through => :applications
-	has_many :studentskills
+	
+  has_many :interviews
+  has_many :companies, :through => :interviews
+  
+
+  has_many :studentskills
 	has_many :skills, through: :studentskills
 
 	# def getInterviews(start_date, end_date, mineOnly)

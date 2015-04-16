@@ -8,3 +8,4 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( appointments.js )
 Rails.application.config.assets.precompile += %w( calendar.js )
+Rails.application.config.assets.precompile += %w( interviews.js )
