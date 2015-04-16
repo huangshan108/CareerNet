@@ -1,0 +1,38 @@
+<%= javascript_include_tag 'calendar.js' %>
+<script src='https://rawgit.com/arshaw/fullcalendar/master/dist/lang-all.js'></script>
+<h1>My Calendar</h1>
+
+
+<body>
+
+	<div id='top'>
+		Language:
+		<select id='lang-selector'></select>
+	</div>
+
+	<div id='wrap'>
+
+		<div id='categories'>
+			<h4>Select calendars to be displayed</h4>
+
+			<input type='checkbox' class='mycal' id='cal_interviews'></input>
+			<label for='cal_interviews'>Interviews</label>
+
+			<input type='checkbox' class='mycal' id='cal_events'></input>
+			<label for='cal_events'>Events</label>
+
+			<input type='checkbox' class='mycal' id='cal_appointments'></input>
+			<label for='cal_appointments'>Appointments</label>
+
+			<input type='checkbox' class='mycal' id='cal_confirmed'></input>
+			<label for='cal_confirmed'>All confirmed activities</label>
+		</div>
+
+		<div style='margin: 40px;'></div>
+		<div id='myCalendar'></div>
+
+		<div style='clear:both'></div>
+
+	</div>
+</body>
+

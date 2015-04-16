@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   
   get 'applications/company/:company_id' => 'applications#index', :as => :company_view_applications
   get 'applications/student/:student_id' => 'applications#index', :as => :student_view_applications
+
+  get 'calendar' => 'calendar#view', :as => :calendar
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
