@@ -12,8 +12,8 @@
       <% if !event.title.nil? %>
         <tr>
           <td><div class="event_title"><%= link_to event.title, event_path(event) %></div></td>
-          <td><div class="time_start"><%= event.time_start.strftime('%D %H:%M %p') %></div></td>
-          <td><div class="time_end"><%= event.time_end.strftime('%D %H:%M %p') %></div></td>
+          <td><div class="time_start"><%= event.time_start.strftime('%D %H:%M %p') if event.time_start %></div></td>
+          <td><div class="time_end"><%= event.time_end.strftime('%D %H:%M %p') if event.time_end %></div></td>
         </tr>
         <% end %>
     <% end %>

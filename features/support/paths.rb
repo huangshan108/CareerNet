@@ -13,7 +13,6 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /^the main page/ then ''
     when /^login page/ then '/account/login'
     when /^signup page/ then '/account/signup'
     when /^forgot password page/ then '/account/forgot-password'
@@ -29,7 +28,7 @@ module NavigationHelpers
     when /jobs page/ then
       '/jobs/'
     when /^the events page$/ then '/events'
-    when /^the main dashboard page$/ then'/'
+    when /^the main dashboard page$/ then'/dashboard'
     when /^the job create page$/ then '/jobs/new'
 
     # Add more mappings here.

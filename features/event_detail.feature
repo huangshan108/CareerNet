@@ -31,29 +31,29 @@ And I press "Log In" button
   Given I am on the events page
   When I follow "Job Fair"
   Then I should see "Job Fair"
-  And I should see "2000-01-01 15:00:00 UTC"
+  And I should see "01/01/00"
   And I should see "Register"
-  And I should see "Back to Events"
+  And I should see "Back"
 
 Scenario: I want to view a resume workshop
 
   Given I am on the events page
   When I follow "Resume Workshop"
   Then I should see "Resume Workshop"
-  And I should see "2000-01-01 15:00:00 UTC"
+  And I should see "01/01/00"
   And I should see "Register"
-  And I should see "Back to Events"
+  And I should see "Back"
 
 Scenario: I want to register for a mock interview
 
   Given I am on the events page
   When I follow "Mock Interviews"
   Then I should see "Mock Interviews"
-  And I should see "2000-01-01 16:00:00 UTC"
+  And I should see "01/01/00"
   And I should see "Register"
-  And I should see "Back to Events"
+  And I should see "Back"
   And I should see "foo"
-  When I follow "Back to Events"
+  When I follow "Back"
   Then I am on the events page
 
 Scenario: As a staff member I want to Create New Event
@@ -69,6 +69,6 @@ Scenario: As a staff member I want to delete an event
   Given I am on the events page
   When I follow "Mock Interviews"
   Then I should see "Mock Interviews"
-  When I press "Delete"
+  When I follow "Delete"
   Then I am on the events page
   And I should not see "Mock Interviews"

@@ -7,10 +7,10 @@ Feature: Staff can post new events
 Background:
 
   Given the following events exist:
-  | title           | description   | 
-  | Job Fair        | a             |
-  | Resume Workshop | b             |
-  | Mock Interviews | c             |
+  | title           | description   |time_start               |time_end                 |
+  | Job Fair        | a             |2000-01-01 15:00:00 UTC  |2000-01-01 15:00:00 UTC  |
+  | Resume Workshop | b             |2000-01-01 15:00:00 UTC  |2000-01-01 15:00:00 UTC  |
+  | Mock Interviews | c             |2000-01-01 15:00:00 UTC  |2000-01-01 15:00:00 UTC  |
 
   Given the following accounts exist:
   |name         |email               |account_type |
@@ -46,7 +46,7 @@ Scenario: I want to delete an event
   Given I am on the events page
   Then I should see "Resume Workshop"
   When I follow "Resume Workshop"
-  And I press "Delete"
+  And I follow "Delete"
   Then I am on the events page
   And I should not see "Resume Workshop"
   

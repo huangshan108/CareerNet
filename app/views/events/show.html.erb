@@ -3,9 +3,9 @@
 
 <dl class="dl-horizontal"> 
 	<dt>Start</dt>
-	<dd><%= @event.time_start.strftime('%D %H:%M %p') %></dd>
+	<dd><%= @event.time_start.strftime('%D %H:%M %p') if @event.time_start %></dd>
 	<dt>End</dt>
-	<dd><%= @event.time_end.strftime('%D %H:%M %p') %></dd>
+	<dd><%= @event.time_end.strftime('%D %H:%M %p') if @event.time_end %></dd>
 	<dt>Location</dt>
 	<dd><%= @event.location %></dd>
 	<dt>Description</dt>
