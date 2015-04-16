@@ -90,7 +90,7 @@ class AccountsController < ApplicationController
         end
         @reset_password_email = params[:email]
         found_user.send_password_reset
-        redirect_to reset_password_confirmation_path
+        render 'reset_password_confirmation'
     end
 
     def reset_password_confirmation

@@ -1,28 +1,21 @@
-<div class="signup">
-	<div class="title">
-		Sign Up
-	</div>
-	<%= form_for @new_account, url: account_confirm_signup_path do %>
-		<div class="form-group has-feedback">
-			<%= text_field_tag :username, params[:username], class: 'form-control', placeholder: 'Username'%>
-		</div>	
-		<div class="form-group has-feedback">
-			<%= text_field_tag :email, params[:email], class: 'form-control', placeholder: 'Email'%>
-		</div>
-		<div class="form-group has-feedback">
-			<%= label_tag 'Sign Up As?' %><br>
-			<%= select_tag :account_type, options_for_select(
-				[
-					["Student", 1], 
-					["Staff", 2],
-					["Company", 3],
-				], 1) %>
-		</div>
-		<div class="form-group has-feedback">
-			<%= password_field_tag :password, params[:password], class: 'form-control', placeholder: 'Password' %>
-		</div>
-  	<div class="actions">
-    	<%= submit_tag "Sign Up", class: "btn pull-right" %>
-  	</div>
+<h1 class="small-form">Sign Up</h1>
+	<%= form_for @new_account, :html => {:class => "small-form"}, url: account_confirm_signup_path do %>
+		<dl class="dl-horizontal">
+			<dt>Username</dt>
+			<dd><%= text_field_tag :username, params[:username] %></dd>
+			<dt>Email</dt>
+			<dd><%= text_field_tag :email, params[:email] %></dd>
+			<dt>Sign Up As</dt>
+			<dd>
+				<%= select_tag :account_type, options_for_select(
+					[
+						["Student", 1], 
+						["Staff", 2],
+						["Company", 3],
+					], 1), :style => "margin-left: 0px !important" %>
+			</dd>
+			<dt>Password</dt>
+			<dd><%= password_field_tag :password, params[:password] %></dd>
+    	<%= submit_tag "Sign Up", class: "button pull-right blue" %>
+  	</dl>
 	<% end %>
-</div>
