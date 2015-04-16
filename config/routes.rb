@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
-  root :to => 'main#index'
+  # root :to => 'main#index'
+  root :to => 'accounts#index'
 
+  get 'dashboard' => 'main#index', :as => :dashboard
+
+  get 'account/index' => 'accounts#index', :as => :account_index
   get 'account/login' => 'accounts#login', :as => :account_login
   post 'account/login' => 'accounts#confirm_login', :as => :account_confirm_login
   get 'account/signup' => 'accounts#signup', :as => :account_signup

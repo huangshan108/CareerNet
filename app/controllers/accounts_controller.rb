@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-    before_action :confirm_logged_in, :except => [:login, :confirm_login, :signup, :confirm_signup, :forgot_password, :reset_password, :start_reset_password, :submit_reset_password, :reset_password_confirmation, :logout]
+    before_action :confirm_logged_in, :except => [:index, :login, :confirm_login, :signup, :confirm_signup, :forgot_password, :reset_password, :start_reset_password, :submit_reset_password, :reset_password_confirmation, :logout]
     before_action :setup_new_account
 
     def index
@@ -28,7 +28,7 @@ class AccountsController < ApplicationController
         else
         end
         # After logging in, directed to main page instead of account#index
-        redirect_to(root_path)
+        redirect_to(dashboard_path)
     else
         flash[:error] = "Invalid username/password combination."
         redirect_to(:action => 'login')
