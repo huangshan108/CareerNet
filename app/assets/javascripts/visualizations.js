@@ -1,41 +1,17 @@
 // Require d3 for visualization
 //= require d3
 
-var req = {
-    us: true,
-    intl: true,
-    m: true,
-    f: true,
-    o: true,
-    2015: true,
-    2016: true,
-    2017: true
-};
-
-function reqToreqData(req){
+function reqToreqData(){
     var reqData = {
-        countries: ["US"],
-        genders: [],
-        classes: []
+        "country": [],
+        "gender": [],
+        "class": []
     };
-    if (req["m"]){
-        reqData['genders'].push("M");
-    }
-    if (req["f"]){
-        reqData['genders'].push("F");
-    }
-    if (req["o"]){
-        reqData['genders'].push("O");
-    }
-    if (req[2015]){
-        reqData['classes'].push(2015);
-    }
-    if (req[2016]){
-        reqData['classes'].push(2016);
-    }
-    if (req[2017]){
-        reqData['classes'].push(2017);
-    }
+    $('.request').each(function(i, elem) {
+        if (elem.checked) {
+            reqData[$(elem).data("category")].push($(elem).data("query"));
+        };
+    })
     console.log(reqData);
     return reqData;
 }
@@ -47,6 +23,11 @@ function init(){
         genders: ["M", "F", "O"],
         classes: [2015, 2016, 2017]
     };
+    // var reqInitData = {
+    //     "country": [],
+    //     "gender": [],
+    //     "class": []
+    // }
 
     $.ajax({
         type: "GET",
@@ -54,7 +35,7 @@ function init(){
         data: reqInitData,
         dataType: 'json',
         success: function(json){
-            alert('success');
+            // alert('success');
             drawPie(json['countries'], "country");
             drawPie(json['genders'], "gender");
             drawPie(json['classes'], "class");
@@ -69,12 +50,8 @@ function init(){
 
     var meow = d3.selectAll('.request')
         .on("click", function() {
-            id = d3.select(this).attr("id");
-            req[id] = !req[id];
-            updateData(reqToreqData(req));
+            updateData(reqToreqData());
         });
-
-
 }
 
 
@@ -85,7 +62,9 @@ function updateData(reqData){
         data: reqData,
         dataType: 'json',
         success: function(json){
-            alert('success');
+            // alert('success');
+            console.log("json: ")
+            console.log(json);
             updatePie(json['countries'], "country");
             updatePie(json['genders'], "gender");
             updatePie(json['classes'], "class");
