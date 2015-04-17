@@ -1,22 +1,22 @@
 class Event < ActiveRecord::Base
-    has_many :students
-    has_many :staffs
-    has_many :companies
+    has_many :student
+    has_many :staff
+    has_many :company
 
 	def as_json(options = {})
 		{
             :title => title,
-            :start => time_start,
-            :end => time_end,
+            :start => created_at,
+            :end => created_at+3600,
             :allDay => false,
             :id => id,
             :url => Rails.application.routes.url_helpers.event_path(self),
-            :color => 'red'
+            :color => 'LightBlue'
         }
 	end
 
     def self.between(start_day, end_day)
-      self.where("date_start >= ? AND date_end <= ?", start_day.to_date, end_day.to_date)
+      self.where("time_start >= ? AND time_end <= ?", start_day.to_date, end_day.to_date)
     end
 
 end

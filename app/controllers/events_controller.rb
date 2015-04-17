@@ -17,7 +17,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.create(:title => params[:title], :description => params[:description], :location => params[:location])
+    @event = Event.create(:title => params[:title], :description => params[:description], :location => params[:location], :time_start => Time.now, :time_end => Time.now+3600)
     redirect_to events_path
   end
 
