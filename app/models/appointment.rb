@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: appointments
+#
+#  id          :integer          not null, primary key
+#  staff_id    :integer
+#  student_id  :integer
+#  time_slot   :integer
+#  day         :date
+#  description :text
+#  note        :text
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Appointment < ActiveRecord::Base
     belongs_to :staff
     belongs_to :student

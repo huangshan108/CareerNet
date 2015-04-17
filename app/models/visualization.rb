@@ -47,6 +47,9 @@ class Visualization < ActiveRecord::Base
     end
 
     def self.student_demographic_json(countries, genders, classes)
+        countries ||= []
+        genders ||= []
+        classes ||= []
         # Find all students of interest
         query_result = self.student_demographic_query(countries, genders, classes)
 
