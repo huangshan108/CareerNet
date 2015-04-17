@@ -2,8 +2,9 @@ $(document).ready(function() {
   var todayDate = new Date();
   todayDate.setHours(0,0,0,0);
 
-
   var currentLangCode = 'en';
+  var currentView = 'agendaWeek';
+
   // build the language selector's options
   $.each($.fullCalendar.langs, function(langCode) {
     $('#lang-selector').append(
@@ -13,106 +14,96 @@ $(document).ready(function() {
         .text(langCode)
     );
   });
+
   // rerender the calendar when the selected option changes
   $('#lang-selector').on('change', function() {
     if (this.value) {
       currentLangCode = this.value;
-      $('#myCalendar').fullCalendar('destroy');
       renderCalendar();
     }
   });
 
-  $("#cal_jumpto").datepicker();
+  // associate datepicker with fullCalendar
+  $("#cal_jumpto").datepicker({
+    onSelect: function(dateText, inst) {
+        $('#myCalendar').fullCalendar('gotoDate', new Date(dateText));
+        $('#myCalendar').fullCalendar('changeView', 'agendaDay');
+    }
+  });
+
+  // make default selections and bind onchange function
+  $('#cal_interviews').attr('checked', true);
+  $('#cal_appointments').attr('checked', true);
+  $('#cal_events').attr('checked', true);
+  $('#cal_available').attr('checked', true);
+  $("#cal_user_select").on('change', renderCalendar);
+
+  // returns true if only fetch confirmed events, false for all available events
+  function onlyMyEvents() {
+    return $("input:radio[name=onlyMyEvents]").val() == '1';
+  }
+
+  // fetch events from server
+  function fetchEvents(start, end, url, callback, confirmedOnly) {
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            start: start.format("YYYY-MM-DD HH:mm:ss"),
+            end: end.format("YYYY-MM-DD HH:mm:ss"),
+            confirmed: confirmedOnly
+        },
+        success: function(json){
+            callback(json);
+        },
+        error: function(){
+            alert('Failed to load '+url);
+        }
+    });
+  }
+
+  function loadEvents(start, end, timezone, callback) {
+    var confirmedOnly = onlyMyEvents();
+    // if ($('#cal_interviews').attr('checked')) {
+    //     fetchEvents(start, end, '/calendar/interviews', callback, confirmedOnly);
+    // }
+    // if ($('#cal_events').attr('checked')) {
+    //     fetchEvents(start, end, '/calendar/events', callback, confirmedOnly);
+    // }
+    if ($('#cal_appointments').attr('checked')) {
+        fetchEvents(start, end, '/calendar/appointments', callback, confirmedOnly);
+    }
+  }
 
   function renderCalendar() {
+    $('#myCalendar').fullCalendar('destroy');
     $('#myCalendar').fullCalendar({
         // put your options and callbacks here
         allDaySlot: true,
+        defaultDate: $("#cal_jumpto").datepicker("getDate"),
         slotDuration: '00:30:00',
-        defaultView: 'agendaWeek',
+        defaultView: currentView,
         editable: false,
         durationEditable: false,
         lang: currentLangCode,
+        theme: true, // using JQuery UI
         header: {
           left: 'prev,next today',
           center: 'title',
           right: 'month agendaWeek agendaDay'
         },
+        viewRender: function(view, element) {
+            currentView = view.name;
+            $("#cal_jumpto").datepicker('setDate', $('#myCalendar').fullCalendar('getDate')._d);
+        },
         selectable: true,
         selectHelper: true,
-        //this section is triggered when the event cell it's clicked
-        // select: function(start, end) {
-        //   var eventData;
-        //   //this validates that the user must insert a name in the input
-        //   eventData = {
-        //     start: start.format("YYYY-MM-DD HH:mm:ss"),
-        //     end: end.format("YYYY-MM-DD HH:mm:ss")
-        //     }
-        //     //here i validate that the user can't create an event before today
-        //     if (start < todayDate){
-        //       alert('Please choose a time that is not already past.');
-        //       $("#calendar").fullCalendar("unselect");
-        //       return
-        //     }
-        //     //if everything it's ok, then the event is saved in database with ajax
-        //     $.ajax({
-        //       url: "/appointments/staff/new",
-        //       type: "POST",
-        //       data: eventData,
-        //       dataType: "json",
-        //       success: function(json) {
-        //         // alert(json.msg);
-        //         $("#calendar").fullCalendar("refetchEvents");
-        //       },
-        //      error: function(json) {
-        //        alert('Failed to register appointments');
-        //      }
-        //     });
-        //   $("#calendar").fullCalendar("unselect");
-        // },
-        // eventClick: function (calEvent, jsEvent, view){
-        //   // var result = confirm("Are you sure you want to delete this appointment?");
-        //     // if (result){
-        //       $.ajax({
-        //         url: "/appointments/staff/" + calEvent.id,
-        //         type: "POST",
-        //         dataType: "json",
-        //         data: { "_method": "delete" },
-        //         success: function() {
-        //           // alert("Successfully deleted appointment");
-        //         },
-        //         error: function() {
-        //           alert("Error. Could not delete appointment");
-        //         }
-        //       });
-        //       $("#calendar").fullCalendar("refetchEvents");
-        //     // }
-        // },
-        // slotMinutes: 20,
-        // events: '/calendar',
-        events: function (start, end, timezone, callback){
-         $.ajax({
-           url: '/calendar/appointments',
-           type: 'GET',
-           dataType: 'json',
-           data: {
-             start: start.format("YYYY-MM-DD HH:mm:ss"),
-             end: end.format("YYYY-MM-DD HH:mm:ss")
-           },
-           success: function(json){
-             callback(json);
-           },
-           error: function(){
-             alert('Failed to load data.');
-           }
-         });
-        },
-        // //timeFormat: 'h:mm t{ - h:mm t} ',
+        events: loadEvents,
         dragOpacity: "0.5"
-        })      
+    })      
   }
 
   renderCalendar();
-
 
 });

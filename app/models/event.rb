@@ -10,8 +10,8 @@ class Event < ActiveRecord::Base
             :end => time_end,
             :allDay => false,
             :id => id,
-            :url => event_path(self),
-            :color => '#009999'
+            :url => Rails.application.routes.url_helpers.event_path(self),
+            :color => 'red'
         }
 	end
 
