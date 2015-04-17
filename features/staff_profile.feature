@@ -5,39 +5,36 @@ Feature: Staff can create and/or modify profiles
 
 Background: Adding jobs to database
 
-    Given the following schools exist:
-    | school_name                   | school_type   | school_year  | address    |
-    | Cambridge College-Portland    | public        | 4-year       | NONE       |
+  Given the following events exist:
+  | title           | description   | 
+  | Job Fair        | a             |
+  | Resume Workshop | b             |
+  | Mock Interviews | c             |
 
-    Given the following majors exist:
-    | name                            |
-    | Humanities/Humanistic Studiesd  |
-    
-    Given the following accounts exist:
-    |name         |email                    |account_type |
-    |huangshan108 |shuang@berkeley.edu      |1            |
-    |Alex         |alexstaff@berkeley.edu   |3            |
+  Given the following accounts exist:
+  |name         |email               |account_type |
+  |huangshan108 |shuang@berkeley.edu |1            |
+  |staff1       |staff1@berkeley.edu |2            |
 
-    Given the following students exist:
-    | first_name   | last_name  | college_id   | major_id     | graduation_date   | resume_link |account_id |
-    | Mark         | Sharp      | 1            | 1            | 2016-10-10        | example.com |1          |
-  
-    And I am on the account_login page
-    Then I enter "alexstaff@berkeley.edu" into "email" 
-    And I enter "alex" into "password" 
-    And I press "Log In" button
-    Then I should see "Welcome to CareerNet"
+  Given the following students exist:
+  |first_name         |last_name      |email               |account_id |
+  |Shan               |Huang          |shuang@berkeley.edu |1          |
 
-    Scenario: View staff profile
-        Given I am on list staff page
-        When I follow "More details"
-        Then I should be on staff profile page
-        And I should see "Alex"
-   
-    Scenario: Edit staff profile
-        Given I am on staff profile page
-        When I follow "Edit profile"
-        Then I should be on edit profile page
-        When I fill in First Name with "Steve"
-        And I press "Submit"
-        Then I should see "Steve"
+  Given the following staffs exist:
+  |first_name         |last_name      |email               |account_id |
+  |Fake               |Staff          |staff1@berkeley.edu |2          |
+
+  And I am on the account_login page
+  Then I enter "staff1@berkeley.edu" into "email" 
+  And I enter "careernet" into "password" 
+  And I press "Log In" button
+  Then I should see "Welcome to CareerNet"
+
+  Scenario: Edit staff profile
+    Given I am on staff profile page
+    And I follow "Edit profile"
+    When I fill in First Name with "Steve"
+    And I fill in "description" with "This is a test"
+    And I press "Submit"
+    Then I should see "Steve"
+    And I should see "This is a test"

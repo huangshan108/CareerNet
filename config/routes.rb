@@ -29,6 +29,12 @@ Rails.application.routes.draw do
   get 'profiles/student/:id/edit' => 'profiles#edit_student', :as => :edit_student_profile
   post 'profiles/student/:id/update' => 'profiles#update_student', :as => :update_student_profile
   get 'profiles/school/:id' => 'profiles#school', :as => :single_school_profile
+  get 'profiles/company/:id' => 'profiles#company', :as => :company_profile
+  get 'profiles/company/:id/edit' => 'profiles#edit_company', :as => :edit_company_profile
+  post 'profiles/company/:id/update' => 'profiles#update_company', :as => :update_company_profile
+  get 'profiles/staff/:id' => 'profiles#staff', :as => :staff_profile
+  get 'profiles/staff/:id/edit' => 'profiles#edit_staff', :as => :edit_staff_profile
+  post 'profiles/staff/:id/update' => 'profiles#update_staff', :as => :update_staff_profile
 
   resources :events
 

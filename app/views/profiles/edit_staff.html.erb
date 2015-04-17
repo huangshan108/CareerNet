@@ -1,0 +1,20 @@
+<%= form_tag(:action => 'update_staff', :id => @staff.id) do %>
+	<dl class="dl-horizontal">
+		<dt>First Name</dt>
+    	<dd><%= text_field_tag :first_name, params[:first_name], value: @staff.first_name %></dd>
+
+    	<dt>Last Name</dt>
+    	<dd><%= text_field_tag :last_name, params[:last_name], value: @staff.last_name ? @staff.last_name : nil %></dd>
+
+		<dt> Description </dt>
+		<dd><%= text_field_tag :description, params[:description], value: @staff.description %></dd>
+
+	</dl>
+
+
+	<div class="pull-right button-group">
+      <%= link_to 'Back', staff_profile_path(@staff), class: "button default" -%>
+      <%= submit_tag "Submit", class: "button blue"%>
+    </div>
+
+<% end %>

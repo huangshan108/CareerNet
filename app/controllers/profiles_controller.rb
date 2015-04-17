@@ -5,6 +5,16 @@ class ProfilesController < ApplicationController
     @student = Student.find(id)
   end
 
+  def company
+    id = params[:id]
+    @company = Company.find(id)
+  end
+
+  def staff
+    id = params[:id]
+    @staff = Staff.find(id)
+  end
+
   def students
     redirect_to(list_students_path(1))
   end
@@ -15,7 +25,41 @@ class ProfilesController < ApplicationController
     @all_schools = College.all
     @all_majors = Major.all
     @all_skills = Skill.all
+    @all_companies = Company.all
     @student_skills = @student.skills.all
+  end
+
+  def edit_company
+    id = params[:id]
+    @company = Company.find(id)
+  end
+
+  def edit_staff
+    id = params[:id]
+    @staff = Staff.find(id)
+  end
+
+  def update_company
+    company = Company.find(params[:id])
+    company.update_attributes(:name => params[:name],
+                              :city => params[:city],
+                              :state => params[:state],
+                              :country => params[:country],
+                              :industry => params[:industry],
+                              :website => params[:website])
+    company.save
+    flash[:notice] = "Profile Updated!"
+    redirect_to(company_profile_path(company))
+  end
+
+  def update_staff
+    staff = Staff.find(params[:id])
+    staff.update_attributes(:first_name => params[:first_name],
+                            :last_name => params[:last_name],
+                            :description => params[:description])
+    staff.save
+    flash[:notice] = "Profile Updated!"
+    redirect_to(staff_profile_path(staff))
   end
 
   def update_student
@@ -25,7 +69,14 @@ class ProfilesController < ApplicationController
                               :college_id => params[:college_id],
                               :major_id => params[:major_id],
                               :graduation_date => params[:graduation_date],
-                              :resume_link => params[:resume_link])
+                              :resume_link => params[:resume_link],
+                              :city => params[:city],
+                              :state => params[:state],
+                              :country => params[:country],
+                              :company_id => params[:company_id],
+                              :base_salary => params[:base_salary],
+                              :years_experience => params[:years_experience],
+                              :title => params[:title])
     skill_id_list = student.skill_ids
 
     if not params[:add_skill_name].empty?
@@ -57,12 +108,6 @@ class ProfilesController < ApplicationController
 
   def list_students
   	@all_students = Student.all
-  end
-
-  def staff
-  end
-
-  def company
   end
 
   def school

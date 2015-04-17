@@ -65,9 +65,19 @@
           <i class="fa fa-user"></i>
           <%= link_to 'My Profile', single_student_profile_path(current_user.student.id), name: "my-profile-button", class: "nav-text" %></a>
         </li>
-      <% else %>
-
       <% end %>
+      <% if current_user.company %>
+        <li>
+          <i class="fa fa-user"></i>
+          <%= link_to 'My Profile', company_profile_path(current_user.company.id), name: "my-profile-button", class: "nav-text" %></a>
+        </li>
+      <%end%>
+      <% if current_user.staff%>
+        <li>
+          <i class="fa fa-user"></i>
+          <%= link_to 'My Profile', staff_profile_path(current_user.staff.id), name: "my-profile-button", class: "nav-text" %></a>
+        </li>
+      <%end%>
       <script type="text/javascript">
       $(document).ready(function() {
         $('a[name="new-profile-button"]').click(function() {

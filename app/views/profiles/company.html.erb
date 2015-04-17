@@ -1,2 +1,75 @@
-<h1>Profiles#company</h1>
-<p>Find me in app/views/profiles/company.html.erb</p>
+<h1>Company Profile</h1>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('a[name="edit-profile-button"]').click(function() {
+      $('.spinner-model').show();
+    });
+  });
+</script>
+<dl class="dl-horizontal">
+	<dt> Name </dt>
+	<% if @company.name %>
+    	<dd><%= @company.name -%></dd>
+  	<% end %>
+
+  	<dt> Website </dt>
+  	<% if @company.website %>
+  		<dd><%= @company.website -%></dd>
+  	<% end %>
+
+  	<dt> City </dt>
+  	<% if @company.city %>
+  		<dd><%= @company.city -%></dd>
+  	<% end %>
+  	<dt> State </dt>
+  	<% if @company.state %>
+  		<dd><%= @company.state -%></dd>
+  	<% end %>
+  	<dt> Country </dt>
+  	<% if @company.country %>
+  		<dd><%= @company.country -%></dd>
+  	<% end %>
+  	<dt> Industry </dt>
+  	<% if @company.industry %>
+  		<dd><%= @company.industry -%></dd>
+  	<% end %>
+
+</dl>
+
+<div class="pull-right button-group">
+  <%= link_to 'Edit profile', edit_company_profile_path(@company), name: "edit-profile-button", class: "button blue" -%>
+</div> 
+
+<br>
+<h2> Available Positions </h2>
+<br>
+<table class="data-table table table-striped">   
+  <thead>
+    <tr>
+    	<th> Position </th>
+    	<th> Company </th>
+    	<th> Salary </th>
+    	<th> Updated </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @company.jobs.each do |job| %>
+  	  <tr>
+  	   <% if !job.company.nil? %>
+  	    <td><%=link_to "#{job.title}", view_single_job_path(job.id) %></td>
+  	    <td><%= job.company.name %></td>
+  	    <td><%= job.salary %></td>
+  	    <td><%= job.updated_at.strftime('%D') %></td>
+  	    <% end %>
+  	  </tr>
+  	  <% end %>
+  </tbody>
+</table>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.data-table').dataTable();
+  })
+</script>
+
+
+
