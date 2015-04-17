@@ -63,7 +63,13 @@ Rails.application.routes.draw do
   post 'interviews/company/new' => 'interviews#company_new', :as => :new_company_interviews
   delete 'interviews/company/:id' => 'interviews#destroy', :as => :cancel_interview
 
+  get 'calendar' => 'calendar#view', :as => :calendar
+  get 'calendar/appointments' => 'calendar#appointmentData', :as => :calendar_appointment
+  get 'calendar/events' => 'calendar#eventData', :as => :calendar_event
+  get 'calendar/interviews' => 'calendar#interviewData', :as => :calendar_interview
+
 # The priority is based upon order of creation: first created -> highest priority.
+
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"

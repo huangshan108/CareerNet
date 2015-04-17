@@ -1,0 +1,51 @@
+<%= javascript_include_tag 'calendar.js' %>
+<script src='https://rawgit.com/arshaw/fullcalendar/master/dist/lang-all.js'></script>
+<h1>My Calendar</h1>
+
+<body>
+  <table border='0' width='100%'> 
+   <tr> 
+    <td valign='top' nowrap> 
+		<dl id='language'>
+			<dt>Language:</dt>
+			<select id='lang-selector'></select>
+		</dl>
+		<label>Jump To Date:</label>
+		<div id='cal_jumpto'></div>
+
+		<div id='cal_user_select'>
+			<h4>What events to include in calendar</h4>
+			<form action="">
+				<dl class="dl-horizontal">
+				<dt>Show me all available</dt>
+				<dd><input type="radio" id="cal_available" name="onlyMyEvents" value="0"></input></dd>
+				<dt>Only ones I am attending</dt>
+				<dd><input type="radio" name="onlyMyEvents" value="1"></input></dd>
+				</dl>
+			</form>
+
+			<dl id='categories' class="dl-horizontal">
+				<h4>Select calendars to be displayed</h4>
+				<dt>Interviews</dt>
+				<dd><input type='checkbox' class='mycal' id='cal_interviews'></input></dd>
+				<dt>Events</dt>
+				<dd><input type='checkbox' class='mycal' id='cal_events'></input></dd>
+				<dt>Appointments</dt>
+				<dd><input type='checkbox' class='mycal' id='cal_appointments'></input></dd>
+				<dt>Personal events</dt>
+				<dd><input type='checkbox' class='mycal' id='cal_confirmed'></input></dd>
+
+			</dl>
+		</div>
+    </td> 
+    <td valign='top' nowrap> 
+		<span class='menu'> 
+		<div style='margin: 40px;'></div>
+		<div id='myCalendar'></div>
+		<div style='clear:both'></div>
+     </span> 
+    </td> 
+   </tr> 
+  </table> 
+ </body>
+

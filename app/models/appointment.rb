@@ -3,7 +3,6 @@ class Appointment < ActiveRecord::Base
     belongs_to :student
 
     def as_json(options = {})
-
         title = self.student == nil ? "Empty" : self.student.last_name
         #time_slot 1 -> 10 a.m.
         # 20 minute increment until 4p.m.
@@ -15,7 +14,9 @@ class Appointment < ActiveRecord::Base
             :start => start_datetime,
             :end => end_datetime,
             :allDay => false,
-            :id => id
+            :id => id,
+            :color => 'red',
+            :url => Rails.application.routes.url_helpers.appointment_student_show_path
         }
     end
 
