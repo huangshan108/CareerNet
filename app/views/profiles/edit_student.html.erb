@@ -2,13 +2,18 @@
 <h1> Edit Profile </h1>
 <%= javascript_tag "var all_schools = #{ @all_schools.to_json };" %>
 <%= javascript_tag "var all_majors = #{ @all_majors.to_json };" %>
+<%= javascript_tag "var companies = #{ @companies.to_json };" %>
 <%= javascript_tag "var all_skills = #{ @all_skills.to_json };" %>
 <%= javascript_tag "var student_skills = #{ @student_skills.to_json };" %>
+
 
 <script>
   $(function() {
     for (var i = 0; i < all_schools.length; i++){
       all_schools[i].label = all_schools[i].school_name
+    }
+    for (var i = 0; i < all_companies.length; i++){
+      all_companies[i].label = all_companies[i].name
     }
     for (var i = 0; i < all_majors.length; i++){
       all_majors[i].label = all_majors[i].name
@@ -31,6 +36,13 @@
       source: all_majors,
       select: function(event, ui) {
         $("#major_id").val(ui.item.id)
+      }
+    });
+    $("#company_name").autocomplete({
+      minLength: 3,
+      source: all_schools,
+      select: function(event, ui) {
+        $("#company_id").val(ui.item.id)
       }
     });
     $("#graduation_date").datepicker({
@@ -59,7 +71,7 @@
 
     <dt>Last Name</dt>
     <dd><%= text_field_tag :last_name, params[:last_name], value: @student.last_name ? @student.last_name : nil %></dd>
-
+    
     <dt>Skills</dt>
     <dd>
       <% @student.skills.all.each do |s| %>
@@ -75,6 +87,15 @@
     <dd><input type="text" name = "remove_skill_name" id="skill_remove" ></input></dd>
     <%= hidden_field_tag :skill_id_remove, params[:skill_id_remove], id: "skill_id_remove", value: -1 %>
 
+    <dt> City </dt>
+    <dd><%= text_field_tag :city, params[:city], value: @student.city %></dd>
+
+    <dt> State </dt>
+    <dd><%= text_field_tag :state, params[:state], value: @student.state %></dd>
+
+    <dt> Country </dt>
+    <dd><%= text_field_tag :country, params[:country], value: @student.country %></dd>
+
     <dt>University</dt>
     <dd><input type="text" id="college_name" value="<%= @student.college ? @student.college.school_name : nil %>" ></input></dd>
     <%= hidden_field_tag :college_id, params[:college_id], id: "college_id", value: @student.college_id %>
@@ -88,7 +109,20 @@
 
     <dt>Resume Link</dt>
     <dd><%= text_field_tag :resume_link, params[:resume_link], value: @student.resume_link %></dd>
-    
+
+    <dt>Company</dt>
+    <dd><input type="text" id="company_name" value="<%= @student.company ? @student.company.name : nil %>" ></input></dd>
+    <%= hidden_field_tag :company_id, params[:company_id], id: "company_id", value: @student.company_id %>
+
+    <dt>Salary</dt>
+    <dd><%= text_field_tag :base_salary, params[:base_salary], value: @student.base_salary %></dd>
+
+    <dt>Years Experience</dt>
+    <dd><%= text_field_tag :years_experience, params[:years_experience], value: @student.years_experience %></dd>
+
+    <dt>Title</dt>
+    <dd><%= text_field_tag :title, params[:title], value: @student.title %></dd>
+
     <div class="pull-right button-group">
       <%= link_to 'Back', single_student_profile_path(@student), class: "button default" -%>
       <%= submit_tag "Submit", class: "button blue"%>

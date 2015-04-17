@@ -79,15 +79,38 @@
           <i class="fa fa-hand-o-left"></i>
           <a href="/account/logout" class="nav-text">Logout</a>
         </li>
-      <% else %>
-        <li>
-          <i class="fa fa-hand-o-right"></i>
-          <a href="/account/login" class="nav-text">Log In</a>
-        </li>
       <% end %>
-    </ul>
-  </nav>
-<% end %>
+      <% if current_user.company %>
+        <li>
+          <i class="fa fa-user"></i>
+          <%= link_to 'My Profile', company_profile_path(current_user.company.id), name: "my-profile-button", class: "nav-text" %></a>
+        </li>
+      <%end%>
+      <% if current_user.staff%>
+        <li>
+          <i class="fa fa-user"></i>
+          <%= link_to 'My Profile', staff_profile_path(current_user.staff.id), name: "my-profile-button", class: "nav-text" %></a>
+        </li>
+      <%end%>
+      <script type="text/javascript">
+      $(document).ready(function() {
+        $('a[name="new-profile-button"]').click(function() {
+          $('.spinner-model').show();
+        });
+      })
+      </script>
+      <li>
+        <i class="fa fa-hand-o-left"></i>
+        <a href="/account/logout" class="nav-text">Logout</a>
+      </li>
+    <% else %>
+      <li>
+        <i class="fa fa-hand-o-right"></i>
+        <a href="/account/login" class="nav-text">Log In</a>
+      </li>
+    <% end %>
+  </ul>
+</nav>
 
 
 

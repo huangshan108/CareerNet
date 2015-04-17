@@ -22,6 +22,21 @@
   <% end %>
   </dd>
 
+  <dt> City </dt>
+  <% if @student.city %>
+    <dd><%= @student.city -%></dd>
+  <% end %>
+
+  <dt> State </dt>
+  <% if @student.state %>
+    <dd><%= @student.state -%></dd>
+  <% end %>
+
+  <dt> Country </dt>
+  <% if @student.country %>
+    <dd><%= @student.country -%></dd>
+  <% end %>
+
   <dt> University </dt>
   <% if @student.college %>
     <dd><%= link_to @student.college.school_name, single_school_profile_path(@student.college) -%></dd>
@@ -41,6 +56,29 @@
   <% if @student.resume_link %>
     <dd><%= link_to(@student.resume_link, @student.resume_link) -%></dd>
   <% end %>
+
+  <dt> Company </dt>
+  <% if @student.company %>
+    <dd><%= @student.company.name -%></dd>
+  <% end %>
+
+  <dt> Salary </dt>
+  <% if@student.base_salary %>
+    <dd><%= @student.base_salary-%></dd>
+  <% end %>
+
+  <dt> Years Experience </dt>
+  <% if@student.years_experience %>
+    <dd><%= @student.years_experience-%></dd>
+  <% end %>
+
+  <dt> Title </dt>
+  <% if@student.title %>
+    <dd><%= @student.title-%></dd>
+  <% end %>
+
+
+
 </dl>
 <div class="pull-right button-group">
   <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>

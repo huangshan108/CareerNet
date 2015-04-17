@@ -4,6 +4,7 @@ class Student < ActiveRecord::Base
 	belongs_to :college
 	belongs_to :major
 	belongs_to :account
+	belongs_to :company
 
   has_many :appointments
   has_many :staffs, :through => :appointments
