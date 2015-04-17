@@ -18,16 +18,8 @@ function reqToreqData(){
 
 init();
 function init(){
-    var reqInitData = {
-        countries: ["US"],
-        genders: ["M", "F", "O"],
-        classes: [2015, 2016, 2017]
-    };
-    // var reqInitData = {
-    //     "country": [],
-    //     "gender": [],
-    //     "class": []
-    // }
+    $('.request').prop("checked", true);
+    var reqInitData = reqToreqData();
 
     $.ajax({
         type: "GET",
@@ -80,7 +72,7 @@ function updateData(reqData){
 
 
 function drawPie(data, section) {
-    var width = 480,
+    var width = 600,
         height = 300;
 
     var svg = d3.select("div#" + section).append("svg")
@@ -98,16 +90,17 @@ function drawPie(data, section) {
 }
 
 function updatePie(data, section){
-    var width = 480,
-        height = 300
-        radius = Math.min(width, height) /2 - 10;
+    var width = 600,
+        height = 300,
+        radius = 100;
 
     var arc = d3.svg.arc().outerRadius(radius * 0.9)
-        .innerRadius(radius * 0.4);
+        .innerRadius(radius * 0.35);
 
     var outerArc = d3.svg.arc()
         .innerRadius(radius * 0.9)
         .outerRadius(radius * 0.9);
+    // var arc = d3.svg.arc().outerRadius(radius);
 
     var svg = d3.select("div#" + section + " svg");
 

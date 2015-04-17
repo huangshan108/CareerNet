@@ -3,13 +3,11 @@
   They will automatically be included in application.css.
 */
 
-.visLeft {
-    float: left;
-    width: 50%;
-    overflow: hidden;
+.single-pie-chart {
+	svg {
+	  height: 300px;
+  	width: 600px;
+	  display: block;
+	  margin: auto;
+	}
 }
-
-.visRight {
-    overflow: hidden;
-}
-
