@@ -86,6 +86,7 @@ class ApplicationController < ActionController::Base
           
   end
 
+
   #company can't delete other company's job
   private
   def job_restriction2
