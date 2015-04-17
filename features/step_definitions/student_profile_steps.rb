@@ -53,3 +53,8 @@ end
 When /^I try vist post job page$/ do
     visit "/jobs/new"
 end
+
+
+When /^I try to edit view this student profile page$/ do
+    visit "/profiles/student/1/edit"
+end
