@@ -1,32 +1,35 @@
 class CalendarController < ApplicationController
 
 	def interviewData
-		currentUser = Account.getUser(current_user)
+		currentUser = current_user.getUser
 		interviews = currentUser.getInterviews(params[:start], params[:end]) if (params[:start] && params[:end]) else []
-		respond_to do |format|
-	        format.html
-	        format.json { render :json => interviews }
-		end
-		return
+		renderJSON(interviews)
 	end
 
 	def eventData
-		currentUser = Account.getUser(current_user)
-		events = currentUser.getEvents(params[:start], params[:end]) if (params[:start] && params[:end]) else []
-		respond_to do |format|
-	        format.html
-	        format.json { render :json => events }
-		end
-		return
+		currentUser = current_user.getUser
+		# events = currentUser.getEvents(params[:start], params[:end]) if (params[:start] && params[:end]) else []
+		events = Event.between(params[:start], params[:end])
+		renderJSON(events)
 	end
 
 	def appointmentData
 		currentUser = current_user.getUser
-		appointments = currentUser.getAppointments(params[:start], params[:end]) if (params[:start] && params[:end]) else []
+		appointments = []
+		# if params[:confirmed] == 'true'
+			appointments = currentUser.getAppointments(params[:start], params[:end]) if (params[:start] && params[:end])
+		# else
+		# 	appointments = Appointment.between(params[:start], params[:end])
+		# end
+		renderJSON(appointments)
+	end
+
+	def renderJSON(data)
 		respond_to do |format|
 	        format.html
-	        format.json { render :json => appointments }
+	        format.json { render :json => data }
 		end
 		return
 	end
+
 end

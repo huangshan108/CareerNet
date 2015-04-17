@@ -52,6 +52,8 @@ Rails.application.routes.draw do
 
   get 'calendar' => 'calendar#view', :as => :calendar
   get 'calendar/appointments' => 'calendar#appointmentData', :as => :calendar_appointment
+  get 'calendar/events' => 'calendar#eventData', :as => :calendar_event
+  get 'calendar/interviews' => 'calendar#interviewData', :as => :calendar_interview
 
 # The priority is based upon order of creation: first created -> highest priority.
 

@@ -65,12 +65,12 @@ $(document).ready(function() {
 
   function loadEvents(start, end, timezone, callback) {
     var confirmedOnly = onlyMyEvents();
-    // if ($('#cal_interviews').attr('checked')) {
-    //     fetchEvents(start, end, '/calendar/interviews', callback, confirmedOnly);
-    // }
-    // if ($('#cal_events').attr('checked')) {
-    //     fetchEvents(start, end, '/calendar/events', callback, confirmedOnly);
-    // }
+    if ($('#cal_interviews').attr('checked')) {
+        fetchEvents(start, end, '/calendar/interviews', callback, confirmedOnly);
+    }
+    if ($('#cal_events').attr('checked')) {
+        fetchEvents(start, end, '/calendar/events', callback, confirmedOnly);
+    }
     if ($('#cal_appointments').attr('checked')) {
         fetchEvents(start, end, '/calendar/appointments', callback, confirmedOnly);
     }
