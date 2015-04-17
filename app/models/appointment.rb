@@ -15,7 +15,8 @@ class Appointment < ActiveRecord::Base
             :start => start_datetime,
             :end => end_datetime,
             :allDay => false,
-            :id => id
+            :id => id,
+            :color => 'green'
         }
     end
 

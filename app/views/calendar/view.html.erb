@@ -2,37 +2,46 @@
 <script src='https://rawgit.com/arshaw/fullcalendar/master/dist/lang-all.js'></script>
 <h1>My Calendar</h1>
 
-
 <body>
+  <table border='0' width='90%'> 
+   <tr> 
+    <td valign='top' nowrap> 
+		<dl id='language'>
+			<dt>Language</dt>
+			<select id='lang-selector'></select>
+		</dl>
+		<label>Jump To Date:</label>
+		<div id='cal_jumpto'></div>
+		<form action="">
+			<dl class="dl-horizontal">
+			<dt>All</dt>
+			<dd><input type="radio" name="allevents" value="1"></input></dd>
+			<dt>Confirmed Only</dt>
+			<dd><input type="radio" name="allevents" value="0"></input></dd>
+			</dl>
+		</form>
 
-	<div id='top'>
-		Language:
-		<select id='lang-selector'></select>
-	</div>
-
-	<div id='wrap'>
-
-		<div id='categories'>
+		<dl id='categories' class="dl-horizontal">
 			<h4>Select calendars to be displayed</h4>
+			<dt>Interviews</dt>
+			<dd><input type='checkbox' class='mycal' id='cal_interviews'></input></dd>
+			<dt>Events</dt>
+			<dd><input type='checkbox' class='mycal' id='cal_events'></input></dd>
+			<dt>Appointments</dt>
+			<dd><input type='checkbox' class='mycal' id='cal_appointments'></input></dd>
+			<dt>Personal events</dt>
+			<dd><input type='checkbox' class='mycal' id='cal_confirmed'></input></dd>
 
-			<input type='checkbox' class='mycal' id='cal_interviews'></input>
-			<label for='cal_interviews'>Interviews</label>
-
-			<input type='checkbox' class='mycal' id='cal_events'></input>
-			<label for='cal_events'>Events</label>
-
-			<input type='checkbox' class='mycal' id='cal_appointments'></input>
-			<label for='cal_appointments'>Appointments</label>
-
-			<input type='checkbox' class='mycal' id='cal_confirmed'></input>
-			<label for='cal_confirmed'>All confirmed activities</label>
-		</div>
-
+		</dl>
+    </td> 
+    <td valign='top' nowrap> 
+		<span class='menu'> 
 		<div style='margin: 40px;'></div>
 		<div id='myCalendar'></div>
-
 		<div style='clear:both'></div>
-
-	</div>
-</body>
+     </span> 
+    </td> 
+   </tr> 
+  </table> 
+ </body>
 

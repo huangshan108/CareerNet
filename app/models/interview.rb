@@ -16,7 +16,8 @@ class Interview < ActiveRecord::Base
             :start => start_datetime,
             :end => end_datetime,
             :allDay => false,
-            :id => id
+            :id => id,
+            :color => 'blue'
         }
     end
 

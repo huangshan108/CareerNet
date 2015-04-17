@@ -22,13 +22,14 @@ $(document).ready(function() {
     }
   });
 
-
+  $("#cal_jumpto").datepicker();
 
   function renderCalendar() {
     $('#myCalendar').fullCalendar({
         // put your options and callbacks here
         allDaySlot: true,
         slotDuration: '00:30:00',
+        defaultView: 'agendaWeek',
         editable: false,
         durationEditable: false,
         lang: currentLangCode,
@@ -38,8 +39,8 @@ $(document).ready(function() {
           right: 'month agendaWeek agendaDay'
         },
         selectable: true,
-        // selectHelper: true,
-        // //this section is triggered when the event cell it's clicked
+        selectHelper: true,
+        //this section is triggered when the event cell it's clicked
         // select: function(start, end) {
         //   var eventData;
         //   //this validates that the user must insert a name in the input
@@ -88,24 +89,24 @@ $(document).ready(function() {
         //     // }
         // },
         // slotMinutes: 20,
-        // events: '/appointments/staff/',
-        // //events: function (start, end, timezone, callback){
-        // //  $.ajax({
-        // //    url: '/appointments/staff',
-        // //    type: 'GET'
-        // //    dataType: 'json',
-        // //    data: {
-        // //      start: start.format("YYYY-MM-DD HH:mm:ss"),
-        // //      end: end.format("YYYY-MM-DD HH:mm:ss")
-        // //    },
-        // //    success: function(json){
-        // //      callback(json);
-        // //    },
-        // //    error: function(){
-        // //      alert('Failed to load appointments.');
-        // //    }
-        // //  });
-        // //},
+        // events: '/calendar',
+        events: function (start, end, timezone, callback){
+         $.ajax({
+           url: '/calendar/appointments',
+           type: 'GET',
+           dataType: 'json',
+           data: {
+             start: start.format("YYYY-MM-DD HH:mm:ss"),
+             end: end.format("YYYY-MM-DD HH:mm:ss")
+           },
+           success: function(json){
+             callback(json);
+           },
+           error: function(){
+             alert('Failed to load data.');
+           }
+         });
+        },
         // //timeFormat: 'h:mm t{ - h:mm t} ',
         dragOpacity: "0.5"
         })      

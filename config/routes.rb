@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   delete 'interviews/company/:id' => 'interviews#destroy', :as => :cancel_interview
 
   get 'calendar' => 'calendar#view', :as => :calendar
+  get 'calendar/appointments' => 'calendar#appointmentData', :as => :calendar_appointment
 
 # The priority is based upon order of creation: first created -> highest priority.
 

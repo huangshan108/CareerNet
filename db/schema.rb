@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150411230041) do
 
   create_table "interviews", force: :cascade do |t|
     t.integer  "company_id"
+    t.integer  "student_id"
     t.integer  "application_id"
     t.integer  "time_slot"
     t.date     "day"
@@ -82,6 +83,9 @@ ActiveRecord::Schema.define(version: 20150411230041) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "interviews", ["company_id"], name: "index_interviews_on_company_id"
+  add_index "interviews", ["student_id"], name: "index_interviews_on_student_id"
 
   create_table "jobs", force: :cascade do |t|
     t.string   "title"
