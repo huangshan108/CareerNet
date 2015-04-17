@@ -27,6 +27,7 @@ class JobsController < ApplicationController
   def view
     job_id = params[:job_id]
     @job = Job.find_by_id(job_id)
+    @company = Company.find_by_id(roll_id);
     @current_user = Account.find(account_id)
   end
 

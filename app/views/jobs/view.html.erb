@@ -10,7 +10,7 @@
 </dl>
 
 <div class="pull-right button-group">
-   <%if @current_user.account_type == 3%>
+   <%if @current_user.account_type == 3 and (@job.company.name.to_s.eql? @company.name.to_s) == true%>
 	<%= link_to "Delete", delete_job_path(@job), :method => :delete, class: "button red" %>
    <%end%>
    <%if @current_user.account_type == 1 || @current_user.account_type == 2 %>
