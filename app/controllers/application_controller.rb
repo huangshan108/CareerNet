@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+    
 	# Prevent CSRF attacks by raising an exception.
 	# For APIs, you may want to use :null_session instead.
 	protect_from_forgery with: :exception
@@ -23,6 +24,76 @@ class ApplicationController < ActionController::Base
 	def logged_in?
 		account_id != nil
 	end
+    
+  #student can't edit other student's profile, so does company
+  #student and company can't create and destroy an event
+  #student can't view company's application
+  #company can't view student's application
+  private
+  def profile_restriction
+    id = params[:id]
+    #if not a staff
+    if account_type != 2
+      if roll_id.to_i != id.to_i or account_type == 3
+          error_message
+      end
+    end
+    return true
+  end
+  
+  private
+  def event_restriction
+      id = params[:id]
+      unless account_type == 2
+          error_message
+      else
+       return true
+      end
+  end
+  
+  #this use :student_id and company_id as params,i can't combine them together since
+  #other controller use :id
+  private
+  def application_restriction
+    if account_type == 3
+        id = params[:company_id]
+        if roll_id.to_i != id.to_i #try vistit other company
+          error_message
+          elsif params[:student_id] #try visit student
+         error_message
+        end
+    elsif account_type == 1
+        id = params[:student_id]
+        if roll_id.to_i != id.to_i #try vistit other stduent
+            error_message
+        elsif params[:company_id] #try vistit company
+            error_message
+        end
+    end
+  end
+  
+  
+  #only company can post and delete jobs and company can't delete other company's job
+  private
+  def job_restriction
+      id = params[:id]
+      if account_type != 3
+          error_message
+      else
+      #might be more stuff here
+          return true
+      end
+          
+  end
+  
+  private
+  
+  def error_message
+      flash[:notice] = "You don't have the persmission to perform the action."
+      redirect_to(:controller => 'main', :action => 'index')
+      return false
+  end
+  
 
 	# return morning, afternoon or evening
 	def time_period

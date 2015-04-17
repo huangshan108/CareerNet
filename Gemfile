@@ -65,6 +65,7 @@ gem 'faker'
 # Gem for FullCalendar
 gem 'fullcalendar-rails', '~> 2.0.2.0'
 gem 'responders'
+gem "cancan"
 
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'jquery-ui-rails'

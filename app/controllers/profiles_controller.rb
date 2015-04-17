@@ -1,5 +1,9 @@
 class ProfilesController < ApplicationController
+    
+  
+  
   before_action :confirm_logged_in
+  before_action :profile_restriction, only:[:edit_student,:update_student,:student]
   def student
     id = params[:id]
     @student = Student.find(id)
@@ -16,6 +20,7 @@ class ProfilesController < ApplicationController
     @all_majors = Major.all
     @all_skills = Skill.all
     @student_skills = @student.skills.all
+    
   end
 
   def update_student

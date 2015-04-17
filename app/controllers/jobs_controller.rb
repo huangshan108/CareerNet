@@ -1,8 +1,10 @@
 class JobsController < ApplicationController
   before_action :confirm_logged_in
+  before_action :job_restriction, only:[:create,:destroy,:new]
   def index
     pages = 10
     @jobs = Job.all
+    @current_user = Account.find(account_id)
   end
     
   def new

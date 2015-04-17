@@ -12,7 +12,7 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-
+    when /^the main page/ then ''
     when /^login page/ then '/account/login'
     when /^signup page/ then '/account/signup'
     when /^forgot password page/ then '/account/forgot-password'
