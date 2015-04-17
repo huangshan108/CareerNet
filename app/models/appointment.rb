@@ -15,7 +15,6 @@ class Appointment < ActiveRecord::Base
             :end => end_datetime,
             :allDay => false,
             :id => id,
-            :color => 'red',
             :url => Rails.application.routes.url_helpers.appointment_student_show_path
         }
     end
