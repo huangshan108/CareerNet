@@ -6,8 +6,8 @@ class Event < ActiveRecord::Base
 	def as_json(options = {})
 		{
             :title => title,
-            :start => created_at,
-            :end => created_at+3600,
+            :start => time_start,
+            :end => time_end,
             :allDay => false,
             :id => id,
             :url => Rails.application.routes.url_helpers.event_path(self),
