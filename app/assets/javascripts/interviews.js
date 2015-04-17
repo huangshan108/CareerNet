@@ -46,7 +46,7 @@ $(document).ready(function() {
                 $("#calendar").fullCalendar("refetchEvents");
               },
              error: function(json) {
-               alert('Failed to register interview slots');
+               alert('Failed to register interview slot');
              }
             });
           $("#calendar").fullCalendar("unselect");

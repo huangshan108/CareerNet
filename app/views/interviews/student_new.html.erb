@@ -1,5 +1,5 @@
-<h1> Confirm an interview </h1>
-<%= link_to "Back to my interviews", interview_student_show_path -%>
+<h1> Schedule Interview </h1>
+<%= link_to "Back to My Interviews", interview_student_show_path -%>
 <table class = "table">
   <thead>
     <tr>
@@ -20,6 +20,7 @@
             end -%>
           </td>
           <% for a in company.interviews -%>
+          <% if a.application = @application %>
             <tr>
               <td><%= a.day -%></td>
               <td><%= ((9*60+40+a.time_slot*20)/60).to_s+':'+((9*60+40+a.time_slot*20)%60).to_s -%></td>
@@ -34,6 +35,7 @@
                 <% end -%>
               </td>
             </tr>
+            <% end %>
           <% end -%>
         </tr>
       <% end -%>

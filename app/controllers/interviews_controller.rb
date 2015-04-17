@@ -17,9 +17,10 @@ class InterviewsController < ApplicationController
       endtime_str = params[:end].to_s
       timeslot = Interview.string_to_timeslot(starttime_str)
       endslot = Interview.string_to_timeslot(endtime_str)
+      app = Application.find_by_id(params[:application_id])
       error = false
       while timeslot < endslot do
-        interview_params = { day: starttime_str, time_slot: timeslot, company: curr_company }
+        interview_params = { day: starttime_str, time_slot: timeslot, company: curr_company, application: app }
         @intr = Interview.new(interview_params)
         timeslot += 1
         error = @intr.save and error
@@ -79,6 +80,7 @@ class InterviewsController < ApplicationController
 
   def student_new
     @companies = Company.all
+    @application = Application.find(params[:application_id])
     @student = Account.find(session[:user_id]).student
   end
 

@@ -45,6 +45,11 @@ Rails.application.routes.draw do
   get 'applications/student/:student_id' => 'applications#index', :as => :student_view_applications
   get 'applications/:application_id' => 'applications#show', :as => :show_application
 
+  get 'interviews/student' => 'interviews#student_show', :as => :interview_student_show
+  get 'interviews/student/new' => 'interviews#student_new', :as => :interview_student_new
+  get 'interviews/student/book/:id' => 'interviews#student_book', :as => :interview_student_book
+  get 'interviews/student/cancel/:id' => 'interviews#student_cancel', :as => :interview_student_cancel
+
   get 'interviews/company' => 'interviews#index_company', :as => :company_interviews
   post 'interviews/company/new' => 'interviews#company_new', :as => :new_company_interviews
   delete 'interviews/company/:id' => 'interviews#destroy', :as => :cancel_interview
