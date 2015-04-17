@@ -100,7 +100,6 @@ function updatePie(data, section){
     var outerArc = d3.svg.arc()
         .innerRadius(radius * 0.9)
         .outerRadius(radius * 0.9);
-    // var arc = d3.svg.arc().outerRadius(radius);
 
     var svg = d3.select("div#" + section + " svg");
 
@@ -115,7 +114,7 @@ function updatePie(data, section){
     };
 
     var color = d3.scale.ordinal()
-    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+    .range(shuffle(["#4D4D4D", "#5DA5DA", "#FAA43A", "#60BD68", "#F17CB0", "#B276B2", "#DECF3F", "#F15854"]));
 
     var slice = svg.select(".slices").selectAll("path.slice")
         .data(pie(data), key);
@@ -205,5 +204,9 @@ function updatePie(data, section){
 
     polyline.exit()
         .remove();
-
 }
+
+function shuffle(o){
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
