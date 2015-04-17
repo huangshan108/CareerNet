@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
   before_action :confirm_logged_in
-  before_action :job_restriction, only:[:create,:destroy,:new]
+  before_action :job_restriction, only:[:create, :new]
+  before_action :job_restriction2, only:[:delete]
   def index
     pages = 10
     @jobs = Job.all

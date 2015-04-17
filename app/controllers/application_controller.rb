@@ -85,6 +85,24 @@ class ApplicationController < ActionController::Base
       end
           
   end
+
+  #company can't delete other company's job
+  private
+  def job_restriction2
+      # id = params[:id]
+      if account_type != 3
+           error_message
+      elsif account_type == 3
+          @company = Company.find_by_id(roll_id);
+            job_id = params[:job_id]
+        @job = Job.find_by_id(job_id)
+        if (@job.company.name.to_s.eql? @company.name.to_s) == false
+          error_message
+        end
+      else 
+        return true 
+      end 
+  end
   
   private
   
