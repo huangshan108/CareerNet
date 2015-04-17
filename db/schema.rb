@@ -76,6 +76,21 @@ ActiveRecord::Schema.define(version: 20150417192022) do
     t.datetime "updated_at"
   end
 
+  create_table "interviews", force: :cascade do |t|
+    t.integer  "company_id"
+    t.integer  "student_id"
+    t.integer  "application_id"
+    t.integer  "time_slot"
+    t.date     "day"
+    t.text     "description"
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interviews", ["company_id"], name: "index_interviews_on_company_id"
+  add_index "interviews", ["student_id"], name: "index_interviews_on_student_id"
+
   create_table "jobs", force: :cascade do |t|
     t.string   "title"
     t.text     "description"

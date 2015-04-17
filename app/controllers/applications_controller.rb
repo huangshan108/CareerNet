@@ -9,4 +9,9 @@ class ApplicationsController < ApplicationController
 			render 'student_view_applications'
 		end
 	end
+  
+  def show
+    app_id = params[:application_id]
+    @application = Application.find_by_id(app_id)
+  end
 end

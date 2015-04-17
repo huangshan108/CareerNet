@@ -1,36 +1,41 @@
-<% #  This file is app/views/appointments/student_show.html.haml %>
-<h1> Make an appointment </h1>
-<%= link_to "Back to my appointments", appointment_student_show_path -%>
+<h1> Schedule Interview </h1>
+<%= link_to "Back to My Interviews", interview_student_show_path -%>
 <table class = "table">
   <thead>
     <tr>
-      <th> Staff </th>
-      <th> Appointment Date </th>
+      <th> Company </th>
+      <th> Interview Date </th>
       <th> Starting Time </th>
       <th> Ending Time </th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <% for staff in @staffs -%>
-      <% if staff.appointments.length > 0 -%>
+    <% for company in @companies -%>
+      <% if company.interviews.length > 0 -%>
         <tr>
-          <td rowspan = "<%= staff.appointments.length+1 -%>"><%=staff.first_name+' '+staff.last_name -%></td>
-          <% for a in staff.appointments -%>
+          <td rowspan = "<%= company.interviews.length+1 -%>">
+          <%if !company.name.nil?
+            company.name 
+            end -%>
+          </td>
+          <% for a in company.interviews -%>
+          <% if a.application = @application %>
             <tr>
               <td><%= a.day -%></td>
               <td><%= ((9*60+40+a.time_slot*20)/60).to_s+':'+((9*60+40+a.time_slot*20)%60).to_s -%></td>
               <td><%= ((9*60+40+(a.time_slot+1)*20)/60).to_s+':'+((9*60+40+(a.time_slot+1)*20)%60).to_s -%></td>
               <td>
                 <% if a.student == nil -%>
-                  <%= link_to "Book", appointment_student_book_path(a) -%>
+                  <%= link_to "Book", interview_student_book_path(a) -%>
                 <% elsif a.student == @student -%>
-                  <%= link_to "Cancel", appointment_student_cancel_path(a) -%>
+                  <%= link_to "Cancel", interview_student_cancel_path(a) -%>
                 <% else -%>
                   Not available
                 <% end -%>
               </td>
             </tr>
+            <% end %>
           <% end -%>
         </tr>
       <% end -%>

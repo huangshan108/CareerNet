@@ -1,10 +1,11 @@
-<h1> My Applications </h1>
+<h2> My Applications </h2>
 <table class="data-table table table-striped">
 	<thead>
 	  <tr>
 	  	<th> Applied Company </th>
 	  	<th> Applied Position </th>
 	  	<th> Applied Date </th>
+      <th> Interview Status </th>
 	  </tr>
 	</thead>
 	<tbody>
@@ -13,6 +14,13 @@
 		    <td><%= application.job.company.name %></td>
 		    <td><%= application.job.title %></td>
 		    <td><%= application.created_at.strftime('%D') %></td>
+        <td>
+          <% if !application.interviews.nil? %>
+            <%= link_to "View Details", interview_student_new_path(:application_id => application.id)%>
+          <% else %>
+            Pending
+          <% end %>
+        </td>
 		  </tr>
 		<% end %>
 	</tbody>

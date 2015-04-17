@@ -26,6 +26,8 @@
 </script>
 <%if @current_user.account_type == 2%>
 <div class="pull-right button-group">
+  <% if account_type == 2 %>
   <%= link_to 'Create New Event', new_event_path, class: "button blue" %>
+  <% end %>
 </div>
 <%end%>
