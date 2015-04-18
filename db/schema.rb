@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150417192022) do
-=======
-ActiveRecord::Schema.define(version: 20150411180346) do
->>>>>>> data vis improved
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -126,15 +122,17 @@ ActiveRecord::Schema.define(version: 20150411180346) do
   add_index "staffs", ["account_id"], name: "index_staffs_on_account_id"
 
   create_table "students", force: :cascade do |t|
-    t.integer  "major_id"
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "major_id"
     t.date     "graduation_date"
     t.integer  "college_id"
     t.string   "resume_link"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
+    t.string   "country"
+    t.string   "gender"
     t.string   "lastemployer"
     t.string   "city"
     t.string   "state"
@@ -146,8 +144,6 @@ ActiveRecord::Schema.define(version: 20150411180346) do
     t.integer  "base_salary"
     t.string   "title"
     t.integer  "company_id"
-    t.string   "country"
-    t.string   "gender"
   end
 
   add_index "students", ["major_id"], name: "index_students_on_major_id"
@@ -155,6 +151,11 @@ ActiveRecord::Schema.define(version: 20150411180346) do
   create_table "studentskills", force: :cascade do |t|
     t.integer "student_id"
     t.integer "skill_id"
+  end
+
+  create_table "visualizations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
