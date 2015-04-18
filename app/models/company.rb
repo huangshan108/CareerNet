@@ -8,8 +8,7 @@ class Company < ActiveRecord::Base
 
 	def getInterviews(start_date, end_date)
 		self.interviews.select{|i| 
-			Interview.timeslot_to_string(i.time_slot).to_date >= start_date.to_date and 
-			Interview.timeslot_to_string(i.time_slot+1).to_date <= end_date.to_date
+			i.day >= start_date.to_date and i.day <= end_date.to_date
 		}
 	end
 
