@@ -3,10 +3,25 @@ class Visualization < ActiveRecord::Base
     # Returns an ActiveRecord::Relation
     def self.student_demographic_query(countries, genders, classes)
         result = Student.none
+        filtered = self.student_by_country_gender(countries, genders)
         classes.each do |class_of|
-            result = Student.where(country: countries, gender: genders).by_year(class_of).union(result)
+            result = filtered.by_year(class_of, field: :graduation_date).union(result)
         end
         result
+    end
+
+
+    # Handle specific case of filtering for countries
+    def self.student_by_country_gender(countries, genders)
+        if countries.include? "US" and countries.include? "intl"
+            Student.where(gender:genders)
+        elsif countries.include? "US"
+            Student.where(country: countries, gender: genders)
+        elsif countries.include? "intl"
+            Student.where.not(country: "US").where(gender: genders)
+        else
+            Student.none
+        end
     end
 
     # Compose json for one category e.g. gender
@@ -14,6 +29,9 @@ class Visualization < ActiveRecord::Base
     #               {name: "F", count: 4, percent: 40.0},
     #               {name: "O", count: 3, percent: 30.0}]
     def self.sub_json_by_category(query_result, category_name, categories)
+        if category_name == "country" and categories.include? "intl"
+            categories = ["US"]
+        end
         total = query_result.count
         others = total
         result = []
@@ -57,7 +75,7 @@ class Visualization < ActiveRecord::Base
         all_count = query_result.count
 
         # Grab major_id's of majors which has 10% or more of students of interest
-        # (So that the displace doesn't get too crowded)
+        # (So that the display doesn't get too crowded)
         large_majors = query_result.group('major_id').having('COUNT(*) >= ?', all_count * 0.1).count.to_a
 
 
@@ -71,7 +89,8 @@ class Visualization < ActiveRecord::Base
             countries: country_count,
             genders: gender_count,
             majors: major_count,
-            classes: class_count
+            classes: class_count,
+            too_few: all_count == 0
         }
     end
 end

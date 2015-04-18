@@ -13,6 +13,7 @@ FactoryGirl.define do  factory :visualization do
   factory :student do |f|
     f.first_name Faker::Name.first_name
     f.last_name Faker::Name.last_name
+    f.graduation_date "2017-5-15".to_date
     f.country "US"
     f.gender "M"
   end
