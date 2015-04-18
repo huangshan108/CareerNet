@@ -15,7 +15,7 @@ FactoryGirl.define do  factory :visualization do
     f.last_name Faker::Name.last_name
     f.graduation_date "2017-5-15".to_date
     f.country "US"
-    f.gender "M"
+    f.gender "male"
   end
 
   factory :major do |f|
