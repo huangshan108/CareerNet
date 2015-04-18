@@ -14,6 +14,7 @@ module NavigationHelpers
     case page_name
     when /^the main page/ then ''
     when /^login page/ then '/account/login'
+    when /^login page/ then '/account/logout'
     when /^signup page/ then '/account/signup'
     when /^forgot password page/ then '/account/forgot-password'
     when /^logout page/ then '/account/logout'
@@ -28,6 +29,7 @@ module NavigationHelpers
     when /^student new appointment page/ then '/appointments/student/new'
     when /^staff appointment page/ then '/appointments/staff'
     when /^calendar page/ then '/calendar'
+    when /^attendees page/ then '/events/1/attendees'
     when /^smart data report page/ then '/visualizations/student_demographic'
     when /(.+) view page/ then 
       split_page = page_name.split(' ').map(&:strip)
