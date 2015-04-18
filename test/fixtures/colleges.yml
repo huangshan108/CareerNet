@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: colleges
+#
+#  id          :integer          not null, primary key
+#  address     :string
+#  school_name :string
+#  school_type :string
+#  school_year :string
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 # This model initially had no columns defined.  If you add columns to the

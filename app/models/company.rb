@@ -10,6 +10,10 @@
 #  brief      :text
 #  created_at :datetime
 #  updated_at :datetime
+#  city       :string
+#  state      :string
+#  country    :string
+#  industry   :string
 #
 
 class Company < ActiveRecord::Base
