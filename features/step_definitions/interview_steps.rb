@@ -18,3 +18,11 @@ end
 When /^I wait until "([^"]*)" is visible$/ do |selector|
   page.has_link?("#{selector}", :visible => true)
 end
+
+When /^I press the css button "([^\"]*)"$/ do |element|
+  page.find(:css, element).click
+end
+
+When /^I accept alert$/ do
+  page.driver.browser.switch_to.alert.accept
+end

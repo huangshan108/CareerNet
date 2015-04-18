@@ -1,0 +1,22 @@
+<h2> <%= "Attendees List for #{@event.title}" %></h2>
+<table class="data-table table table-striped">
+  <thead>
+    <tr>
+      <th> Attendee Name </th>
+      <th> Account Type </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @attendees.each do |attendee| %>
+      <tr>
+        <td><%= attendee.name %></td>
+        <td><%= attendee.account_type %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.data-table').dataTable();
+  })
+</script>

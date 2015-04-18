@@ -47,7 +47,6 @@ class Student < ActiveRecord::Base
 	has_many :studentskills
 	has_many :skills, through: :studentskills
 
-	has_many :events
 
 	def getInterviews(start_date, end_date)
 		self.interviews.select{|i| 
