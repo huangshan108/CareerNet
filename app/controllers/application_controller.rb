@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     id = params[:id]
     #if not a staff
     if account_type != 2
-      if roll_id.to_i != id.to_i or account_type == 3
+      if roll_id.to_i != id.to_i
           error_message
       end
     end

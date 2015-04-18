@@ -65,13 +65,13 @@ $(document).ready(function() {
 
   function loadEvents(start, end, timezone, callback) {
     var confirmedOnly = onlyMyEvents();
-    if ($('#cal_interviews').attr('checked')) {
+    if ($('#cal_interviews').prop('checked')) {
         fetchEvents(start, end, '/calendar/interviews', callback, confirmedOnly);
     }
-    if ($('#cal_events').attr('checked')) {
+    if ($('#cal_events').prop('checked')) {
         fetchEvents(start, end, '/calendar/events', callback, confirmedOnly);
     }
-    if ($('#cal_appointments').attr('checked')) {
+    if ($('#cal_appointments').prop('checked')) {
         fetchEvents(start, end, '/calendar/appointments', callback, confirmedOnly);
     }
   }

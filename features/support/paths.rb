@@ -24,6 +24,10 @@ module NavigationHelpers
     when /^staff profile page/ then '/profiles/staff/1'
     when /^edit profile page/ then '/profiles/student/1/edit'
     when /^company edit profile page/ then '/profiles/company/1/edit'
+    when /^student appointment page/ then '/appointments/student'
+    when /^student new appointment page/ then '/appointments/student/new'
+    when /^staff appointment page/ then '/appointments/staff'
+    when /^calendar page/ then '/calendar'
     when /(.+) view page/ then 
       split_page = page_name.split(' ').map(&:strip)
       job_id = split_page[2]

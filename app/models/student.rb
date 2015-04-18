@@ -45,9 +45,12 @@ class Student < ActiveRecord::Base
 	end
 
 	def getEvents(start_date, end_date)
-		self.events.select{ |e|
-			e.time_start >= start_date.to_date and e.time_end <= end_date.to_date
-		}
+		# self.events.select{ |e|
+		# 	e.time_start >= start_date.to_date and e.time_end <= end_date.to_date
+		# }
+
+		# Event registration is not ready yet
+		[]
 	end
 
 	def getAppointments(start_date, end_date)

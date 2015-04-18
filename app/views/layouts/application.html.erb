@@ -56,8 +56,12 @@
         <a href="/jobs" class="nav-text">Browse Jobs</a>
       </li>
       <li>                                 
-        <i class="fa fa-calendar"></i>
+        <i class="fa fa-map-marker"></i>
         <a href="/events" class="nav-text">Browse Events</a>
+      </li>
+      <li>                                 
+        <i class="fa fa-calendar"></i>
+        <a href="/calendar" class="nav-text">My Calendar</a>
       </li>
       <% if logged_in? %>
         <% if current_user.student %>
@@ -65,44 +69,21 @@
             <i class="fa fa-user"></i>
             <%= link_to 'My Profile', single_student_profile_path(current_user.student.id), name: "my-profile-button", class: "nav-text" %></a>
           </li>
-        <% else %>
-
-        <% end %>
-        <script type="text/javascript">
-        $(document).ready(function() {
-          $('a[name="new-profile-button"]').click(function() {
-            $('.spinner-model').show();
-          });
-        })
-        </script>
-      <% end %>
-      <% if current_user.company %>
-        <li>
-          <i class="fa fa-user"></i>
-          <%= link_to 'My Profile', company_profile_path(current_user.company.id), name: "my-profile-button", class: "nav-text" %></a>
-        </li>
+        <% elsif current_user.company %>
+          <li>
+            <i class="fa fa-user"></i>
+            <%= link_to 'My Profile', company_profile_path(current_user.company.id), name: "my-profile-button", class: "nav-text" %></a>
+          </li>
+        <% elsif current_user.staff%>
+          <li>
+            <i class="fa fa-user"></i>
+            <%= link_to 'My Profile', staff_profile_path(current_user.staff.id), name: "my-profile-button", class: "nav-text" %></a>
+          </li>
+        <%end%>
       <%end%>
-      <% if current_user.staff%>
-        <li>
-          <i class="fa fa-user"></i>
-          <%= link_to 'My Profile', staff_profile_path(current_user.staff.id), name: "my-profile-button", class: "nav-text" %></a>
-        </li>
-      <%end%>
-      <script type="text/javascript">
-      $(document).ready(function() {
-        $('a[name="new-profile-button"]').click(function() {
-          $('.spinner-model').show();
-        });
-      })
-      </script>
       <li>
         <i class="fa fa-hand-o-left"></i>
         <a href="/account/logout" class="nav-text">Logout</a>
-      </li>
-    <% else %>
-      <li>
-        <i class="fa fa-hand-o-right"></i>
-        <a href="/account/login" class="nav-text">Log In</a>
       </li>
     <% end %>
   </ul>
