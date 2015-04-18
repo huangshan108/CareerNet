@@ -194,9 +194,9 @@ function updatePie(data, section){
         .text(function(d) {
             var name = d.data.name;
             var nameHash = {
-                "M": "Male",
-                "F": "Female",
-                "O": "Others"
+                "male": "Male",
+                "female": "Female",
+                "other": "Others"
             }
             if (d.data.name in nameHash){
                 name = nameHash[name]
