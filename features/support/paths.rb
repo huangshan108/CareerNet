@@ -28,6 +28,7 @@ module NavigationHelpers
     when /^student new appointment page/ then '/appointments/student/new'
     when /^staff appointment page/ then '/appointments/staff'
     when /^calendar page/ then '/calendar'
+    when /^attendees page/ then '/events/1/attendees'
     when /^smart data report page/ then '/visualizations/student_demographic'
     when /(.+) view page/ then 
       split_page = page_name.split(' ').map(&:strip)
