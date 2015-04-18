@@ -17,7 +17,8 @@ class Interview < ActiveRecord::Base
             :end => end_datetime,
             :allDay => false,
             :id => id,
-            :color => 'blue'
+            :color => 'blue',
+            :url => Rails.application.routes.url_helpers.interview_student_show_path
         }
     end
 
