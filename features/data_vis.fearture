@@ -14,6 +14,8 @@ Background: Events have been added to the database.
   And I press "Log In" button
   Then I should see "Welcome to CareerNet"
 
+
+@javascript
 Scenario: I want to view smart data report
 
   Given I am on smart data report page
