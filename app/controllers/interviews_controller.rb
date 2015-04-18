@@ -40,6 +40,8 @@ class InterviewsController < ApplicationController
           flash[:error] = 'You must be a company to access this page.'
           redirect_to root_path
           return
+      elsif @account.company == nil
+          Company.new(account: @account)
       else
           @account.company
       end

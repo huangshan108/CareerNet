@@ -51,6 +51,9 @@ Scenario: Accept interview time with company
   Then I should see "Shan Huang"
   When I follow "View/Schedule Interview"
   Then I should see "interview slots"
+  When I press the css button ".fc-button.fc-button-next.fc-state-default.fc-corner-right"
+  When I press the css button ".fc-slot0 td.fc-widget-content"
+  And I accept alert
   Then I am on logout page
   Then I am on the account_login page
   When I enter "shuang@berkeley.edu" into "email"
