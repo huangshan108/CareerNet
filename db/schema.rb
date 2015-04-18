@@ -122,9 +122,9 @@ ActiveRecord::Schema.define(version: 20150417192022) do
   add_index "staffs", ["account_id"], name: "index_staffs_on_account_id"
 
   create_table "students", force: :cascade do |t|
+    t.integer  "major_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "major_id"
     t.date     "graduation_date"
     t.integer  "college_id"
     t.string   "resume_link"
