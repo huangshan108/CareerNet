@@ -69,6 +69,16 @@ describe Visualization do
         end
     end
 
+    describe 'student_demographic_json' do
+        it 'should return correct json for the query' do
+            result = Visualization.student_demographic_json(["US"], ["male"], ["2017"])
+            expect(result[:countries]).to include({name: "US", count: 50, percent: 100.0})
+            expect(result[:genders]).to include({name: "male", count: 50, percent: 100.0})
+            expect(result[:classes]).to include({name: "Class of 2017", count: 50, percent: 100.0})
+            expect(result[:too_few]).to eq(false)
+        end
+    end
+
     # Compose json for one category e.g. gender
     # Sample output [{ name: "M", count: 3, percent: 30.0},
     #               {name: "F", count: 4, percent: 40.0},
