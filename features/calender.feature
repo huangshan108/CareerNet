@@ -32,11 +32,6 @@ Background: Events have been added to the database.
   | title          | brief       | website          | address |account_id |          
   | Google         | Search      | Google.com       |  Soda   |3          |
 
-  Given the following appointments exist
-  | staff_id       | student_id    | time_slot        | 
-  | 1              | nil           | 1                |
-  | 1              | 2             | 2                |
-
 
 And I am on the account_login page
 Then I enter "test.student@berkeley.edu" into "email" 
@@ -59,18 +54,6 @@ Scenario: Basic calendar view from Student
 	And I should see "today"
 	When I follow "10"
 	And I should see "10am"
-
-@javascript
-Scenario: Sign up for an appointment
-	When I am on student appointment page
-	And I should see "You currently do not have any active appointment."
-	And I should see "Make a new appointment"
-	When I follow "Make a new appointment"
-	And I should be on student new appointment page
-	And I should see "Book"
-	And I should see "Not available"
-	When I follow "Book"
-	And I should see "Appointment has been made."
 
 When I am on logout page
 Then I should see "Logged out"
