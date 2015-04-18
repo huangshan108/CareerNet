@@ -36,11 +36,12 @@ Background:
   When I follow "View Applications"
   Then I should see "Director"
 
+@javascript
 Scenario: Accept interview time with company
 
   When I follow "View Details"
   Then I should see "Schedule Interview"
-  When I follow "Logout"
+  Then I am on logout page
   Then I am on the account_login page
   When I enter "company@careernet.com" into "email"
   And I enter "careernet" into "password"
@@ -50,7 +51,7 @@ Scenario: Accept interview time with company
   Then I should see "Shan Huang"
   When I follow "View/Schedule Interview"
   Then I should see "interview slots"
-  When I follow "Logout"
+  Then I am on logout page
   Then I am on the account_login page
   When I enter "shuang@berkeley.edu" into "email"
   And I enter "careernet" into "password"
@@ -63,6 +64,8 @@ Scenario: Accept interview time with company
   Then I should see "Interviews"
   And I should see "Interview Date"
 
+
+@javascript
 Scenario: Adding interview slots student side
   Given I am on the main page
   Given the following interviews exist: 
