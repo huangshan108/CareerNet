@@ -21,8 +21,8 @@ Background: Adding jobs to database
   
     And I am on the account_login page
     Then I enter "shuang@berkeley.edu" into "email" 
-And I enter "careernet" into "password" 
-And I press "Log In" button
+    And I enter "careernet" into "password" 
+    And I press "Log In" button
     Then I should see "Welcome to CareerNet"
 
     Scenario: Go to students page
