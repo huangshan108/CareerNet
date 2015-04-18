@@ -27,6 +27,9 @@ module NavigationHelpers
     when /^student appointment page/ then '/appointments/student'
     when /^student new appointment page/ then '/appointments/student/new'
     when /^staff appointment page/ then '/appointments/staff'
+    when /^calendar appointment page/ then '/calendar/appointments?start=2015-04-12+00%3A00%3A00&end=2015-04-19+00%3A00%3A00&confirmed=false'
+    when /^calendar event page/ then '/calendar/events?start=2015-04-12+00%3A00%3A00&end=2015-04-19+00%3A00%3A00&confirmed=false'
+    when /^calendar interview page/ then '/calendar/interviews?start=2015-04-12+00%3A00%3A00&end=2015-04-19+00%3A00%3A00&confirmed=false'
     when /^calendar page/ then '/calendar'
     when /(.+) view page/ then 
       split_page = page_name.split(' ').map(&:strip)

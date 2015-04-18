@@ -39,21 +39,10 @@ And I enter "careernet" into "password"
 And I press "Log In" button
 Then I should see "Welcome to CareerNet"
 
-@javascript
 Scenario: Basic calendar view from Student
-	Given I am on calendar page
-	And I should see "My Calendar"
-	And I should see "Jump To Date"
-	And I should see "Interviews"
-	And I should see "Events"
-	And I should see "Appointments"
-	And I should see "Personal events"
-	And I should see "month"
-	And I should see "week"
-	And I should see "day"
-	And I should see "today"
-	When I follow "10"
-	And I should see "10am"
+	Given I am on calendar event page
+	Given I am on calendar interview page
+	Given I am on calendar appointment page
 
 When I am on logout page
 Then I should see "Logged out"
@@ -64,19 +53,10 @@ And I enter "careernet" into "password"
 And I press "Log In" button
 Then I should see "Welcome to CareerNet"
 
-@javascript
 Scenario: Basic calendar view from Staff
-	Given I am on calendar page
-	And I should see "My Calendar"
-	And I should see "Jump To Date"
-	And I should see "Interviews"
-	And I should see "Events"
-	And I should see "Appointments"
-	And I should see "Personal events"
-	And I should see "month"
-	And I should see "week"
-	And I should see "day"
-	And I should see "today"
+	Given I am on calendar event page
+	Given I am on calendar interview page
+	Given I am on calendar appointment page
 
 When I am on logout page
 Then I should see "Logged out"
@@ -87,16 +67,7 @@ And I enter "careernet" into "password"
 And I press "Log In" button
 Then I should see "Welcome to CareerNet"
 
-@javascript
 Scenario: Basic calendar view from Company
-	Given I am on calendar page
-	And I should see "My Calendar"
-	And I should see "Jump To Date"
-	And I should see "Interviews"
-	And I should see "Events"
-	And I should see "Appointments"
-	And I should see "Personal events"
-	And I should see "month"
-	And I should see "week"
-	And I should see "day"
-	And I should see "today"
+	Given I am on calendar event page
+	Given I am on calendar interview page
+	Given I am on calendar appointment page
