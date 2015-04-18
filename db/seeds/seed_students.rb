@@ -31,11 +31,11 @@ random_names.each_line do |line|
     # 48% of times female, 48% of times male, and 4% others
     gender = rand(99)
     if gender < 48
-        student[:gender] = 'female'
+        student[:gender] = 'F'
     elsif gender < 96
-        student[:gender] = 'male'
+        student[:gender] = 'M'
     else
-        student[:gender] = 'other'
+        student[:gender] = 'O'
     end
 	s = Student.create! student
 	account = {}
