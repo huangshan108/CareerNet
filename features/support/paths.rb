@@ -31,6 +31,8 @@ module NavigationHelpers
     when /^calendar event page/ then '/calendar/events?start=2015-04-12+00%3A00%3A00&end=2015-04-19+00%3A00%3A00&confirmed=false'
     when /^calendar interview page/ then '/calendar/interviews?start=2015-04-12+00%3A00%3A00&end=2015-04-19+00%3A00%3A00&confirmed=false'
     when /^calendar page/ then '/calendar'
+    when /^attendees page/ then '/events/1/attendees'
+    when /^smart data report page/ then '/visualizations/student_demographic'
     when /(.+) view page/ then 
       split_page = page_name.split(' ').map(&:strip)
       job_id = split_page[2]

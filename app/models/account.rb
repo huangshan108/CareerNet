@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: accounts
+#
+#  id                     :integer          not null, primary key
+#  name                   :string
+#  email                  :string
+#  account_type           :integer
+#  created_at             :datetime
+#  updated_at             :datetime
+#  password_digest        :string
+#  password_reset_token   :string
+#  password_reset_sent_at :datetime
+#
+
 class Account < ActiveRecord::Base
     has_secure_password
     validates :email, presence: true, email: true

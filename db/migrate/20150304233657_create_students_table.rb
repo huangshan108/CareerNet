@@ -1,7 +1,8 @@
 class CreateStudentsTable < ActiveRecord::Migration
   def change
     create_table :students do |t|
-    	t.string :first_name
+      t.belongs_to :major, index: true
+      t.string :first_name
       t.string :last_name
       t.integer :major_id
       t.date :graduation_date
