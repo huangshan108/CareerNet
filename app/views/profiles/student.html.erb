@@ -23,59 +23,81 @@
   </dd>
 
   <dt> City </dt>
-  <% if @student.city %>
-    <dd><%= @student.city -%></dd>
-  <% end %>
+  <dd>
+    <% if @student.city %>
+      <%= @student.city -%>
+    <% end %>
+  </dd>
 
   <dt> State </dt>
-  <% if @student.state %>
-    <dd><%= @student.state -%></dd>
-  <% end %>
+  <dd>
+    <% if @student.state %>
+      <%= @student.state -%>
+    <% end %>
+  </dd>
 
   <dt> Country </dt>
-  <% if @student.country %>
-    <dd><%= @student.country -%></dd>
-  <% end %>
+  <dd>
+    <% if @student.country %>
+      <%= @student.country -%>
+    <% end %>
+  </dd>
 
   <dt> University </dt>
-  <% if @student.college %>
-    <dd><%= link_to @student.college.school_name, single_school_profile_path(@student.college) -%></dd>
-  <% end %>
+  <dd>
+    <% if @student.college %>
+      <%= link_to @student.college.school_name, single_school_profile_path(@student.college) -%>
+    <% end %>
+  </dd>
 
   <dt> Major </dt>
-  <% if @student.major %>
-    <dd><%= @student.major.name -%></dd>
-  <% end %>
+  <dd>
+    <% if @student.major %>
+      <%= @student.major.name -%>
+    <% end %>
+  </dd>
 
   <dt> Graduation Date </dt>
-  <% if @student.graduation_date %>
-    <dd><%= @student.graduation_date -%></dd>
-  <% end %>
+  <dd>
+    <% if @student.graduation_date %>
+      <%= @student.graduation_date -%>
+    <% end %>
+  </dd>
 
   <dt> Resume Link </dt>
-  <% if @student.resume_link %>
-    <dd><%= link_to(@student.resume_link, @student.resume_link) -%></dd>
-  <% end %>
+  <dd>
+    <% if @student.resume_link %>
+      <%= link_to(@student.resume_link, @student.resume_link) -%>
+    <% end %>
+  </dd>
 
   <dt> Company </dt>
-  <% if @student.company %>
-    <dd><%= @student.company.name -%></dd>
-  <% end %>
+  <dd>
+    <% if @student.company %>
+      <%= @student.company.name -%>
+    <% end %>
+  </dd>
 
   <dt> Salary </dt>
-  <% if@student.base_salary %>
-    <dd><%= @student.base_salary-%></dd>
-  <% end %>
+  <dd>
+    <% if@student.base_salary %>
+      <%= @student.base_salary-%>
+    <% end %>
+  </dd>
 
   <dt> Years Experience </dt>
-  <% if@student.years_experience %>
-    <dd><%= @student.years_experience-%></dd>
-  <% end %>
+  <dd>
+    <% if@student.years_experience %>
+      <%= @student.years_experience-%>
+    <% end %>
+  </dd>
 
   <dt> Title </dt>
-  <% if@student.title %>
-    <dd><%= @student.title-%></dd>
-  <% end %>
+  <dd>
+    <% if@student.title %>
+      <%= @student.title-%>
+    <% end %>
+  </dd>
 
 
 
