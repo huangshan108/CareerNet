@@ -18,7 +18,6 @@ class Company < ActiveRecord::Base
 	has_many :applications
 	has_many :interviews
 	has_many :students, :through => :applications
-	has_many :events
 
 	def getInterviews(start_date, end_date)
 		self.interviews.select{|i| 

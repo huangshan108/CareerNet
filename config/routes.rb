@@ -40,6 +40,9 @@ Rails.application.routes.draw do
   post 'profiles/staff/:id/update' => 'profiles#update_staff', :as => :update_staff_profile
 
   resources :events
+  get 'events/:event_id/register' => 'events#register', :as => :event_register
+  get 'events/registered/:account_id' => 'events#registered_index', :as => :registered_event_index
+  get 'events/:event_id/attendees' => 'events#attendees_index', :as => :event_attendees_index
 
   get 'appointments/student/' => 'appointments#student_show', :as => :appointment_student_show
   get 'appointments/student/new' => 'appointments#student_new', :as => :appointment_student_new

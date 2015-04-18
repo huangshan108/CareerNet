@@ -2,6 +2,7 @@
 
 <div class="dashboard-action col-md-3">
   <ul>
+    <li><%= link_to "View Registered Events", registered_event_index_path(roll_id) %> </li>
     <% case account_type
       when 1 %>
         <li><%= link_to 'View Applications', student_view_applications_path(roll_id) %> </li>
