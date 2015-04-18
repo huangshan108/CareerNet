@@ -12,7 +12,6 @@ function reqToreqData(){
             reqData[$(elem).data("category")].push($(elem).data("query"));
         };
     })
-    console.log(reqData);
     return reqData;
 }
 
@@ -32,8 +31,6 @@ function init(){
                 alert("There are too few data that fit the category for meaningful visualization.");
                 return;
             }
-            console.log("mehahaha");
-            console.log(json);
             drawPie(json['countries'], "country");
             drawPie(json['genders'], "gender");
             drawPie(json['classes'], "class");
@@ -61,8 +58,6 @@ function updateData(reqData){
         dataType: 'json',
         success: function(json){
             // alert('success');
-            console.log("json: ")
-            console.log(json);
             if (json['too_few']){
                 alert("There are too few data that fit the category for meaningful visualization.");
                 return;
@@ -157,8 +152,6 @@ function updatePie(data, section){
         .attr("class", "slice")
         .style("fill", function(d) { return color(d.data.name); })
         .each(function(d) {
-            console.log("new!");
-            console.log(d);
             this._current = d;
         });
 
@@ -233,9 +226,6 @@ function updatePie(data, section){
                 _this._current = d2;
                 var pos = outerArc.centroid(d2);
                 pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
-                if (_this._current.data.name == "Class of 2017"){
-                    console.log(pos);
-                }
                 return "translate(" + pos + ")";
             };
         })
@@ -245,10 +235,6 @@ function updatePie(data, section){
             return function(t) {
                 var d2 = interpolate(t);
                 var anchor = midAngle(d2) < Math.PI ? "start" : "end";
-                if (_this._current.data.name == "Class of 2017"){
-                    console.log(_this._current);
-                    console.log(anchor);
-                }
                 return anchor;
             };
         });
