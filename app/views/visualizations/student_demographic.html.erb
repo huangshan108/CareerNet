@@ -1,0 +1,20 @@
+<label>Country:</label>
+<input type="checkbox" class="request" data-category="country" data-query='US' id='us' >U.S.</input>
+<input type="checkbox" class="request" data-category="country" data-query='intl' id='intl' >Intl</input>
+<label>Gender:</label>
+<input type="checkbox" class="request" data-category="gender" data-query='male' id='m' >Male</input>
+<input type="checkbox" class="request" data-category="gender" data-query='female' id='f' >Female</input>
+<input type="checkbox" class="request" data-category="gender" data-query='other' id='o' >Others</input>
+<label>Class:</label>
+<input type="checkbox" class="request" data-category="class" data-query='2015' id='2015' >2015</input>
+<input type="checkbox" class="request" data-category="class" data-query='2016' id='2016' >2016</input>
+<input type="checkbox" class="request" data-category="class" data-query='2017' id='2017' >2017</input>
+
+<div class="smart-report">
+    <div id='major' class="single-pie-chart"></div>
+    <div id='class' class="single-pie-chart"></div>
+    <div id='country' class="single-pie-chart"></div>
+    <div id='gender' class="single-pie-chart"></div>
+</div>
+
+<%= javascript_include_tag 'visualizations.js' %>

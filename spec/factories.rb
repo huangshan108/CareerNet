@@ -1,10 +1,26 @@
 require 'faker'
 
-FactoryGirl.define do  
+FactoryGirl.define do  factory :visualization do
+    
+  end
+  
   factory :staff do |f|
     f.first_name Faker::Name.first_name
     f.last_name Faker::Name.last_name
     f.description "I specialize in resume review."
+  end
+
+  factory :student do |f|
+    f.first_name Faker::Name.first_name
+    f.last_name Faker::Name.last_name
+    f.graduation_date "2017-5-15".to_date
+    f.country "US"
+    f.gender "male"
+  end
+
+  factory :major do |f|
+      f.name "Urban Forestry\r\n"
+      f.id 90
   end
 
   factory :appointment do |f|

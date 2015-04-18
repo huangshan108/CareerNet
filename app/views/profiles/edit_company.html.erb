@@ -1,0 +1,29 @@
+<%= form_tag(:action => 'update_company', :id => @company.id) do %>
+	<dl class="dl-horizontal">
+		<dt> Company Name </dt>
+		<dd><%= text_field_tag :name, params[:name], value: @company.name %></dd>
+
+		<dt> City </dt>
+		<dd><%= text_field_tag :city, params[:city], value: @company.city %></dd>
+
+		<dt> State </dt>
+		<dd><%= text_field_tag :state, params[:state], value: @company.state %></dd>
+
+		<dt> Country </dt>
+		<dd><%= text_field_tag :country, params[:country], value: @company.country %></dd>
+
+		<dt> Industry </dt>
+		<dd><%= text_field_tag :industry, params[:industry], value: @company.industry %></dd>
+
+		<dt> Website </dt>
+		<dd><%= text_field_tag :website, params[:website], value: @company.website %></dd>
+
+	</dl>
+
+
+	<div class="pull-right button-group">
+      <%= link_to 'Back', company_profile_path(@company), class: "button default" -%>
+      <%= submit_tag "Submit", class: "button blue"%>
+    </div>
+
+<% end %>

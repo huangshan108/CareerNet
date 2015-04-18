@@ -1,15 +1,24 @@
 class JobsController < ApplicationController
   before_action :confirm_logged_in
+  before_action :job_restriction, only:[:create, :new]
+  before_action :job_restriction2, only:[:delete]
+  
   def index
     pages = 10
-    @jobs = Job.all.paginate(page: params[:page], per_page: pages)
+    @jobs = Job.all
+    @current_user = Account.find(account_id)
   end
     
   def new
   end
   
   def create
-    @job = Job.create!(:title => params[:title], :description => params[:description], :company_id => params[:company_id],:salary => params[:salary])
+    @job = Job.create(
+      :title => params[:title], 
+      :description => params[:description], 
+      :company_id => roll_id,
+      :salary => params[:salary]
+    )
     flash[:notice] = "#{@job.title} was successfully created."
     redirect_to job_list_path
   end
@@ -18,6 +27,7 @@ class JobsController < ApplicationController
   def view
     job_id = params[:job_id]
     @job = Job.find_by_id(job_id)
+    @company = Company.find_by_id(roll_id);
     @current_user = Account.find(account_id)
   end
 
@@ -30,7 +40,7 @@ class JobsController < ApplicationController
 
   def view_posted_jobs
     pages = 10
-    @jobs = Company.find(roll_id).jobs.paginate(page: params[:page], per_page: pages)
+    @jobs = Company.find(roll_id).jobs
     render 'index'
   end
 

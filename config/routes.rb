@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
 
-  root :to => 'main#index'
+  # root :to => 'main#index'
+  root :to => 'accounts#index'
 
+  get 'dashboard' => 'main#index', :as => :dashboard
+
+  get 'account/index' => 'accounts#index', :as => :account_index
   get 'account/login' => 'accounts#login', :as => :account_login
   post 'account/login' => 'accounts#confirm_login', :as => :account_confirm_login
   get 'account/signup' => 'accounts#signup', :as => :account_signup
   post 'account/signup' => 'accounts#confirm_signup', :as => :account_confirm_signup
   get 'account/forgot-password' => 'accounts#forgot_password', :as => :account_forgot_password
   post 'account/reset-password' => 'accounts#reset_password', :as => :account_reset_password
-  get 'account/reset_password_confirmation' => 'accounts#reset_password_confirmation', :as => :reset_password_confirmation
   get 'account/start-reset-password/:password_reset_token' => 'accounts#start_reset_password', :as => :account_start_reset_password
   post 'account/start-reset-password/:password_reset_token' => 'accounts#submit_reset_password', :as => :account_submit_reset_password
   get 'account/logout' => 'accounts#logout'
@@ -29,6 +32,12 @@ Rails.application.routes.draw do
   get 'profiles/student/:id/edit' => 'profiles#edit_student', :as => :edit_student_profile
   post 'profiles/student/:id/update' => 'profiles#update_student', :as => :update_student_profile
   get 'profiles/school/:id' => 'profiles#school', :as => :single_school_profile
+  get 'profiles/company/:id' => 'profiles#company', :as => :company_profile
+  get 'profiles/company/:id/edit' => 'profiles#edit_company', :as => :edit_company_profile
+  post 'profiles/company/:id/update' => 'profiles#update_company', :as => :update_company_profile
+  get 'profiles/staff/:id' => 'profiles#staff', :as => :staff_profile
+  get 'profiles/staff/:id/edit' => 'profiles#edit_staff', :as => :edit_staff_profile
+  post 'profiles/staff/:id/update' => 'profiles#update_staff', :as => :update_staff_profile
 
   resources :events
 
@@ -43,6 +52,27 @@ Rails.application.routes.draw do
   
   get 'applications/company/:company_id' => 'applications#index', :as => :company_view_applications
   get 'applications/student/:student_id' => 'applications#index', :as => :student_view_applications
+  get 'applications/:application_id' => 'applications#show', :as => :show_application
+
+  get 'interviews/student' => 'interviews#student_show', :as => :interview_student_show
+  get 'interviews/student/new' => 'interviews#student_new', :as => :interview_student_new
+  get 'interviews/student/book/:id' => 'interviews#student_book', :as => :interview_student_book
+  get 'interviews/student/cancel/:id' => 'interviews#student_cancel', :as => :interview_student_cancel
+
+  get 'interviews/company' => 'interviews#index_company', :as => :company_interviews
+  post 'interviews/company/new' => 'interviews#company_new', :as => :new_company_interviews
+  delete 'interviews/company/:id' => 'interviews#destroy', :as => :cancel_interview
+
+  get 'calendar' => 'calendar#view', :as => :calendar
+  get 'calendar/appointments' => 'calendar#appointmentData', :as => :calendar_appointment
+  get 'calendar/events' => 'calendar#eventData', :as => :calendar_event
+  get 'calendar/interviews' => 'calendar#interviewData', :as => :calendar_interview
+
+# The priority is based upon order of creation: first created -> highest priority.
+
+  # Visualization
+  get 'visualizations/student_demographic/' => 'visualizations#student_demographic', :as => :vis_student_demo
+  get 'visualizations/student_demographic/data' => 'visualizations#student_demographic_data', :defaults => { :format => 'json' }, :as => :vis_student_demo_data
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

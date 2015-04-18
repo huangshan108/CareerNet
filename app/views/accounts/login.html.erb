@@ -1,36 +1,23 @@
-<div class="account-index">
-
-</div>
-
-<div class="account-index-overlay">
-	<div class="row">
-		<div class="logo-text">
-			CareerNet
-		</div>
-	</div>	
-	<div class="row">
-		<div class="login">
-			<div class="title">
-				Log In
-			</div>
-			<%= form_tag(:action => 'login') do %>
-			  <div class="form-group has-feedback">
-			    <%= text_field_tag :email, params[:email], class: 'form-control', placeholder: 'Email' %>
-			  </div>
-			  <div class="form-group has-feedback">
-			    <%= password_field_tag :password, params[:password], class: 'form-control', placeholder: 'Password' %>
-			  </div>
-			  <div class="actions">
-			    <%= submit_tag "Log In", class: "btn" %>
-			  </div>
-			 <% end %>
-		</div>
-		<div class="to-signup">
-			Don't have an account? <%= link_to 'Sign up here.', account_signup_path %>
-		</div>
-		<div class="to-signup">
-			Forgot password? <%= link_to 'Recover your password here.', account_forgot_password_path %>
-		</div>
-		</div>
+<div class="no-nav-offset">
+	<h1 class="small-form">Log In</h1>
+	<%= form_tag({:action => 'login'}, :class => "small-form") do %>
+	  <dl class="dl-horizontal">
+		  <dt>Email</dt>
+		  <dd><%= text_field_tag :email, params[:email] %></dd>
+		  <dt>Password</dt>
+		  <dd><%= password_field_tag :password, params[:password] %></dd>
+		  <%= submit_tag "Log In", class: "button pull-right blue" %>
+	  </dl>
+	<% end %>
+	<div class="login-another">
+		<div>Don't have an account? <%= link_to 'Sign up here.', account_signup_path %></div>
+		<div>Forgot password? <%= link_to 'Recover your password here.', account_forgot_password_path %></div>
+	</div>
+	<div class="test-accounts">
+		<div>To test this application as students, use <code>careernet.student+i@gmail.com</code></div>
+		<div>To test this application as staffs, use <code>careernet.staff+i@gmail.com</code></div>
+		<div>To test this application as companies, use <code>careernet.company+i@gmail.com</code></div>
+		<div>Where <code>i</code> is any integer from 1 to 100.</div>
+		<div>All test accounts passwords are <code>careernet</code></div>
 	</div>
 </div>

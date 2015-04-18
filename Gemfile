@@ -65,4 +65,13 @@ gem 'faker'
 # Gem for FullCalendar
 gem 'fullcalendar-rails', '~> 2.0.2.0'
 gem 'responders'
+gem "cancan"
 
+gem 'jquery-datatables-rails'
+gem 'jquery-ui-rails'
+gem 'momentjs-rails'
+gem 'd3-rails'
+gem 'by_star', '~> 2.2.1'
+gem 'active_record_union'
+gem 'annotate', '~> 2.6.6'
+gem 'selenium-webdriver'

@@ -33,7 +33,6 @@ Scenario: Creating Jobs
   And I fill in "title" with "Software Engineering"
   And I fill in "description" with "Good"
   And I fill in "salary" with "77000"
-  And I fill in "company_id" with "1"
   Then I press "Post"
   Then I should see "Software Engineering was successfully created"
   When I go to the main dashboard page

@@ -1,0 +1,44 @@
+<h1> Schedule Interview </h1>
+<%= link_to "Back to My Interviews", interview_student_show_path -%>
+<table class = "table">
+  <thead>
+    <tr>
+      <th> Company </th>
+      <th> Interview Date </th>
+      <th> Starting Time </th>
+      <th> Ending Time </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for company in @companies -%>
+      <% if company.interviews.length > 0 -%>
+        <tr>
+          <td rowspan = "<%= company.interviews.length+1 -%>">
+          <%if !company.name.nil?
+            company.name 
+            end -%>
+          </td>
+          <% for a in company.interviews -%>
+          <% if a.application = @application %>
+            <tr>
+              <td><%= a.day -%></td>
+              <td><%= ((9*60+40+a.time_slot*20)/60).to_s+':'+((9*60+40+a.time_slot*20)%60).to_s -%></td>
+              <td><%= ((9*60+40+(a.time_slot+1)*20)/60).to_s+':'+((9*60+40+(a.time_slot+1)*20)%60).to_s -%></td>
+              <td>
+                <% if a.student == nil -%>
+                  <%= link_to "Book", interview_student_book_path(a) -%>
+                <% elsif a.student == @student -%>
+                  <%= link_to "Cancel", interview_student_cancel_path(a) -%>
+                <% else -%>
+                  Not available
+                <% end -%>
+              </td>
+            </tr>
+            <% end %>
+          <% end -%>
+        </tr>
+      <% end -%>
+    <% end -%>
+  </tbody>
+</table>

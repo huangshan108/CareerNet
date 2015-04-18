@@ -1,0 +1,17 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.single-pie-chart {
+	svg {
+	  height: 300px;
+  	width: 600px;
+	  display: block;
+	  margin: auto;
+	}
+}
+
+input[type="checkbox"] {
+	 width: initial;
+}

@@ -1,5 +1,4 @@
 <h1> Student Profile </h1>
-<%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button" -%>
 <script type="text/javascript">
   $(document).ready(function() {
     $('a[name="edit-profile-button"]').click(function() {
@@ -7,49 +6,102 @@
     });
   });
 </script>
-<table class = "table">
-  <tbody>
-    <tr>
-      <th> Name </th>
-      <% if @student.first_name and @student.last_name %>
-        <td><%= @student.first_name + ' ' + @student.last_name -%></td>
-      <% end %>
-    </tr>
-    <tr>
-      <th> Skills </th>
-      <% if @student.skills %>
-        <% skill_list = [] %>
-        <% @student.skills.all.each do |s| %>
-        <%skill_list << s.name.gsub("\n", "") %>
-        <% end %>
-        <% if not skill_list.empty? %>
-          <td><%=skill_list%></td>
-        <% end %>
-      <% end %>
-    </tr>
-    <tr>
-      <th> University </th>
-      <% if @student.college %>
-        <td><%= link_to @student.college.school_name, single_school_profile_path(@student.college) -%></td>
-      <% end %>
-    </tr>
-    <tr>
-      <th> Major </th>
-      <% if @student.major %>
-        <td><%= @student.major.name -%></td>
-      <% end %>
-    </tr>
-    <tr>
-      <th> Graduation Date </th>
-      <% if @student.graduation_date %>
-        <td><%= @student.graduation_date -%></td>
-      <% end %>
-    </tr>
-    <tr>
-      <th> Resume Link </th>
-      <% if @student.resume_link %>
-        <td><%= link_to(@student.resume_link, @student.resume_link) -%></td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
+<dl class="dl-horizontal">
+  <dt> Name </dt>
+  <% if @student.first_name and @student.last_name %>
+    <dd><%= @student.first_name + ' ' + @student.last_name -%></dd>
+  <% end %>
+
+  <dt> Skills </dt>
+  <dd>
+  <% student_skills = @student.skills %>
+  <% if student_skills  %>
+    <% student_skills.each do |skill| %>
+      <span class="skill-tag"><%= skill.name %></span>
+    <% end %>
+  <% end %>
+  </dd>
+
+  <dt> City </dt>
+  <dd>
+    <% if @student.city %>
+      <%= @student.city -%>
+    <% end %>
+  </dd>
+
+  <dt> State </dt>
+  <dd>
+    <% if @student.state %>
+      <%= @student.state -%>
+    <% end %>
+  </dd>
+
+  <dt> Country </dt>
+  <dd>
+    <% if @student.country %>
+      <%= @student.country -%>
+    <% end %>
+  </dd>
+
+  <dt> University </dt>
+  <dd>
+    <% if @student.college %>
+      <%= link_to @student.college.school_name, single_school_profile_path(@student.college) -%>
+    <% end %>
+  </dd>
+
+  <dt> Major </dt>
+  <dd>
+    <% if @student.major %>
+      <%= @student.major.name -%>
+    <% end %>
+  </dd>
+
+  <dt> Graduation Date </dt>
+  <dd>
+    <% if @student.graduation_date %>
+      <%= @student.graduation_date -%>
+    <% end %>
+  </dd>
+
+  <dt> Resume Link </dt>
+  <dd>
+    <% if @student.resume_link %>
+      <%= link_to(@student.resume_link, @student.resume_link) -%>
+    <% end %>
+  </dd>
+
+  <dt> Company </dt>
+  <dd>
+    <% if @student.company %>
+      <%= @student.company.name -%>
+    <% end %>
+  </dd>
+
+  <dt> Salary </dt>
+  <dd>
+    <% if@student.base_salary %>
+      <%= @student.base_salary-%>
+    <% end %>
+  </dd>
+
+  <dt> Years Experience </dt>
+  <dd>
+    <% if@student.years_experience %>
+      <%= @student.years_experience-%>
+    <% end %>
+  </dd>
+
+  <dt> Title </dt>
+  <dd>
+    <% if@student.title %>
+      <%= @student.title-%>
+    <% end %>
+  </dd>
+
+
+
+</dl>
+<div class="pull-right button-group">
+  <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
+</div> 

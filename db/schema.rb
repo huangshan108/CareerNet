@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403150116) do
+ActiveRecord::Schema.define(version: 20150417192022) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -60,6 +60,10 @@ ActiveRecord::Schema.define(version: 20150403150116) do
     t.text     "brief"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.string   "industry"
   end
 
   create_table "events", force: :cascade do |t|
@@ -71,6 +75,21 @@ ActiveRecord::Schema.define(version: 20150403150116) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "interviews", force: :cascade do |t|
+    t.integer  "company_id"
+    t.integer  "student_id"
+    t.integer  "application_id"
+    t.integer  "time_slot"
+    t.date     "day"
+    t.text     "description"
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interviews", ["company_id"], name: "index_interviews_on_company_id"
+  add_index "interviews", ["student_id"], name: "index_interviews_on_student_id"
 
   create_table "jobs", force: :cascade do |t|
     t.string   "title"
@@ -103,16 +122,31 @@ ActiveRecord::Schema.define(version: 20150403150116) do
   add_index "staffs", ["account_id"], name: "index_staffs_on_account_id"
 
   create_table "students", force: :cascade do |t|
+    t.integer  "major_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "major_id"
     t.date     "graduation_date"
     t.integer  "college_id"
     t.string   "resume_link"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
+    t.string   "country"
+    t.string   "gender"
+    t.string   "lastemployer"
+    t.string   "city"
+    t.string   "state"
+    t.text     "notes"
+    t.string   "ethnicity"
+    t.string   "citizenship"
+    t.integer  "years_experience"
+    t.integer  "industry"
+    t.integer  "base_salary"
+    t.string   "title"
+    t.integer  "company_id"
   end
+
+  add_index "students", ["major_id"], name: "index_students_on_major_id"
 
   create_table "studentskills", force: :cascade do |t|
     t.integer "student_id"

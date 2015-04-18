@@ -17,6 +17,5 @@ describe "Adding Skills" do
         click_link('Jobs')
         expect(page).to have_content 'Job'
         expect(page).to have_content 'Company'
-        expect(page).to have_content 'Description'
     end	
 end

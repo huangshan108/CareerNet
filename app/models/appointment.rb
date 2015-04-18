@@ -1,9 +1,23 @@
+# == Schema Information
+#
+# Table name: appointments
+#
+#  id          :integer          not null, primary key
+#  staff_id    :integer
+#  student_id  :integer
+#  time_slot   :integer
+#  day         :date
+#  description :text
+#  note        :text
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Appointment < ActiveRecord::Base
     belongs_to :staff
     belongs_to :student
 
     def as_json(options = {})
-
         title = self.student == nil ? "Empty" : self.student.last_name
         #time_slot 1 -> 10 a.m.
         # 20 minute increment until 4p.m.
@@ -15,7 +29,8 @@ class Appointment < ActiveRecord::Base
             :start => start_datetime,
             :end => end_datetime,
             :allDay => false,
-            :id => id
+            :id => id,
+            :url => Rails.application.routes.url_helpers.appointment_student_show_path
         }
     end
 

@@ -12,16 +12,25 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-
     when /^the main page/ then ''
     when /^login page/ then '/account/login'
+    when /^login page/ then '/account/logout'
     when /^signup page/ then '/account/signup'
     when /^forgot password page/ then '/account/forgot-password'
     when /^logout page/ then '/account/logout'
     when /^list students page/ then '/profiles/students'
     when /^student profile page/ then '/profiles/student/1'
     when /^school profile page/ then '/profiles/school/1'
+    when /^company profile page/ then '/profiles/company/1'
+    when /^staff profile page/ then '/profiles/staff/1'
     when /^edit profile page/ then '/profiles/student/1/edit'
+    when /^company edit profile page/ then '/profiles/company/1/edit'
+    when /^student appointment page/ then '/appointments/student'
+    when /^student new appointment page/ then '/appointments/student/new'
+    when /^staff appointment page/ then '/appointments/staff'
+    when /^calendar page/ then '/calendar'
+    when /^attendees page/ then '/events/1/attendees'
+    when /^smart data report page/ then '/visualizations/student_demographic'
     when /(.+) view page/ then 
       split_page = page_name.split(' ').map(&:strip)
       job_id = split_page[2]
@@ -29,7 +38,7 @@ module NavigationHelpers
     when /jobs page/ then
       '/jobs/'
     when /^the events page$/ then '/events'
-    when /^the main dashboard page$/ then'/'
+    when /^the main dashboard page$/ then'/dashboard'
     when /^the job create page$/ then '/jobs/new'
 
     # Add more mappings here.

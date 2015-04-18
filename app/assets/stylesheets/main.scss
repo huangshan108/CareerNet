@@ -1,7 +1,31 @@
 body {
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 
+body,div,h1,h2,h3,h4,h5,h6,a,li,ul,div,td,th,span {
+  font-family: 'Lato', sans-serif !important;
+}
+
+/* h2 is only used to page titles */
+h1 {
+  margin: 100px 0px 50px 0px !important;
+}
+
+label {
+  font-weight: 700 !important;
+}
+
+dd {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.container {
+  background: none !important;
+  margin-left: 100px !important;
+  margin-bottom: 50px;
+  margin-right: 100px !important;
+  width: calc(100% - 150px) !important;
+}
 .row {
   margin-left: 0px;
   margin-right: 0px;
@@ -9,7 +33,7 @@ body {
 
 .flash-message {
   position: fixed;
-  top: 20%;
+  top: 15px;
   left: 0;
   width: 100%;
   z-index: 1000;
@@ -17,7 +41,10 @@ body {
   margin-left: 35%;
   font-weight: bold;
   text-align: center;
-	.notice {
+	.alert {
+    padding: 2px;
+  }
+  .notice {
 
 	}
 	.error {
@@ -34,4 +61,119 @@ body {
 	input, textarea {
 		border: 1px solid #EF4F4F;
 	}
+}
+
+.section-break {
+  height: 20px;
+}
+
+/* Search box of the data table */
+.form-control.input-sm {
+  margin-left: 10px !important;
+  box-shadow: none !important; 
+  border-width: 1px !important;
+}
+input.form-control.input-sm {
+  width: 250px !important;
+}
+
+select {
+  border: none !important;
+  background: #eee !important;
+  outline: none !important;
+  box-shadow: none !important;
+  margin: 0px 10px !important;
+}
+
+h1.small-form {
+  text-align: center;
+}
+
+form.small-form {
+  width: 500px;
+  margin-left: calc(50% - 300px);
+}
+
+a.button {
+  height: 27px;
+  color: white;
+  padding: 5px 6px 5px 6px;
+  border-radius: 3px;
+  margin: 0px 2px;
+}
+a.button:hover {
+  color: white;
+  text-decoration: none;
+  background-color: #34495E;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+input {
+  width: 100%;
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 0px 5px;
+  border-width: 1px;
+  border-color: #999;
+}
+
+input:focus {
+  border-color: #3498DB;
+}
+
+input.button {
+  width: initial;
+  border: none;
+  color: white;
+  padding: 4px 6px 3px 6px;
+  border-radius: 3px;
+  margin: 0px 2px;
+}
+
+input.button:hover {
+  color: white;
+  text-decoration: none;
+  background-color: #34495E;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+/* Edit, Create */
+.blue {
+  background-color: #3498DB;
+}
+/* Delete */
+.red {
+  background-color: #E74C3C;
+}
+
+/* Apply, Submit */
+.green {
+  background-color: #27AE60;
+}
+.orange {
+  background-color: #F39C12;
+}
+
+/* Back */
+.default {
+  background-color: #95A5A6;
+}
+
+.button-group {
+  margin: 20px 0px;
+}
+
+.skill-tag {
+  border: 1px #222 solid;
+  border-radius: 3px;
+  padding: 1px 4px 2px 4px;
+  margin: 0px 1px;
 }

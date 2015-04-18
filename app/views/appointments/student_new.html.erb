@@ -15,7 +15,7 @@
     <% for staff in @staffs -%>
       <% if staff.appointments.length > 0 -%>
         <tr>
-          <td rowspan = "<%= staff.appointments.length+1 -%>"><%= staff.first_name+' '+staff.last_name -%></td>
+          <td rowspan = "<%= staff.appointments.length+1 -%>"><%=staff.first_name+' '+staff.last_name -%></td>
           <% for a in staff.appointments -%>
             <tr>
               <td><%= a.day -%></td>

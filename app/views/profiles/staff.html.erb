@@ -1,2 +1,24 @@
-<h1>Profiles#staff</h1>
-<p>Find me in app/views/profiles/staff.html.erb</p>
+<h1>Staff Profile</h1>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('a[name="edit-profile-button"]').click(function() {
+      $('.spinner-model').show();
+    });
+  });
+</script>
+<dl class="dl-horizontal">
+	  <dt> Name </dt>
+	    <% if @staff.first_name and @staff.last_name %>
+	    <dd><%= @staff.first_name + ' ' + @staff.last_name -%></dd>
+	  <% end %>
+
+  	<dt> Description </dt>
+  	<% if @staff.description %>
+  		<dd><%= @staff.description -%></dd>
+  	<% end %>
+
+</dl>
+
+<div class="pull-right button-group">
+  <%= link_to 'Edit profile', edit_staff_profile_path(@staff), name: "edit-profile-button", class: "button blue" -%>
+</div> 

@@ -1,15 +1,18 @@
-<% #  This file is app/views/profiles/students.html.haml %>
 <h1> Edit Profile </h1>
-<%= link_to('Back to profile', single_student_profile_path(@student)) -%>
 <%= javascript_tag "var all_schools = #{ @all_schools.to_json };" %>
 <%= javascript_tag "var all_majors = #{ @all_majors.to_json };" %>
+<%= javascript_tag "var companies = #{ @companies.to_json };" %>
 <%= javascript_tag "var all_skills = #{ @all_skills.to_json };" %>
 <%= javascript_tag "var student_skills = #{ @student_skills.to_json };" %>
+
 
 <script>
   $(function() {
     for (var i = 0; i < all_schools.length; i++){
       all_schools[i].label = all_schools[i].school_name
+    }
+    for (var i = 0; i < all_companies.length; i++){
+      all_companies[i].label = all_companies[i].name
     }
     for (var i = 0; i < all_majors.length; i++){
       all_majors[i].label = all_majors[i].name
@@ -34,6 +37,13 @@
         $("#major_id").val(ui.item.id)
       }
     });
+    $("#company_name").autocomplete({
+      minLength: 3,
+      source: all_schools,
+      select: function(event, ui) {
+        $("#company_id").val(ui.item.id)
+      }
+    });
     $("#graduation_date").datepicker({
       dateFormat: "yy-mm-dd"
     });
@@ -54,50 +64,68 @@
   });
 </script>
 <%= form_tag(:action => 'update_student', :id => @student.id) do %>
-  <div>
-    <label>First Name</label>
-    <%= text_field_tag :first_name, params[:first_name], class: 'form-control', value: @student.first_name %>
-  </div>
-  <div>
-    <label>Last Name</label>
-    <%= text_field_tag :last_name, params[:last_name], class: 'form-control', value: @student.last_name ? @student.last_name : nil %>
-  </div>
-  <div>
-    <label>Skills</label></br>
-    <% @student.skills.all.each do |s| %>
-    <li><%=s.name %></li>
-    <% end %>
-  </div>
-  <div>
-    <label>Add Skills</label>
-    <input type="text" name = "add_skill_name" id="skill_add" class='form-control' ></input>
+  <dl class="dl-horizontal"> 
+    <dt>First Name</dt>
+    <dd><%= text_field_tag :first_name, params[:first_name], value: @student.first_name %></dd>
+
+    <dt>Last Name</dt>
+    <dd><%= text_field_tag :last_name, params[:last_name], value: @student.last_name ? @student.last_name : nil %></dd>
+    
+    <dt>Skills</dt>
+    <dd>
+      <% @student.skills.all.each do |s| %>
+        <span class="skill-tag"> <%= s.name %></span> 
+      <% end %>
+    </dd>
+
+    <dt>Add Skills</dt>
+    <dd><input type="text" name = "add_skill_name" id="skill_add" ></input></dd>
     <%= hidden_field_tag :skill_id, params[:skill_id], id: "skill_id", value: -1 %>
-  </div>
-  <div>
-    <label>Remove Skills</label>
-    <input type="text" name = "remove_skill_name" id="skill_remove" class='form-control' ></input>
+
+    <dt>Remove Skills</dt>
+    <dd><input type="text" name = "remove_skill_name" id="skill_remove" ></input></dd>
     <%= hidden_field_tag :skill_id_remove, params[:skill_id_remove], id: "skill_id_remove", value: -1 %>
-  </div>
-  <div>
-  <div>
-    <label>University</label>
-    <input type="text" id="college_name" class='form-control' value="<%= @student.college ? @student.college.school_name : nil %>" ></input>
+
+    <dt> City </dt>
+    <dd><%= text_field_tag :city, params[:city], value: @student.city %></dd>
+
+    <dt> State </dt>
+    <dd><%= text_field_tag :state, params[:state], value: @student.state %></dd>
+
+    <dt> Country </dt>
+    <dd><%= text_field_tag :country, params[:country], value: @student.country %></dd>
+
+    <dt>University</dt>
+    <dd><input type="text" id="college_name" value="<%= @student.college ? @student.college.school_name : nil %>" ></input></dd>
     <%= hidden_field_tag :college_id, params[:college_id], id: "college_id", value: @student.college_id %>
-  </div>
-  <div>
-    <label>Major</label>
-    <input type="text" id="major_name" class='form-control' value="<%= @student.major ? @student.major.name : nil %>" ></input>
+
+    <dt>Major</dt>
+    <dd><input type="text" id="major_name" value="<%= @student.major ? @student.major.name : nil %>" ></input></dd>
     <%= hidden_field_tag :major_id, params[:major_id], id: "major_id", value: @student.major_id %>
-  </div>
-  <div>
-    <label>Graduation Date</label>
-    <%= text_field_tag :graduation_date, params[:graduation_date], class: 'form-control', id: "graduation_date", value: @student.graduation_date %>
-  </div>
-  <div>
-    <label>Resume Link</label>
-    <%= text_field_tag :resume_link, params[:resume_link], class: 'form-control', value: @student.resume_link %>
-  </div>
-  <div class="actions">
-    <%= submit_tag "Submit", class: "btn" %>
-  </div>
+
+    <dt>Graduation Date</dt>
+    <dd><%= text_field_tag :graduation_date, params[:graduation_date], id: "graduation_date", value: @student.graduation_date %></dd>
+
+    <dt>Resume Link</dt>
+    <dd><%= text_field_tag :resume_link, params[:resume_link], value: @student.resume_link %></dd>
+
+    <dt>Company</dt>
+    <dd><input type="text" id="company_name" value="<%= @student.company ? @student.company.name : nil %>" ></input></dd>
+    <%= hidden_field_tag :company_id, params[:company_id], id: "company_id", value: @student.company_id %>
+
+    <dt>Salary</dt>
+    <dd><%= text_field_tag :base_salary, params[:base_salary], value: @student.base_salary %></dd>
+
+    <dt>Years Experience</dt>
+    <dd><%= text_field_tag :years_experience, params[:years_experience], value: @student.years_experience %></dd>
+
+    <dt>Title</dt>
+    <dd><%= text_field_tag :title, params[:title], value: @student.title %></dd>
+
+    <div class="pull-right button-group">
+      <%= link_to 'Back', single_student_profile_path(@student), class: "button default" -%>
+      <%= submit_tag "Submit", class: "button blue"%>
+    </div>
+    
+  </dl>
 <% end %>
