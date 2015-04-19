@@ -7,32 +7,44 @@
   });
 </script>
 <dl class="dl-horizontal">
-	<dt> Name </dt>
-	<% if @company.name %>
-    	<dd><%= @company.name -%></dd>
-  	<% end %>
+  <dt> Name </dt>
+    <dd>
+      <% if @company.name %>
+        <%= @company.name -%>
+      <% end %>
+    </dd>
 
-  	<dt> Website </dt>
-  	<% if @company.website %>
-  		<dd><%= @company.website -%></dd>
-  	<% end %>
+    <dt> Website </dt>
+    <dd>
+      <% if @company.website %>
+        <%= link_to @company.website, @company.website, :target => "_blank" -%>
+      <% end %>
+    </dd>
 
-  	<dt> City </dt>
-  	<% if @company.city %>
-  		<dd><%= @company.city -%></dd>
-  	<% end %>
-  	<dt> State </dt>
-  	<% if @company.state %>
-  		<dd><%= @company.state -%></dd>
-  	<% end %>
-  	<dt> Country </dt>
-  	<% if @company.country %>
-  		<dd><%= @company.country -%></dd>
-  	<% end %>
-  	<dt> Industry </dt>
-  	<% if @company.industry %>
-  		<dd><%= @company.industry -%></dd>
-  	<% end %>
+    <dt> City </dt>
+    <dd>
+      <% if @company.city %>
+        <%= @company.city -%>
+      <% end %>
+    </dd>
+    <dt> State </dt>
+    <dd>
+      <% if @company.state %>
+        <%= @company.state -%>
+      <% end %>
+    </dd>
+    <dt> Country </dt>
+    <dd>
+      <% if @company.country %>
+        <%= @company.country -%>
+      <% end %>
+    </dd>
+    <dt> Industry </dt>
+    <dd>
+      <% if @company.industry %>
+        <%= @company.industry -%>
+      <% end %>
+    </dd>
 
 </dl>
 
@@ -40,29 +52,28 @@
   <%= link_to 'Edit profile', edit_company_profile_path(@company), name: "edit-profile-button", class: "button blue" -%>
 </div> 
 
-<br>
-<h2> Available Positions </h2>
-<br>
+
+<h1> Available Positions </h1>
 <table class="data-table table table-striped">   
   <thead>
     <tr>
-    	<th> Position </th>
-    	<th> Company </th>
-    	<th> Salary </th>
-    	<th> Updated </th>
+      <th> Position </th>
+      <th> Company </th>
+      <th> Salary </th>
+      <th> Updated </th>
     </tr>
   </thead>
   <tbody>
     <% @company.jobs.each do |job| %>
-  	  <tr>
-  	   <% if !job.company.nil? %>
-  	    <td><%=link_to "#{job.title}", view_single_job_path(job.id) %></td>
-  	    <td><%= job.company.name %></td>
-  	    <td><%= job.salary %></td>
-  	    <td><%= job.updated_at.strftime('%D') %></td>
-  	    <% end %>
-  	  </tr>
-  	  <% end %>
+      <tr>
+       <% if !job.company.nil? %>
+        <td><%=link_to "#{job.title}", view_single_job_path(job.id) %></td>
+        <td><%= job.company.name %></td>
+        <td><%= job.salary %></td>
+        <td><%= job.updated_at.strftime('%D') %></td>
+        <% end %>
+      </tr>
+      <% end %>
   </tbody>
 </table>
 <script type="text/javascript">

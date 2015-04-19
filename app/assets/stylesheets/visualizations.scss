@@ -4,14 +4,40 @@
 */
 
 .single-pie-chart {
+	border: 1px #eee solid;
+  margin-top: 30px;
 	svg {
-	  height: 300px;
+	  height: 210px;
   	width: 600px;
 	  display: block;
-	  margin: auto;
+	  margin-left: auto;
+	  margin-right: auto;
+		margin-top: 20px;
+  	margin-bottom: 10px;
 	}
 }
 
 input[type="checkbox"] {
 	 width: initial;
+	 margin-right: 5px !important;
+}
+
+span.checkbox-group {
+	margin-left: 10px;
+}
+
+.report-title {
+  text-align: center;
+  font-size: 17px;
+  color: #999;
+  background-color: #eee;
+  padding: 5px;
+  margin-bottom: 15px;
+}
+
+i.help {
+  display: inline;
+  position: relative;
+  margin-left: 15px;
+  top: -4px;
 }

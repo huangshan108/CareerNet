@@ -7,10 +7,14 @@
   });
 </script>
 <dl class="dl-horizontal">
-  <dt> Name </dt>
-  <% if @student.first_name and @student.last_name %>
-    <dd><%= @student.first_name + ' ' + @student.last_name -%></dd>
-  <% end %>
+  <dt> First Name </dt>
+    <% if @student.first_name %>
+      <dd><%= @student.first_name %></dd>
+    <% end %>
+  <dt>Last Name</dt>
+    <% if @student.last_name %>
+      <dd><%= @student.last_name -%></dd>
+    <% end %>
 
   <dt> Skills </dt>
   <dd>

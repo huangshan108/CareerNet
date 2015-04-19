@@ -84,14 +84,6 @@ ActiveRecord::Schema.define(version: 20150418212252) do
     t.datetime "updated_at"
   end
 
-  create_table "events_accounts", force: :cascade do |t|
-    t.integer "event_id"
-    t.integer "account_id"
-  end
-
-  add_index "events_accounts", ["event_id", "account_id"], name: "index_events_accounts_on_event_id_and_account_id"
-  add_index "events_accounts", ["event_id"], name: "index_events_accounts_on_event_id"
-
   create_table "interviews", force: :cascade do |t|
     t.integer  "company_id"
     t.integer  "student_id"
@@ -138,9 +130,9 @@ ActiveRecord::Schema.define(version: 20150418212252) do
   add_index "staffs", ["account_id"], name: "index_staffs_on_account_id"
 
   create_table "students", force: :cascade do |t|
+    t.integer  "major_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "major_id"
     t.date     "graduation_date"
     t.integer  "college_id"
     t.string   "resume_link"
@@ -161,6 +153,8 @@ ActiveRecord::Schema.define(version: 20150418212252) do
     t.string   "title"
     t.integer  "company_id"
   end
+
+  add_index "students", ["major_id"], name: "index_students_on_major_id"
 
   create_table "studentskills", force: :cascade do |t|
     t.integer "student_id"

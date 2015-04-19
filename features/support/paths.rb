@@ -30,7 +30,7 @@ module NavigationHelpers
     when /^staff appointment page/ then '/appointments/staff'
     when /^calendar page/ then '/calendar'
     when /^attendees page/ then '/events/1/attendees'
-    when /^smart data report page/ then '/visualizations/student_demographic'
+    when /^smart data report page/ then '/smart-report'
     when /(.+) view page/ then 
       split_page = page_name.split(' ').map(&:strip)
       job_id = split_page[2]
