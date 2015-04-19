@@ -35,7 +35,7 @@ And I press "Log In" button
         Given I am on list students page
         When I follow "More details"
         Then I should be on student profile page
-        And I should see "Mark Sharp"
+        And I should see "Mark"
    
     Scenario: Edit student profile
         Given I am on student profile page
