@@ -59,6 +59,7 @@ Scenario: Accept interview time with company
   When I enter "shuang@berkeley.edu" into "email"
   And I enter "careernet" into "password"
   And I press "Log In" button
+  Then I am on the main dashboard page
   And I follow "View Applications"
   And I follow "View Details"
   Then I should see "Schedule Interview"
@@ -68,7 +69,6 @@ Scenario: Accept interview time with company
   And I should see "Interview Date"
 
 
-@javascript
 Scenario: Adding interview slots student side
   Given I am on the main page
   Given the following interviews exist: 
