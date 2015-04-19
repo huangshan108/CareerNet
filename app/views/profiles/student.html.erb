@@ -7,10 +7,14 @@
   });
 </script>
 <dl class="dl-horizontal">
-  <dt> Name </dt>
-  <% if @student.first_name and @student.last_name %>
-    <dd><%= @student.first_name + ' ' + @student.last_name -%></dd>
-  <% end %>
+  <dt> First Name </dt>
+    <% if @student.first_name %>
+      <dd><%= @student.first_name %></dd>
+    <% end %>
+  <dt>Last Name</dt>
+    <% if @student.last_name %>
+      <dd><%= @student.last_name -%></dd>
+    <% end %>
 
   <dt> Skills </dt>
   <dd>
@@ -102,6 +106,8 @@
 
 
 </dl>
+<%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
 <div class="pull-right button-group">
   <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
 </div> 
+<%end%>

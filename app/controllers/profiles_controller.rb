@@ -3,10 +3,12 @@ class ProfilesController < ApplicationController
   
   
   before_action :confirm_logged_in
-  before_action :profile_restriction, only:[:edit_student,:update_student,:student]
+  before_action :profile_restriction, only:[:edit_student,:update_student]
   def student
     id = params[:id]
+    @id_1 = params[:id]
     @student = Student.find(id)
+    @current_user = Account.find(account_id)
   end
 
   def company

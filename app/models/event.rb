@@ -5,23 +5,21 @@
 #  id          :integer          not null, primary key
 #  title       :string
 #  description :text
-#  time_start  :time
-#  time_end    :time
+#  time_start  :datetime
+#  time_end    :datetime
 #  location    :string
 #  created_at  :datetime
 #  updated_at  :datetime
 #
 
 class Event < ActiveRecord::Base
-    has_many :student
-    has_many :staff
-    has_many :company
+    has_and_belongs_to_many :accounts
 
 	def as_json(options = {})
 		{
             :title => title,
-            :start => time_start,
-            :end => time_end,
+            :time_start => time_start,
+            :time_end => time_end,
             :allDay => false,
             :id => id,
             :url => Rails.application.routes.url_helpers.event_path(self),

@@ -1,6 +1,9 @@
 // Require d3 for visualization
 //= require d3
 
+
+var WIDTH = 500;
+var HEIGHT = 200;
 function reqToreqData(){
     var reqData = {
         "country": [],
@@ -22,7 +25,7 @@ function init(){
 
     $.ajax({
         type: "GET",
-        url: '/visualizations/student_demographic/data',
+        url: '/smart-report/data',
         data: reqInitData,
         dataType: 'json',
         success: function(json){
@@ -53,7 +56,7 @@ function init(){
 function updateData(reqData){
     $.ajax({
         type: "GET",
-        url: '/visualizations/student_demographic/data',
+        url: '/smart-report/data',
         data: reqData,
         dataType: 'json',
         success: function(json){
@@ -77,8 +80,8 @@ function updateData(reqData){
 
 
 function drawPie(data, section) {
-    var width = 600,
-        height = 300;
+    var width = WIDTH,
+        height = HEIGHT;
 
     var svg = d3.select("div#" + section).append("svg")
         .append("g");
@@ -112,8 +115,8 @@ function mergeWithFirstEqualZero(first, second){
 }
 
 function updatePie(data, section){
-    var width = 1200,
-        height = 300,
+    var width = WIDTH,
+        height = HEIGHT,
         radius = 100;
 
     var arc = d3.svg.arc().outerRadius(radius * 0.8)

@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: interviews
+#
+#  id             :integer          not null, primary key
+#  company_id     :integer
+#  student_id     :integer
+#  application_id :integer
+#  time_slot      :integer
+#  day            :date
+#  description    :text
+#  note           :text
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class Interview < ActiveRecord::Base
     belongs_to :company
     belongs_to :student
@@ -29,20 +45,20 @@ class Interview < ActiveRecord::Base
         time
     end
 
-#    def self.string_to_timeslot(time_string)
-#        match = /.*(\d\d):(\d\d):(\d\d)/.match(time_string)
-#        if match
-#            hour = match[1].to_i - 10
-#            min = match[2].to_i / 20
-#            if hour >= 0 and hour < 7
-#                hour * 3 + min + 1
-#            else
-#                0
-#            end
-#        else
-#            0
-#        end
-#    end
+    def self.string_to_timeslot(time_string)
+        match = /.*(\d\d):(\d\d):(\d\d)/.match(time_string)
+        if match
+            hour = match[1].to_i - 10
+            min = match[2].to_i / 20
+            if hour >= 0 and hour < 7
+                hour * 3 + min + 1
+            else
+                0
+            end
+        else
+            0
+        end
+    end
 
     def self.between(start_day, end_day)
       self.where("day >= ? AND day <= ?", start_day.to_date, end_day.to_date)

@@ -76,6 +76,10 @@
           </li>
         <% elsif current_user.staff%>
           <li>
+            <i class="fa fa-pie-chart"></i>
+            <%= link_to 'Smart Report', smart_report_path, name: "my-profile-button", class: "nav-text" %></a>
+          </li>
+          <li>
             <i class="fa fa-user"></i>
             <%= link_to 'My Profile', staff_profile_path(current_user.staff.id), name: "my-profile-button", class: "nav-text" %></a>
           </li>

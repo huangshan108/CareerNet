@@ -7,15 +7,25 @@
   });
 </script>
 <dl class="dl-horizontal">
-	  <dt> Name </dt>
-	    <% if @staff.first_name and @staff.last_name %>
-	    <dd><%= @staff.first_name + ' ' + @staff.last_name -%></dd>
-	  <% end %>
+    <dt> First Name </dt>
+      <dd>
+        <% if @staff.first_name %>
+          <%= @staff.first_name %>
+        <% end %>
+      </dd>
+    <dt>Last Name</dt>
+      <dd>
+        <% if @staff.last_name %>
+          <%= @staff.last_name -%>
+        <% end %>
+      </dd>
 
-  	<dt> Description </dt>
-  	<% if @staff.description %>
-  		<dd><%= @staff.description -%></dd>
-  	<% end %>
+    <dt> Description </dt>
+      <dd>
+        <% if @staff.description %>
+          <%= @staff.description -%>
+        <% end %>
+      </dd>
 
 </dl>
 

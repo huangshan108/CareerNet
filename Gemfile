@@ -75,3 +75,4 @@ gem 'by_star', '~> 2.2.1'
 gem 'active_record_union'
 gem 'annotate', '~> 2.6.6'
 gem 'selenium-webdriver'
+gem "font-awesome-rails"

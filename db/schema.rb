@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417192022) do
+ActiveRecord::Schema.define(version: 20150418212252) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 20150417192022) do
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
   end
+
+  create_table "accounts_events", force: :cascade do |t|
+    t.integer "account_id"
+    t.integer "event_id"
+  end
+
+  add_index "accounts_events", ["account_id", "event_id"], name: "index_accounts_events_on_account_id_and_event_id"
+  add_index "accounts_events", ["event_id"], name: "index_accounts_events_on_event_id"
 
   create_table "applications", force: :cascade do |t|
     t.integer  "student_id"
@@ -69,8 +77,8 @@ ActiveRecord::Schema.define(version: 20150417192022) do
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.time     "time_start"
-    t.time     "time_end"
+    t.datetime "time_start"
+    t.datetime "time_end"
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"

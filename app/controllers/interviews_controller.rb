@@ -3,36 +3,35 @@ class InterviewsController < ApplicationController
 
   respond_to :html, :js, :json
 
-#  def new
-#    @interview = Interview.new
-#
-#    respond_to do |format|
-#      format.html
-#      format.js
-#    end
-#  end
+  def new
+    @interview = Interview.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
   def company_new
-#      starttime_str = params[:start].to_s
-#      endtime_str = params[:end].to_s
-#      timeslot = Interview.string_to_timeslot(starttime_str)
-#      endslot = Interview.string_to_timeslot(endtime_str)
-#      app = Application.find_by_id(params[:application_id])
-#      error = false
-#      while timeslot < endslot do
-#        interview_params = { day: starttime_str, time_slot: timeslot, company: curr_company, application: app }
-#        @intr = Interview.new(interview_params)
-#        timeslot += 1
-#        error = @intr.save and error
-#      end
-#      
-#      respond_to do |format|
-#        if error
-#            format.json { render json: {msg: 'You have successfully registed your slot.'} }
-#        else
-#            format.json { render json: {msg: 'Error. Your interview slot was not registered.'}, :status => 500 }
-#        end
-#      end
+      starttime_str = params[:start].to_s
+      endtime_str = params[:end].to_s
+      timeslot = Interview.string_to_timeslot(starttime_str)
+      endslot = Interview.string_to_timeslot(endtime_str)
+      app = Application.find_by_id(params[:application_id])
+      error = false
+      while timeslot < endslot do
+        interview_params = { day: starttime_str, time_slot: timeslot, company: curr_company, application: app }
+        @intr = Interview.new(interview_params)
+        timeslot += 1
+        error = @intr.save and error
+      end
+
+      respond_to do |format|
+        if error
+            format.json { render json: {msg: 'You have successfully registed your slot.'} }
+        else
+            format.json { render json: {msg: 'Error. Your interview slot was not registered.'}, :status => 500 }
+        end
+      end
   end
 
   def curr_company
@@ -41,8 +40,8 @@ class InterviewsController < ApplicationController
           flash[:error] = 'You must be a company to access this page.'
           redirect_to root_path
           return
-#      elsif @account.company == nil
-#          Company.new(account: @account)
+      elsif @account.company == nil
+          Company.new(account: @account)
       else
           @account.company
       end
@@ -58,10 +57,10 @@ class InterviewsController < ApplicationController
       end
   end
 
-#  def destroy
-#    Interview.find(params[:id]).destroy
-#    respond_with layout: false
-#  end
+  def destroy
+    Interview.find(params[:id]).destroy
+    respond_with layout: false
+  end
 
   def student_show
     account = Account.find(session[:user_id])
@@ -72,8 +71,8 @@ class InterviewsController < ApplicationController
       @student = account.student
       @interviews = @student.interviews
     else
-#      flash[:error] = "This page is only available to students."
-#      redirect_to(:root)
+      flash[:error] = "This page is only available to students."
+      redirect_to(:root)
       return
     end
   end
@@ -98,8 +97,8 @@ class InterviewsController < ApplicationController
     if interview.student == Account.find(session[:user_id]).student
       interview.update_attribute(:student, nil)
       flash[:notice] = "Interview has been cancelled."
-#    else
-#      flash[:error] = "You do not have permission to cancel this interview."
+    else
+      flash[:error] = "You do not have permission to cancel this interview."
     end
     redirect_to(interview_student_show_path)
   end

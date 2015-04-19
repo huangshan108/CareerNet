@@ -51,21 +51,17 @@ Scenario: Accept interview time with company
   Then I should see "Shan Huang"
   When I follow "View/Schedule Interview"
   Then I should see "interview slots"
+  When I press the css button ".fc-button.fc-button-next.fc-state-default.fc-corner-right"
+  When I press the css button ".fc-slot0 td.fc-widget-content"
+  And I accept alert
   Then I am on logout page
   Then I am on the account_login page
   When I enter "shuang@berkeley.edu" into "email"
   And I enter "careernet" into "password"
   And I press "Log In" button
-  And I follow "View Applications"
-  And I follow "View Details"
-  Then I should see "Schedule Interview"
-  And I should see "Back to My Interviews"
-  When I follow "Back to My Interviews"
-  Then I should see "Interviews"
-  And I should see "Interview Date"
+  Then I am on the main dashboard page
 
 
-@javascript
 Scenario: Adding interview slots student side
   Given I am on the main page
   Given the following interviews exist: 
