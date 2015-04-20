@@ -52,22 +52,26 @@ $(document).ready(function() {
           $("#calendar").fullCalendar("unselect");
         },
         eventClick: function (calEvent, jsEvent, view){
-          // var result = confirm("Are you sure you want to delete this appointment?");
-            // if (result){
-              $.ajax({
-                url: "/appointments/staff/" + calEvent.id,
-                type: "POST",
-                dataType: "json",
-                data: { "_method": "delete" },
-                success: function() {
-                  // alert("Successfully deleted appointment");
-                },
-                error: function() {
-                  alert("Error. Could not delete appointment");
+                //Delete the event if no student has signed up for the slot yet
+                if (calEvent.title == "Empty"){
+                    $.ajax({
+                      url: "/appointments/staff/" + calEvent.id,
+                      type: "POST",
+                      //dataType: "json",
+                      data: { "_method": "delete" },
+                      success: function() {
+                        $("#calendar").fullCalendar("removeEvents", calEvent.id);
+                      },
+                      error: function() {
+                        alert("Error. Could not delete appointment");
+                      }
+                    });
                 }
-              });
-              $("#calendar").fullCalendar("refetchEvents");
-            // }
+                else {
+                    //If a student has signed up for the event, directed to details
+                    //page of that appointment
+                    window.location = calEvent.detailURL;
+                }
         },
         slotMinutes: 20,
         events: '/appointments/staff/',

@@ -72,7 +72,9 @@ class AppointmentsController < ApplicationController
 
   def destroy
     Appointment.find(params[:id]).destroy
-    respond_with layout: false
+    respond_to do |format|
+        format.json { render :json => true }
+    end
   end
 
   def student_show

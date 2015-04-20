@@ -100,6 +100,14 @@ $(document).ready(function() {
         selectable: true,
         selectHelper: true,
         events: loadEvents,
+        //Manually direct user to appointment detail page rather than using 'url:' of Event obj
+        //in fullcalendar
+        //So that for staff, clicking on a slot will cancel the appointment if the slot is empty
+        //and show details page for staff only if a student signed up for it
+        eventClick: function(calEvent, jsEvent, view){
+            window.location = calEvent.detailURL;
+            return;
+        },
         dragOpacity: "0.5"
     })      
   }
