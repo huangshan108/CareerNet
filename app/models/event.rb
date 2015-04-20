@@ -22,7 +22,7 @@ class Event < ActiveRecord::Base
             :end => time_end,
             :allDay => false,
             :id => id,
-            :url => Rails.application.routes.url_helpers.event_path(self),
+            :detailURL => Rails.application.routes.url_helpers.event_path(self),
             :color => 'LightBlue'
         }
 	end

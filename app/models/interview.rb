@@ -34,7 +34,7 @@ class Interview < ActiveRecord::Base
             :allDay => false,
             :id => id,
             :color => 'blue',
-            :url => Rails.application.routes.url_helpers.interview_student_show_path
+            :detailURL => Rails.application.routes.url_helpers.interview_student_show_path
         }
     end
 
