@@ -32,15 +32,15 @@ $(document).ready(function() {
   });
 
   // make default selections and bind onchange function
-  $('#cal_interviews').attr('checked', true);
-  $('#cal_appointments').attr('checked', true);
-  $('#cal_events').attr('checked', true);
-  $('#cal_available').attr('checked', true);
+  $('#cal_interviews').prop('checked', true);
+  $('#cal_appointments').prop('checked', true);
+  $('#cal_events').prop('checked', true);
+  $('#cal_available').prop('checked', true);
   $("#cal_user_select").on('change', renderCalendar);
 
   // returns true if only fetch confirmed events, false for all available events
   function onlyMyEvents() {
-    return $("input:radio[name=onlyMyEvents]").val() == '1';
+    return !$('#cal_available').prop('checked');
   }
 
   // fetch events from server

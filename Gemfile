@@ -63,7 +63,7 @@ gem 'factory_girl_rails'
 gem 'faker'
 
 # Gem for FullCalendar
-gem 'fullcalendar-rails', '~> 2.0.2.0'
+gem 'fullcalendar-rails'
 gem 'responders'
 gem "cancan"
 

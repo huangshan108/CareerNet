@@ -52,6 +52,8 @@ Rails.application.routes.draw do
   get 'appointments/staff' => 'appointments#index_staff', :as => :staff_appointments
   post 'appointments/staff/new' => 'appointments#staff_new', :as => :new_staff_appointments
   delete 'appointments/staff/:id' => 'appointments#destroy', :as => :cancel_appointment
+
+  get 'appointments' => 'appointments#index', :as => :appointments
   
   get 'applications/company/:company_id' => 'applications#index', :as => :company_view_applications
   get 'applications/student/:student_id' => 'applications#index', :as => :student_view_applications

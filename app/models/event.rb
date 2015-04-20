@@ -18,8 +18,8 @@ class Event < ActiveRecord::Base
 	def as_json(options = {})
 		{
             :title => title,
-            :time_start => time_start,
-            :time_end => time_end,
+            :start => time_start,
+            :end => time_end,
             :allDay => false,
             :id => id,
             :url => Rails.application.routes.url_helpers.event_path(self),
