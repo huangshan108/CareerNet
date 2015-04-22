@@ -1,0 +1,26 @@
+<h1> My Events </h1>
+<table class="data-table table table-striped">
+  <thead>
+    <tr>
+      <th> Event Title </th>
+      <th> Start Time </th>
+      <th> End Time </th>
+      <th> Location </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.title %></td>
+        <td><%= event.time_start.strftime('%D %H:%M %p') if event.time_start %></td>
+        <td><%= event.time_end.strftime('%D %H:%M %p') if event.time_end %></td>
+        <td><%= event.location %></td>
+      <tr>
+    <% end %>
+  </tbody>
+</table>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.data-table').dataTable();
+  })
+</script>

@@ -40,6 +40,9 @@ Rails.application.routes.draw do
   post 'profiles/staff/:id/update' => 'profiles#update_staff', :as => :update_staff_profile
 
   resources :events
+  get 'events/:event_id/register' => 'events#register', :as => :event_register
+  get 'events/registered/:account_id' => 'events#registered_index', :as => :registered_event_index
+  get 'events/:event_id/attendees' => 'events#attendees_index', :as => :event_attendees_index
 
   get 'appointments/student/' => 'appointments#student_show', :as => :appointment_student_show
   get 'appointments/student/new' => 'appointments#student_new', :as => :appointment_student_new
@@ -49,6 +52,8 @@ Rails.application.routes.draw do
   get 'appointments/staff' => 'appointments#index_staff', :as => :staff_appointments
   post 'appointments/staff/new' => 'appointments#staff_new', :as => :new_staff_appointments
   delete 'appointments/staff/:id' => 'appointments#destroy', :as => :cancel_appointment
+
+  get 'appointments' => 'appointments#index', :as => :appointments
   
   get 'applications/company/:company_id' => 'applications#index', :as => :company_view_applications
   get 'applications/student/:student_id' => 'applications#index', :as => :student_view_applications
@@ -71,8 +76,8 @@ Rails.application.routes.draw do
 # The priority is based upon order of creation: first created -> highest priority.
 
   # Visualization
-  get 'visualizations/student_demographic/' => 'visualizations#student_demographic', :as => :vis_student_demo
-  get 'visualizations/student_demographic/data' => 'visualizations#student_demographic_data', :defaults => { :format => 'json' }, :as => :vis_student_demo_data
+  get 'smart-report/' => 'visualizations#student_demographic', :as => :smart_report
+  get 'smart-report/data' => 'visualizations#student_demographic_data', :defaults => { :format => 'json' }, :as => :smart_report_data
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

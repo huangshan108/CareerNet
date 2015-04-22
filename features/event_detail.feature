@@ -72,3 +72,28 @@ Scenario: As a staff member I want to delete an event
   When I follow "Delete"
   Then I am on the events page
   And I should not see "Mock Interviews"
+
+Scenario: As a user I want to see all my registered events
+  Given I am on the events page
+  When I follow "Job Fair"
+  And I follow "Register"
+  Then I am on the events page
+  When I follow "Resume Workshop"
+  And I follow "Register"
+  Then I am on the events page
+  Given I am on the main page
+  And I follow "View Registered Events"
+  Then I should see "My Events"
+  And I should see "Job Fair"
+  And I should see "Resume Workshop"
+  And I should not see "Mock Interviews"
+
+Scenario: As a staff member I want to see all attendees to an event
+  Given I am on the events page
+  When I follow "Job Fair"
+  And I follow "Register"
+  Then I am on the events page
+  When I follow "Job Fair"
+  And I follow "View Attendees"
+  Then I am on attendees page
+

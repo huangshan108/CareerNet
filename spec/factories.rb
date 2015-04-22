@@ -3,7 +3,11 @@ require 'faker'
 FactoryGirl.define do  factory :visualization do
     
   end
-  
+
+  factory :company do |f|
+    f.name Faker::Name.last_name
+  end
+
   factory :staff do |f|
     f.first_name Faker::Name.first_name
     f.last_name Faker::Name.last_name
@@ -30,6 +34,14 @@ FactoryGirl.define do  factory :visualization do
     f.note "Session notes by staff."
 
     f.association :staff, :factory => :staff
+  end
+
+  factory :interview do |f|
+    f.time_slot 1
+    f.day "2015-04-22"
+    f.description "Interview"
+    f.note "Extra notes"
+    f.association :company, :factory => :company
   end
 
   factory :account do

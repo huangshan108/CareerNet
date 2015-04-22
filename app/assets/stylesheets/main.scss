@@ -177,3 +177,22 @@ input.button:hover {
   padding: 1px 4px 2px 4px;
   margin: 0px 1px;
 }
+
+.quick-links {
+  padding: 30px 10px;
+  background: #eee;
+  border-radius: 5px;
+  .quick-links-title {
+    margin-left: 39px;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+}
+
+.quick-links-ul {
+  list-style-type: none;
+  li {
+    margin-bottom: 3px;
+  }
+}

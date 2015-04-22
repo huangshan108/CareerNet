@@ -47,7 +47,6 @@ class Student < ActiveRecord::Base
 	has_many :studentskills
 	has_many :skills, through: :studentskills
 
-	has_many :events
 
 	def getInterviews(start_date, end_date)
 		self.interviews.select{|i| 
@@ -56,12 +55,9 @@ class Student < ActiveRecord::Base
 	end
 
 	def getEvents(start_date, end_date)
-		# self.events.select{ |e|
-		# 	e.time_start >= start_date.to_date and e.time_end <= end_date.to_date
-		# }
-
-		# Event registration is not ready yet
-		[]
+		self.account.events.select{ |e|
+			e.time_start >= start_date.to_date and e.time_end <= end_date.to_date
+		}
 	end
 
 	def getAppointments(start_date, end_date)

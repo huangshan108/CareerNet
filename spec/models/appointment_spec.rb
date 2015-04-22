@@ -85,7 +85,7 @@ describe Appointment do
         end: '2015-02-03 11:20:00',
         allDay: false,
         id: @appt.id,
-        url: "/appointments/student"
+        detailURL: "/appointments"
       }
       expect(@result).to eq(@expected)
     end

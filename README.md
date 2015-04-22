@@ -1,5 +1,7 @@
 # CareerNet
 
+[![Build Status](https://travis-ci.org/huangshan108/CareerNet.svg?branch=master)](https://travis-ci.org/huangshan108/CareerNet)
+
 Herokuapp Link: http://careernet.herokuapp.com/
 
 Client Interview Link: http://youtu.be/nVIXn0le4u8/
@@ -28,6 +30,7 @@ Currently avalible seed_scripts are (It's highly recommended that you reset your
 
 To test this app with test accounts:
 * For students, use `careernet.student+<id>@gmail.com`
+* For staffs, use `careernet.staff+<id>@gmail.com`
 * For companies, use `careernet.company+<id>@gmail.com`
 * All test account passwords are `careernet`
 

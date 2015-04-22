@@ -21,6 +21,7 @@ class Account < ActiveRecord::Base
     has_one :student
     has_one :staff
     has_one :company
+    has_and_belongs_to_many :events
 
     def send_password_reset
       self.password_reset_sent_at = Time.zone.now
