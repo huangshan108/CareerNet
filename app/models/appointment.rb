@@ -30,7 +30,7 @@ class Appointment < ActiveRecord::Base
             :end => end_datetime,
             :allDay => false,
             :id => id,
-            :url => Rails.application.routes.url_helpers.appointment_student_show_path
+            :detailURL => Rails.application.routes.url_helpers.appointments_path
         }
     end
 

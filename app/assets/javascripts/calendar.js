@@ -32,15 +32,15 @@ $(document).ready(function() {
   });
 
   // make default selections and bind onchange function
-  $('#cal_interviews').attr('checked', true);
-  $('#cal_appointments').attr('checked', true);
-  $('#cal_events').attr('checked', true);
-  $('#cal_available').attr('checked', true);
+  $('#cal_interviews').prop('checked', true);
+  $('#cal_appointments').prop('checked', true);
+  $('#cal_events').prop('checked', true);
+  $('#cal_available').prop('checked', true);
   $("#cal_user_select").on('change', renderCalendar);
 
   // returns true if only fetch confirmed events, false for all available events
   function onlyMyEvents() {
-    return $("input:radio[name=onlyMyEvents]").val() == '1';
+    return !$('#cal_available').prop('checked');
   }
 
   // fetch events from server
@@ -100,6 +100,14 @@ $(document).ready(function() {
         selectable: true,
         selectHelper: true,
         events: loadEvents,
+        //Manually direct user to appointment detail page rather than using 'url:' of Event obj
+        //in fullcalendar
+        //So that for staff, clicking on a slot will cancel the appointment if the slot is empty
+        //and show details page for staff only if a student signed up for it
+        eventClick: function(calEvent, jsEvent, view){
+            window.location = calEvent.detailURL;
+            return;
+        },
         dragOpacity: "0.5"
     })      
   }

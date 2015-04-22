@@ -71,7 +71,7 @@ describe Interview do
         allDay: false,
         color: "blue",
         id: @interview.id,
-        url: "/interviews/student"
+        detailURL: "/interviews/student"
       }
       expect(@result).to eq(@expected)
     end

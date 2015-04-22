@@ -3,6 +3,17 @@ class AppointmentsController < ApplicationController
 
   respond_to :html, :js, :json
 
+  def index
+    if account_type == 1
+      redirect_to appointment_student_show_path
+    elsif account_type == 2
+      redirect_to staff_appointments_path
+    else
+      flash[:error] = 'You must be a staff or a student to access this page.'
+      redirect_to dashboard_path
+    end
+  end
+
   def new
     @appointment = Appointment.new
 
@@ -46,7 +57,7 @@ class AppointmentsController < ApplicationController
   def curr_staff
       @account = Account.find(session[:user_id])
       if @account.account_type != 2
-          flash[:error] = 'You must be a staff of access this page.'
+          flash[:error] = 'You must be a staff to access this page.'
           redirect_to root_path
           return
       elsif @account.staff == nil
@@ -72,7 +83,9 @@ class AppointmentsController < ApplicationController
 
   def destroy
     Appointment.find(params[:id]).destroy
-    respond_with layout: false
+    respond_to do |format|
+        format.json { render :json => true }
+    end
   end
 
   def student_show
