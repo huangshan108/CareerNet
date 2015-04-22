@@ -1,5 +1,7 @@
 # CareerNet
 
+[![Build Status](https://travis-ci.org/huangshan108/CareerNet.svg?branch=master)](https://travis-ci.org/huangshan108/CareerNet)
+
 Herokuapp Link: http://careernet.herokuapp.com/
 
 Client Interview Link: http://youtu.be/nVIXn0le4u8/
