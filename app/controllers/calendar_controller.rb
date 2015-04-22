@@ -2,26 +2,32 @@ class CalendarController < ApplicationController
 
 	def interviewData
 		currentUser = current_user.getUser
-		all = Interview.between(params[:start], params[:end])
-		interviews = currentUser.getInterviews(params[:start], params[:end]) if (params[:start] && params[:end]) else []
+		if params[:confirmed] == 'true'
+			interviews = currentUser.getInterviews(params[:start], params[:end])
+		else
+			all = Interview.between(params[:start], params[:end])
+		end	
 		renderJSON(interviews)
 	end
 
 	def eventData
 		currentUser = current_user.getUser
-		all = Event.between(params[:start], params[:end])
-		events = currentUser.getEvents(params[:start], params[:end]) if (params[:start] && params[:end]) else []
+		if params[:confirmed] == 'true'
+			events = currentUser.getEvents(params[:start], params[:end])
+		else
+			events = Event.between(params[:start], params[:end])
+		end
 		renderJSON(events)
 	end
 
 	def appointmentData
 		currentUser = current_user.getUser
 		appointments = []
-		# if params[:confirmed] == 'true'
-			appointments = currentUser.getAppointments(params[:start], params[:end]) if (params[:start] && params[:end])
-		# else
-			all = Appointment.between(params[:start], params[:end])
-		# end
+		if params[:confirmed] == 'true'
+			appointments = currentUser.getAppointments(params[:start], params[:end])
+		else
+			appointments = Appointment.between(params[:start], params[:end])
+		end
 		renderJSON(appointments)
 	end
 
