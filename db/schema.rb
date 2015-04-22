@@ -154,16 +154,9 @@ ActiveRecord::Schema.define(version: 20150418082139) do
     t.integer  "company_id"
   end
 
-  add_index "students", ["major_id"], name: "index_students_on_major_id"
-
   create_table "studentskills", force: :cascade do |t|
     t.integer "student_id"
     t.integer "skill_id"
-  end
-
-  create_table "visualizations", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end

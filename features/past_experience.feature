@@ -20,7 +20,7 @@ Background: Adding jobs to database
     Scenario: Add past experience
         Given I am on student profile page
         When I follow "Edit profile"
-        I should see button "+"
+        And I should see button "+"
         When I follow the button "+"
         Then I should see "add more experience"
         Then I should see "Company Name"
