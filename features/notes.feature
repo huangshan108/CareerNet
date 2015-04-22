@@ -113,6 +113,8 @@ Scenario: As a company, send feedback to interviewee
   And I press "Log In" button
   Then I am on the main page
   When I follow "View Applications"
+  Then I should see "Director"
+  When I follow "View Details"
   And I follow "View Feedback"
   Then I should see "Sample feedback here"
 
