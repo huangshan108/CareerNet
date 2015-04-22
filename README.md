@@ -30,6 +30,7 @@ Currently avalible seed_scripts are (It's highly recommended that you reset your
 
 To test this app with test accounts:
 * For students, use `careernet.student+<id>@gmail.com`
+* For staffs, use `careernet.staff+<id>@gmail.com`
 * For companies, use `careernet.company+<id>@gmail.com`
 * All test account passwords are `careernet`
 
