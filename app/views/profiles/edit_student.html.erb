@@ -130,41 +130,34 @@
   </dl>
 <% end %>
 
-
+<button class="addbutton"> + </button>
 <%= form_tag(:action => 'update_past_experience', :id => @student.id) do %>
 <div class="past_experience">
 	<h3> Past experience </h3>
-	<button class="addbutton"> + </button>
-	
-  	<dl class="form"> 
-   	 <dt>Company </dt>
-   	 <dd><%= text_field_tag :company_name, params[:company_name],placeholder: 'Company Name' %></dd>
-    
-   	 <dt>Description </dt>
-   	 <dd><%= text_field_tag :description, params[:description], placeholder: 'Description' %></dd>
-    
-   	 <dt>Location </dt>
-   	 <dd><%= text_field_tag :location, params[:location], placeholder: 'Location' %></dd>
-    
-   	 <dt>Job Title </dt>
-   	 <dd><%= text_field_tag :job, params[:job], placeholder: 'Job Title' %></dd>
-    
-   	 <dt>Salary </dt>
-   	 <dd><%= text_field_tag :salary, params[:salary],placeholder: 'Salary' %></dd>
-    
-   	 <%= submit_tag "Update", class: "button blue pull-right"%>
-   	 <%= submit_tag "Cancle", class: "button red pull-right"%>
-    
-  	</dl>
+  	<dl class="exp_form"> 
+    </dl>
 </div>
 <% end %>
 
 
+
 <script>
 $(document).ready(function(){
-    $(".addbutton").click(function(){
-   	   $( ".past_experience").remove("dl");
-       //$( ".past_experience" ).append("<p> good </p>");
-    });
+    //$(".exp_form").remove()
 });
+
+$(window).load(function(){
+  //$(".exp_form").remove()
+  var is_added = false;
+  $(".addbutton").click(function(){
+      // $(".past_experience").html('experience_form.html.erb');
+      //$("form").clone().appendTo('.past_experience');
+      if(is_added == false){
+          $( ".past_experience" ).append('<dl class="exp_form"> <dt>Company </dt><dd><%= text_field_tag :company_name, params[:company_name],placeholder: "Company Name" %></dd><dt>Description </dt><dd><%= text_field_tag :description, params[:description], placeholder: "Description" %></dd><dt>Location </dt><dd><%= text_field_tag :location, params[:location], placeholder: "Location" %></dd><dt>Job Title </dt><dd><%= text_field_tag :job, params[:job], placeholder: "Job Title" %></dd><dt>Salary </dt><dd><%= text_field_tag :salary, params[:salary],placeholder: "Salary" %></dd><%= submit_tag "Update", class: "button blue pull-right"%><%= submit_tag "Cancle", class: "button red pull-right"%></dl>');
+          is_added = true;
+      }
+  });
+})
+
+
 </script>
