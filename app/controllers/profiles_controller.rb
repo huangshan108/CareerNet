@@ -121,4 +121,19 @@ class ProfilesController < ApplicationController
     id = params[:id] # retrieve student ID from URI route
     @college = College.find(id)
   end
+
+  def update_past_experience
+  	student = Student.find(params[:id])
+  	work_experience = {:company_name => params[:company_name],
+                       :student_id => params[:id],
+                       :location => params[:location],
+                       :salary => params[:salary],
+                       :description => params[:description],
+                       :job => params[:job]
+                       }
+    student.WorkExperience.create(work_experience);
+    student.save!              
+  end
+
+
 end
