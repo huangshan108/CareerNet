@@ -131,8 +131,9 @@ class ProfilesController < ApplicationController
                        :description => params[:description],
                        :job => params[:job]
                        }
-    student.Workexperience.create(work_experience);
-    student.save!              
+    student.workexperiences.create(work_experience);
+    student.save!
+    redirect_to(single_student_profile_path(student))
   end
 
 

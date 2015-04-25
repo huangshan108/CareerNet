@@ -137,18 +137,22 @@
   	<dl class="exp_form"> 
     </dl>
 </div>
+<div id="update_div">
+  <button class="update_exp_button">Update</button>
+</div>
 <% end %>
+<div id="cancel_div">
+  <button class="cancelbutton">Cancel</button>
+</div>
+
+
 
 
 
 <script>
-$(document).ready(function(){
-    //$(".exp_form").remove()
-});
-
-$(window).load(function(){
-  //$(".exp_form").remove()
   var is_added = false;
+  document.getElementById('cancel_div').style.visibility='hidden';
+  document.getElementById('update_div').style.visibility='hidden';
   $(".addbutton").click(function(){
       // $(".past_experience").html('experience_form.html.erb');
       //$("form").clone().appendTo('.past_experience');
@@ -164,13 +168,21 @@ $(window).load(function(){
      '<dd><%= text_field_tag :job, params[:job], placeholder: "Job Title" %></dd>' +
      '<dt>Salary </dt>' +
      '<dd><%= text_field_tag :salary, params[:salary],placeholder: "Salary" %></dd>' +
-     '<%= submit_tag "Update", class: "button blue pull-right"%>' +
-     '<%= submit_tag "Cancle", class: "button red pull-right"%>' +
      '</dl>');
           is_added = true;
+          document.getElementById('cancel_div').style.visibility='visible';
+          document.getElementById('update_div').style.visibility='visible';
       }
   });
-})
 
+  $(".cancelbutton").click(function(){
+    if (is_added == true){
+      is_added = false;
+      $(".exp_form").remove();  
+      document.getElementById('cancel_div').style.visibility='hidden';
+      document.getElementById('update_div').style.visibility='visible';
+
+    }
+  });
 
 </script>
