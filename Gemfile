@@ -76,3 +76,6 @@ gem 'active_record_union'
 gem 'annotate', '~> 2.6.6'
 gem 'selenium-webdriver'
 gem "font-awesome-rails"
+
+# Gem for seeding client data
+gem 'roo', '~> 2.0.0'
