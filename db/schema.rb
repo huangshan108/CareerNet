@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418082139) do
+ActiveRecord::Schema.define(version: 20150425212809) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -77,8 +77,8 @@ ActiveRecord::Schema.define(version: 20150418082139) do
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.time     "time_start"
-    t.time     "time_end"
+    t.datetime "time_start"
+    t.datetime "time_end"
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -130,9 +130,9 @@ ActiveRecord::Schema.define(version: 20150418082139) do
   add_index "staffs", ["account_id"], name: "index_staffs_on_account_id"
 
   create_table "students", force: :cascade do |t|
+    t.integer  "major_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "major_id"
     t.date     "graduation_date"
     t.integer  "college_id"
     t.string   "resume_link"
@@ -161,9 +161,15 @@ ActiveRecord::Schema.define(version: 20150418082139) do
     t.integer "skill_id"
   end
 
-  create_table "visualizations", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "workexperiences", force: :cascade do |t|
+    t.string   "company_name"
+    t.string   "location"
+    t.string   "job"
+    t.integer  "salary"
+    t.integer  "student_id"
+    t.text     "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end
