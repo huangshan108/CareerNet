@@ -131,7 +131,7 @@ class ProfilesController < ApplicationController
                        :description => params[:description],
                        :job => params[:job]
                        }
-    student.WorkExperience.create(work_experience);
+    student.Workexperience.create(work_experience);
     student.save!              
   end
 
