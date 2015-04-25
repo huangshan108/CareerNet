@@ -1,19 +1,14 @@
-<dl class="exp_form"> 
-     <dt>Company </dt>
-     <dd><%= text_field_tag :company_name, params[:company_name],placeholder: 'Company Name' %></dd>
-    
-     <dt>Description </dt>
-     <dd><%= text_field_tag :description, params[:description], placeholder: 'Description' %></dd>
-    
-     <dt>Location </dt>
-     <dd><%= text_field_tag :location, params[:location], placeholder: 'Location' %></dd>
-    
-     <dt>Job Title </dt>
-     <dd><%= text_field_tag :job, params[:job], placeholder: 'Job Title' %></dd>
-    
-     <dt>Salary </dt>
-     <dd><%= text_field_tag :salary, params[:salary],placeholder: 'Salary' %></dd>
-    
-     <%= submit_tag "Update", class: "button blue pull-right"%>
-     <%= submit_tag "Cancle", class: "button red pull-right"%>    
-</dl>
+'<dl class="exp_form">' + 
+     '<dt>Company </dt>' +
+     '<dd><%= text_field_tag :company_name, params[:company_name],placeholder: "Company Name" %></dd>' +
+     '<dt>Description </dt>' +
+     '<dd><%= text_field_tag :description, params[:description], placeholder: "Description" %></dd>' +
+     '<dt>Location </dt>' +
+     '<dd><%= text_field_tag :location, params[:location], placeholder: "Location" %></dd>' +
+     '<dt>Job Title </dt>' +
+     '<dd><%= text_field_tag :job, params[:job], placeholder: "Job Title" %></dd>' +
+     '<dt>Salary </dt>' +
+     '<dd><%= text_field_tag :salary, params[:salary],placeholder: "Salary" %></dd>' +
+     '<%= submit_tag "Update", class: "button blue pull-right"%>' +
+     '<%= submit_tag "Cancle", class: "button red pull-right"%>' +
+'</dl>'
