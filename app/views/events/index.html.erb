@@ -21,7 +21,10 @@
 </table>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('.data-table').dataTable();
+    $('.data-table').dataTable({
+      "pageLength": 25,
+      "lengthMenu": [ 25, 50, 100 ]
+    });
   })
 </script>
 <%if @current_user.account_type == 2%>

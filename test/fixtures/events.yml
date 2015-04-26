@@ -5,8 +5,8 @@
 #  id          :integer          not null, primary key
 #  title       :string
 #  description :text
-#  time_start  :time
-#  time_end    :time
+#  time_start  :datetime
+#  time_end    :datetime
 #  location    :string
 #  created_at  :datetime
 #  updated_at  :datetime
