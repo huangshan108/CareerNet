@@ -7,7 +7,7 @@ base_username = "careernet.company"
 companies = File.open(File.join(Rails.root, 'db', 'seeds', 'db_seed_data/company_names.txt')).read
 companies.each_line do |line|
 	company = {}
-	company[:name] = line
+	company[:name] = line.strip
 	company[:brief] = brief
 	company[:website] = "http://www.berkeley.edu/"
 	company[:address] = "387 Soda Hall, Berkeley, CA 94720"

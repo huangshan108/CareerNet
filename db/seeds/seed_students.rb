@@ -2,7 +2,7 @@ require 'time'
 require 'references'
 require 'roo'
 
-puts "Seeding Client Data..."
+puts "Seeding Students..."
 
 # Open client data
 sheet = Roo::Spreadsheet.open(File.join(Rails.root, 'db', 'seeds', 'db_seed_data/client_data.xlsx'))
@@ -33,7 +33,7 @@ indestries_map = {
 }
 
 indestries_map.keys.each do |industry|
-    Industry.create!(:industry => industry)
+    Industry.create!(:name => industry)
 end
 
 sheet.each(last_name: 'Last_Name', first_name: 'First_Name', gender: 'Gender',
@@ -68,7 +68,10 @@ sheet.each(last_name: 'Last_Name', first_name: 'First_Name', gender: 'Gender',
     s.update_attributes(:account_id => a.id)
 
     experience = {}
-    experience[:org_name] = hash[:company]
+    begin
+        experience[:company_id] = Company.find_by_name(hash[:company].strip).id
+    rescue
+    end
     experience[:job_title] = hash[:job_title]
     begin
         experience[:industry_id] = indestries_map[hash[:industry]]    
