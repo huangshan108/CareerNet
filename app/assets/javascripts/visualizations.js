@@ -4,6 +4,10 @@
 
 var WIDTH = 500;
 var HEIGHT = 200;
+
+var general_stats_template = ['industry', 'organization'];
+var stats_table;
+
 function reqToreqData(){
     var reqData = {
         "country": [],
@@ -18,14 +22,25 @@ function reqToreqData(){
     return reqData;
 }
 
-init();
-function init(){
-    $('.request').prop("checked", true);
+
+//       <tbody>
+
+//       </tbody>
+//     </table>
+// </div>';
+
+// $(function() {
+    console.log("here");
+    var template = $('h1').data("template");
+    init(template);
+// });
+
+function init(template){
     var reqInitData = reqToreqData();
 
     $.ajax({
         type: "GET",
-        url: '/smart-report/data',
+        url: '/smart-report/' + template + '-data',
         data: reqInitData,
         dataType: 'json',
         success: function(json){
@@ -34,10 +49,15 @@ function init(){
                 alert("There are too few data that fit the category for meaningful visualization.");
                 return;
             }
-            drawPie(json['countries'], "country");
-            drawPie(json['genders'], "gender");
-            drawPie(json['classes'], "class");
-            drawPie(json['majors'], "major");
+            // need to render table
+            if (general_stats_template.indexOf(template) != -1 ) {
+                renderTable(json, template);
+            } else if (template == "overview") {
+                drawPie(json['countries'], "country");
+                drawPie(json['genders'], "gender");
+                drawPie(json['classes'], "class");
+                drawPie(json['majors'], "major");
+            };
             return json;
         },
         error: function(){
@@ -48,15 +68,45 @@ function init(){
 
     var meow = d3.selectAll('.request')
         .on("click", function() {
-            updateData(reqToreqData());
+            updateData(template, reqToreqData());
+            renderTable(json, template);
         });
+
+   
+
 }
 
+function renderTable(data, template) {
+    // console.log(data);
+    $('.dataTables_wrapper').remove();
+    stats_table_header = '<table class="general-stats-table data-table table table-striped"><thead><tr><th style="text-transform: capitalize;">'+template+'</th><th> Student Percentage </th><th> Student Count </th><th> Highest Paid </th><th> Lowest Paid </th><th>Average Paid</th><th>Mode Paid</th><th>Median Paid</th><th>Standard Deviation</th><th>1st Quartile</th><th>2nd Quartile</th><th>3rd Quartile</th></tr></thead>';
+    stats_table_body = "<tbody>";
+    $.each(data, function(i, elem) {
+        stats_table_body += "<tr><th>"+ elem.class_name+"</th>"
+                         + "<th>"+ (elem.student_percentage*100).toFixed(2)+" %</th>"
+                         + "<th>"+ elem.stats.number+"</th>"
+                         + "<th>$"+ elem.stats.max.toFixed(0)+"</th>"
+                         + "<th>$"+ elem.stats.min.toFixed(0)+"</th>"
+                         + "<th>$"+ elem.stats.mean.toFixed(0)+"</th>"
+                         + "<th>$"+ elem.stats.mode.toFixed(0)+"</th>"
+                         + "<th>$"+ elem.stats.median.toFixed(0)+"</th>"
+                         + "<th>$"+ elem.stats.standard_deviation.toFixed(0)+"</th>"
+                         + "<th>$"+ elem.stats.q1.toFixed(0)+"</th>"
+                         + "<th>$"+ elem.stats.q2.toFixed(0)+"</th>"
+                         + "<th>$"+ elem.stats.q3.toFixed(0)+"</th></tr>";
+    })
+    $('.general-stats-table-container').html(stats_table_header+stats_table_body+ "</tbody></table>");
+    $('.general-stats-table').dataTable({
+      "pageLength": 25,
+      "lengthMenu": [ 25, 50, 100 ],
+      "scrollX": true
+    });
+}
 
-function updateData(reqData){
+function updateData(template, reqData){
     $.ajax({
         type: "GET",
-        url: '/smart-report/data',
+        url: '/smart-report/' + template + '-data',
         data: reqData,
         dataType: 'json',
         success: function(json){

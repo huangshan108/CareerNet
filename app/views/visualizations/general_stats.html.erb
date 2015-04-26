@@ -1,0 +1,9 @@
+<h1 data-template="<%= @template_name.downcase %>"><%= "Smart Data Report - #{@template_name}" %></h1>
+<%= render 'options' %>
+
+<div class="general-stats-pie">
+	
+</div>
+<div class="general-stats-table-container">
+</div>
+<%= javascript_include_tag 'visualizations.js' %>
