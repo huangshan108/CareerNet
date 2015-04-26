@@ -6,6 +6,25 @@
     });
   });
 </script>
+<style>
+  .past_ex {
+    display: inline-block;
+
+  }
+  .update_exp_button {
+    background-color: #78c272;
+  }
+
+  .cancelbutton {
+    background-color: #6392c0;
+  }
+
+  .blue_button {
+    background-color: #6392c0;
+
+  }
+
+</style>
 <dl class="dl-horizontal">
   <dt> First Name </dt>
     <% if @student.first_name %>
@@ -121,7 +140,7 @@
   	  </tr>
   	  <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
   	  <%= form_tag(:action => 'delete_past_experience', :ex_id => ex.id) do %>
-		<button> Delete </button>
+		<button class="blue_button"> Delete </button>
 	  <% end %>
 	  <% end %>
   	  <br>
@@ -136,12 +155,12 @@
       </dl>
   </div>
   <div id="update_div">
-    <button class="update_exp_button green pull-left">Update</button>
+    <button class="update_exp_button pull-left">Update</button>
   </div>
   <% end %>
 
   <div id="cancel_div">
-    <button class="cancelbutton red pull-left">Cancel</button>
+    <button class="cancelbutton pull-left">Cancel</button>
   </div>
   <div class="pull-right button-group">
     <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
