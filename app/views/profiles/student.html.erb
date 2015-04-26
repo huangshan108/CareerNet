@@ -108,16 +108,15 @@
    <h2> Past Experience </h2>
     <% @student.workexperiences.each do |ex| %>
   	  <tr class="past_ex">
-  	    <td><%= ex.id %></td>
-  	  
+  	    <h3> Company Name </h3>
   	    <td><%= ex.company_name %></td>
-  	    
+  	    <h3> Company Location </h3>
   	    <td><%= ex.location %></td>
-  	    
+  	    <h3> Salary </h3>
   	    <td><%= ex.salary %></td>
-  	    
+  	    <h3> Description </h3>
   	    <td><%= ex.description %></td>
-  	    
+  	    <h3> Job Title </h3>
   	    <td><%= ex.job%></td>
   	  </tr>
   	  <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
@@ -137,12 +136,12 @@
       </dl>
   </div>
   <div id="update_div">
-    <button class="update_exp_button">Update</button>
+    <button class="update_exp_button green pull-left">Update</button>
   </div>
   <% end %>
 
   <div id="cancel_div">
-    <button class="cancelbutton">Cancel</button>
+    <button class="cancelbutton red pull-left">Cancel</button>
   </div>
   <div class="pull-right button-group">
     <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
@@ -159,8 +158,8 @@
       // $(".past_experience").html('experience_form.html.erb');
       //$("form").clone().appendTo('.past_experience');
       if(is_added == false){
-          $( ".past_experience" ).append('<h3> Add experience </h3>' +
-      '<dl class="exp_form">' + 
+          $( ".past_experience" ).append('<dl class="exp_form">' + 
+     '<h3> Add experience </h3>' +
      '<dt>Company </dt>' +
      '<dd><%= text_field_tag :company_name, params[:company_name],placeholder: "Company Name" %></dd>' +
      '<dt>Description </dt>' +
