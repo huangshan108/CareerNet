@@ -7,6 +7,5 @@
 #
 
 class Skill < ActiveRecord::Base
-	has_many :studentskills
-	has_many :students, through: :studentskills
+	has_and_belongs_to_many :students
 end

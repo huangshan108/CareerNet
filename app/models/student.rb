@@ -28,6 +28,7 @@
 #
 
 
+
 require 'will_paginate'
 
 class Student < ActiveRecord::Base
@@ -47,9 +48,7 @@ class Student < ActiveRecord::Base
   has_many :interviews
   has_many :companies, :through => :interviews
     
-  has_many :studentskills
-  has_many :skills, through: :studentskills
-
+  has_and_belongs_to_many :skills
   has_many :experiences
 
 
