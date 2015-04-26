@@ -28,7 +28,7 @@ module GeneralStats
       data = {}
       d = i.students.select(:salary).map(&:salary).compact
       data[:class_name] = i.name
-      data[:stats] = data.descriptive_statistics
+      data[:stats] = d.descriptive_statistics
       total += data[:stats][:number]
       response << data
     end
