@@ -128,30 +128,25 @@
   	  <br>
   	  <% end %>
   </tbody>
-  
-  
-  
-  
-<button class="addbutton"> + </button>
-<%= form_tag(:action => 'update_past_experience', :id => @student.id) do %>
-<div class="past_experience">
-    <dl class="exp_form"> 
-    </dl>
-</div>
-<div id="update_div">
-  <button class="update_exp_button">Update</button>
-</div>
-<% end %>
-
-<div id="cancel_div">
-  <button class="cancelbutton">Cancel</button>
-</div>
-
 </dl>
 <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
-<div class="pull-right button-group">
-  <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
-</div> 
+  <button class="addbutton"> + </button>
+  <%= form_tag(:action => 'update_past_experience', :id => @student.id) do %>
+  <div class="past_experience">
+      <dl class="exp_form"> 
+      </dl>
+  </div>
+  <div id="update_div">
+    <button class="update_exp_button">Update</button>
+  </div>
+  <% end %>
+
+  <div id="cancel_div">
+    <button class="cancelbutton">Cancel</button>
+  </div>
+  <div class="pull-right button-group">
+    <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
+  </div> 
 <%end%>
 
 
