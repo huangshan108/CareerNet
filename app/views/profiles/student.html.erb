@@ -107,7 +107,9 @@
    
    <h2> Past Experience </h2>
     <% @student.workexperiences.each do |ex| %>
-  	  <tr>
+  	  <tr class="past_ex">
+  	    <td><%= ex.id %></td>
+  	  
   	    <td><%= ex.company_name %></td>
   	    
   	    <td><%= ex.location %></td>
@@ -118,9 +120,18 @@
   	    
   	    <td><%= ex.job%></td>
   	  </tr>
+  	  <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
+  	  <%= form_tag(:action => 'delete_past_experience', :ex_id => ex.id) do %>
+		<button> Delete </button>
+	  <% end %>
+	  <% end %>
   	  <br>
   	  <% end %>
   </tbody>
+  
+  
+  
+  
 <button class="addbutton"> + </button>
 <%= form_tag(:action => 'update_past_experience', :id => @student.id) do %>
 <div class="past_experience">
@@ -181,5 +192,4 @@
 
     }
   });
-
 </script>

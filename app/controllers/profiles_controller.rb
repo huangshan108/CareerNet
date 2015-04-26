@@ -136,5 +136,12 @@ class ProfilesController < ApplicationController
     redirect_to(single_student_profile_path(student))
   end
 
+  def delete_past_experience
+  	student = Student.find(params[:id])
+    student.workexperiences.destroy(params[:ex_id]);
+    student.save!
+    redirect_to(single_student_profile_path(student))
+  end
+
 
 end
