@@ -103,7 +103,23 @@
     <% end %>
   </dd>
 
-  
+<tbody>
+   <h2> Past Experience </h2>
+    <% @student.workexperiences.each do |ex| %>
+  	  <tr>
+  	    <td><%= ex.company_name %></td>
+  	    
+  	    <td><%= ex.location %></td>
+  	    
+  	    <td><%= ex.salary %></td>
+  	    
+  	    <td><%= ex.description %></td>
+  	    
+  	    <td><%= ex.job%></td>
+  	  </tr>
+  	  <br>
+  	  <% end %>
+  </tbody>
 
 
 </dl>
