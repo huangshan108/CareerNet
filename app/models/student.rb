@@ -27,6 +27,7 @@
 #  company_id       :integer
 #
 
+
 require 'will_paginate'
 
 class Student < ActiveRecord::Base
