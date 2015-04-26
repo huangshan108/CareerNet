@@ -22,7 +22,7 @@ class Company < ActiveRecord::Base
 	has_many :jobs
 	has_many :applications
 	has_many :interviews
-	has_many :students, :through => :applications
+	has_many :students, :class_name => "Experience"
 
 	def getInterviews(start_date, end_date)
 		self.interviews.select{|i| 
@@ -40,4 +40,9 @@ class Company < ActiveRecord::Base
 		[]
 	end
 
+  def self.get_industry_vis_data
+		response = GeneralStats.get_vis_data("Company")
+		# possible pre processing before return
+		return response
+  end
 end

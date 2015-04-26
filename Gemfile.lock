@@ -97,6 +97,7 @@ GEM
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
+    descriptive_statistics (2.5.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
     email_validator (1.5.0)
@@ -271,6 +272,7 @@ DEPENDENCIES
   cucumber-rails
   d3-rails
   database_cleaner
+  descriptive_statistics
   email_validator
   factory_girl_rails
   faker

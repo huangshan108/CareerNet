@@ -79,3 +79,5 @@ gem "font-awesome-rails"
 
 # Gem for seeding client data
 gem 'roo', '~> 2.0.0'
+
+gem 'descriptive_statistics'
