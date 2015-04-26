@@ -104,6 +104,7 @@
   </dd>
 
 <tbody>
+   
    <h2> Past Experience </h2>
     <% @student.workexperiences.each do |ex| %>
   	  <tr>
@@ -120,7 +121,20 @@
   	  <br>
   	  <% end %>
   </tbody>
+<button class="addbutton"> + </button>
+<%= form_tag(:action => 'update_past_experience', :id => @student.id) do %>
+<div class="past_experience">
+    <dl class="exp_form"> 
+    </dl>
+</div>
+<div id="update_div">
+  <button class="update_exp_button">Update</button>
+</div>
+<% end %>
 
+<div id="cancel_div">
+  <button class="cancelbutton">Cancel</button>
+</div>
 
 </dl>
 <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
@@ -128,3 +142,44 @@
   <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
 </div> 
 <%end%>
+
+
+
+<script>
+  var is_added = false;
+  document.getElementById('cancel_div').style.visibility='hidden';
+  document.getElementById('update_div').style.visibility='hidden';
+  $(".addbutton").click(function(){
+      // $(".past_experience").html('experience_form.html.erb');
+      //$("form").clone().appendTo('.past_experience');
+      if(is_added == false){
+          $( ".past_experience" ).append('<h3> Add experience </h3>' +
+      '<dl class="exp_form">' + 
+     '<dt>Company </dt>' +
+     '<dd><%= text_field_tag :company_name, params[:company_name],placeholder: "Company Name" %></dd>' +
+     '<dt>Description </dt>' +
+     '<dd><%= text_field_tag :description, params[:description], placeholder: "Description" %></dd>' +
+     '<dt>Location </dt>' +
+     '<dd><%= text_field_tag :location, params[:location], placeholder: "Location" %></dd>' +
+     '<dt>Job Title </dt>' +
+     '<dd><%= text_field_tag :job, params[:job], placeholder: "Job Title" %></dd>' +
+     '<dt>Salary </dt>' +
+     '<dd><%= text_field_tag :salary, params[:salary],placeholder: "Salary" %></dd>' +
+     '</dl>');
+          is_added = true;
+          document.getElementById('cancel_div').style.visibility='visible';
+          document.getElementById('update_div').style.visibility='visible';
+      }
+  });
+
+  $(".cancelbutton").click(function(){
+    if (is_added == true){
+      is_added = false;
+      $(".exp_form").remove();  
+      document.getElementById('cancel_div').style.visibility='hidden';
+      document.getElementById('update_div').style.visibility='hidden';
+
+    }
+  });
+
+</script>
