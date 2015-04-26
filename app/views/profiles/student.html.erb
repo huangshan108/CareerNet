@@ -23,6 +23,10 @@
     background-color: #6392c0;
 
   }
+  .ex_title {
+      font-size:20px;
+      
+  }
 
 </style>
 <dl class="dl-horizontal">
@@ -127,15 +131,15 @@
    <h2> Past Experience </h2>
     <% @student.workexperiences.each do |ex| %>
   	  <tr class="past_ex">
-  	    <h3> Company Name </h3>
+  	    <div class="ex_title"> Company Name </div>
   	    <td><%= ex.company_name %></td>
-  	    <h3> Company Location </h3>
+  	    <div class="ex_title"> Company Location </div>
   	    <td><%= ex.location %></td>
-  	    <h3> Salary </h3>
+  	    <div class="ex_title"> Salary </div>
   	    <td><%= ex.salary %></td>
-  	    <h3> Description </h3>
+  	    <div class="ex_title"> Description </div>
   	    <td><%= ex.description %></td>
-  	    <h3> Job Title </h3>
+  	    <div class="ex_title"> Job Title </div>
   	    <td><%= ex.job%></td>
   	  </tr>
   	  <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
