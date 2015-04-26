@@ -1,6 +1,9 @@
 require 'faker'
 
-FactoryGirl.define do  factory :experience do
+FactoryGirl.define do  factory :industry do
+    
+  end
+  factory :experience do
     industry "MyString"
     yr_exp 1
     salary 1

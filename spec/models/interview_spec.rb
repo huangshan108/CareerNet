@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: interviews
+#
+#  id             :integer          not null, primary key
+#  company_id     :integer
+#  student_id     :integer
+#  application_id :integer
+#  time_slot      :integer
+#  day            :date
+#  description    :text
+#  note           :text
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 require 'spec_helper'
 
 describe Interview do
