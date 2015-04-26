@@ -14,6 +14,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  industry_id :integer
+#  company_id  :integer
 #
 
 class Experience < ActiveRecord::Base
