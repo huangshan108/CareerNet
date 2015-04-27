@@ -79,3 +79,6 @@ gem "font-awesome-rails"
 
 # Gem for seeding client data
 gem 'roo', '~> 2.0.0'
+
+# Gem for U.S. map d3
+gem 'topojson-rails'
