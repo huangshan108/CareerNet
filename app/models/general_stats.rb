@@ -27,10 +27,12 @@ module GeneralStats
     class_name.classify.constantize.all.each do |i|
       data = {}
       d = i.students.select(:salary).map(&:salary).compact
-      data[:class_name] = i.name
-      data[:stats] = d.descriptive_statistics
-      total += data[:stats][:number]
-      response << data
+      if d != []
+        data[:class_name] = i.name
+        data[:stats] = d.descriptive_statistics
+        total += data[:stats][:number]
+        response << data
+      end
     end
     response.each do |r|
       r[:student_percentage] = r[:stats][:number].fdiv(total)

@@ -42,7 +42,7 @@ class Company < ActiveRecord::Base
 		[]
 	end
 
-  def self.get_industry_vis_data
+  def self.get_company_vis_data
 		response = GeneralStats.get_vis_data("Company")
 		# possible pre processing before return
 		return response

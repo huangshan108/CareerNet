@@ -85,15 +85,15 @@ function renderTable(data, template) {
         stats_table_body += "<tr><th>"+ elem.class_name+"</th>"
                          + "<th>"+ (elem.student_percentage*100).toFixed(2)+" %</th>"
                          + "<th>"+ elem.stats.number+"</th>"
-                         + "<th>$"+ elem.stats.max.toFixed(0)+"</th>"
-                         + "<th>$"+ elem.stats.min.toFixed(0)+"</th>"
-                         + "<th>$"+ elem.stats.mean.toFixed(0)+"</th>"
-                         + "<th>$"+ elem.stats.mode.toFixed(0)+"</th>"
-                         + "<th>$"+ elem.stats.median.toFixed(0)+"</th>"
-                         + "<th>$"+ elem.stats.standard_deviation.toFixed(0)+"</th>"
-                         + "<th>$"+ elem.stats.q1.toFixed(0)+"</th>"
-                         + "<th>$"+ elem.stats.q2.toFixed(0)+"</th>"
-                         + "<th>$"+ elem.stats.q3.toFixed(0)+"</th></tr>";
+                         + "<th>$"+ formatNum(elem.stats.max, 0)+"</th>"
+                         + "<th>$"+ formatNum(elem.stats.min, 0)+"</th>"
+                         + "<th>$"+ formatNum(elem.stats.mean, 0)+"</th>"
+                         + "<th>$"+ formatNum(elem.stats.mode, 0)+"</th>"
+                         + "<th>$"+ formatNum(elem.stats.median, 0)+"</th>"
+                         + "<th>$"+ formatNum(elem.stats.standard_deviation, 0)+"</th>"
+                         + "<th>$"+ formatNum(elem.stats.q1, 0)+"</th>"
+                         + "<th>$"+ formatNum(elem.stats.q2, 0)+"</th>"
+                         + "<th>$"+ formatNum(elem.stats.q3, 0)+"</th></tr>";
     })
     $('.general-stats-table-container').html(stats_table_header+stats_table_body+ "</tbody></table>");
     $('.general-stats-table').dataTable({
@@ -101,6 +101,15 @@ function renderTable(data, template) {
       "lengthMenu": [ 25, 50, 100 ],
       "scrollX": true
     });
+}
+
+// this function takes in a number and decimal place we want to leave after formatting
+function formatNum(num, decimal) {
+    if (num != null) {
+        return num.toFixed(decimal);
+    } else {
+        return "N/A";
+    }
 }
 
 function updateData(template, reqData){
