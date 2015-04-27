@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150426144326) do
+ActiveRecord::Schema.define(version: 20150427235255) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(version: 20150426144326) do
     t.integer  "base_salary"
     t.string   "title"
     t.integer  "company_id"
+    t.integer  "class_of"
   end
 
   add_index "students", ["major_id"], name: "index_students_on_major_id"
