@@ -79,3 +79,8 @@ gem "font-awesome-rails"
 
 # Gem for seeding client data
 gem 'roo', '~> 2.0.0'
+
+# Gem for authentication, authorization and switch users
+gem 'devise'
+gem "pundit"
+gem "switch_user"
