@@ -4,7 +4,7 @@ $(document).ready(function() {
     // Dependencies needed for US Map viz
     var dependencies = {};
     dependencies.convertIdToStateCode = d3.map();
-    dependencies.convertStateCodeToName = d3.map();
+    dependencies.convertStateNameToCode = d3.map();
 
     //Set all checkboxes to true initially
     $('.request').prop("checked", true);
@@ -23,7 +23,7 @@ $(document).ready(function() {
       .defer(d3.tsv, "../us-state-names.tsv", function(d) {
         // On the fly creation of state name/id mappings
         dependencies.convertIdToStateCode.set(d.id, d.code);
-        dependencies.convertStateCodeToName.set(d.code, d.name);
+        dependencies.convertStateNameToCode.set(d.name, d.code);
       })
       .await(ready);
 
@@ -32,7 +32,7 @@ $(document).ready(function() {
           d3.select("div#usmap"),
           response,
           dependencies.convertIdToStateCode,
-          dependencies.convertStateCodeToName
+          dependencies.convertStateNameToCode
       );
       updateData(usCashMap);
     }
@@ -72,6 +72,7 @@ function updateData(usCashMap){
             console.log("checkbox checked and request sent");
             console.log(json);
             //update map
+            usCashMap.render(json['usa_avg']);
             return json;
         },
         error: function(){
@@ -184,15 +185,19 @@ USCashMap.prototype.render = function (data) {
     // Hack needed to access class object in functions defined in this scope
     var that = this;
 
+    console.log("inrender");
+
     var moneyColorScale = d3.scale.sqrt()
         .domain([
             d3.min(data, function (d) { return d['average']; }),
             d3.max(data, function (d) { return d['average']; })
         ])
         .range(['#E8F5E9', '#4CAF50']).nice();
+        console.log(d3.min(data, function (d) { return d['average']; }));
+        console.log(d3.max(data, function (d) { return d['average']; }));
 
     this.states = this.stateGroup.selectAll('path')
-        .data(data, function(d) { return d['state']; });
+        .data(data, function(d) { return that.stateNameMap[d['label']]; });
 
     /** Enter phase **/
     // No enter phase. We'll be binding to the state SVG paths that have already 
@@ -205,7 +210,9 @@ USCashMap.prototype.render = function (data) {
             // Hint: take a look at moneyColorScale defined above
 
             // Implement
-            return moneyColorScale(d['total_amount']);  // Return a hexcode
+            console.log("in update");
+            console.log(d['average']);
+            return moneyColorScale(d['average']);  // Return a hexcode
         });
 
     /** Exit phase **/
@@ -225,6 +232,7 @@ USCashMap.prototype.render = function (data) {
      *  (3) Update the inspection information text with the selected state using `setInspectionInfo`
      *  (4) set internal state that signals the selection is not due to a click (already done for you)
      */
+    /*
     this.states.on('mouseover', function(d, e, p){
         that.setSelectionClickBoolean(false);
         // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
@@ -237,6 +245,7 @@ USCashMap.prototype.render = function (data) {
         var fullState = that.stateNameMap.get(d['state']);
         that.setInspectionInfo(fullState, d['total_amount']);
     });
+    */
 
     /*
      * Mouseout event handler
@@ -249,6 +258,7 @@ USCashMap.prototype.render = function (data) {
      *  (3) Make sure the colors of every state are the same as it was prior to any events.
      *      (a) this means using the original `moneyColorScale` mapping
      */
+    /*
     this.states.on('mouseout', function(d, e, p){
         that.setSelectionClickBoolean(false);
         // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
@@ -262,6 +272,7 @@ USCashMap.prototype.render = function (data) {
             return moneyColorScale(d['total_amount']);
         });
     });
+    */
 
     /*
      * Click event handler
@@ -276,6 +287,7 @@ USCashMap.prototype.render = function (data) {
      *  (3) Update the inspection information text with the selected state using `setInspectionInfo`
      *  (4) set internal state that signals the selection is due to a click (already done for you)
      */
+    /*
     this.states.on('click', function(d, e, p){
         d3.event.stopPropagation();
         that.setSelectionClickBoolean(true);
@@ -289,6 +301,7 @@ USCashMap.prototype.render = function (data) {
         var fullState = that.stateNameMap.get(d['state']);
         that.setInspectionInfo(fullState, d['total_amount']);
     });
+    */
 };
 
 
