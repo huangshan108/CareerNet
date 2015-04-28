@@ -143,15 +143,11 @@
 
   <div id="cancel_div">
     <button class="cancelbutton pull-left">Cancel</button>
-  </div>
-  <div class="pull-right button-group">
-    <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
   </div> 
-<%end%>
+
 
 
 <!--   project buttton -->
- <button class="addbutton_project" name="add_project"> + </button>
   <%= form_tag(:action => 'update_past_project', :id => @student.id) do %>
   <div class="past_project">
       <dl class="proj_form"> 
@@ -166,8 +162,9 @@
     <button class="cancelbutton_project pull-left">Cancel</button>
   </div> 
 
+<br>
 <div class="past_student_projects">
-<h2> Past Project </h2>
+	<h2 class="past_proj"> Past Project </h2>
     <% @student.projects.each do |proj| %>
   	  <tr class="past_ex">
   	    <div class="ex_title"> Project Name </div>
@@ -190,6 +187,11 @@
   	  <br>
   	  <% end %>
 </div>
+<button class="addbutton_project pull-left" name="add_project"> + </button>
+<div class="pull-right button-group">
+    <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
+</div>
+<%end%>
 
 <script>
   var is_added = false;
@@ -243,7 +245,6 @@
   });
 
   $(".cancelbutton").click(function(){
-    alert("here");
     if (is_added == true){
       is_added = false;
       $(".exp_form").remove();  
@@ -253,7 +254,6 @@
     
   });
   $(".cancelbutton_project").click(function (){
-    alert("project cancel")
     if (is_added_project == true){
       is_added_project = false;
       $(".project_form").remove();
@@ -261,6 +261,4 @@
       document.getElementById('update_div_project').style.visibility='hidden';
     }
   });
-  
-
 </script>
