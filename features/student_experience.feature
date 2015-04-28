@@ -27,28 +27,23 @@ Background: Adding jobs to database
     And I press "Log In" button
     Then I should see "Welcome to CareerNet"
 
-    Given the following work experience exists:
-    |Title      |Employer   |Salary     |student_id|
-    |Engineer   |Apple      |100000     |1         |
-
+    @javascript
     Scenario: Adding a experience
-    Given I am on edit student profile page
-    And I add a new "Work Experience"
-    Then I enter "Software Engineer" into "Title"
-    And I enter "Apple" into "Employer"
-    And I enter "120000" into "Salary"
-    And I press "Save" button
-    Then I should see my "Apple Work Experience" displayed
+    Given I am on student profile page
+    And I should see "Past Experience"
+    When I press "+"
+    Then I should see "Add experience"
+    And I should see "update"
+    When I fill in the following:
+     | company_name| Riot       |
+     | salary      | 70000      |
+     | location    | Berkeley   |
+     | description | Full stack |
+     | job         | Software Engineering|
+    When I press "Update"
+    Then I am on student profile page
+    And I should see "Riot"
+    And I should see "70000"
+    And I should see "Berkeley"
+    And I should see "Software Engineering"
 
-    Scenario: Adding a different experience
-    Given I am on edit student profile page
-    And I add a new "Project Experience"
-    Then I enter "CareerNet" into "Project Title"
-    And I enter "Backend Developer" into "Role"
-    And I press "Save Button"
-    Then I should see my "CareerNet Project Experience" displayed
-
-    Scenario: Deleting an experience
-    Given I am on edit student profile page
-    And I delete my "Apple Work Experience"
-    Then my "Apple Work Experience" is no longer displayed
