@@ -1,6 +1,12 @@
 require 'faker'
 
-FactoryGirl.define do  factory :workexperience do
+FactoryGirl.define do  factory :activity do
+    
+  end
+  factory :project do
+    
+  end
+  factory :workexperience do
     
   end
   factory :studentworkexperience do
