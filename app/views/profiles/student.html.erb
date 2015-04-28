@@ -166,19 +166,21 @@
     <button class="cancelbutton_project pull-left">Cancel</button>
   </div> 
 
+<div class="past_student_projects">
 <h2> Past Project </h2>
     <% @student.projects.each do |proj| %>
   	  <tr class="past_ex">
   	    <div class="ex_title"> Project Name </div>
-  	    <td><%= ex.project_name %></td>
+  	    <td><%= proj.project_name %></td>
   	    <div class="ex_title"> position </div>
-  	    <td><%= ex.position %></td>
+  	    <td><%= proj.position %></td>
   	    <div class="ex_title"> Description </div>
-  	    <td><%= ex.description %></td>
-  	    <div class="ex_title"> Start Date </div>
-  	    <td><%= ex.start_date%></td>
-  	    <div class="ex_title"> End Date </div>
-  	    <td><%= ex.end_date%></td>
+  	    <td><%= proj.description %></td>
+  	    <div class="ex_title"> Date </div>
+  	    <td><%= proj.start_date%> 
+  	    <%if proj.end_date %>
+  	    to <%= proj.end_date%>
+  	    <%end%> </td>
   	  </tr>
   	  <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
   	  <%= form_tag(:action => 'delete_past_project', :proj_id => proj.id) do %>
@@ -187,7 +189,7 @@
 	  <% end %>
   	  <br>
   	  <% end %>
-
+</div>
 
 <script>
   var is_added = false;
