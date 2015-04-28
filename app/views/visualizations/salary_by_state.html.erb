@@ -1,59 +1,25 @@
-<style>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<%= javascript_include_tag 'geocashmap.js' %>
 
-.land {
-  fill: #222;
-}
+<dl class="dl-horizontal">
+	<dt>Country</dt>
+	<dd>
+	<span class="checkbox-group"><input type="checkbox" class="request" data-category="country" data-query='US' id='us' >United States</span>
+	<span class="checkbox-group"><input type="checkbox" class="request" data-category="country" data-query='intl' id='intl' >International</span>
+	</dd>
 
-.county-boundary {
-  fill: none;
-  stroke: #fff;
-  stroke-width: .5px;
-}
+	<dt>Gender</dt>
+	<dd>
+	<span class="checkbox-group"><input type="checkbox" class="request" data-category="gender" data-query='male' id='m' >Male</span>
+	<span class="checkbox-group"><input type="checkbox" class="request" data-category="gender" data-query='female' id='f' >Female</span>
+	<span class="checkbox-group"><input type="checkbox" class="request" data-category="gender" data-query='other' id='o' >Others</span>
+	</dd>
 
-.state-boundary {
-  fill: none;
-  stroke: #fff;
-}
-
-</style>
-<body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
-<script>
-
-var width = 960,
-    height = 500;
-
-var projection = d3.geo.albersUsa()
-    .scale(1000)
-    .translate([width / 2, height / 2]);
-
-var path = d3.geo.path()
-    .projection(projection);
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-d3.json("/smart-report/us-map-json", function(error, us) {
-  console.log(us);
-  svg.insert("path", ".graticule")
-      .datum(topojson.feature(us, us.objects.land))
-      .attr("class", "land")
-      .attr("d", path)
-      .style("fill", "blue");
-
-  //svg.insert("path", ".graticule")
-  //    .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b && !(a.id / 1000 ^ b.id / 1000); }))
-  //    .attr("class", "county-boundary")
-  //    .attr("d", path);
-
-  svg.insert("path", ".graticule")
-      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-      .attr("class", "state-boundary")
-      .attr("d", path);
-});
-
-d3.select(self.frameElement).style("height", height + "px");
-
-</script>
+	<dt>Class</dt>
+	<dd>
+	<span class="checkbox-group"><input type="checkbox" class="request" data-category="class" data-query='2015' id='2015' >2015</span>
+	<span class="checkbox-group"><input type="checkbox" class="request" data-category="class" data-query='2016' id='2016' >2016</span>
+	<span class="checkbox-group"><input type="checkbox" class="request" data-category="class" data-query='2017' id='2017' >2017</span>
+	</dd>
+    <div id='usmap'></div>
+</dl>

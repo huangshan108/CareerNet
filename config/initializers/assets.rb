@@ -9,5 +9,7 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( appointments.js )
 Rails.application.config.assets.precompile += %w( salary_map.js )
 Rails.application.config.assets.precompile += %w( topojson.v1.min.js )
+Rails.application.config.assets.precompile += %w( queue.v1.min.js )
+Rails.application.config.assets.precompile += %w( geocashmap.js )
 Rails.application.config.assets.precompile += %w( calendar.js )
 Rails.application.config.assets.precompile += %w( interviews.js )
