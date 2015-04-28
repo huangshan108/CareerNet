@@ -31,19 +31,39 @@ Background: Adding jobs to database
     Scenario: Adding a experience
     Given I am on student profile page
     And I should see "Past Experience"
-    When I press "+"
+    When I click on add experience button
     Then I should see "Add experience"
-    And I should see "update"
     When I fill in the following:
      | company_name| Riot       |
      | salary      | 70000      |
      | location    | Berkeley   |
      | description | Full stack |
      | job         | Software Engineering|
-    When I press "Update"
+    When I click on update button
     Then I am on student profile page
     And I should see "Riot"
     And I should see "70000"
     And I should see "Berkeley"
     And I should see "Software Engineering"
+
+    @javascript
+    Scenario: Adding a project
+    Given I am on student profile page
+    And I should see "Past Project"
+    When I click on add project button
+    Then I should see "Add project"
+    When I fill in the following:
+     | project_name | website     |
+     | position     | full stack  |
+     | description  | personal website |
+     | start_date   | 07/03/2012|
+     | end_date     | 07/03/2013|
+    When I click on project update button
+    Then I am on student profile page
+    And I should see "website"
+    And I should see "full stack "
+    And I should see "personal website"
+    
+
+
 

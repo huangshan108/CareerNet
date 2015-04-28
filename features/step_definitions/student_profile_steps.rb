@@ -58,3 +58,21 @@ end
 When /^I try to edit view this student profile page$/ do
     visit "/profiles/student/1/edit"
 end
+
+
+When /^I click on add experience button$/ do
+    page.find('.addbutton').click
+end
+
+When /^I click on update button$/ do
+    page.find('.update_exp_button').click
+end
+
+
+When /^I click on add project button$/ do
+    page.find('.addbutton_project').click
+end
+
+When /^I click on project update button$/ do
+    page.find('.update_proj_button_project').click
+end

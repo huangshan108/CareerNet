@@ -158,7 +158,7 @@
       </dl>
   </div>
   <div id="update_div_project">
-    <button class="update_exp_button_project pull-left">Update</button>
+    <button class="update_proj_button_project pull-left">Update</button>
   </div>
 <% end %>
 
@@ -177,9 +177,9 @@
   	    <div class="ex_title"> Description </div>
   	    <td><%= proj.description %></td>
   	    <div class="ex_title"> Date </div>
-  	    <td><%= proj.start_date%> 
+  	    <td><%= proj.start_date.to_s%> 
   	    <%if proj.end_date %>
-  	    to <%= proj.end_date%>
+  	    to <%= proj.end_date.to_s%>
   	    <%end%> </td>
   	  </tr>
   	  <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
