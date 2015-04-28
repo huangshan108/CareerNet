@@ -144,10 +144,36 @@
   <div id="cancel_div">
     <button class="cancelbutton pull-left">Cancel</button>
   </div> 
+  <br>
 
 
 
-<!--   project buttton -->
+<!--   project buttton project section starts here-->
+<div class="past_student_projects">
+  <h2 class="past_proj"> Past Project </h2>
+    <% @student.projects.each do |proj| %>
+      <tr class="past_ex">
+        <div class="ex_title"> Project Name </div>
+        <td><%= proj.project_name %></td>
+        <div class="ex_title"> position </div>
+        <td><%= proj.position %></td>
+        <div class="ex_title"> Description </div>
+        <td><%= proj.description %></td>
+        <div class="ex_title"> Date </div>
+        <td><%= proj.start_date.to_s%> 
+        <%if proj.end_date %>
+        to <%= proj.end_date.to_s%>
+        <%end%> </td>
+      </tr>
+      <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
+      <%= form_tag(:action => 'delete_past_project', :proj_id => proj.id) do %>
+    <button class="blue_button"> Delete </button>
+    <% end %>
+    <% end %>
+      <br>
+      <% end %>
+</div>
+
   <%= form_tag(:action => 'update_past_project', :id => @student.id) do %>
   <div class="past_project">
       <dl class="proj_form"> 
@@ -163,35 +189,14 @@
   </div> 
 
 <br>
-<div class="past_student_projects">
-	<h2 class="past_proj"> Past Project </h2>
-    <% @student.projects.each do |proj| %>
-  	  <tr class="past_ex">
-  	    <div class="ex_title"> Project Name </div>
-  	    <td><%= proj.project_name %></td>
-  	    <div class="ex_title"> position </div>
-  	    <td><%= proj.position %></td>
-  	    <div class="ex_title"> Description </div>
-  	    <td><%= proj.description %></td>
-  	    <div class="ex_title"> Date </div>
-  	    <td><%= proj.start_date.to_s%> 
-  	    <%if proj.end_date %>
-  	    to <%= proj.end_date.to_s%>
-  	    <%end%> </td>
-  	  </tr>
-  	  <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
-  	  <%= form_tag(:action => 'delete_past_project', :proj_id => proj.id) do %>
-		<button class="blue_button"> Delete </button>
-	  <% end %>
-	  <% end %>
-  	  <br>
-  	  <% end %>
-</div>
+<br>
+
 <button class="addbutton_project pull-left" name="add_project"> + </button>
 <div class="pull-right button-group">
     <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
 </div>
 <%end%>
+<!-- end of the project section -->
 
 <script>
   var is_added = false;
