@@ -130,7 +130,7 @@
   </tbody>
 </dl>
 <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
-  <button class="addbutton"> + </button>
+  <button class="addbutton" name="add_experience"> + </button>
   <%= form_tag(:action => 'update_past_experience', :id => @student.id) do %>
   <div class="past_experience">
       <dl class="exp_form"> 
@@ -151,7 +151,7 @@
 
 
 <!--   project buttton -->
- <button class="addbutton_project"> + </button>
+ <button class="addbutton_project" name="add_project"> + </button>
   <%= form_tag(:action => 'update_past_project', :id => @student.id) do %>
   <div class="past_project">
       <dl class="proj_form"> 
