@@ -139,7 +139,7 @@
   <div id="update_div">
     <button class="update_exp_button pull-left">Update</button>
   </div>
-  <% end %>
+<% end %>
 
   <div id="cancel_div">
     <button class="cancelbutton pull-left">Cancel</button>
@@ -150,9 +150,27 @@
 <%end%>
 
 
+<!--   project buttton -->
+ <button class="addbutton_project"> + </button>
+  <%= form_tag(:action => 'update_past_experience', :id => @student.id) do %>
+  <div class="past_project">
+      <dl class="proj_form"> 
+      </dl>
+  </div>
+  <div id="update_div">
+    <button class="update_exp_button pull-left">Update</button>
+  </div>
+<% end %>
+
+  <div id="cancel_div">
+    <button class="cancelbutton pull-left">Cancel</button>
+  </div> 
+
+
 
 <script>
   var is_added = false;
+  var is_added2 = false;
   document.getElementById('cancel_div').style.visibility='hidden';
   document.getElementById('update_div').style.visibility='hidden';
   $(".addbutton").click(function(){
@@ -173,6 +191,29 @@
      '<dd><%= text_field_tag :salary, params[:salary],placeholder: "Salary" %></dd>' +
      '</dl>');
           is_added = true;
+          document.getElementById('cancel_div').style.visibility='visible';
+          document.getElementById('update_div').style.visibility='visible';
+      }
+  });
+
+  $(".addbutton_project").click(function(){
+      // $(".past_experience").html('experience_form.html.erb');
+      //$("form").clone().appendTo('.past_experience');
+      if(is_added2 == false){
+          $( ".past_project" ).append('<dl class="exp_form">' + 
+     '<h3> Add experience </h3>' +
+     '<dt>Company </dt>' +
+     '<dd><%= text_field_tag :company_name, params[:company_name],placeholder: "Company Name" %></dd>' +
+     '<dt>Description </dt>' +
+     '<dd><%= text_field_tag :description, params[:description], placeholder: "Description" %></dd>' +
+     '<dt>Location </dt>' +
+     '<dd><%= text_field_tag :location, params[:location], placeholder: "Location" %></dd>' +
+     '<dt>Job Title </dt>' +
+     '<dd><%= text_field_tag :job, params[:job], placeholder: "Job Title" %></dd>' +
+     '<dt>Salary </dt>' +
+     '<dd><%= text_field_tag :salary, params[:salary],placeholder: "Salary" %></dd>' +
+     '</dl>');
+          is_added2 = true;
           document.getElementById('cancel_div').style.visibility='visible';
           document.getElementById('update_div').style.visibility='visible';
       }
