@@ -30,7 +30,9 @@ $(document).ready(function() {
     function ready(error, response){
       usCashMap = new USCashMap(
           d3.select("div#usmap"),
-          response
+          response,
+          dependencies.convertIdToStateCode,
+          dependencies.convertStateCodeToName
       );
       updateData(usCashMap);
     }
@@ -93,7 +95,8 @@ function updateData(usCashMap){
  * @params {d3.map} stateNameMap
  * @params {d3.dispatch} dispatcher
  */
-var USCashMap = function (selector, usTopoJSON) {
+var USCashMap = function (selector, usTopoJSON, stateIdToStateCodeMap, stateNameMap) {
+
     //this.dispatch = dispatcher;  // for triggering events
     this.selector = selector;
 
@@ -110,14 +113,14 @@ var USCashMap = function (selector, usTopoJSON) {
         .projection(this.projection);
 
     // Maps stateCode to stateName (e.g. 'CA' --> 'California')
-    //this.stateNameMap = stateNameMap;
+    this.stateNameMap = stateNameMap;
     // Store geography features
     this.us = usTopoJSON;
     this.landSubunit = topojson.feature(usTopoJSON, usTopoJSON.objects.land);
-    this.statePaths = topojson.feature(usTopoJSON, usTopoJSON.objects.states);//.features.map(function(d) {
-    //    d['state'] = stateIdToStateCodeMap.get(d['id']);
-    //    return d;
-    //});
+    this.statePaths = topojson.feature(usTopoJSON, usTopoJSON.objects.states).features.map(function(d) {
+        d['state'] = stateIdToStateCodeMap.get(d['id']);
+        return d;
+    });
 
     this.setupMap();
 
