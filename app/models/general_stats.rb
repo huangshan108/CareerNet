@@ -41,7 +41,7 @@ module GeneralStats
   end
 
   def self.filter_by_query(students, params)
-    students.select{ |s| self.filter_by_class_of(s.student, params[:class]) and self.filter_by_gender(s.student, params[:gender]) and self.filter_by_country(s.student, params[:country]) }
+    students.select{ |s| self.filter_by_class_of(s.student, params[:class]) }.select{ |s| self.filter_by_gender(s.student, params[:gender])}.select{ |s| self.filter_by_country(s.student, params[:country]) }
   end
 
   def self.filter_by_class_of(student, classes)
