@@ -11,8 +11,8 @@
 class Industry < ActiveRecord::Base
   has_many :students, :class_name => "Experience"
 
-  def self.get_industry_vis_data
-  	response = GeneralStats.get_vis_data("Industry")
+  def self.get_industry_vis_data(params)
+  	response = GeneralStats.get_vis_data("Industry", params)
   	# possible pre processing before return
   	return response
   end

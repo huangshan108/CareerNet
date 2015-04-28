@@ -45,10 +45,10 @@ function init(template){
         dataType: 'json',
         success: function(json){
             // alert('success');
-            if (json['too_few']){
-                alert("There are too few data that fit the category for meaningful visualization.");
-                return;
-            }
+            // if (json['too_few']){
+            //     alert("There are too few data that fit the category for meaningful visualization.");
+            //     return;
+            // }
             // need to render table
             if (general_stats_template.indexOf(template) != -1 ) {
                 renderTable(json, template);
@@ -69,7 +69,7 @@ function init(template){
     var meow = d3.selectAll('.request')
         .on("click", function() {
             updateData(template, reqToreqData());
-            renderTable(json, template);
+            // renderTable(json, template);
         });
 
    
@@ -120,14 +120,18 @@ function updateData(template, reqData){
         dataType: 'json',
         success: function(json){
             // alert('success');
-            if (json['too_few']){
-                alert("There are too few data that fit the category for meaningful visualization.");
-                return;
-            }
-            updatePie(json['countries'], "country");
-            updatePie(json['genders'], "gender");
-            updatePie(json['classes'], "class");
-            updatePie(json['majors'], "major");
+            // if (json['too_few']){
+            //     alert("There are too few data that fit the category for meaningful visualization.");
+            //     return;
+            // }
+            if (general_stats_template.indexOf(template) != -1 ) {
+                renderTable(json, template);
+            } else if (template == "overview") {
+                drawPie(json['countries'], "country");
+                drawPie(json['genders'], "gender");
+                drawPie(json['classes'], "class");
+                drawPie(json['majors'], "major");
+            };
             return json;
         },
         error: function(){
