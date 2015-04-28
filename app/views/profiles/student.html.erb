@@ -157,22 +157,24 @@
       <dl class="proj_form"> 
       </dl>
   </div>
-  <div id="update_div">
-    <button class="update_exp_button pull-left">Update</button>
+  <div id="update_div_project">
+    <button class="update_exp_button_project pull-left">Update</button>
   </div>
 <% end %>
 
-  <div id="cancel_div">
-    <button class="cancelbutton pull-left">Cancel</button>
+  <div id="cancel_div_project">
+    <button class="cancelbutton_project pull-left">Cancel</button>
   </div> 
 
 
 
 <script>
   var is_added = false;
-  var is_added2 = false;
+  var is_added_project = false;
   document.getElementById('cancel_div').style.visibility='hidden';
   document.getElementById('update_div').style.visibility='hidden';
+  document.getElementById('cancel_div_project').style.visibility='hidden';
+  document.getElementById('update_div_project').style.visibility='hidden';
   $(".addbutton").click(function(){
       // $(".past_experience").html('experience_form.html.erb');
       //$("form").clone().appendTo('.past_experience');
@@ -197,35 +199,45 @@
   });
 
   $(".addbutton_project").click(function(){
-      // $(".past_experience").html('experience_form.html.erb');
-      //$("form").clone().appendTo('.past_experience');
-      if(is_added2 == false){
-          $( ".past_project" ).append('<dl class="exp_form">' + 
-     '<h3> Add experience </h3>' +
-     '<dt>Company </dt>' +
-     '<dd><%= text_field_tag :company_name, params[:company_name],placeholder: "Company Name" %></dd>' +
-     '<dt>Description </dt>' +
+      if(is_added_project == false){
+          $( ".past_project" ).append('<dl class="project_form">' + 
+     '<h3> Add project </h3>' +
+     '<dt>Project</dt>' +
+     '<dd><%= text_field_tag :project_name, params[:project_name],placeholder: "Project Name" %></dd>' +
+     '<dt>Description</dt>' +
      '<dd><%= text_field_tag :description, params[:description], placeholder: "Description" %></dd>' +
-     '<dt>Location </dt>' +
-     '<dd><%= text_field_tag :location, params[:location], placeholder: "Location" %></dd>' +
-     '<dt>Job Title </dt>' +
-     '<dd><%= text_field_tag :job, params[:job], placeholder: "Job Title" %></dd>' +
-     '<dt>Salary </dt>' +
-     '<dd><%= text_field_tag :salary, params[:salary],placeholder: "Salary" %></dd>' +
+     '<dt>Position</dt>' +
+     '<dd><%= text_field_tag :position, params[:position], placeholder: "Position" %></dd>' +
+     '<dt>Start Date</dt>' +
+     '<dd><%= text_field_tag :start_date, params[:start_date], placeholder: "Start Date" %></dd>' +
+     '<dt>End Date</dt>' +
+     '<dd><%= text_field_tag :end_date, params[:end_date],placeholder: "End Date" %></dd>' +
      '</dl>');
-          is_added2 = true;
-          document.getElementById('cancel_div').style.visibility='visible';
-          document.getElementById('update_div').style.visibility='visible';
+          is_added_project = true;
+          document.getElementById('cancel_div_project').style.visibility='visible';
+          document.getElementById('update_div_project').style.visibility='visible';
       }
   });
 
   $(".cancelbutton").click(function(){
+    alert("here");
     if (is_added == true){
       is_added = false;
       $(".exp_form").remove();  
       document.getElementById('cancel_div').style.visibility='hidden';
       document.getElementById('update_div').style.visibility='hidden';
-
+    }
+    
+  });
+  $(".cancelbutton_project").click(function (){
+    alert("project cancel")
+    if (is_added_project == true){
+      is_added_project = false;
+      $(".project_form").remove();
+      document.getElementById('cancel_div_project').style.visibility='hidden';
+      document.getElementById('update_div_project').style.visibility='hidden';
     }
   });
+  
+
 </script>
