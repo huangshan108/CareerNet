@@ -13,6 +13,18 @@ class ApplicationController < ActionController::Base
 		current_user.account_type
 	end
 
+  def is_student?
+    return account_type == 1
+  end
+
+  def is_staff?
+    return account_type == 2
+  end
+
+  def is_company?
+    return account_type == 3
+  end
+
 	def account_id
 		session[:user_id]
 	end
@@ -33,7 +45,7 @@ class ApplicationController < ActionController::Base
   def profile_restriction
     id = params[:id]
     #if not a staff
-    if account_type != 2
+    if !is_staff?
       if roll_id.to_i != id.to_i
           error_message
       end
@@ -44,7 +56,7 @@ class ApplicationController < ActionController::Base
   private
   def event_restriction
       id = params[:id]
-      unless account_type == 2
+      unless is_staff?
           error_message
       else
        return true
@@ -55,14 +67,14 @@ class ApplicationController < ActionController::Base
   #other controller use :id
   private
   def application_restriction
-    if account_type == 3
+    if is_company?
         id = params[:company_id]
         if roll_id.to_i != id.to_i #try vistit other company
           error_message
           elsif params[:student_id] #try visit student
          error_message
         end
-    elsif account_type == 1
+    elsif is_student?
         id = params[:student_id]
         if roll_id.to_i != id.to_i #try vistit other stduent
             error_message
@@ -77,7 +89,7 @@ class ApplicationController < ActionController::Base
   private
   def job_restriction
       id = params[:id]
-      if account_type != 3
+      if !is_company?
           error_message
       else
       #might be more stuff here
@@ -91,9 +103,9 @@ class ApplicationController < ActionController::Base
   private
   def job_restriction2
       # id = params[:id]
-      if account_type != 3
+      if !is_company?
            error_message
-      elsif account_type == 3
+      elsif is_company?
           @company = Company.find_by_id(roll_id);
             job_id = params[:job_id]
         @job = Job.find_by_id(job_id)

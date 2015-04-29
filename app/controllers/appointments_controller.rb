@@ -4,9 +4,9 @@ class AppointmentsController < ApplicationController
   respond_to :html, :js, :json
 
   def index
-    if account_type == 1
+    if is_student?
       redirect_to appointment_student_show_path
-    elsif account_type == 2
+    elsif is_staff?
       redirect_to staff_appointments_path
     else
       flash[:error] = 'You must be a staff or a student to access this page.'
@@ -56,7 +56,7 @@ class AppointmentsController < ApplicationController
   #end
   def curr_staff
       @account = current_user
-      if @account.account_type != 2
+      if !is_staff?
           flash[:error] = 'You must be a staff to access this page.'
           redirect_to root_path
           return
@@ -90,7 +90,7 @@ class AppointmentsController < ApplicationController
 
   def student_show
     account = current_user
-    if account.account_type == 1
+    if is_student?
       if account.student == nil
         Student.new(account: account)
       end
