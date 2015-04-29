@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
     id = params[:id]
     @id_1 = params[:id]
     @student = Student.find(id)
-    @current_user = Account.find(account_id)
+    @current_user = current_user
   end
 
   def company

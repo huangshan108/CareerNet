@@ -6,7 +6,7 @@ class JobsController < ApplicationController
   def index
     pages = 10
     @jobs = Job.all
-    @current_user = Account.find(account_id)
+    @current_user = current_user
   end
     
   def new
@@ -28,7 +28,7 @@ class JobsController < ApplicationController
     job_id = params[:job_id]
     @job = Job.find_by_id(job_id)
     @company = Company.find_by_id(roll_id);
-    @current_user = Account.find(account_id)
+    @current_user = current_user
   end
 
   def delete

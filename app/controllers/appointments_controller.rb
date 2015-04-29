@@ -55,7 +55,7 @@ class AppointmentsController < ApplicationController
   #    }
   #end
   def curr_staff
-      @account = Account.find(session[:user_id])
+      @account = current_user
       if @account.account_type != 2
           flash[:error] = 'You must be a staff to access this page.'
           redirect_to root_path
@@ -89,7 +89,7 @@ class AppointmentsController < ApplicationController
   end
 
   def student_show
-    account = Account.find(session[:user_id])
+    account = current_user
     if account.account_type == 1
       if account.student == nil
         Student.new(account: account)
@@ -105,13 +105,13 @@ class AppointmentsController < ApplicationController
 
   def student_new
     @staffs = Staff.all
-    @student = Account.find(session[:user_id]).student
+    @student = current_user.student
   end
 
   def student_book
     appointment = Appointment.find(params[:id])
     if appointment.student == nil
-      appointment.update_attribute(:student, Account.find(session[:user_id]).student)
+      appointment.update_attribute(:student, current_user.student)
       flash[:notice] = "Appointment has been made."
       redirect_to(appointment_student_show_path)
     else
@@ -122,7 +122,7 @@ class AppointmentsController < ApplicationController
 
   def student_cancel
     appointment = Appointment.find(params[:id])
-    if appointment.student == Account.find(session[:user_id]).student
+    if appointment.student == current_user.student
       appointment.update_attribute(:student, nil)
       flash[:notice] = "Appointment has been cancelled."
     else

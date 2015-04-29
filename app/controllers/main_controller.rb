@@ -2,7 +2,7 @@ class MainController < ApplicationController
   before_action :confirm_logged_in
   def index
       @name = Account.name
-      @current_user = Account.find(account_id)
+      @current_user = current_user
       @jobs = Job.order('created_at')
       if @jobs.length >= 3
         @jobs = @jobs[-3, 3]

@@ -35,7 +35,7 @@ class InterviewsController < ApplicationController
   end
 
   def curr_company
-      @account = Account.find(session[:user_id])
+      @account = current_user
       if @account.account_type != 3
           flash[:error] = 'You must be a company to access this page.'
           redirect_to root_path
@@ -63,7 +63,7 @@ class InterviewsController < ApplicationController
   end
 
   def student_show
-    account = Account.find(session[:user_id])
+    account = current_user
     if account.account_type == 1
       if account.student == nil
         Student.new(account: account)
@@ -80,13 +80,13 @@ class InterviewsController < ApplicationController
   def student_new
     @companies = Company.all
     @application = Application.find(params[:application_id])
-    @student = Account.find(session[:user_id]).student
+    @student = current_user.student
   end
 
   def student_book
     interview = Interview.find(params[:id])
     if interview.student == nil
-      interview.update_attribute(:student, Account.find(session[:user_id]).student)
+      interview.update_attribute(:student, current_user.student)
       flash[:notice] = "Interview has been scheduled."
     end
     redirect_to(interview_student_show_path)
@@ -94,7 +94,7 @@ class InterviewsController < ApplicationController
 
   def student_cancel
     interview = Interview.find(params[:id])
-    if interview.student == Account.find(session[:user_id]).student
+    if interview.student == current_user.student
       interview.update_attribute(:student, nil)
       flash[:notice] = "Interview has been cancelled."
     else
