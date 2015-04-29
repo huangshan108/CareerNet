@@ -19,10 +19,4 @@ class VisualizationsController < ApplicationController
         end
     end
 
-    def us_map_json
-        @us_map_json = File.read(File.join(Rails.root, 'app', 'assets', 'jsons', 'us.json'))
-        respond_to do |format|
-            format.json { render :json => @us_map_json }
-        end
-    end
 end

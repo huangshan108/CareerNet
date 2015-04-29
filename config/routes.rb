@@ -81,8 +81,6 @@ Rails.application.routes.draw do
   get 'smart-report/region' => 'visualizations#salary_by_state', :as => :smart_report_region
   get 'smart-report/region/data' => 'visualizations#salary_by_state_data', :defaults => { :format => 'json' }, :as => :smart_report_region_data
 
-  # For loading U.S map json
-  get 'smart-report/us-map-json' => 'visualizations#us_map_json', :defaults => { :format => 'json' }, :as => :us_map_json
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

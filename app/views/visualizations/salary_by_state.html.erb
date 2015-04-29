@@ -1,6 +1,12 @@
-<script src="http://d3js.org/queue.v1.min.js"></script>
+<%= javascript_include_tag '/queue.v1.min.js' %>
 <%= javascript_include_tag 'geocashmap.js' %>
 
+<h1>Smart Data Report - Region<i class="fa fa-question-circle help" data-toggle="tooltip" data-placement="right" title="Hover over a section on pie char to see details"></i></h1>
+<script type="text/javascript">
+	$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	})
+</script>
 <dl class="dl-horizontal">
 	<dt>Country</dt>
 	<dd>

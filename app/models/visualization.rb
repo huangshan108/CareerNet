@@ -103,7 +103,9 @@ class Visualization < ActiveRecord::Base
 
         result = []
         average.each do |key, value|
-            result += [{label: key, average: value.to_i, count: count[key]}]
+            if key != nil
+                result += [{label: key, average: value.to_i, count: count[key]}]
+            end
         end
         {
             usa_avg: result
@@ -121,4 +123,5 @@ class Visualization < ActiveRecord::Base
         end
         result
     end
+
 end
