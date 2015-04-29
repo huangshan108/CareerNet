@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     // Dependencies needed for US Map viz
     var dependencies = {};
-    dependencies.convertIdToStateCode = d3.map();
+    dependencies.convertIdToStateName = d3.map();
     dependencies.convertStateNameToCode = d3.map();
 
     //Set all checkboxes to true initially
@@ -22,7 +22,7 @@ $(document).ready(function() {
       .defer(d3.json, "../us.json")
       .defer(d3.tsv, "../us-state-names.tsv", function(d) {
         // On the fly creation of state name/id mappings
-        dependencies.convertIdToStateCode.set(d.id, d.code);
+        dependencies.convertIdToStateName.set(d.id, d.name);
         dependencies.convertStateNameToCode.set(d.name, d.code);
       })
       .await(ready);
@@ -31,7 +31,7 @@ $(document).ready(function() {
       usCashMap = new USCashMap(
           d3.select("div#usmap"),
           response,
-          dependencies.convertIdToStateCode,
+          dependencies.convertIdToStateName,
           dependencies.convertStateNameToCode
       );
       updateData(usCashMap);
@@ -69,8 +69,6 @@ function updateData(usCashMap){
                 alert("There are too few data that fit the category for meaningful visualization.");
                 return;
             }
-            console.log("checkbox checked and request sent");
-            console.log(json);
             //update map
             usCashMap.render(json['usa_avg']);
             return json;
@@ -96,7 +94,7 @@ function updateData(usCashMap){
  * @params {d3.map} stateNameMap
  * @params {d3.dispatch} dispatcher
  */
-var USCashMap = function (selector, usTopoJSON, stateIdToStateCodeMap, stateNameMap) {
+var USCashMap = function (selector, usTopoJSON, stateIdToStateNameMap, stateNameMap) {
 
     //this.dispatch = dispatcher;  // for triggering events
     this.selector = selector;
@@ -118,8 +116,10 @@ var USCashMap = function (selector, usTopoJSON, stateIdToStateCodeMap, stateName
     // Store geography features
     this.us = usTopoJSON;
     this.landSubunit = topojson.feature(usTopoJSON, usTopoJSON.objects.land);
+    console.log("statePaths");
     this.statePaths = topojson.feature(usTopoJSON, usTopoJSON.objects.states).features.map(function(d) {
-        d['state'] = stateIdToStateCodeMap.get(d['id']);
+        d['label'] = stateIdToStateNameMap.get(d['id']);
+        console.log(d);
         return d;
     });
 
@@ -165,7 +165,9 @@ USCashMap.prototype.setupMap = function () {
 
     // Add state paths
     this._states = this.stateGroup.selectAll('path')
-        .data(this.statePaths, function(d) { return d.state; });
+        .data(this.statePaths, function(d) { 
+            return d.label;
+        });
 
     this._states.enter().append('path')
         .attr('class', 'states')
@@ -184,8 +186,7 @@ USCashMap.prototype.setupMap = function () {
 USCashMap.prototype.render = function (data) {
     // Hack needed to access class object in functions defined in this scope
     var that = this;
-
-    console.log("inrender");
+    var count = 0;
 
     var moneyColorScale = d3.scale.sqrt()
         .domain([
@@ -193,26 +194,31 @@ USCashMap.prototype.render = function (data) {
             d3.max(data, function (d) { return d['average']; })
         ])
         .range(['#E8F5E9', '#4CAF50']).nice();
-        console.log(d3.min(data, function (d) { return d['average']; }));
-        console.log(d3.max(data, function (d) { return d['average']; }));
 
     this.states = this.stateGroup.selectAll('path')
-        .data(data, function(d) { return that.stateNameMap[d['label']]; });
+        .data(data, function(d) {
+            return d['label'];
+        });
 
     /** Enter phase **/
     // No enter phase. We'll be binding to the state SVG paths that have already 
     // been rendered. (see assignment of this._states)
 
     /** Update phase **/
+    console.log("Update");
+    console.log(this.states);
     this.states.transition().duration(200)
         .attr("fill", function(d) {
             // Change the color based on the state's total contribution amount
             // Hint: take a look at moneyColorScale defined above
 
             // Implement
-            console.log("in update");
-            console.log(d['average']);
-            return moneyColorScale(d['average']);  // Return a hexcode
+            console.log(d);
+            function getRandom(min, max){
+                return Math.random() * (max - min) + min;
+            }
+            //return moneyColorScale(d['average']);  // Return a hexcode
+            return moneyColorScale(d['average']);
         });
 
     /** Exit phase **/
