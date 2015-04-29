@@ -119,6 +119,7 @@ var USCashMap = function (selector, usTopoJSON, stateIdToStateNameMap, stateName
     console.log("statePaths");
     this.statePaths = topojson.feature(usTopoJSON, usTopoJSON.objects.states).features.map(function(d) {
         d['label'] = stateIdToStateNameMap.get(d['id']);
+        d['average'] = 0;
         console.log(d);
         return d;
     });
@@ -207,22 +208,25 @@ USCashMap.prototype.render = function (data) {
     /** Update phase **/
     console.log("Update");
     console.log(this.states);
-    this.states.transition().duration(200)
+    this.states.transition().duration(500)
         .attr("fill", function(d) {
             // Change the color based on the state's total contribution amount
             // Hint: take a look at moneyColorScale defined above
 
             // Implement
-            console.log(d);
-            function getRandom(min, max){
-                return Math.random() * (max - min) + min;
-            }
-            //return moneyColorScale(d['average']);  // Return a hexcode
             return moneyColorScale(d['average']);
         });
 
     /** Exit phase **/
     // No exit anticipated. The state paths are just going to stay there.
+    this.states.exit().transition().duration(500)
+        .attr("fill", function(d) {
+            // Change the color based on the state's total contribution amount
+            // Hint: take a look at moneyColorScale defined above
+
+            // Implement
+            return moneyColorScale(d['average']);
+        });
 
     /** Setup/Rebind event handlers **/
 
@@ -238,7 +242,6 @@ USCashMap.prototype.render = function (data) {
      *  (3) Update the inspection information text with the selected state using `setInspectionInfo`
      *  (4) set internal state that signals the selection is not due to a click (already done for you)
      */
-    /*
     this.states.on('mouseover', function(d, e, p){
         that.setSelectionClickBoolean(false);
         // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
@@ -246,12 +249,23 @@ USCashMap.prototype.render = function (data) {
         // defined function.
 
         // Implement
-        d3.select(this).attr("fill", '#4CAF50'); 
-        that.addStateToSelection(d['state']);
-        var fullState = that.stateNameMap.get(d['state']);
-        that.setInspectionInfo(fullState, d['total_amount']);
+        d3.select(this).attr("fill", '#FF8300'); 
+        //that.addStateToSelection(d['label']);
+        var fullState = d['label'];
+        that.setInspectionInfo(fullState, d['average']);
     });
-    */
+    this.states.exit().on('mouseover', function(d, e, p){
+        that.setSelectionClickBoolean(false);
+        // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
+        // `that` variable defined above rather than `this`, since `this` is rebound to a newly
+        // defined function.
+
+        // Implement
+        d3.select(this).attr("fill", '#FF8300'); 
+        //that.addStateToSelection(d['label']);
+        var fullState = d['label'];
+        that.setInspectionInfo(fullState, d['average']);
+    });
 
     /*
      * Mouseout event handler
@@ -264,7 +278,6 @@ USCashMap.prototype.render = function (data) {
      *  (3) Make sure the colors of every state are the same as it was prior to any events.
      *      (a) this means using the original `moneyColorScale` mapping
      */
-    /*
     this.states.on('mouseout', function(d, e, p){
         that.setSelectionClickBoolean(false);
         // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
@@ -273,12 +286,24 @@ USCashMap.prototype.render = function (data) {
 
         // Implement
         that.clearInspectionInfo();
-        that.clearStatesFromSelection();
+        //that.clearStatesFromSelection();
         d3.select(this).attr("fill", function(d){
-            return moneyColorScale(d['total_amount']);
+            return moneyColorScale(d['average']);
         });
     });
-    */
+    this.states.exit().on('mouseout', function(d, e, p){
+        that.setSelectionClickBoolean(false);
+        // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
+        // `that` variable defined above rather than `this`, since `this` is rebound to a newly
+        // defined function.
+
+        // Implement
+        that.clearInspectionInfo();
+        //that.clearStatesFromSelection();
+        d3.select(this).attr("fill", function(d){
+            return moneyColorScale(d['average']);
+        });
+    });
 
     /*
      * Click event handler
