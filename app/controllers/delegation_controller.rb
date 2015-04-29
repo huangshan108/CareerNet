@@ -1,0 +1,2 @@
+class DelegationController < ApplicationController
+end
