@@ -60,7 +60,7 @@ function updateData(usCashMap){
     var reqData = reqToreqData();
     $.ajax({
         type: "GET",
-        url: '/smart-report/region/data',
+        url: '/smart-report/region-data',
         data: reqData,
         dataType: 'json',
         success: function(json){
