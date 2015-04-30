@@ -11,11 +11,11 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.title %></td>
+        <td><%= link_to event.title, event_path(event) %></td>
         <td><%= event.time_start.strftime('%D %H:%M %p') if event.time_start %></td>
         <td><%= event.time_end.strftime('%D %H:%M %p') if event.time_end %></td>
         <td><%= event.location %></td>
-      <tr>
+      </tr>
     <% end %>
   </tbody>
 </table>

@@ -15,7 +15,6 @@ class EventsController < ApplicationController
 
   def registered_index
     @current_user = Account.find(account_id)
-    pages = 10
     @events = @current_user.events
   end
 

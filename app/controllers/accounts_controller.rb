@@ -44,7 +44,7 @@ class AccountsController < ApplicationController
     def confirm_signup
         found_user = Account.where(:email =>params[:email]).first
         if found_user
-            flash[:error] = "Email already exist."
+            flash[:error] = "Email already exists."
             redirect_to(:back)
             return
         end

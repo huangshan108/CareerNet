@@ -27,6 +27,7 @@ class ProfilesController < ApplicationController
 
   def edit_student
     id = params[:id] # retrieve student ID from URI route
+    @current_user = Account.find(account_id)
     @student = Student.find(id)
     @all_schools = College.all
     @all_majors = Major.all
@@ -55,7 +56,7 @@ class ProfilesController < ApplicationController
                               :industry => params[:industry],
                               :website => params[:website])
     company.save
-    flash[:notice] = "Profile Updated!"
+    flash[:notice] = "Profile updated!"
     redirect_to(company_profile_path(company))
   end
 
@@ -65,7 +66,7 @@ class ProfilesController < ApplicationController
                             :last_name => params[:last_name],
                             :description => params[:description])
     staff.save
-    flash[:notice] = "Profile Updated!"
+    flash[:notice] = "Profile updated!"
     redirect_to(staff_profile_path(staff))
   end
 
@@ -83,7 +84,8 @@ class ProfilesController < ApplicationController
                               :company_id => params[:company_id],
                               :base_salary => params[:base_salary],
                               :years_experience => params[:years_experience],
-                              :title => params[:title])
+                              :title => params[:title],
+                              :notes => params[:notes])
     skill_id_list = student.skill_ids
 
     if not params[:add_skill_name].empty?
@@ -109,7 +111,7 @@ class ProfilesController < ApplicationController
       end
     end      
     student.save
-    flash[:notice] = "Profile Updated!"
+    flash[:notice] = "Profile updated!"
     redirect_to(single_student_profile_path(student))
   end
 

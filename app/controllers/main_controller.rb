@@ -5,11 +5,11 @@ class MainController < ApplicationController
       @current_user = Account.find(account_id)
       @jobs = Job.order('created_at')
       if @jobs.length >= 3
-        @jobs = @jobs[-3, 3]
+        @jobs = @jobs[-3, 3].reverse
       end
       @events = Event.order('time_start')
       if @events.length >= 3
-        @events = @events[-3, 3]
+        @events = @events[-3, 3].reverse
       end
   end
 end
