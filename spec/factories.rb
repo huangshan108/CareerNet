@@ -5,14 +5,15 @@ FactoryGirl.define do  factory :industry do
   end
   factory :experience do
     industry "MyString"
-yr_exp 1
-salary 1
-city "MyString"
-state "MyString"
-country "MyString"
-org_name "MyString"
-job_title "MyString"
+    yr_exp 1
+    salary 1
+    city "Berkeley"
+    state "California"
+    country "USA"
+    org_name "My Company"
+    job_title "Software Engineer"
   end
+
   factory :visualization do
     
   end

@@ -10,9 +10,12 @@ describe Visualization do
         # 50 Students from US and are Male
         # Class of 2017
         # Agricultural, general major
-        50.times do
+        48.times do
             FactoryGirl.create(:student, graduation_date: "2017-5-15".to_date, major_id: 1)
         end
+        # These two students has experiences
+        @student1 = FactoryGirl.create(:student, graduation_date: "2017-5-15".to_date, major_id: 1)
+        @student2 = FactoryGirl.create(:student, graduation_date: "2017-5-15".to_date, major_id: 1)
         
         # 20 students from Korea and are Female
         # Class of 2016
@@ -33,6 +36,9 @@ describe Visualization do
                                graduation_date: "2015-5-15".to_date,
                                major_id: 90)
         end
+
+        @exp1 = FactoryGirl.create(:experience, student: @student1)
+        @exp2 = FactoryGirl.create(:experience, student: @student2)
     end
 
     describe 'student_demographic_query(countries, genders, classes)' do
@@ -79,66 +85,12 @@ describe Visualization do
         end
     end
 
-    # Compose json for one category e.g. gender
-    # Sample output [{ name: "M", count: 3, percent: 30.0},
-    #               {name: "F", count: 4, percent: 40.0},
-    #               {name: "O", count: 3, percent: 30.0}]
-    #def self.sub_json_by_category(query_result, category_name, categories)
-    #    total = query_result.count
-    #    others = total
-    #    result = []
-    #   categories.each do |category|
-    #       if category_name == "class"
-    #           count = query_result.by_year(category, field: :graduation_date).count
-    #           # To display 'Class of <year>' rather than '<year>'
-    #           category = "Class of " + category
-    #       elsif category_name == "major"
-    #           count = category[1]
-    #           category = Major.find(category[0]).name
-    #       else
-    #           count = query_result.where(category_name => category).count
-    #       end
-    #       others -= count
-    #       percentage = self.percentage_format(count, total)
-    #       result += [{name: category, count: count, percent: percentage }]
-    #   end
+    describe 'experience_by_student_filtered_query' do
+        it 'should return correct instances of Experience Activerecord:relation' do
+            result = Visualization.experience_by_student_filtered_query(["US"], ["male"], ["2017"])
+            expect(result).to include(@exp1)
+            expect(result).to include(@exp2)
+        end
+    end
 
-    #   # Account for others if query above don't add up too 100%
-    #   if others != 0
-    #       percentage = self.percentage_format(others, total)
-    #       result += [{name: "Others", count: others, percent: percentage }]
-    #   end
-    #   result
-    #end
-
-    ## Computes percentage and formats it to 1 decimal place
-    #def self.percentage_format(num, total)
-    #    (num.to_f / total.to_f).round(3) * 100.0
-    #end
-
-    #def self.student_demographic_json(countries, genders, classes)
-    #    # Find all students of interest
-    #    query_result = self.student_demographic_query(countries, genders, classes)
-
-    #    # Total num of students of interest
-    #    all_count = query_result.count
-
-    #    # Grab major_id's of majors which has 10% or more of students of interest
-    #    # (So that the displace doesn't get too crowded)
-    #    large_majors = query_result.group('major_id').having('COUNT(*) >= ?', all_count * 0.1).count.to_a
-
-
-    #    # Student count by categories
-    #    gender_count = sub_json_by_category(query_result, "gender", genders)
-    #    country_count = sub_json_by_category(query_result, "country", countries)
-    #    class_count = sub_json_by_category(query_result, "class", classes)
-    #    major_count = sub_json_by_category(query_result, "major", large_majors)
-
-    #    {
-    #        countries: country_count,
-    #        genders: gender_count,
-    #        majors: major_count,
-    #        classes: class_count
-    #    }
-    #end
 end

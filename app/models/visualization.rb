@@ -93,4 +93,35 @@ class Visualization < ActiveRecord::Base
             too_few: all_count == 0
         }
     end
+
+    # Returns json of average salary and count of all jobs in USA held by 
+    # students that fit the category of 'countries, genders, classes'
+    def self.salary_by_region_usa_json(countries, genders, classes)
+        filtered = self.experience_by_student_filtered_query(countries, genders, classes)
+        average = filtered.where(country: 'USA').group(:state).average(:salary)
+        count = filtered.where(country: 'USA').group(:state).count
+
+        result = []
+        average.each do |key, value|
+            if key != nil
+                result += [{label: key, average: value.to_i, count: count[key]}]
+            end
+        end
+        {
+            usa_avg: result
+        }
+    end
+
+    # Returns Activerecord::Relations of Experience filtered by 
+    # Countries, genders and class of students owning them
+    def self.experience_by_student_filtered_query(countries, genders, classes)
+        result = Experience.none
+        student_filtered = self.student_by_country_gender(countries, genders)
+        classes.each do |class_of|
+            student_filtered_by_year = student_filtered.by_year(class_of, field: :graduation_date)
+            result = Experience.all.joins(:student).merge(student_filtered_by_year).union(result)
+        end
+        result
+    end
+
 end

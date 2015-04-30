@@ -82,6 +82,9 @@ Rails.application.routes.draw do
   get 'smart-report/industry-data' => 'visualizations#industry_data', :defaults => { :format => 'json' }, :as => :smart_report_industry_data
   get 'smart-report/organization' => 'visualizations#organization', :as => :smart_report_organization
   get 'smart-report/organization-data' => 'visualizations#organization_data', :defaults => { :format => 'json' }, :as => :smart_report_organization_data
+  get 'smart-report/region' => 'visualizations#salary_by_state', :as => :smart_report_region
+  get 'smart-report/region-data' => 'visualizations#salary_by_state_data', :defaults => { :format => 'json' }, :as => :smart_report_region_data
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
