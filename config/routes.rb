@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   post 'profiles/student/:id/deleteexperience' => 'profiles#delete_past_experience', :as => :delete_past_experience
   post 'profiles/student/:id/updateproject' => 'profiles#update_past_project', :as => :update_past_project
   post 'profiles/student/:id/deleteproject' => 'profiles#delete_past_project', :as => :delete_past_project
+  post 'profiles/student/:id/updateactivity' => 'profiles#update_past_activity', :as => :update_past_activity
+  post 'profiles/student/:id/deleteactivity' => 'profiles#delete_past_activity', :as => :delete_past_activity
   get 'profiles/school/:id' => 'profiles#school', :as => :single_school_profile
   get 'profiles/company/:id' => 'profiles#company', :as => :company_profile
   get 'profiles/company/:id/edit' => 'profiles#edit_company', :as => :edit_company_profile
