@@ -26,17 +26,25 @@ class ApplicationController < ActionController::Base
   end
 
 	def account_id
-		session[:user_id]
+    if delegation_on?
+      return session[:signed_in_as]
+    else
+  		return session[:user_id]
+    end
 	end
 
 	def roll_id
-		session[:roll_id]
+    return current_user.getUser.id
 	end
 
 	def logged_in?
 		account_id != nil
 	end
     
+  def delegation_on?
+    return !(session[:signed_in_as] == nil)
+  end
+
   #student can't edit other student's profile, so does company
   #student and company can't create and destroy an event
   #student can't view company's application

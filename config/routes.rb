@@ -78,6 +78,11 @@ Rails.application.routes.draw do
   # Visualization
   get 'smart-report/' => 'visualizations#student_demographic', :as => :smart_report
   get 'smart-report/data' => 'visualizations#student_demographic_data', :defaults => { :format => 'json' }, :as => :smart_report_data
+
+  get 'sign-in-as/student/:id' => 'delegation#as_student', :as => :as_student
+  get 'sign-in-as/company/:id' => 'delegation#as_company', :as => :as_company
+  get 'cancel-delegation' => 'delegation#switch_back', :as => :cancel_delegation
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
