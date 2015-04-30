@@ -127,10 +127,10 @@ function updateData(template, reqData){
             if (general_stats_template.indexOf(template) != -1 ) {
                 renderTable(json, template);
             } else if (template == "overview") {
-                drawPie(json['countries'], "country");
-                drawPie(json['genders'], "gender");
-                drawPie(json['classes'], "class");
-                drawPie(json['majors'], "major");
+                updatePie(json['countries'], "country");
+                updatePie(json['genders'], "gender");
+                updatePie(json['classes'], "class");
+                updatePie(json['majors'], "major");
             };
             return json;
         },
