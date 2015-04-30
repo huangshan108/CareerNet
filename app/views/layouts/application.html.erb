@@ -93,7 +93,42 @@
   </ul>
 </nav>
 
+<% if logged_in? and (is_staff? or delegation_on?) %>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
 
+      <!-- Allow staff to sign in as a student or a company -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <% if delegation_on? %>
+          <p class="navbar-text"><b>CAUTION: YOU ARE CURRENTLY SIGNED IN AS ANOTHER USER.</b></p>
+        <% else %>
+          <ul class="nav navbar-nav">
+            <li><%= link_to 'Sign in as a student', profiles_students_path %></li>
+            <li><a href="/">Sign in as a company</a></li>
+            <li><%= link_to 'Smart Report', smart_report_path %></li>
+          </ul>
+        <% end %>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="divider"></li>
+              <% if delegation_on? %>
+                <li><%= link_to 'Switch Back', cancel_delegation_path %></li>
+              <% else %>
+                <li><%= link_to 'Logout', account_logout_path %></li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <div class="nav-bar-offset">
+  </div>
+<% end %>
 
 <div class="container">
   <%= yield %>

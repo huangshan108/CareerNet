@@ -119,6 +119,7 @@ class AccountsController < ApplicationController
         session[:user_id] = nil
         session[:email] = nil
         session[:roll_id] = nil
+        session[:signed_in_as] = nil
         flash[:notice] = "Logged out"
         redirect_to(:action => "login")
     end
