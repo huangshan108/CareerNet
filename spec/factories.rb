@@ -1,6 +1,9 @@
 require 'faker'
 
-FactoryGirl.define do  factory :activity do
+FactoryGirl.define do  factory :education do
+    
+  end
+  factory :activity do
     
   end
   factory :project do

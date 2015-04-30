@@ -53,6 +53,8 @@ class Student < ActiveRecord::Base
 
 	has_many :activities, dependent: :destroy
 
+	has_many :educations, dependent: :destroy
+
 
 	def getInterviews(start_date, end_date)
 		self.interviews.select{|i| 
