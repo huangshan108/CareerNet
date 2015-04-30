@@ -76,3 +76,11 @@ end
 When /^I click on project update button$/ do
     page.find('.update_proj_button_project').click
 end
+
+When /^I click on add education button$/ do
+    page.find('.addbutton_education').click
+end
+
+When /^I click on education update button$/ do
+    page.find('.update_edu_button_education').click
+end

@@ -187,11 +187,61 @@
   <div id="cancel_div_project">
     <button class="cancelbutton_project pull-left">Cancel</button>
   </div> 
-
 <br>
 <br>
-
 <button class="addbutton_project pull-left" name="add_project"> + </button>
+<br>
+
+
+<!-- starting past education -->
+<!--   project buttton project section starts here-->
+<div class="past_student_education">
+  <h2 class="past_proj"> Past Education </h2>
+    <% @student.educations.each do |edu| %>
+      <tr class="past_ex">
+        <div class="ex_title"> School Name </div>
+        <td><%= edu.school_name %></td>
+        <div class="ex_title"> major </div>
+        <td><%= edu.major %></td>
+        <div class="ex_title"> Date </div>
+        <td><%= edu.start_date.to_s%> 
+        <%if edu.graduation_date %>
+        to <%= edu.graduation_date.to_s%>
+        <%end%> </td>
+      </tr>
+      <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
+      <%= form_tag(:action => 'delete_past_education', :edu_id => edu.id) do %>
+    <button class="blue_button"> Delete </button>
+    <% end %>
+    <% end %>
+      <br>
+      <% end %>
+</div>
+
+  <%= form_tag(:action => 'update_past_education', :id => @student.id) do %>
+  <div class="past_education">
+      <dl class="edu_form"> 
+      </dl>
+  </div>
+  <div id="update_div_education">
+    <button class="update_edu_button_education pull-left">Update</button>
+  </div>
+<% end %>
+
+  <div id="cancel_div_education">
+    <button class="cancelbutton_education pull-left">Cancel</button>
+  </div> 
+  <br>
+  <br>
+<button class="addbutton_education pull-left" name="add_project"> + </button>
+<br>
+
+
+
+
+
+<!-- end past education -->
+
 <div class="pull-right button-group">
     <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
 </div>
@@ -201,10 +251,15 @@
 <script>
   var is_added = false;
   var is_added_project = false;
+  var is_added_education = false;
+
   document.getElementById('cancel_div').style.visibility='hidden';
   document.getElementById('update_div').style.visibility='hidden';
   document.getElementById('cancel_div_project').style.visibility='hidden';
   document.getElementById('update_div_project').style.visibility='hidden';
+  document.getElementById('cancel_div_education').style.visibility='hidden';
+  document.getElementById('update_div_education').style.visibility='hidden';
+
   $(".addbutton").click(function(){
       // $(".past_experience").html('experience_form.html.erb');
       //$("form").clone().appendTo('.past_experience');
@@ -249,6 +304,26 @@
       }
   });
 
+
+  $(".addbutton_education").click(function(){
+      if(is_added_education == false){
+          $( ".past_education" ).append('<dl class="education_form">' + 
+     '<h3> Add Past Education </h3>' +
+     '<dt>Education</dt>' +
+     '<dd><%= text_field_tag :school_name, params[:school_name],placeholder: "School Name" %></dd>' +
+     '<dt>Major</dt>' +
+     '<dd><%= text_field_tag :major, params[:major], placeholder: "Major" %></dd>' +
+     '<dt>Starting Date</dt>' +
+     '<dd><%= text_field_tag :start_date, params[:start_date], placeholder: "Staring Date" %></dd>' +
+     '<dt>Graduation Date</dt>' +
+     '<dd><%= text_field_tag :graduation_date, params[:graduation_date], placeholder: "Graduation Date" %></dd>' +
+     '</dl>');
+          is_added_education = true;
+          document.getElementById('cancel_div_education').style.visibility='visible';
+          document.getElementById('update_div_education').style.visibility='visible';
+      }
+  });
+
   $(".cancelbutton").click(function(){
     if (is_added == true){
       is_added = false;
@@ -264,6 +339,15 @@
       $(".project_form").remove();
       document.getElementById('cancel_div_project').style.visibility='hidden';
       document.getElementById('update_div_project').style.visibility='hidden';
+    }
+  });
+
+  $(".cancelbutton_education").click(function (){
+    if (is_added_education == true){
+      is_added_education = false;
+      $(".education_form").remove();
+      document.getElementById('cancel_div_education').style.visibility='hidden';
+      document.getElementById('update_div_education').style.visibility='hidden';
     }
   });
 </script>

@@ -63,6 +63,23 @@ Background: Adding jobs to database
     And I should see "website"
     And I should see "full stack "
     And I should see "personal website"
+
+
+    @javascript
+    Scenario: Adding an past experience
+    Given I am on student profile page
+    And I should see "Past Education"
+    When I click on add education button
+    Then I should see "Add Past Education"
+    When I fill in the following:
+     | school_name  | Berkeley     |
+     | Major        | EECS         |
+     | start_date   | 07/03/2012|
+     | graduation_date     | 07/03/2013|
+    When I click on education update button
+    Then I am on student profile page
+    And I should see "Berkeley"
+    And I should see "EECS"
     
 
 

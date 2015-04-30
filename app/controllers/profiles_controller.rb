@@ -166,25 +166,25 @@ class ProfilesController < ApplicationController
   end
   
   
-#  def update_past_education
-#      student = Student.find(params[:id])
-#      past_education = {:school_name => params[:school_name],
-#          :student_id => params[:id],
-#          :major => params[:major],
-#          :description => params[:description],
-#          :type => params[:end_date]
-#      }
-#      student.educations.create(past_education);
-#      student.save!
-#      redirect_to(single_student_profile_path(student))
-#  end
-#  
-#  def delete_past_project
-#      student = Student.find(params[:id])
-#      student.educations.destroy(params[:proj_id]);
-#      student.save!
-#      redirect_to(single_student_profile_path(student))
-#  end
+ def update_past_education
+     student = Student.find(params[:id])
+     past_education = {:school_name => params[:school_name],
+         :student_id => params[:id],
+         :major => params[:major],
+         :start_date => params[:start_date],
+         :graduation_date => params[:graduation_date]
+     }
+     student.educations.create(past_education);
+     student.save!
+     redirect_to(single_student_profile_path(student))
+ end
+ 
+ def delete_past_education
+     student = Student.find(params[:id])
+     student.educations.destroy(params[:edu_id]);
+     student.save!
+     redirect_to(single_student_profile_path(student))
+ end
 
   
 
