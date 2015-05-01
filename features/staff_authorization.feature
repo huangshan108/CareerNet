@@ -38,9 +38,9 @@ Scenario: stuff can view any students' profile
   Then I should be on edit profile page
 
 Scenario: stuff can visit other student application
-  hen I am on the main dashboard page
+  Then I am on the main dashboard page
   When I try visit student C application page
-  And I should not see "You don't have the persmission to perform the action."
+  And I should see "Unauthorized. Wrong user group."
   
   
   

@@ -42,7 +42,7 @@ Scenario: Creating Jobs
 Scenario: Deleting Jobs
   Given I am on the job 1 view page
   And I follow "Delete"
-  Then I should see "The Job Software Engineer deleted."
+  Then I should see "The job Software Engineer deleted."
 
 
 

@@ -1,0 +1,39 @@
+<h1>Interview Details </h1>
+
+<dl class="dl-horizontal">
+  <dt>Company </dt>
+  <dd><%= @interview.company.name %></dd>
+  <dt>Student </dt>
+  <dd><%= @interview.student.first_name + ' ' + @interview.student.last_name %></dd>
+  <dt>Interview Date</dt>
+  <dd><%= @interview.day %></dd>
+  <dt>Starting Time </dt>
+  <dd><%= ((9*60+40+@interview.time_slot*20)/60).to_s+":"+((9*60+40+@interview.time_slot*20)%60).to_s%></dd>
+  <dt>End Time </dt>
+  <dd><%= ((9*60+40+(@interview.time_slot+1)*20)/60).to_s+":"+((9*60+40+(@interview.time_slot+1)*20)%60).to_s%></dd>
+  <dt>Description </dt>
+  <dd><%= @interview.description %>
+  <dt>Company Feedback </dt>
+  <dd><%= @interview.note %>
+</dl>
+
+<% if @current_user.account_type == 3 %>
+  <%= form_tag update_interview_path do %>
+    <dl class="dl-horizontal">
+      <dt>Add Description </dt>
+      <dd><%= text_field_tag :description, params[:description] %></dd>
+      <dt>Add Feedback </dt>
+      <dd><%= text_field_tag :note, params[:note] %></dd>
+    </dl>
+    <div class="pull-right button-group">
+      <%= link_to "Back", company_interviews_path, class: "button default" %>
+      <%= submit_tag "Submit", class: "button blue" %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @current_user.account_type != 3 %>
+  <div class="pull-right button-group">
+    <%= link_to "Back", interview_student_show_path, class: "button default" %>
+  </div>
+<% end %>

@@ -122,6 +122,11 @@
     <dt>Title</dt>
     <dd><%= text_field_tag :title, params[:title], value: @student.title %></dd>
 
+    <% if @current_user.account_type == 2 %>
+      <dt>Staff Notes </dt>
+      <dd><%= text_field_tag :notes, params[:notes], value: @student.notes %></dd>
+    <% end %>
+
     <div class="pull-right button-group">
       <%= link_to 'Back', single_student_profile_path(@student), class: "button default" -%>
       <%= submit_tag "Submit", class: "button blue"%>

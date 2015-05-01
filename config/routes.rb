@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   get 'profiles/student/:id/edit' => 'profiles#edit_student', :as => :edit_student_profile
   post 'profiles/student/:id/update' => 'profiles#update_student', :as => :update_student_profile
   get 'profiles/school/:id' => 'profiles#school', :as => :single_school_profile
+  get 'profiles/companies/' => 'profiles#companies'
+  get 'profiles/company/page/:page' => 'profiles#list_companies', :as => :list_companies
   get 'profiles/company/:id' => 'profiles#company', :as => :company_profile
   get 'profiles/company/:id/edit' => 'profiles#edit_company', :as => :edit_company_profile
   post 'profiles/company/:id/update' => 'profiles#update_company', :as => :update_company_profile
@@ -47,25 +49,30 @@ Rails.application.routes.draw do
   get 'appointments/student/' => 'appointments#student_show', :as => :appointment_student_show
   get 'appointments/student/new' => 'appointments#student_new', :as => :appointment_student_new
   get 'appointments/student/book/:id' => 'appointments#student_book', :as => :appointment_student_book
+  post 'appointments/student/update/:id' => 'appointments#student_update', :as => :appointment_student_update
   get 'appointments/student/cancel/:id' => 'appointments#student_cancel', :as => :appointment_student_cancel
 
   get 'appointments/staff' => 'appointments#index_staff', :as => :staff_appointments
   post 'appointments/staff/new' => 'appointments#staff_new', :as => :new_staff_appointments
+  get 'appointments/:id' => 'appointments#show', :as => :show_appointment
+  post 'appointments/:id' => 'appointments#staff_update', :as => :update_appointment
   delete 'appointments/staff/:id' => 'appointments#destroy', :as => :cancel_appointment
 
   get 'appointments' => 'appointments#index', :as => :appointments
-  
+
   get 'applications/company/:company_id' => 'applications#index', :as => :company_view_applications
   get 'applications/student/:student_id' => 'applications#index', :as => :student_view_applications
-  get 'applications/:application_id' => 'applications#show', :as => :show_application
 
+  get 'interviews/application/:application_id' => 'interviews#app', :as => :app_int
   get 'interviews/student' => 'interviews#student_show', :as => :interview_student_show
-  get 'interviews/student/new' => 'interviews#student_new', :as => :interview_student_new
+  get 'interviews/student/new/:application_id' => 'interviews#student_new', :as => :interview_student_new
   get 'interviews/student/book/:id' => 'interviews#student_book', :as => :interview_student_book
   get 'interviews/student/cancel/:id' => 'interviews#student_cancel', :as => :interview_student_cancel
 
   get 'interviews/company' => 'interviews#index_company', :as => :company_interviews
   post 'interviews/company/new' => 'interviews#company_new', :as => :new_company_interviews
+  get 'interviews/:id' => 'interviews#show', :as => :show_interview
+  post 'interviews/:id' => 'interviews#company_update', :as => :update_interview
   delete 'interviews/company/:id' => 'interviews#destroy', :as => :cancel_interview
 
   get 'calendar' => 'calendar#view', :as => :calendar
@@ -84,6 +91,10 @@ Rails.application.routes.draw do
   get 'smart-report/organization-data' => 'visualizations#organization_data', :defaults => { :format => 'json' }, :as => :smart_report_organization_data
   get 'smart-report/region' => 'visualizations#salary_by_state', :as => :smart_report_region
   get 'smart-report/region-data' => 'visualizations#salary_by_state_data', :defaults => { :format => 'json' }, :as => :smart_report_region_data
+
+  get 'sign-in-as/student/:id' => 'delegation#as_student', :as => :as_student
+  get 'sign-in-as/company/:id' => 'delegation#as_company', :as => :as_company
+  get 'cancel-delegation' => 'delegation#switch_back', :as => :cancel_delegation
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

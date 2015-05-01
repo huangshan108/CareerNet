@@ -81,6 +81,9 @@ gem "font-awesome-rails"
 gem 'roo', '~> 2.0.0'
 
 gem 'descriptive_statistics'
-#
 # Gem for U.S. map d3
 gem 'topojson-rails'
+# Gem for authentication, authorization and switch users
+gem 'devise'
+gem "pundit"
+gem "switch_user"

@@ -1,17 +1,25 @@
 class ApplicationsController < ApplicationController
-    before_action :application_restriction
+    before_action :confirm_logged_in
+
 	def index
 		if params[:company_id]
-			@jobs = Company.find(params[:company_id]).jobs
-			render 'company_view_applications'
+			params[:id] = params[:company_id]
+			if authorize([:company, :self])
+				@jobs = Company.find(params[:company_id]).jobs
+				render 'company_view_applications'
+			end
 		elsif params[:student_id]
-			@applications = Student.find(params[:student_id]).applications
-			render 'student_view_applications'
+			params[:id] = params[:student_id]
+			if authorize([:student, :self])
+				@applications = Student.find(params[:student_id]).applications
+				render 'student_view_applications'
+			end
 		end
 	end
-  
-  def show
-    app_id = params[:application_id]
-    @application = Application.find_by_id(app_id)
+
+  def int
+    session[:application_id] = params[:application_id]
+    redirect_to(company_interviews_path)
   end
+
 end
