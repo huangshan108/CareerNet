@@ -138,7 +138,7 @@ class ProfilesController < ApplicationController
 
   def list_students
     if authorize([:staff])
-    	@all_students = Student.all
+      @all_students = Student.all
     end
   end
 

@@ -184,9 +184,4 @@ ActiveRecord::Schema.define(version: 20150501041455) do
 
   add_index "students", ["major_id"], name: "index_students_on_major_id"
 
-  create_table "studentskills", force: :cascade do |t|
-    t.integer "student_id"
-    t.integer "skill_id"
-  end
-
 end

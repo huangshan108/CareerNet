@@ -15,8 +15,8 @@
 class Event < ActiveRecord::Base
     has_and_belongs_to_many :accounts
 
-	def as_json(options = {})
-		{
+    def as_json(options = {})
+        {
             :title => title,
             :start => time_start,
             :end => time_end,
@@ -25,7 +25,7 @@ class Event < ActiveRecord::Base
             :detailURL => Rails.application.routes.url_helpers.event_path(self),
             :color => 'LightBlue'
         }
-	end
+    end
 
     def self.between(start_day, end_day)
       self.where("time_start >= ? AND time_end <= ?", start_day.to_date, end_day.to_date)
