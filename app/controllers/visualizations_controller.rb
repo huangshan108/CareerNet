@@ -15,9 +15,9 @@ class VisualizationsController < ApplicationController
     end
 
     def industry_data
-    	@industry_data = Industry.get_industry_vis_data(params)
+    	@salary_by_industry = Industry.get_industry_vis_data(params[:country], params[:gender], params[:class])
     	respond_to do |format|
-    		format.json { render :json => @industry_data}
+    		format.json { render :json => @salary_by_industry}
     	end
     end
 
@@ -27,9 +27,9 @@ class VisualizationsController < ApplicationController
     end
 
     def organization_data
-    	@company_data = Company.get_company_vis_data(params)
+    	@salary_by_organization = Company.get_company_vis_data(params[:country], params[:gender], params[:class])
     	respond_to do |format|
-    		format.json { render :json => @company_data}
+    		format.json { render :json => @salary_by_organization}
     	end    	
     end
 

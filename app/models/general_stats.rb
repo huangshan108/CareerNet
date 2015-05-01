@@ -21,14 +21,21 @@ module GeneralStats
       }
     ]
 =end
-  def self.get_vis_data(class_name, params)
+  def self.get_vis_data(class_name, countries, genders, classes)
+    filtered = self.experience_by_student_filtered_query(countries, genders, classes)
+    # byebug
+    query_field = (class_name + "_id").downcase.to_sym
+    grouped_data = filtered.group_by(&query_field)
     response = []
     total = 0
-    class_name.classify.constantize.all.each do |i|
+    grouped_data.each do |group_key, group|
+      if group_key == nil
+        next
+      end
       data = {}
-      d = self.filter_by_query(i.students, params).map(&:salary).compact
+      d = group.map(&:salary).compact
       if d != []
-        data[:class_name] = i.name
+        data[:class_name] = class_name.classify.constantize.find_by_id(group_key).name
         data[:stats] = d.descriptive_statistics
         total += data[:stats][:number]
         response << data
@@ -40,37 +47,28 @@ module GeneralStats
     return response
   end
 
-  def self.filter_by_query(students, params)
-    students.select{ |s| self.filter_by_class_of(s.student, params[:class]) }.select{ |s| self.filter_by_gender(s.student, params[:gender])}.select{ |s| self.filter_by_country(s.student, params[:country]) }
+  # Returns Activerecord::Relations of Experience filtered by 
+  # Countries, genders and class of students owning them
+  def self.experience_by_student_filtered_query(countries, genders, classes)
+      result = Experience.none
+      student_filtered = self.student_by_country_gender(countries, genders)
+      classes.each do |class_of|
+          student_filtered_by_year = student_filtered.where(:class_of => class_of.to_i)
+          result = Experience.all.joins(:student).merge(student_filtered_by_year).union(result)
+      end
+      result
   end
 
-  def self.filter_by_class_of(student, classes)
-    if classes.include? student.class_of.to_s
-      return true
-    elsif classes == student.class_of.to_s
-      return true
-    else
-      return false
-    end
-  end
-
-  def self.filter_by_gender(student, genders)
-    if genders.include? student.gender 
-      return true 
-    elsif genders == student.gender
-      return true
-    else
-      return false
-    end
-  end
-  
-  def self.filter_by_country(student, countries)
-    if countries.include? "intl" and student.country != "US"
-      return true
-    elsif countries.include? "US" and student.country == "US"
-      return true
-    else
-      return false
-    end
+  # Handle specific case of filtering for countries
+  def self.student_by_country_gender(countries, genders)
+      if countries.include? "US" and countries.include? "intl"
+          Student.where(gender:genders)
+      elsif countries.include? "US"
+          Student.where(country: countries, gender: genders)
+      elsif countries.include? "intl"
+          Student.where.not(country: "US").where(gender: genders)
+      else
+          Student.none
+      end
   end
 end
