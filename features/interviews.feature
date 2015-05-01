@@ -23,7 +23,7 @@ Background:
   | title        | description        | salary      | company_id |
   | Director     | Front-end          | 80000       | 1          |
 
-  And I am on the account_login page
+  And I am on logout page
   Then I enter "shuang@berkeley.edu" into "email"
   And I enter "careernet" into "password"
   And I press "Log In" button
