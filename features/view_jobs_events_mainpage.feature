@@ -8,9 +8,9 @@ Background:
 
   Given the following events exist:
   | title           | description   | created_at                  |
-  | Job Fair        | a             |   2015-03-24 00:43:43 UTC   |
-  | Resume Workshop | b             |     2015-03-24 00:43:44 UTC |
-  | Mock Interviews | c             |     2015-03-25 00:43:45 UTC |
+  | Job Fair        | a             |   2020-03-24 00:43:43 UTC   |
+  | Resume Workshop | b             |     2020-03-24 00:43:44 UTC |
+  | Mock Interviews | c             |     2020-03-25 00:43:45 UTC |
   
   And the following jobs exist:
   | title     | description | time_start              |

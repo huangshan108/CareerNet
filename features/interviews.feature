@@ -31,7 +31,7 @@ Background:
 
   Given I am on the job 1 view page
   When I follow "Apply"
-  Then I should see "You application has been submitted!"
+  Then I should see "Your application has been submitted!"
   When I am on the main dashboard page
   When I follow "View Applications"
   Then I should see "Director"
