@@ -70,7 +70,7 @@ $(document).ready(function() {
                 else {
                     //If a student has signed up for the event, directed to details
                     //page of that appointment
-                    window.location = calEvent.detailURL;
+                    window.location = "/appointments/" + calEvent.id;
                 }
         },
         slotMinutes: 20,

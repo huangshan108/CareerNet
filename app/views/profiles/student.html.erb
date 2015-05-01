@@ -102,12 +102,18 @@
       <%= @student.title-%>
     <% end %>
   </dd>
-
-
+  <% if @current_user.account_type == 2 %>
+    <dt> Staff Notes </dt>
+    <dd>
+      <% if @student.notes %>
+        <%= @student.notes-%>
+      <% end %>
+    </dd>
+  <% end %>
 
 </dl>
 <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
 <div class="pull-right button-group">
-  <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
-</div> 
+  <%= link_to "Edit profile", edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
+</div>
 <%end%>

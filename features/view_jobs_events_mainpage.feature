@@ -7,17 +7,17 @@ Feature: Display upcoming jobs and events on main page
 Background:
 
   Given the following events exist:
-  | title           | description   | created_at                  |
-  | Job Fair        | a             |   2015-03-24 00:43:43 UTC   |
-  | Resume Workshop | b             |     2015-03-24 00:43:44 UTC |
-  | Mock Interviews | c             |     2015-03-25 00:43:45 UTC |
+  | title           | description   | time_start              |
+  | Job Fair        | a             | 2020-03-24 00:43:43 UTC |
+  | Resume Workshop | b             | 2020-03-24 00:43:44 UTC |
+  | Mock Interviews | c             | 2020-03-25 00:43:45 UTC |
 
   Given the following companies exist
   | title          | brief       | website          | address |account_id |          
   | Google         | Search      | Google.com       |  Soda   |1          |
-  
+
   And the following jobs exist:
-  | title     | description | company_id | time_start              |
+  | title     | description | company_id | created_at              |
   | Job1      | d           | 1          | 2000-01-01 15:00:00 UTC |
   | Job2      | e           | 1          | 2000-01-02 15:00:00 UTC |
   | Job3      | f           | 1          | 2000-01-03 15:00:01 UTC |

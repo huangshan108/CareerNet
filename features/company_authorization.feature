@@ -52,5 +52,7 @@ Background: Adding user to  database
       And I am on the main page
       When I try visit random company application page
       And I am on the main page
+      When I try visit random company application page
+      And I am on the main page
 
 

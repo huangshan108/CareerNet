@@ -104,7 +104,8 @@ class ProfilesController < ApplicationController
                                 :company_id => params[:company_id],
                                 :base_salary => params[:base_salary],
                                 :years_experience => params[:years_experience],
-                                :title => params[:title])
+                                :title => params[:title],
+                                :notes => params[:notes])
       skill_id_list = student.skill_ids
 
       if not params[:add_skill_name].empty?

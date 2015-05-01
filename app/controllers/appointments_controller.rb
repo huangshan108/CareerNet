@@ -3,15 +3,15 @@ class AppointmentsController < ApplicationController
 
   respond_to :html, :js, :json
 
-  def index
-    if authorize([:student, :staff])
-      if is_student?
-        redirect_to appointment_student_show_path
-      else is_staff?
-        redirect_to staff_appointments_path
-      end
-    end
-  end
+#  def index
+#    if authorize([:student, :staff])
+#      if is_student?
+#        redirect_to appointment_student_show_path
+#      else is_staff?
+#        redirect_to staff_appointments_path
+#      end
+#    end
+#  end
 
   def new
     @appointment = Appointment.new
@@ -69,6 +69,20 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def show
+    @current_user = Account.find(account_id)
+    @appointment = Appointment.find(params[:id])
+    if @current_user.account_type != 2 and @current_user.account_type == 1 and @current_user.student != @appointment.student
+      flash[:notice] = "You are not authorized to view that appointment."
+      redirect_to(appointment_student_show_path)
+    end
+  end
+
+  def staff_update
+    Appointment.find(params[:id]).update_attribute(:note, params[:note])
+    redirect_to(staff_appointments_path)
+  end
+
   def destroy
     if authorize([:staff])
       Appointment.find(params[:id]).destroy
@@ -99,22 +113,27 @@ class AppointmentsController < ApplicationController
   def student_book
     if authorize([:student])
       appointment = Appointment.find(params[:id])
-      if appointment.student == nil
-        appointment.update_attribute(:student, current_user.student)
-        flash[:notice] = "Appointment has been made."
-        redirect_to(appointment_student_show_path)
-      else
-        flash[:error] = "Selected appointment is no longer available."
-        redirect_to(appointment_student_new_path)
-      end
     end
   end
+
+  def student_update
+    appointment = Appointment.find(params[:id])
+    if appointment.student == nil
+      appointment.update_attributes(:student => Account.find(session[:user_id]).student, :reason => params[:reason], :description => params[:description])
+      flash[:notice] = "Appointment has been made."
+      redirect_to(appointment_student_show_path)
+    else
+      flash[:error] = "Selected appointment is no longer available."
+      redirect_to(appointments_student_show_path)
+    end
+  end
+
 
   def student_cancel
     appointment = Appointment.find(params[:id])
     params[:id] = appointment.student.id
     if authorize([:student, :self])
-      appointment.update_attribute(:student, nil)
+      appointment.update_attributes(:student => nil, :reason => nil, :description => nil)
       flash[:notice] = "Appointment has been cancelled."
       redirect_to(appointment_student_show_path)
     end

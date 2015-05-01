@@ -16,9 +16,10 @@ class ApplicationsController < ApplicationController
 			end
 		end
 	end
-  
-  def show
-    app_id = params[:application_id]
-    @application = Application.find_by_id(app_id)
+
+  def int
+    session[:application_id] = params[:application_id]
+    redirect_to(company_interviews_path)
   end
+
 end

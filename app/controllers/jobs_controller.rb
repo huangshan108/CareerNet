@@ -41,7 +41,7 @@ class JobsController < ApplicationController
     params[:id] = @job.company_id
     if authorize([:company, :self])
       @job.destroy
-      flash[:notice] = "The Job #{@job.title} deleted."
+      flash[:notice] = "The job #{@job.title} deleted."
       redirect_to job_list_path
     end
   end
@@ -57,7 +57,7 @@ class JobsController < ApplicationController
   def apply
     if authorize([:student])
       @application = Application.create(:student_id => roll_id, :job_id => params[:job_id])
-      flash[:notice] = "You application has been submitted!"
+      flash[:notice] = "Your application has been submitted!"
       ApplicationsMailer.application_confirmation_email_student(@application).deliver_now
       ApplicationsMailer.application_confirmation_email_company(@application).deliver_now
       redirect_to view_single_job_path(params[:job_id])
