@@ -22,13 +22,6 @@ function reqToreqData(){
     return reqData;
 }
 
-
-//       <tbody>
-
-//       </tbody>
-//     </table>
-// </div>';
-
 // $(function() {
     console.log("here");
     var template = $('h1').data("template");
@@ -52,6 +45,8 @@ function init(template){
             // need to render table
             if (general_stats_template.indexOf(template) != -1 ) {
                 renderTable(json, template);
+                // drawPie(preFormatData(json), "industry");
+                var pie = new d3pie("pieChart", getD3PieOptions(json));
             } else if (template == "overview") {
                 drawPie(json['countries'], "country");
                 drawPie(json['genders'], "gender");
@@ -69,11 +64,124 @@ function init(template){
     var meow = d3.selectAll('.request')
         .on("click", function() {
             updateData(template, reqToreqData());
-            // renderTable(json, template);
         });
+}
 
-   
+/* This function takes an json data responsed from GeneralStats
+ * and format it so that it can be passed into drawPie */
+function preFormatData(data) {
+    result = [];
+    console.log(data);
+    $.each(data, function(index, item) {
+        temp = {};
+        temp["count"] = item.stats.number;
+        temp["name"] = item.class_name;
+        temp["percent"] = item.student_percentage;
+        result.push(temp);
+    });
+    // console.log(result);
+    return result;
+}
 
+/* Get the default options for d3pie */
+function getDefaultOptions() {
+    return {
+        "header": {
+            "title": {
+                "text": "",
+                "fontSize": 24,
+                "font": "Lato"
+            },
+            "subtitle": {
+                "color": "#999999",
+                "fontSize": 12,
+                "font": "Lato"
+            },
+            "titleSubtitlePadding": 9
+        },
+        "footer": {
+            "color": "#999999",
+            "fontSize": 10,
+            "font": "Lato",
+            "location": "bottom-left"
+        },
+        "size": {
+            "canvasWidth": 800,
+            // "pieInnerRadius": "25%",
+            "pieOuterRadius": "80%"
+        },
+        "data": {
+            "smallSegmentGrouping": {
+                "enabled": true,
+                "value": 1
+            },
+            "sortOrder": "value-desc",
+            "content": []
+        },
+        "labels": {
+            "outer": {
+                "format": "label-value1",
+                "hideWhenLessThanPercentage": 1,
+                "pieDistance": 32
+            },
+            "inner": {
+                "hideWhenLessThanPercentage": 3
+            },
+            "mainLabel": {
+                "fontSize": 11
+            },
+            "percentage": {
+                "color": "#ffffff",
+                "decimalPlaces": 0
+            },
+            "value": {
+                "color": "#adadad",
+                "fontSize": 11
+            },
+            "lines": {
+                "enabled": true
+            },
+            "truncation": {
+                "enabled": true
+            }
+        },
+        "effects": {
+            "pullOutSegmentOnClick": {
+                "effect": "elastic",
+                "speed": 400,
+                "size": 8
+            }
+        },
+        "misc": {
+            "gradient": {
+                "enabled": true,
+                "percentage": 100
+            },
+            "colors": {
+                "segments": all_colors_fewer
+            }
+        }   
+    }
+}
+
+/* This function takes in json data responsed from GeneralStats
+ * and return an json object that can be passed into d3pie constructor */
+function getD3PieOptions(data) {
+    var default_option = getDefaultOptions();
+    var content_data = [];
+    $.each(data, function(index, item) {
+        temp = {};
+        temp["label"] = item.class_name;
+        temp["value"] = item.stats.number;
+        // temp["color"] = pickOneColor();
+        temp["average"] = item.stats.mean;
+        content_data.push(temp);
+    });
+    default_option.data.content = content_data;
+
+    default_option.header.title.text = "Student Destributions"
+    console.log(default_option);
+    return default_option;
 }
 
 function renderTable(data, template) {
@@ -126,6 +234,8 @@ function updateData(template, reqData){
             // }
             if (general_stats_template.indexOf(template) != -1 ) {
                 renderTable(json, template);
+                $("#pieChart").empty();
+                var pie = new d3pie("pieChart", getD3PieOptions(json));
             } else if (template == "overview") {
                 updatePie(json['countries'], "country");
                 updatePie(json['genders'], "gender");
@@ -143,6 +253,7 @@ function updateData(template, reqData){
 
 
 function drawPie(data, section) {
+    console.log(data);
     var width = WIDTH,
         height = HEIGHT;
 
@@ -208,7 +319,7 @@ function updatePie(data, section){
     };
 
     var color = d3.scale.ordinal()
-    .range(shuffle(["#4D4D4D", "#5DA5DA", "#FAA43A", "#60BD68", "#F17CB0", "#B276B2", "#DECF3F", "#F15854"]));
+    .range(shuffle(all_colors));
 
     var slice = svg.select(".slices").selectAll("path.slice")
         .data(pie(was), key);
@@ -350,6 +461,18 @@ function updatePie(data, section){
 
     polyline.exit().transition().delay(1000)
         .remove();
+}
+
+/* 50 colors follow the gradient from red -> green -> red */
+all_colors = ["#f02a60", "#e43953", "#e93e44", "#f33c29", "#eb6846", "#f06927", "#f77f1d", "#eea33f", "#d69f23", "#d7b41e", "#d8cb28", "#d7e030", "#b2cf25", "#a8dc29", "#8fcc38", "#82dc32", "#74f72d", "#5cd438", "#46f031", "#24f526", "#2ef048", "#21d14d", "#43e37f", "#29e183", "#44f1ae", "#26f4bc", "#38d2bb", "#42f0eb", "#33c6d5", "#2dccf7", "#19a1e4", "#42a7fa", "#2277e8", "#1d5ae0", "#3a56d0", "#1f2de9", "#4f46f6", "#502df9", "#511dd1", "#6f2ad2", "#8f1ef4", "#9937ce", "#d13bfe", "#c229d5", "#e73ee6", "#f230d9", "#fc2ec8", "#f722a8", "#f0439b", "#e72f76"];
+
+
+/* 25 colors follow the gradient from blue -> yellow -> red */
+all_colors_fewer = ['#4f46f6', '#2277e8', '#33c6d5', '#44f1ae', '#2ef048', '#74f72d', '#b2cf25', '#d69f23', '#eb6846', '#f02a60', '#f0439b', '#e73ee6', '#8f1ef4'];
+
+/* Randomly pick a color from all_colors */
+function pickOneColor() {
+    return all_colors[Math.floor(Math.random() * 100 / 2)];
 }
 
 function shuffle(o){
