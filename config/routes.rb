@@ -47,25 +47,30 @@ Rails.application.routes.draw do
   get 'appointments/student/' => 'appointments#student_show', :as => :appointment_student_show
   get 'appointments/student/new' => 'appointments#student_new', :as => :appointment_student_new
   get 'appointments/student/book/:id' => 'appointments#student_book', :as => :appointment_student_book
+  post 'appointments/student/update/:id' => 'appointments#student_update', :as => :appointment_student_update
   get 'appointments/student/cancel/:id' => 'appointments#student_cancel', :as => :appointment_student_cancel
 
   get 'appointments/staff' => 'appointments#index_staff', :as => :staff_appointments
   post 'appointments/staff/new' => 'appointments#staff_new', :as => :new_staff_appointments
+  get 'appointments/:id' => 'appointments#show', :as => :show_appointment
+  post 'appointments/:id' => 'appointments#staff_update', :as => :update_appointment
   delete 'appointments/staff/:id' => 'appointments#destroy', :as => :cancel_appointment
 
   get 'appointments' => 'appointments#index', :as => :appointments
-  
+
   get 'applications/company/:company_id' => 'applications#index', :as => :company_view_applications
   get 'applications/student/:student_id' => 'applications#index', :as => :student_view_applications
-  get 'applications/:application_id' => 'applications#show', :as => :show_application
 
+  get 'interviews/application/:application_id' => 'interviews#app', :as => :app_int
   get 'interviews/student' => 'interviews#student_show', :as => :interview_student_show
-  get 'interviews/student/new' => 'interviews#student_new', :as => :interview_student_new
+  get 'interviews/student/new/:application_id' => 'interviews#student_new', :as => :interview_student_new
   get 'interviews/student/book/:id' => 'interviews#student_book', :as => :interview_student_book
   get 'interviews/student/cancel/:id' => 'interviews#student_cancel', :as => :interview_student_cancel
 
   get 'interviews/company' => 'interviews#index_company', :as => :company_interviews
   post 'interviews/company/new' => 'interviews#company_new', :as => :new_company_interviews
+  get 'interviews/:id' => 'interviews#show', :as => :show_interview
+  post 'interviews/:id' => 'interviews#company_update', :as => :update_interview
   delete 'interviews/company/:id' => 'interviews#destroy', :as => :cancel_interview
 
   get 'calendar' => 'calendar#view', :as => :calendar
