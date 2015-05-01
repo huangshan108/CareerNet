@@ -28,7 +28,7 @@
     <div class="recent-activity-list">
       <%@jobs.each do |job| %>
       <h5><%=link_to job.title, view_single_job_path(job.id)%></a></h3>
-      <h6>Posted by <%=job.company_id%> on <%=job.created_at%></h6>
+      <h6>Posted by <%= link_to job.company.name, company_profile_path(job.company_id) %> on <%=job.created_at%></h6>
       <% end %>
     </div>
     <h3>Upcoming Events </h3>
