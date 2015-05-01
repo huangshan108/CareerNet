@@ -60,7 +60,7 @@ class InterviewsController < ApplicationController
     @current_user = Account.find(account_id)
     @interview = Interview.find(params[:id])
     if @current_user.account_type != 3 and current_user.student != @interview.student
-      flash[:notice] = "You are not authorized to view that appointment."
+      flash[:notice] = "You are not authorized to view that interview."
       redirect_to(interview_student_show_path)
     end
   end

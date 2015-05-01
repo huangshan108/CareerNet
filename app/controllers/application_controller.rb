@@ -108,7 +108,7 @@ class ApplicationController < ActionController::Base
   private
   
   def error_message
-      flash[:notice] = "You don't have the persmission to perform the action."
+      flash[:notice] = "You don't have permission to perform that action."
       redirect_to(:controller => 'main', :action => 'index')
       return false
   end

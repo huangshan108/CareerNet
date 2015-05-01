@@ -5,6 +5,7 @@ class CreateAppointments < ActiveRecord::Migration
       t.belongs_to :student, index: true
       t.integer :time_slot
       t.date :day
+      t.string :reason
       t.text :description
       t.text :note
       t.timestamps
