@@ -40,11 +40,13 @@ sheet.each(last_name: 'Last_Name', first_name: 'First_Name', gender: 'Gender',
            citizenship: 'Citizenship', job_title: 'JobTitle', yr_exp: 'Yr Experience',
            industry: 'General Industry', company: 'Org Name', salary: 'Base Salary',
            city: 'City', state: 'State', country: 'Country') do |hash|
+    grad_date = random_dates_list.sample
     student = {}
     student[:first_name] = hash[:first_name]
     student[:last_name] = hash[:last_name]
     student[:major_id] = [1, 30, 90][rand(2)]
-    student[:graduation_date] = random_dates_list.sample
+    student[:graduation_date] = grad_date
+    student[:class_of] = grad_date.year
     student[:college_id] = 1 + rand(10000)
     student[:resume_link] = resume_link
     student[:country] = hash[:citizenship]
