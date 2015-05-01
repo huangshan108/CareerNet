@@ -1,5 +1,4 @@
 <h1> My Interviews </h1>
-<%= link_to "Back to My Applications", student_view_applications_path(roll_id) -%>
 <table class = "table">
   <thead>
     <tr>
@@ -25,3 +24,6 @@
 <% if @interviews.length == 0 -%>
   <center><b>You currently do not have any scheduled interviews.</b></center>
 <% end -%>
+<div class="pull-right button-group">
+  <%= link_to "Back", student_view_applications_path(roll_id), class: "button default" %>
+</div>
