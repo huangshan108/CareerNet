@@ -157,7 +157,7 @@ USCashMap.prototype.setupMap = function () {
     // Label for inspection information interaction
     //this.textGroup = this.textsvg.append("g")
     //    .attr('class', 'map-text-container');
-    this.stateText = d3.select("p#state");
+    this.stateText = d3.select("b#state");
     this.avgText = d3.select("p#average");
     this.countText = d3.select("p#count");
 
@@ -256,7 +256,6 @@ USCashMap.prototype.render = function (data) {
      *  (4) set internal state that signals the selection is not due to a click (already done for you)
      */
     this.states.on('mouseover', function(d, e, p){
-        that.setSelectionClickBoolean(false);
         // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
         // `that` variable defined above rather than `this`, since `this` is rebound to a newly
         // defined function.
@@ -268,7 +267,6 @@ USCashMap.prototype.render = function (data) {
         that.setInspectionInfo(fullState, d['average'], d['count']);
     });
     this.states.exit().on('mouseover', function(d, e, p){
-        that.setSelectionClickBoolean(false);
         // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
         // `that` variable defined above rather than `this`, since `this` is rebound to a newly
         // defined function.
@@ -277,7 +275,7 @@ USCashMap.prototype.render = function (data) {
         d3.select(this).attr("fill", '#FF8300'); 
         //that.addStateToSelection(d['label']);
         var fullState = d['label'];
-        that.setInspectionInfo(fullState, d['average']);
+        that.setNoDataInfo(fullState);
     });
 
     /*
@@ -292,7 +290,6 @@ USCashMap.prototype.render = function (data) {
      *      (a) this means using the original `moneyColorScale` mapping
      */
     this.states.on('mouseout', function(d, e, p){
-        that.setSelectionClickBoolean(false);
         // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
         // `that` variable defined above rather than `this`, since `this` is rebound to a newly
         // defined function.
@@ -305,7 +302,6 @@ USCashMap.prototype.render = function (data) {
         });
     });
     this.states.exit().on('mouseout', function(d, e, p){
-        that.setSelectionClickBoolean(false);
         // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
         // `that` variable defined above rather than `this`, since `this` is rebound to a newly
         // defined function.
@@ -318,34 +314,6 @@ USCashMap.prototype.render = function (data) {
         });
     });
 
-    /*
-     * Click event handler
-     *
-     * When the user click's on the particular region, this event is triggered.
-     * On click, the following will occur:
-     *  (1) the state's code (e.g. 'CA') is added to this._selectedStates via `addStateToSelection`
-     *      (a) an event needs to be triggered (already done in the `addStateToSelection` method)
-     *  (2) the fill of this particular state is a bright color different from both your contribution
-     *      color mapping and mouseover color choice
-     *      (a) the fill of all other states should still be the original color intensity mapping
-     *  (3) Update the inspection information text with the selected state using `setInspectionInfo`
-     *  (4) set internal state that signals the selection is due to a click (already done for you)
-     */
-    /*
-    this.states.on('click', function(d, e, p){
-        d3.event.stopPropagation();
-        that.setSelectionClickBoolean(true);
-        // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
-        // `that` variable defined above rather than `this`, since `this` is rebound to a newly
-        // defined function.
-
-        // Implement
-        d3.select(this).attr("fill", "#FF6600");
-        that.addStateToSelection(d['state']);
-        var fullState = that.stateNameMap.get(d['state']);
-        that.setInspectionInfo(fullState, d['total_amount']);
-    });
-    */
 };
 
 
@@ -370,8 +338,13 @@ USCashMap.prototype.currencyFormatter = d3.format('$,');
  */
 USCashMap.prototype.setInspectionInfo = function(stateName, amount, count) {
     this.stateText.text(stateName);
-    this.avgText.text(this.currencyFormatter(amount));
-    this.countText.text(count);
+    this.avgText.text("Avg. Salary: " + this.currencyFormatter(amount));
+    this.countText.text("#Offers: " + count);
+};
+
+USCashMap.prototype.setNoDataInfo = function(stateName){
+    this.stateText.text(stateName);
+    this.avgText.text('No data');
 };
 
 
@@ -384,102 +357,4 @@ USCashMap.prototype.clearInspectionInfo = function() {
     this.stateText.text('');
     this.avgText.text('');
     this.countText.text('');
-};
-
-
-/*
- * addStateToSelection(stateCode)
- *
- * Adds the state to the internal representation of a selection. This method will
- * also fire off the 'mapselectionchange' event.
- *
- * @params {String} stateCode is the 2 letter abbreviation of a state (e.g. 'CA')
- */
-USCashMap.prototype.addStateToSelection = function (stateCode) {
-    this._selectedStates.add(stateCode);  // e.g. stateCode = 'CA'
-    this.dispatch.mapselectionchange();  // dispatch event for controller to consume
-};
-
-
- /*
- * removeStateFromSelection(stateCode)
- *
- * Removes the state to the internal representation of a selection. This method will
- * also fire off the 'mapselectionchange' event.
- *
- * @params {String} stateCode is the 2 letter abbreviation of a state (e.g. 'CA')
- */
-USCashMap.prototype.removeStateFromSelection = function (stateCode) {
-    if (this._selectedStates.has(stateCode)) {
-        var ret = this._selectedStates.remove(stateCode);
-        this.dispatch.mapselectionchange();
-        return ret;
-    }
-};
-
-/*
- * clearStatesFromSelection()
- *
- * Clears all states from the selection and triggers a 'mapselectionchange' event.
- */
-USCashMap.prototype.clearStatesFromSelection = function () {
-    this._selectedStates = d3.set();
-    this.dispatch.mapselectionchange();
-    this.setSelectionClickBoolean(false);
-};
-
-
-/*
- * hasStateInSelection(stateCode)
- *
- * Return true if the state code is in the selection.
- *
- * @params {String} stateCode is the 2 letter abbreviation of a state (e.g. 'CA')
- */
-USCashMap.prototype.hasStateInSelection = function (stateCode) {
-    return this._selectedStates.has(stateCode);
-};
-
-
-/*
- * getStatesInSelection()
- *
- * Return an array containing the states selected by this visualization.
- * e.g. will return: ['CA']
- *
- * @returns {Array} of strings that indicate the selected state codes
- */
-USCashMap.prototype.getStatesInSelection = function () {
-    return this._selectedStates.values();
-};
-
-
-/*
- * hasSelection()
- * 
- * Return true if there is at least one state selected.
- */
-USCashMap.prototype.hasSelection = function () {
-    return !this._selectedStates.empty();
-};
-
-/*
- * isSelectionClick()
- *
- * Return true if the selection was due to a click event.
- * @returns {boolean} true if click selection
- */
-USCashMap.prototype.isSelectionClick = function () {
-    return this.hasSelection() && this._clicked;
-};
-
-/*
- * setSelectionClickBoolean(clickBoolean)
- *
- * Set the internal representation of whether or not the selection was clicked.
- *
- * @params {boolean} clickBoolean
- */
-USCashMap.prototype.setSelectionClickBoolean = function (clickBoolean) {
-    this._clicked = clickBoolean;
 };
