@@ -111,13 +111,12 @@ class AppointmentsController < ApplicationController
   end
 
   def student_cancel
-      appointment = Appointment.find(params[:id])
-      params[:id] = appointment.student.id
-      if authorize([:student, :self])
-        appointment.update_attribute(:student, nil)
-        flash[:notice] = "Appointment has been cancelled."
-        redirect_to(appointment_student_show_path)
-      end
+    appointment = Appointment.find(params[:id])
+    params[:id] = appointment.student.id
+    if authorize([:student, :self])
+      appointment.update_attribute(:student, nil)
+      flash[:notice] = "Appointment has been cancelled."
+      redirect_to(appointment_student_show_path)
     end
   end
 
