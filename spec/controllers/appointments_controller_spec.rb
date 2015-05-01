@@ -1,3 +1,4 @@
+require 'spec_helper'
 describe AppointmentsController do
   describe 'POST staff_new' do
     it 'does not render a new html page' do
