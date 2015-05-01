@@ -3,25 +3,11 @@ class Visualization < ActiveRecord::Base
     # Returns an ActiveRecord::Relation
     def self.student_demographic_query(countries, genders, classes)
         result = Student.none
-        filtered = self.student_by_country_gender(countries, genders)
+        filtered = GeneralStats.student_by_country_gender(countries, genders)
         classes.each do |class_of|
             result = filtered.by_year(class_of, field: :graduation_date).union(result)
         end
         result
-    end
-
-
-    # Handle specific case of filtering for countries
-    def self.student_by_country_gender(countries, genders)
-        if countries.include? "US" and countries.include? "intl"
-            Student.where(gender:genders)
-        elsif countries.include? "US"
-            Student.where(country: countries, gender: genders)
-        elsif countries.include? "intl"
-            Student.where.not(country: "US").where(gender: genders)
-        else
-            Student.none
-        end
     end
 
     # Compose json for one category e.g. gender
@@ -97,7 +83,7 @@ class Visualization < ActiveRecord::Base
     # Returns json of average salary and count of all jobs in USA held by 
     # students that fit the category of 'countries, genders, classes'
     def self.salary_by_region_usa_json(countries, genders, classes)
-        filtered = self.experience_by_student_filtered_query(countries, genders, classes)
+        filtered = GeneralStats.experience_by_student_filtered_query(countries, genders, classes)
         average = filtered.where(country: 'USA').group(:state).average(:salary)
         count = filtered.where(country: 'USA').group(:state).count
 
@@ -111,17 +97,4 @@ class Visualization < ActiveRecord::Base
             usa_avg: result
         }
     end
-
-    # Returns Activerecord::Relations of Experience filtered by 
-    # Countries, genders and class of students owning them
-    def self.experience_by_student_filtered_query(countries, genders, classes)
-        result = Experience.none
-        student_filtered = self.student_by_country_gender(countries, genders)
-        classes.each do |class_of|
-            student_filtered_by_year = student_filtered.by_year(class_of, field: :graduation_date)
-            result = Experience.all.joins(:student).merge(student_filtered_by_year).union(result)
-        end
-        result
-    end
-
 end
