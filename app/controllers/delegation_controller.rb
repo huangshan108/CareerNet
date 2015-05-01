@@ -1,6 +1,6 @@
 class DelegationController < ApplicationController
 	before_action :confirm_logged_in
-	
+
 	def sign_in_as(account_id)
 		if authorize([:staff])
 			session[:signed_in_as] = account_id
@@ -9,7 +9,7 @@ class DelegationController < ApplicationController
 	end
 
 	def switch_back
-		if authorize([:staff])
+		if authorize([:all]) # otherwise impossible to switch back
 			if !delegation_on?
 				flash[:error] = 'You are already on your own account.'
 			else
