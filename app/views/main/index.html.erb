@@ -8,6 +8,7 @@
         when 1 %>
           <li><%= link_to "View Registered Events", registered_event_index_path(roll_id) %> </li>
           <li><%= link_to 'View Applications', student_view_applications_path(roll_id) %> </li>
+          <li><%= link_to 'View Scheduled Interviews', interview_student_show_path %></li>
           <li><%= link_to 'Make An Appointment', appointment_student_show_path %></li>
         <% when 2 %>
           <li><%= link_to "View Registered Events", registered_event_index_path(roll_id) %> </li>

@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-      <% for a in @application.interviews -%>
+      <% for a in @interviews -%>
           <tr>
             <td><%= a.company.name %></td>
             <td><%= a.day -%></td>
@@ -30,6 +30,10 @@
         </tr>
   </tbody>
 </table>
+<% if @interviews.nil? or @interviews.length == 0 %>
+  <center><b>You do not have any current interview offers for this application. </b></center>
+<% end %>
+
 <div class="pull-right button-group">
   <%= link_to "Back", student_view_applications_path(roll_id), class: "button default" %>
 </div>

@@ -9,7 +9,7 @@
   <dd><%= @appointment.day %></dd>
   <dt>Starting Time </dt>
   <dd><%= ((9*60+40+@appointment.time_slot*20)/60).to_s+":"+((9*60+40+@appointment.time_slot*20)%60).to_s%></dd>
-  <dt>Appointment Date </dt>
+  <dt>End Time</dt>
   <dd><%= ((9*60+40+(@appointment.time_slot+1)*20)/60).to_s+":"+((9*60+40+(@appointment.time_slot+1)*20)%60).to_s%></dd>
   <dt>Reason </dt>
   <dd><%= @appointment.reason %>

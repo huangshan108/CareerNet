@@ -1,5 +1,5 @@
 class ApplicationsController < ApplicationController
-    before_action :application_restriction
+before_action :application_restriction
 	def index
 		if params[:company_id]
 			@jobs = Company.find(params[:company_id]).jobs
@@ -10,8 +10,8 @@ class ApplicationsController < ApplicationController
 		end
 	end
 
-  def interview
-    session[:application_id] = application.id
+  def int
+    session[:application_id] = params[:application_id]
     redirect_to(company_interviews_path)
   end
 

@@ -56,9 +56,30 @@ class InterviewsController < ApplicationController
       end
   end
 
+  def show
+    @current_user = Account.find(account_id)
+    @interview = Interview.find(params[:id])
+    if @current_user.account_type != 3 and current_user.student != @interview.student
+      flash[:notice] = "You are not authorized to view that appointment."
+      redirect_to(interview_student_show_path)
+    end
+  end
+
+  def app
+    session[:application_id] = params[:application_id]
+    redirect_to(company_interviews_path)
+  end
+
+  def company_update
+    Interview.find(params[:id]).update_attributes([:description => params[:description], :note => params[:note]])
+    redirect_to(company_appointments_path)
+  end
+
   def destroy
     Interview.find(params[:id]).destroy
-    respond_with layout: false
+    respond_to do |format|
+      format.json { render :json => true }
+    end
   end
 
   def student_show
@@ -79,8 +100,8 @@ class InterviewsController < ApplicationController
   def student_new
     @student = Account.find(session[:user_id]).student
     @application = Application.find params[:application_id]
-#@interviews = Interview.where("application = :application", plication_id])
-  end
+    @interviews = @application.interviews
+    end
 
   def student_book
     interview = Interview.find(params[:id])

@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
         id = params[:company_id]
         if roll_id.to_i != id.to_i #try vistit other company
           error_message
-          elsif params[:student_id] #try visit student
+        elsif params[:student_id] #try visit student
          error_message
         end
     elsif account_type == 1
