@@ -1,0 +1,39 @@
+<h1>Appointment Details </h1>
+
+<dl class="dl-horizontal">
+  <dt>Staff </dt>
+  <dd><%= @appointment.staff.first_name + ' ' + @appointment.staff.last_name %></dd>
+  <dt>Student </dt>
+  <dd><%= @appointment.student.first_name + ' ' + @appointment.student.last_name %></dd>
+  <dt>Appointment Date</dt>
+  <dd><%= @appointment.day %></dd>
+  <dt>Starting Time </dt>
+  <dd><%= ((9*60+40+@appointment.time_slot*20)/60).to_s+":"+((9*60+40+@appointment.time_slot*20)%60).to_s%></dd>
+  <dt>Appointment Date </dt>
+  <dd><%= ((9*60+40+(@appointment.time_slot+1)*20)/60).to_s+":"+((9*60+40+(@appointment.time_slot+1)*20)%60).to_s%></dd>
+  <dt>Reason </dt>
+  <dd><%= @appointment.reason %>
+  <dt>Description </dt>
+  <dd><%= @appointment.description %>
+  <dt>Staff Feedback </dt>
+  <dd><%= @appointment.note %>
+</dl>
+
+<% if @current_user.account_type == 2 %>
+  <%= form_tag update_appointment_path do %>
+    <dl class="dl-horizontal">
+      <dt>Add Feedback </dt>
+      <dd><%= text_field_tag :note, params[:note] %></dd>
+    </dl>
+    <div class="pull-right button-group">
+      <%= link_to "Back", staff_appointments_path, class: "button default" %>
+      <%= submit_tag "Submit", class: "button blue" %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @current_user.account_type != 2 %>
+  <div class="pull-right button-group">
+    <%= link_to "Back", appointment_student_show_path, class: "button default" %>
+  </div>
+<% end %>

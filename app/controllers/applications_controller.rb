@@ -9,9 +9,10 @@ class ApplicationsController < ApplicationController
 			render 'student_view_applications'
 		end
 	end
-  
-  def show
-    app_id = params[:application_id]
-    @application = Application.find_by_id(app_id)
+
+  def interview
+    session[:application_id] = application.id
+    redirect_to(company_interviews_path)
   end
+
 end

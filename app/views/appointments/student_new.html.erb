@@ -1,6 +1,5 @@
 <% #  This file is app/views/appointments/student_show.html.haml %>
 <h1> Make an appointment </h1>
-<%= link_to "Back to my appointments", appointment_student_show_path -%>
 <table class = "table">
   <thead>
     <tr>
@@ -37,3 +36,7 @@
     <% end -%>
   </tbody>
 </table>
+
+<div class="pull-right button-group">
+  <%= link_to "Back", appointment_student_show_path, class: "button default" -%>
+</div>

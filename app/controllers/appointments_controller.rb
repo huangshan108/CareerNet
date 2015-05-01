@@ -81,6 +81,22 @@ class AppointmentsController < ApplicationController
       end
   end
 
+  def show
+    @current_user = Account.find(account_id)
+    @appointment = Appointment.find(params[:id])
+    if @current_user.account_type != 2
+      if @current_user.account_type == 1 and @current_user.student != @appointment.student
+        flash[:notice] = "You are not authorized to view that appointment."
+        redirect_to(appointment_student_show_path)
+      end
+    end
+  end
+
+  def staff_update
+    Appointment.find(params[:id]).update_attribute(:note, params[:note])
+    redirect_to(staff_appointments_path)
+  end
+
   def destroy
     Appointment.find(params[:id]).destroy
     respond_to do |format|
@@ -110,20 +126,25 @@ class AppointmentsController < ApplicationController
 
   def student_book
     appointment = Appointment.find(params[:id])
+  end
+
+  def student_update
+    appointment = Appointment.find(params[:id])
     if appointment.student == nil
-      appointment.update_attribute(:student, Account.find(session[:user_id]).student)
+      appointment.update_attributes(:student => Account.find(session[:user_id]).student, :reason => params[:reason], :description => params[:description])
       flash[:notice] = "Appointment has been made."
       redirect_to(appointment_student_show_path)
     else
       flash[:error] = "Selected appointment is no longer available."
-      redirect_to(appointment_student_new_path)
+      redirect_to(appointments_student_show_path)
     end
   end
+
 
   def student_cancel
     appointment = Appointment.find(params[:id])
     if appointment.student == Account.find(session[:user_id]).student
-      appointment.update_attribute(:student, nil)
+      appointment.update_attributes(:student => nil, :reason => nil, :description => nil)
       flash[:notice] = "Appointment has been cancelled."
     else
       flash[:error] = "You do not have permission to cancel this appointment."

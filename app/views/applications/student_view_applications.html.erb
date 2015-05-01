@@ -16,7 +16,7 @@
 		    <td><%= application.created_at.strftime('%D') %></td>
         <td>
           <% if !application.interviews.nil? %>
-            <%= link_to "View Details", interview_student_new_path(:application_id => application.id)%>
+          <%= link_to "View Details", interview_student_new_path(application)%>
           <% else %>
             Pending
           <% end %>
