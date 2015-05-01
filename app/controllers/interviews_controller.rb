@@ -19,7 +19,7 @@ class InterviewsController < ApplicationController
       endslot = Interview.string_to_timeslot(endtime_str)
       error = false
       while timeslot < endslot do
-        interview_params = { day: starttime_str, time_slot: timeslot, company: curr_company, application_id: session[:application_id]}
+        interview_params = { day: starttime_str, time_slot: timeslot, company: curr_company, application_id: session[:application_id], status: "Pending"}
         @intr = Interview.new(interview_params)
         timeslot += 1
         error = @intr.save and error
