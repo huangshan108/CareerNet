@@ -73,8 +73,8 @@ class InterviewsController < ApplicationController
   end
 
   def company_update
-    Interview.find(params[:id]).update_attributes([:description => params[:description], :note => params[:note]])
-    redirect_to(company_appointments_path)
+    Interview.find(params[:id]).update_attributes(:description => params[:description], :status => params[:status], :note => params[:note])
+    redirect_to(company_interviews_path)
   end
 
   def destroy
