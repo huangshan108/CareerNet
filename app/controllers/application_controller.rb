@@ -40,7 +40,9 @@ class ApplicationController < ActionController::Base
       flash[:error] = "Unauthorized. Wrong user group."
       redirect_to root_path
       return false
-    elsif identities.include? :self and current_user.getUser.id != params[:id]
+    elsif identities.include? :self and \
+      current_identity == identities[identities.index(:self)-1] and \
+      current_user.getUser.id != params[:id].to_i
       flash[:error] = "Unauthorized. Privacy violation."
       redirect_to root_path
       return false
@@ -67,95 +69,6 @@ class ApplicationController < ActionController::Base
   def delegation_on?
     return !(session[:signed_in_as] == nil)
   end
-
-  #student can't edit other student's profile, so does company
-  #student and company can't create and destroy an event
-  #student can't view company's application
-  #company can't view student's application
-  private
-  def profile_restriction
-    id = params[:id]
-    #if not a staff
-    if !is_staff?
-      if roll_id.to_i != id.to_i
-          error_message
-      end
-    end
-    return true
-  end
-  
-  private
-  def event_restriction
-      id = params[:id]
-      unless is_staff?
-          error_message
-      else
-       return true
-      end
-  end
-  
-  #this use :student_id and company_id as params,i can't combine them together since
-  #other controller use :id
-  private
-  def application_restriction
-    if is_company?
-        id = params[:company_id]
-        if roll_id.to_i != id.to_i #try vistit other company
-          error_message
-          elsif params[:student_id] #try visit student
-         error_message
-        end
-    elsif is_student?
-        id = params[:student_id]
-        if roll_id.to_i != id.to_i #try vistit other stduent
-            error_message
-        elsif params[:company_id] #try vistit company
-            error_message
-        end
-    end
-  end
-  
-  
-  #only company can post and delete jobs and company can't delete other company's job
-  private
-  def job_restriction
-      id = params[:id]
-      if !is_company?
-          error_message
-      else
-      #might be more stuff here
-          return true
-      end
-          
-  end
-
-
-  #company can't delete other company's job
-  private
-  def job_restriction2
-      # id = params[:id]
-      if !is_company?
-           error_message
-      elsif is_company?
-          @company = Company.find_by_id(roll_id);
-            job_id = params[:job_id]
-        @job = Job.find_by_id(job_id)
-        if (@job.company.name.to_s.eql? @company.name.to_s) == false
-          error_message
-        end
-      else 
-        return true 
-      end 
-  end
-  
-  private
-  
-  def error_message
-      flash[:notice] = "You don't have the persmission to perform the action."
-      redirect_to(:controller => 'main', :action => 'index')
-      return false
-  end
-  
 
 	# return morning, afternoon or evening
 	def time_period

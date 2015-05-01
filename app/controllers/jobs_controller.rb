@@ -1,7 +1,5 @@
 class JobsController < ApplicationController
   before_action :confirm_logged_in
-  before_action :job_restriction, only:[:create, :new]
-  before_action :job_restriction2, only:[:delete]
   
   def index
     if authorize([:all])
@@ -41,10 +39,11 @@ class JobsController < ApplicationController
   def delete
     @job = Job.find params[:job_id]
     params[:id] = @job.company_id
-    authorize([:company, :self])
-    @job.destroy
-    flash[:notice] = "The Job #{@job.title} deleted."
-    redirect_to job_list_path
+    if authorize([:company, :self])
+      @job.destroy
+      flash[:notice] = "The Job #{@job.title} deleted."
+      redirect_to job_list_path
+    end
   end
 
   def view_posted_jobs

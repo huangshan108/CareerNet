@@ -37,16 +37,14 @@ class InterviewsController < ApplicationController
   end
 
   def curr_company
+    if authorize([:company])
       @account = current_user
-      if @account.account_type != 3
-          flash[:error] = 'You must be a company to access this page.'
-          redirect_to root_path
-          return
-      elsif @account.company == nil
+      if @account.company == nil
           Company.new(account: @account)
       else
           @account.company
       end
+    end
   end
 
   def index_company
@@ -105,14 +103,11 @@ class InterviewsController < ApplicationController
   end
 
   def student_cancel
-    if authorize([:student])
-      interview = Interview.find(params[:id])
-      if interview.student == current_user.student
-        interview.update_attribute(:student, nil)
-        flash[:notice] = "Interview has been cancelled."
-      else
-        flash[:error] = "You do not have permission to cancel this interview."
-      end
+    interview = Interview.find(params[:id])
+    params[:id] = interview.student.id
+    if authorize([:student, :self])
+      interview.update_attribute(:student, nil)
+      flash[:notice] = "Interview has been cancelled."
       redirect_to(interview_student_show_path)
     end
   end

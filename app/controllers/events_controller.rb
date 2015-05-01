@@ -1,26 +1,29 @@
 class EventsController < ApplicationController
   before_action :confirm_logged_in
-  before_action :event_restriction, only:[:create,:destroy,:new]
+
   def show
-    authorize([:all])
-    id = params[:id]
-    @event = Event.find(id)
-    @current_user = Account.find(account_id)
+    if authorize([:all])
+      id = params[:id]
+      @event = Event.find(id)
+      @current_user = Account.find(account_id)
+    end
   end
 
   def index
-    authorize([:all])
-    @current_user = Account.find(account_id)
-    pages = 10
-    @events = Event.all
+    if authorize([:all])
+      @current_user = Account.find(account_id)
+      pages = 10
+      @events = Event.all
+    end
   end
 
   def registered_index
     @current_user = Account.find(account_id)
     params[:id] = @current_user.getUser.id
-    authorize([:all, :self])
-    pages = 10
-    @events = @current_user.events
+    if authorize([:all])
+      pages = 10
+      @events = @current_user.events
+    end
   end
 
   def attendees_index

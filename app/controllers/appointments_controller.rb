@@ -45,24 +45,12 @@ class AppointmentsController < ApplicationController
     end
   end
 
-  #def appt_params
-  #    appt_date = params[:start].to_date
-  #    appt_time = params[:start].to_time
-  #    time_slot = Appointment.string_to_timeslot(params[:start].to_s)
-  #    {
-  #      day: appt_date,
-  #      time_slot: time_slot
-  #    }
-  #end
   def curr_staff
     if authorize([:staff])
       @account = current_user
       if @account.staff == nil
           Staff.new(account: @account)
       else
-          #@account.staff.first_name = "Hye"
-          #@account.staff.last_name = "Cho"
-          #@account.staff.save
           @account.staff
       end
     end
@@ -71,8 +59,8 @@ class AppointmentsController < ApplicationController
   def index_staff
     if authorize([:staff])
       @staff = curr_staff
-      #@appointments = Appointment.appointments_this_week(@staff)
-      @appointments = @staff.appointments.between(params[:start], params[:end]) if (params[:start] && params[:end])
+      @appointments = @staff.appointments.between(params[:start], params[:end]) \
+       if (params[:start] && params[:end])
 
       respond_to do |format|
         format.html
@@ -93,17 +81,11 @@ class AppointmentsController < ApplicationController
   def student_show
     if authorize([:student])
       account = current_user
-      if is_student?
-        if account.student == nil
-          Student.new(account: account)
-        end
-        @student = account.student
-        @appointments = @student.appointments
-      else
-        flash[:error] = "This page is only available to students."
-        redirect_to(:root)
-        return
+      if account.student == nil
+        Student.new(account: account)
       end
+      @student = account.student
+      @appointments = @student.appointments
     end
   end
 
@@ -129,15 +111,13 @@ class AppointmentsController < ApplicationController
   end
 
   def student_cancel
-    if authorize([:student])
       appointment = Appointment.find(params[:id])
-      if appointment.student == current_user.student
+      params[:id] = appointment.student.id
+      if authorize([:student, :self])
         appointment.update_attribute(:student, nil)
         flash[:notice] = "Appointment has been cancelled."
-      else
-        flash[:error] = "You do not have permission to cancel this appointment."
+        redirect_to(appointment_student_show_path)
       end
-      redirect_to(appointment_student_show_path)
     end
   end
 

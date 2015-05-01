@@ -1,4 +1,6 @@
 class DelegationController < ApplicationController
+	before_action :confirm_logged_in
+	
 	def sign_in_as(account_id)
 		if authorize([:staff])
 			session[:signed_in_as] = account_id

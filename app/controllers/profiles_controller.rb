@@ -1,8 +1,8 @@
 class ProfilesController < ApplicationController  
   before_action :confirm_logged_in
-  before_action :profile_restriction, only:[:edit_student,:update_student]
+
   def student
-    if authorize([:staff, :student, :company, :self])
+    if authorize([:staff, :company, :student, :self])
       id = params[:id]
       @id_1 = params[:id]
       @student = Student.find(id)
