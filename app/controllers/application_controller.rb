@@ -25,6 +25,29 @@ class ApplicationController < ActionController::Base
     return account_type == 3
   end
 
+  def current_identity
+    if is_student?
+      return :student
+    elsif is_staff?
+      return :staff
+    else
+      return :company
+    end     
+  end
+
+  def authorize(identities)
+    if !identities.include? :all and !identities.include? current_identity
+      flash[:error] = "Unauthorized. Wrong user group."
+      redirect_to root_path
+      return false
+    elsif identities.include? :self and current_user.getUser.id != params[:id]
+      flash[:error] = "Unauthorized. Privacy violation."
+      redirect_to root_path
+      return false
+    end
+    return true
+  end
+
 	def account_id
     if delegation_on?
       return session[:signed_in_as]

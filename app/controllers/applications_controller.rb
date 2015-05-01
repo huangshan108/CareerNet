@@ -1,6 +1,8 @@
 class ApplicationsController < ApplicationController
     before_action :application_restriction
+
 	def index
+		authorize([:company])
 		if params[:company_id]
 			@jobs = Company.find(params[:company_id]).jobs
 			render 'company_view_applications'

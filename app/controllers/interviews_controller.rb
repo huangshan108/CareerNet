@@ -12,6 +12,7 @@ class InterviewsController < ApplicationController
   end
 
   def company_new
+    authorize([:company])
       starttime_str = params[:start].to_s
       endtime_str = params[:end].to_s
       timeslot = Interview.string_to_timeslot(starttime_str)
@@ -32,6 +33,7 @@ class InterviewsController < ApplicationController
             format.json { render json: {msg: 'Error. Your interview slot was not registered.'}, :status => 500 }
         end
       end
+    end
   end
 
   def curr_company
@@ -48,6 +50,7 @@ class InterviewsController < ApplicationController
   end
 
   def index_company
+    authorize([:company])
       @company = curr_company
       @interviews = @company.interviews.between(params[:start], params[:end]) if (params[:start] && params[:end])
 
@@ -55,52 +58,63 @@ class InterviewsController < ApplicationController
         format.html
         format.json { render :json => @interviews }
       end
+    end
   end
 
   def destroy
-    Interview.find(params[:id]).destroy
-    respond_with layout: false
+    authorize([:company])
+      Interview.find(params[:id]).destroy
+      respond_with layout: false
+    end
   end
 
   def student_show
-    account = current_user
-    if account.account_type == 1
-      if account.student == nil
-        Student.new(account: account)
+    if authorize([:student])
+      account = current_user
+      if account.account_type == 1
+        if account.student == nil
+          Student.new(account: account)
+        end
+        @student = account.student
+        @interviews = @student.interviews
+      else
+        flash[:error] = "This page is only available to students."
+        redirect_to(:root)
+        return
       end
-      @student = account.student
-      @interviews = @student.interviews
-    else
-      flash[:error] = "This page is only available to students."
-      redirect_to(:root)
-      return
     end
   end
 
   def student_new
-    @companies = Company.all
-    @application = Application.find(params[:application_id])
-    @student = current_user.student
+    if authorize([:student])
+      @companies = Company.all
+      @application = Application.find(params[:application_id])
+      @student = current_user.student
+    end
   end
 
   def student_book
-    interview = Interview.find(params[:id])
-    if interview.student == nil
-      interview.update_attribute(:student, current_user.student)
-      flash[:notice] = "Interview has been scheduled."
+    if authorize([:student])
+      interview = Interview.find(params[:id])
+      if interview.student == nil
+        interview.update_attribute(:student, current_user.student)
+        flash[:notice] = "Interview has been scheduled."
+      end
+      redirect_to(interview_student_show_path)
     end
-    redirect_to(interview_student_show_path)
   end
 
   def student_cancel
-    interview = Interview.find(params[:id])
-    if interview.student == current_user.student
-      interview.update_attribute(:student, nil)
-      flash[:notice] = "Interview has been cancelled."
-    else
-      flash[:error] = "You do not have permission to cancel this interview."
+    if authorize([:student])
+      interview = Interview.find(params[:id])
+      if interview.student == current_user.student
+        interview.update_attribute(:student, nil)
+        flash[:notice] = "Interview has been cancelled."
+      else
+        flash[:error] = "You do not have permission to cancel this interview."
+      end
+      redirect_to(interview_student_show_path)
     end
-    redirect_to(interview_student_show_path)
   end
 
 end

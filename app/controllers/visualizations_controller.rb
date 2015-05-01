@@ -1,4 +1,6 @@
 class VisualizationsController < ApplicationController
+    before_action :confirm_logged_in
+
     def student_demographic
     end
 

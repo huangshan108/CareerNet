@@ -1,4 +1,5 @@
 class CalendarController < ApplicationController
+	  before_action :confirm_logged_in
 
 	def interviewData
 		currentUser = current_user.getUser
