@@ -141,6 +141,9 @@ USCashMap.prototype.setupMap = function () {
         .attr("width", this.width)
         .attr("height", this.height);
 
+    // Create detail text svg container
+    //this.textsvg = d3.select("div#map-detail").append("svg");
+
     // Render the bounding land region first
     this.svg.insert("path", ".graticule")
         .datum(this.landSubunit)
@@ -152,17 +155,27 @@ USCashMap.prototype.setupMap = function () {
         .attr("class", "state-group");
 
     // Label for inspection information interaction
-    this.textGroup = this.svg.append("g");
-    this.mainText = this.textGroup.insert("text")
-        .attr('class', 'map-main-text')
-        .attr('x', 500)
-        .attr('y', 50)
-        .text("");  // E.g. California
-    this.subText = this.textGroup.append("text")
-        .attr('class', 'map-sub-text')
-        .attr('x', 500)
-        .attr('y', 70)
-        .text(""); // E.g. $3,999,102
+    //this.textGroup = this.textsvg.append("g")
+    //    .attr('class', 'map-text-container');
+    this.stateText = d3.select("p#state");
+    this.avgText = d3.select("p#average");
+    this.countText = d3.select("p#count");
+
+    //this.mainText = this.textGroup.insert("text")
+    //    .attr('class', 'map-main-text')
+    //    .attr('x', 0)
+    //    .attr('y', 30)
+    //    .text("");  // E.g. California
+    //this.subText = this.textGroup.append("text")
+    //    .attr('class', 'map-sub-text')
+    //    .attr('x', 0)
+    //    .attr('y', 50)
+    //    .text(""); // E.g. $3,999,102
+    //this.subTextCount = this.textGroup.append("text")
+    //    .attr('class', 'map-sub-text')
+    //    .attr('x', 0)
+    //    .attr('y', 70)
+    //    .text(""); // E.g. 13
 
     // Add state paths
     this._states = this.stateGroup.selectAll('path')
@@ -252,7 +265,7 @@ USCashMap.prototype.render = function (data) {
         d3.select(this).attr("fill", '#FF8300'); 
         //that.addStateToSelection(d['label']);
         var fullState = d['label'];
-        that.setInspectionInfo(fullState, d['average']);
+        that.setInspectionInfo(fullState, d['average'], d['count']);
     });
     this.states.exit().on('mouseover', function(d, e, p){
         that.setSelectionClickBoolean(false);
@@ -355,9 +368,10 @@ USCashMap.prototype.currencyFormatter = d3.format('$,');
  * @params {String} stateName (e.g. California)
  * @params {number} amount (e.g. 1000000)
  */
-USCashMap.prototype.setInspectionInfo = function(stateName, amount) {
-    this.mainText.text(stateName);
-    this.subText.text(this.currencyFormatter(amount));
+USCashMap.prototype.setInspectionInfo = function(stateName, amount, count) {
+    this.stateText.text(stateName);
+    this.avgText.text(this.currencyFormatter(amount));
+    this.countText.text(count);
 };
 
 
@@ -367,8 +381,9 @@ USCashMap.prototype.setInspectionInfo = function(stateName, amount) {
  * Clears the inspection info text.
  */
 USCashMap.prototype.clearInspectionInfo = function() {
-    this.mainText.text('');
-    this.subText.text('');
+    this.stateText.text('');
+    this.avgText.text('');
+    this.countText.text('');
 };
 
 

@@ -45,3 +45,22 @@ i.help {
   margin-left: 15px;
   top: -4px;
 }
+
+.map-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+#usmap{
+    width: 750px;
+    float: left;
+}
+
+#map-detail {
+    margin-left: 770px;
+}
+
+#map-text{
+  background-color: #eee;
+}
+
