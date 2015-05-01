@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit_student
-    if authorize([:student, :self])
+    if authorize([:staff, :student, :self])
       id = params[:id] # retrieve student ID from URI route
       @student = Student.find(id)
       @all_schools = College.all

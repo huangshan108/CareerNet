@@ -12,7 +12,7 @@ class InterviewsController < ApplicationController
   end
 
   def company_new
-    authorize([:company])
+    if authorize([:company])
       starttime_str = params[:start].to_s
       endtime_str = params[:end].to_s
       timeslot = Interview.string_to_timeslot(starttime_str)
@@ -48,7 +48,7 @@ class InterviewsController < ApplicationController
   end
 
   def index_company
-    authorize([:company])
+    if authorize([:company])
       @company = curr_company
       @interviews = @company.interviews.between(params[:start], params[:end]) if (params[:start] && params[:end])
 
@@ -60,7 +60,7 @@ class InterviewsController < ApplicationController
   end
 
   def destroy
-    authorize([:company])
+    if authorize([:company])
       Interview.find(params[:id]).destroy
       respond_with layout: false
     end

@@ -7,8 +7,8 @@ Background: Adding jobs/companies to database
 
   Given the following accounts exist:
   |name            |email                 |account_type |
-  |huangshan108    |shuang@berkeley.edu   |1            |
   |Example Company |company@careernet.com |3            |
+  |huangshan108    |shuang@berkeley.edu   |1            |
 
   Given the following companies exist:
   | title         | brief           | website            | address   | account_id |

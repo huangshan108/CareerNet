@@ -6,6 +6,10 @@ Feature: Authorization and Delegation
 
 Background: Adding user to  database
 
+    Given the following companies exist
+    | title          | brief       | website          | address |account_id |          
+    | Google         | Search      | Google.com       |  Soda   |1          |
+
     Given the following jobs exist:
   	| title                   | description | company_id    | salary |
   	| Software Engineer       | Good        | 1             | 100000 |
@@ -35,39 +39,3 @@ Background: Adding user to  database
     And I enter "careernet" into "password" 
     And I press "Log In" button
     Then I should see "Welcome to CareerNet"
-
-    Scenario: student can't edit and delete an event
-      When I go to the events page
-      And I try Add an event
-      And I should see "You don't have the persmission to perform the action."
-      When I go to the events page
-      Then I should see "Resume Workshop"
-      When I follow "Resume Workshop"
-      And I should not see "Delete"
-
-    Scenario: student can't visit or edit other student's profile
-      Given I am on list students page
-      When I try to edit view student C profile page
-      And I should see "You don't have the persmission to perform the action."
-      And I am on the main page
-
-    Scenario: student can't view other students' application or company's applicant
-      When I am on the main dashboard page
-      When I try visit student C application page
-      And I should see "You don't have the persmission to perform the action."
-      And I am on the main page
-      When I try visit random company application page
-      And I should see "You don't have the persmission to perform the action."
-      And I am on the main page
-
-    Scenario: student can't delete a job
-      Given I am on the job 1 view page
-      And I should not see "Delete"
-
-
-    Scenario: student try to post a job
-       When I am on the main dashboard page
-       When I try vist post job page
-       And I should see "You don't have the persmission to perform the action."
-       And I am on the main page
-

@@ -9,7 +9,7 @@ class ApplicationsController < ApplicationController
 				render 'company_view_applications'
 			end
 		elsif params[:student_id]
-			params[:id] = params[:company_id]
+			params[:id] = params[:student_id]
 			if authorize([:student, :self])
 				@applications = Student.find(params[:student_id]).applications
 				render 'student_view_applications'

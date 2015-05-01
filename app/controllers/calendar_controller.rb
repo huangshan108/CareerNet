@@ -14,7 +14,7 @@ class CalendarController < ApplicationController
 	end
 
 	def appointmentData
-		if authorize{[:all]}
+		if authorize([:all])
 			serveData(:appointments)
 		end
 	end
