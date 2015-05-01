@@ -45,6 +45,9 @@ Background: Adding jobs to database
     And I should see "70000"
     And I should see "Berkeley"
     And I should see "Software Engineering"
+    When I press "Delete"
+    And I should not see "Riot"
+    And I should not see "70000"
 
     @javascript
     Scenario: Adding a project
@@ -63,6 +66,9 @@ Background: Adding jobs to database
     And I should see "website"
     And I should see "full stack "
     And I should see "personal website"
+    When I press "Delete"
+    And I should not see "full stack"
+    And I should not see "personal website"
 
 
     @javascript
@@ -80,6 +86,9 @@ Background: Adding jobs to database
     Then I am on student profile page
     And I should see "Berkeley"
     And I should see "EECS"
+    When I press "Delete"
+    And I should not see "EECS"
+    And I should not see "Berkeley"
     
 
 
