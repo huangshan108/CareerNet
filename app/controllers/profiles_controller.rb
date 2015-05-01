@@ -30,6 +30,12 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def companies
+    if authorize([:staff])
+      redirect_to(list_companies_path(1))
+    end
+  end
+
   def edit_student
     if authorize([:student, :self])
       id = params[:id] # retrieve student ID from URI route
@@ -132,6 +138,12 @@ class ProfilesController < ApplicationController
   def list_students
     if authorize([:staff])
     	@all_students = Student.all
+    end
+  end
+
+  def list_companies
+    if authorize([:staff])
+      @all_companies = Company.all
     end
   end
 
