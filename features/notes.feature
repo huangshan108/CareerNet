@@ -36,7 +36,7 @@ Background:
 
   Given I am on the job 1 view page
   When I follow "Apply"
-  Then I should see "You application has been submitted!"
+  Then I should see "Your application has been submitted!"
   When I am on the main dashboard page
   When I follow "View Applications"
   Then I should see "Director"
@@ -44,18 +44,16 @@ Background:
 Scenario: As a student, enter a reason for scheduling an appointment
 
   Given the following appointments exist:
-  | time_slot   | day               | student_id  | staff_id   |
-  | Slot1       | middle_of_day     | 1           | 1          |
+  | time_slot   | day               | staff_id   |
+  | Slot1       | middle_of_day     | 1          |
   Given I am on the main page
-  And I follow "Make an Appointment"
-  And I follow "Make a new appointment"
-  And I follow "Book"
-  Then I should see "Reason for appointment"
-  And I should see "Mock interview"
-  And I should see "Resume advice"
-  And I should see "Job search"
-  And I should see "Other"
-  And I select "Job search"
+  And I follow "Make An Appointment"
+  Then I am on student appointment page
+  When I follow "New Appointment"
+  Then I am on student new appointment page
+  When I follow "Book"
+  Then I should see "Reason"
+  And I should see "Description"
   When I press "Submit" button
   Then I should see "Fake Staff"
   When I follow "Logout"
@@ -64,10 +62,12 @@ Scenario: As a student, enter a reason for scheduling an appointment
   And I enter "careernet" into "password"
   And I press "Log In" button
   Then I am on the main page
-  When I follow "My Calendar"
-  And I follow "Shan Huang"
-  Then I should see "Reason for appointment"
-  And I should see "Job search"
+  When I am on appointment page
+  Then I should see "Reason"
+  And I should see "Description"
+  And I should see "Staff Feedback"
+  And I should see "Add Feedback"
+  And I press "Submit" button
 
 Scenario: As staff, add notes to students
 
@@ -78,43 +78,6 @@ Scenario: As staff, add notes to students
   And I enter "careernet" into "password"
   And I press "Log In" button
   Then I am on the main page
-  When I follow "Browse Students"
-  Then I should see "Shan Huang"
-  When I follow "Shan Huang"
+  When I am on edit profile page
   Then I should see "Notes"
-  When I press "Edit Notes" button
-  And I enter "Sample notes here" into "notes"
   And I press "Submit" button
-  Then I should see "Sample notes here"
-
-Scenario: As a company, send feedback to interviewee
-
-  Given I am on the main page
-  When I follow "Logout"
-  Then I am on the account_login page
-  When I enter "company@careernet.com" into "email"
-  And I enter "careernet" into "password"
-  And press "Log In" button
-  Then I am on the main page
-  Given the following interviews exist:
-  | time_slot    | day               | application_id | student_id | company_id |
-  | Slot1        | middle_of_day     | 1              | 1          | 1          |
-  And I follow "View Applications"
-  And I follow "View Details"
-  Then I should see "Add Feedback"
-  When I press "Add Feedback" button
-  And I enter "Sample feedback here" into "feedback"
-  And I press "Submit" button
-  Then I should see "Sample feedback here"
-  When I follow "Logout"
-  Then I am on the account_login page
-  When I enter "shuang@berkeley.edu" into "email"
-  And I enter "careernet" into "password"
-  And I press "Log In" button
-  Then I am on the main page
-  When I follow "View Applications"
-  Then I should see "Director"
-  When I follow "View Details"
-  And I follow "View Feedback"
-  Then I should see "Sample feedback here"
-
