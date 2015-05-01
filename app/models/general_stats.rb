@@ -2,7 +2,7 @@ require 'descriptive_statistics'
 module GeneralStats
 =begin
     [
-      name
+      class_name
       student_percentage
       stats = {
         :number=>11.0,
