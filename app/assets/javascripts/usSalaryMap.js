@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var usCashMap;
+    var usSalaryMap;
 
     // Dependencies needed for US Map viz
     var dependencies = {};
@@ -14,7 +14,7 @@ $(document).ready(function() {
     //to updateData when clicked
     d3.selectAll('.request')
         .on("click", function() {
-            updateData(usCashMap);
+            updateData(usSalaryMap);
         });
 
     // Fetch data necessary for geo vizualization
@@ -27,14 +27,15 @@ $(document).ready(function() {
       })
       .await(ready);
 
+    // Initialize map
     function ready(error, response){
-      usCashMap = new USCashMap(
+      usSalaryMap = new USsalaryMap(
           d3.select("div#usmap"),
           response,
           dependencies.convertIdToStateName,
           dependencies.convertStateNameToCode
       );
-      updateData(usCashMap);
+      updateData(usSalaryMap);
     }
 
 });
@@ -56,7 +57,8 @@ function reqToreqData(){
 }
 
 
-function updateData(usCashMap){
+//Updates coloring of states when selection of checkboxes are altered
+function updateData(usSalaryMap){
     var reqData = reqToreqData();
     $.ajax({
         type: "GET",
@@ -64,13 +66,8 @@ function updateData(usCashMap){
         data: reqData,
         dataType: 'json',
         success: function(json){
-            // alert('success');
-            if (json['too_few']){
-                alert("There are too few data that fit the category for meaningful visualization.");
-                return;
-            }
             //update map
-            usCashMap.render(json['usa_avg']);
+            usSalaryMap.render(json['usa_avg']);
             return json;
         },
         error: function(){
@@ -81,22 +78,14 @@ function updateData(usCashMap){
 }
 
 /**
- * USCashMap
+ * USsalaryMap
  *
  * Object encapsulating the U.S. state heatmap of monetary contributions. Each state's
  * color intensity maps to it's total contribution amount with respect to all other
  * states' contribution amounts.
- *
- * @constructor
- * @params {d3.selection} selector
- * @params {FeatureCollection} usTopoJSON
- * @params {d3.map} stateMap
- * @params {d3.map} stateNameMap
- * @params {d3.dispatch} dispatcher
  */
-var USCashMap = function (selector, usTopoJSON, stateIdToStateNameMap, stateNameMap) {
+var USsalaryMap = function (selector, usTopoJSON, stateIdToStateNameMap, stateNameMap) {
 
-    //this.dispatch = dispatcher;  // for triggering events
     this.selector = selector;
 
     // Store height and width parameters
@@ -111,8 +100,8 @@ var USCashMap = function (selector, usTopoJSON, stateIdToStateNameMap, stateName
     this.geopath = d3.geo.path()
         .projection(this.projection);
 
-    // Maps stateCode to stateName (e.g. 'CA' --> 'California')
     this.stateNameMap = stateNameMap;
+
     // Store geography features
     this.us = usTopoJSON;
     this.landSubunit = topojson.feature(usTopoJSON, usTopoJSON.objects.land);
@@ -135,14 +124,11 @@ var USCashMap = function (selector, usTopoJSON, stateIdToStateNameMap, stateName
  *
  * Sets up the SVG container and inspection text.
  */
-USCashMap.prototype.setupMap = function () {
+USsalaryMap.prototype.setupMap = function () {
     // Create the map's svg container
     this.svg = this.selector.append("svg")
         .attr("width", this.width)
         .attr("height", this.height);
-
-    // Create detail text svg container
-    //this.textsvg = d3.select("div#map-detail").append("svg");
 
     // Render the bounding land region first
     this.svg.insert("path", ".graticule")
@@ -154,28 +140,10 @@ USCashMap.prototype.setupMap = function () {
     this.stateGroup = this.svg.append("g")
         .attr("class", "state-group");
 
-    // Label for inspection information interaction
-    //this.textGroup = this.textsvg.append("g")
-    //    .attr('class', 'map-text-container');
+    //Select objects to displace text
     this.stateText = d3.select("b#state");
     this.avgText = d3.select("p#average");
     this.countText = d3.select("p#count");
-
-    //this.mainText = this.textGroup.insert("text")
-    //    .attr('class', 'map-main-text')
-    //    .attr('x', 0)
-    //    .attr('y', 30)
-    //    .text("");  // E.g. California
-    //this.subText = this.textGroup.append("text")
-    //    .attr('class', 'map-sub-text')
-    //    .attr('x', 0)
-    //    .attr('y', 50)
-    //    .text(""); // E.g. $3,999,102
-    //this.subTextCount = this.textGroup.append("text")
-    //    .attr('class', 'map-sub-text')
-    //    .attr('x', 0)
-    //    .attr('y', 70)
-    //    .text(""); // E.g. 13
 
     // Add state paths
     this._states = this.stateGroup.selectAll('path')
@@ -189,15 +157,9 @@ USCashMap.prototype.setupMap = function () {
         .attr('fill', '#E8F5E9');
 };
 
-/*
- * render(data)
- *
- * Renders the map with each state path colored based on a color mapping determined
- * by the total amounts of each state.
- *
- * @params {Array} data is a list of objects containg the keys 'state' and 'total_amount'
- */
-USCashMap.prototype.render = function (data) {
+//Renders the map with each state path colored based on a color mapping determined
+//by the average salary of each state.
+USsalaryMap.prototype.render = function (data) {
     // Hack needed to access class object in functions defined in this scope
     var that = this;
     var count = 0;
@@ -223,92 +185,46 @@ USCashMap.prototype.render = function (data) {
     console.log(this.states);
     this.states.transition().duration(500)
         .attr("fill", function(d) {
-            // Change the color based on the state's total contribution amount
-            // Hint: take a look at moneyColorScale defined above
-
-            // Implement
             return moneyColorScale(d['average']);
         });
 
     /** Exit phase **/
-    // No exit anticipated. The state paths are just going to stay there.
     this.states.exit().transition().duration(500)
         .attr("fill", function(d) {
-            // Change the color based on the state's total contribution amount
-            // Hint: take a look at moneyColorScale defined above
-
-            // Implement
             return moneyColorScale(d['average']);
         });
 
     /** Setup/Rebind event handlers **/
-
-    /*
-     * Mouseover event handler
-     *
-     * When the mouse hovers within a state's boundaries, this event is triggered.
-     * On hover, the following will occur:
-     *  (1) the state's code (e.g. 'CA') is added to this._selectedStates via `addStateToSelection`
-     *      (a) an event needs to be triggered (already done in the `addStateToSelection` method)
-     *  (2) the fill of this particular state is an active color (of your choice)
-     *      (a) the fill of all other states should still be the original color intensity mapping
-     *  (3) Update the inspection information text with the selected state using `setInspectionInfo`
-     *  (4) set internal state that signals the selection is not due to a click (already done for you)
-     */
+    
+    //For states that does have enough data,
+    //set inspection info
     this.states.on('mouseover', function(d, e, p){
-        // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
-        // `that` variable defined above rather than `this`, since `this` is rebound to a newly
-        // defined function.
-
-        // Implement
         d3.select(this).attr("fill", '#FF8300'); 
-        //that.addStateToSelection(d['label']);
         var fullState = d['label'];
         that.setInspectionInfo(fullState, d['average'], d['count']);
     });
-    this.states.exit().on('mouseover', function(d, e, p){
-        // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
-        // `that` variable defined above rather than `this`, since `this` is rebound to a newly
-        // defined function.
 
-        // Implement
+    //For states that does not have enough data,
+    //set inspection info
+    this.states.exit().on('mouseover', function(d, e, p){
         d3.select(this).attr("fill", '#FF8300'); 
-        //that.addStateToSelection(d['label']);
         var fullState = d['label'];
         that.setNoDataInfo(fullState);
     });
 
-    /*
-     * Mouseout event handler
-     *
-     * When the mouse leaves a state's boundaries, this event is triggered.
-     * On the mouse's depature, the following will occur:
-     *  (1) Clear the inspection info
-     *  (2) Remove the state code (e.g. 'CA') from this._selectedStates
-     *      (a) internal state for determining if selection was a click needs to be removed
-     *  (3) Make sure the colors of every state are the same as it was prior to any events.
-     *      (a) this means using the original `moneyColorScale` mapping
-     */
+    //For states that does have enough data,
+    //clear inspection info
     this.states.on('mouseout', function(d, e, p){
-        // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
-        // `that` variable defined above rather than `this`, since `this` is rebound to a newly
-        // defined function.
-
-        // Implement
         that.clearInspectionInfo();
-        //that.clearStatesFromSelection();
         d3.select(this).attr("fill", function(d){
             return moneyColorScale(d['average']);
         });
     });
-    this.states.exit().on('mouseout', function(d, e, p){
-        // NOTE: if you want to reference the USCashMap instantiated object,  you must use the
-        // `that` variable defined above rather than `this`, since `this` is rebound to a newly
-        // defined function.
 
-        // Implement
+    //For states that does not have enough data,
+    //clear inspection info
+    this.states.exit().on('mouseout', function(d, e, p){
         that.clearInspectionInfo();
-        //that.clearStatesFromSelection();
         d3.select(this).attr("fill", function(d){
             return moneyColorScale(d['average']);
         });
@@ -317,43 +233,26 @@ USCashMap.prototype.render = function (data) {
 };
 
 
-/*
- * currencyFormatter(number)
- *
- * Formats a number into readable currency.
- *
- * @params {number} number
- */
-USCashMap.prototype.currencyFormatter = d3.format('$,');
+//Formats integer into currency (without decimal places)
+USsalaryMap.prototype.currencyFormatter = d3.format('$,');
 
 
-/*
- * setInspectionInfo(stateName, amount)
- *
- * Set the display text for a particular state with its state name and total
- * contribution amount.
- *
- * @params {String} stateName (e.g. California)
- * @params {number} amount (e.g. 1000000)
- */
-USCashMap.prototype.setInspectionInfo = function(stateName, amount, count) {
+//Set inspection Info for states with enough info on the side of the map
+USsalaryMap.prototype.setInspectionInfo = function(stateName, amount, count) {
     this.stateText.text(stateName);
-    this.avgText.text("Avg. Salary: " + this.currencyFormatter(amount));
+    this.avgText.text("Avg. Salary:  " + this.currencyFormatter(amount));
     this.countText.text("#Offers: " + count);
 };
 
-USCashMap.prototype.setNoDataInfo = function(stateName){
+//Set Info on states that does not have enough data
+USsalaryMap.prototype.setNoDataInfo = function(stateName){
     this.stateText.text(stateName);
     this.avgText.text('No data');
 };
 
 
-/*
- * clearInspectionInfo()
- *
- * Clears the inspection info text.
- */
-USCashMap.prototype.clearInspectionInfo = function() {
+//Clears the inspection Info on the side of the map
+USsalaryMap.prototype.clearInspectionInfo = function() {
     this.stateText.text('');
     this.avgText.text('');
     this.countText.text('');
