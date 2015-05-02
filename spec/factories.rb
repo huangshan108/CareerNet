@@ -1,8 +1,7 @@
 require 'faker'
 
-FactoryGirl.define do  factory :industry do
-    
-  end
+FactoryGirl.define do  
+
   factory :experience do
     industry "MyString"
     yr_exp 1
@@ -29,8 +28,13 @@ FactoryGirl.define do  factory :industry do
   factory :work_experience do
     
   end
+
   factory :visualization do
     
+  end
+
+  factory :industry do |f|
+      f.name "Technology"
   end
 
   factory :company do |f|
@@ -79,31 +83,4 @@ FactoryGirl.define do  factory :industry do
       password "Esmeralda"
   end
 end
-
-
-
-
-    #factory :student do
-    #    first_name "Moo"
-    #    last_name "Quack"
-    #    university "Mouth Wash University"
-    #    #account_id
-    #end
-
-    #factory :major do
-    #    name "Study of Toiletry"
-    #    major_id nil
-    #end
-
-    #factory :college do
-    #    address "1234 Toiletry Road"
-    #    school_name "Collge of Toothpaste"
-    #end
-
-    #
-    #factory :account_with_student do
-    #    after(:create) do |account|
-    #        create(:student, account: account)
-    #    end
-    #end
 

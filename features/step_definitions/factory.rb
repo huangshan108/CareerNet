@@ -9,7 +9,7 @@ Given /the following staffs exist/ do |staffs_table|
 end
 
 Given /the following data exist/ do
-	require File.join(Rails.root, 'db', 'seeds', 'seed_client_data.rb')
+	require File.join(Rails.root, 'db', 'seeds', 'seed_students.rb')
 	require File.join(Rails.root, 'db', 'seeds', 'seed_events.rb')
 	require File.join(Rails.root, 'db', 'seeds', 'seed_jobs_and_companies.rb')
 	require File.join(Rails.root, 'db', 'seeds', 'seed_colleges.rb')

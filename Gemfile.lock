@@ -42,7 +42,7 @@ GEM
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
     arel (6.0.0)
-    autoprefixer-rails (5.1.10)
+    autoprefixer-rails (5.1.11)
       execjs
       json
     bcrypt (3.1.10)
@@ -97,6 +97,7 @@ GEM
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
+    descriptive_statistics (2.5.1)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -129,7 +130,7 @@ GEM
     jbuilder (2.2.13)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
-    jquery-datatables-rails (3.2.0)
+    jquery-datatables-rails (3.3.0)
       actionpack (>= 3.1)
       jquery-rails
       railties (>= 3.1)
@@ -146,10 +147,10 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mime-types (2.4.3)
+    mime-types (2.5)
     mini_portile (0.6.2)
-    minitest (5.6.0)
-    momentjs-rails (2.9.0)
+    minitest (5.6.1)
+    momentjs-rails (2.10.2)
       railties (>= 3.1)
     multi_json (1.11.0)
     multi_test (0.1.2)
@@ -235,8 +236,8 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
     slop (3.6.0)
-    spring (1.3.4)
-    sprockets (3.0.1)
+    spring (1.3.5)
+    sprockets (3.0.3)
       rack (~> 1.0)
     sprockets-rails (2.2.4)
       actionpack (>= 3.0)
@@ -250,11 +251,13 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    topojson-rails (1.4.9)
+      railties (>= 3.0, < 5.0)
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2015.3)
+    tzinfo-data (1.2015.4)
       tzinfo (>= 1.0.0)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
@@ -284,12 +287,13 @@ DEPENDENCIES
   cucumber-rails
   d3-rails
   database_cleaner
+  descriptive_statistics
   devise
   email_validator
   factory_girl_rails
   faker
   font-awesome-rails
-  fullcalendar-rails
+  fullcalendar-rails (= 2.0.2.0)
   jbuilder (~> 2.0)
   jquery-datatables-rails
   jquery-rails
@@ -311,6 +315,7 @@ DEPENDENCIES
   sqlite3
   switch_user
   therubyracer
+  topojson-rails
   turbolinks
   tzinfo-data
   uglifier

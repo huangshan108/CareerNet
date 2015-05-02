@@ -91,8 +91,14 @@ Rails.application.routes.draw do
 # The priority is based upon order of creation: first created -> highest priority.
 
   # Visualization
-  get 'smart-report/' => 'visualizations#student_demographic', :as => :smart_report
-  get 'smart-report/data' => 'visualizations#student_demographic_data', :defaults => { :format => 'json' }, :as => :smart_report_data
+  get 'smart-report/overview' => 'visualizations#student_demographic', :as => :smart_report
+  get 'smart-report/overview-data' => 'visualizations#student_demographic_data', :defaults => { :format => 'json' }, :as => :smart_report_data
+  get 'smart-report/industry' => 'visualizations#industry', :as => :smart_report_industry
+  get 'smart-report/industry-data' => 'visualizations#industry_data', :defaults => { :format => 'json' }, :as => :smart_report_industry_data
+  get 'smart-report/organization' => 'visualizations#organization', :as => :smart_report_organization
+  get 'smart-report/organization-data' => 'visualizations#organization_data', :defaults => { :format => 'json' }, :as => :smart_report_organization_data
+  get 'smart-report/region' => 'visualizations#salary_by_state', :as => :smart_report_region
+  get 'smart-report/region-data' => 'visualizations#salary_by_state_data', :defaults => { :format => 'json' }, :as => :smart_report_region_data
 
   get 'sign-in-as/student/:id' => 'delegation#as_student', :as => :as_student
   get 'sign-in-as/company/:id' => 'delegation#as_company', :as => :as_company

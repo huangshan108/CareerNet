@@ -118,12 +118,13 @@ ActiveRecord::Schema.define(version: 20150501041455) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "industry_id"
+    t.integer  "company_id"
   end
 
   add_index "experiences", ["student_id"], name: "index_experiences_on_student_id"
 
   create_table "industries", force: :cascade do |t|
-    t.string   "industry"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -212,6 +213,7 @@ ActiveRecord::Schema.define(version: 20150501041455) do
     t.integer  "base_salary"
     t.string   "title"
     t.integer  "company_id"
+    t.integer  "class_of"
   end
 
   add_index "students", ["major_id"], name: "index_students_on_major_id"

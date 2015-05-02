@@ -3,6 +3,17 @@
   They will automatically be included in application.css.
 */
 
+tbody th {
+  font-weight: 100;
+}
+
+#pieChart {
+  text-align: center;
+  margin: 50px 0px;
+  padding-top: 10px;
+  border: 2px solid #ddd;
+}
+
 .single-pie-chart {
 	border: 1px #eee solid;
   margin-top: 30px;
@@ -41,3 +52,30 @@ i.help {
   margin-left: 15px;
   top: -4px;
 }
+
+.map-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+#usmap{
+    width: 750px;
+    float: left;
+}
+
+#map-detail {
+    margin-left: 770px;
+}
+
+#map-text{
+  background-color: #eee;
+}
+
+b#state{
+  margin-bottom: 15px;
+}
+
+p#average, p#count {
+    margin: 0px;
+}
+
