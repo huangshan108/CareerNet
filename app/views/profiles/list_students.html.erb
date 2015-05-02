@@ -7,6 +7,9 @@
       <th> Major </th>
       <th> Graduation Date </th>
       <th> More Info </th>
+      <% if is_staff? %>
+        <th>Delegation</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -17,6 +20,9 @@
         <td><%= student.major.name -%></td>
         <td><%= student.graduation_date.strftime('%D') if student.graduation_date -%></td>
         <td><%= link_to "More details", single_student_profile_path(student) -%></td>
+        <% if is_staff? %>
+          <td><%= link_to "Sign in", as_student_path(student) -%></td>
+        <% end %>
       </tr>
     <% end -%>
   </tbody>

@@ -128,7 +128,7 @@ function getDefaultOptions() {
                 "hideWhenLessThanPercentage": 3
             },
             "mainLabel": {
-                "fontSize": 11
+                "fontSize": 13
             },
             "percentage": {
                 "color": "#ffffff",
@@ -136,7 +136,7 @@ function getDefaultOptions() {
             },
             "value": {
                 "color": "#adadad",
-                "fontSize": 11
+                "fontSize": 13
             },
             "lines": {
                 "enabled": true

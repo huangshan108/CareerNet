@@ -16,7 +16,7 @@
 		    <td><%= application.created_at.strftime('%D') %></td>
         <td>
           <% if !application.interviews.nil? %>
-            <%= link_to "View Details", interview_student_new_path(:application_id => application.id)%>
+          <%= link_to "Details", interview_student_new_path(application)%>
           <% else %>
             Pending
           <% end %>
@@ -33,3 +33,6 @@
     });
   })
 </script>
+<div class="pull-right button-group">
+  <%= link_to "View Scheduled Interviews", interview_student_show_path, class: "button orange" %>
+</div>

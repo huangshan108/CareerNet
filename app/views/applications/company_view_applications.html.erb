@@ -12,10 +12,10 @@
 	  <% @jobs.each do |job| %>
 		  <% job.applications.each do |application| %>
 			  <tr>
-			    <td><%=link_to "#{application.student.first_name} #{application.student.last_name}", single_student_profile_path(application.student.account.id) %></td>
+			    <td><%= link_to "#{application.student.first_name} #{application.student.last_name}", single_student_profile_path(application.student.account.id) %></td>
 			    <td><%= application.job.title %></td>
 			    <td><%= application.created_at %></td>
-          <td><%= link_to "View/Schedule Interview", company_interviews_path(:application_id => application.id) %></td>
+          <td><%= link_to "View/Schedule Interview", app_int_path(application) %></td>
 			  </tr>
 			<% end %>
 		<% end %>

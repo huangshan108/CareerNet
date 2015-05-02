@@ -41,56 +41,56 @@ describe Visualization do
         @exp2 = FactoryGirl.create(:experience, student: @student2)
     end
 
-    describe 'student_demographic_query(countries, genders, classes)' do
-        it 'should return correctly students of interest' do
-            result = Visualization.student_demographic_query(["US", "KR"], ["male", "other"], [2017, 2016])
-            intl = result.where.not(country: "US").count
-            f = result.where(gender: "female").count
-            c = result.by_year(2017, field: :graduation_date).count
-            expect(intl).to eq(0)
-            expect(f).to eq(0)
-            expect(c).to eq(50)
-        end
+    # describe 'student_demographic_query(countries, genders, classes)' do
+    #     it 'should return correctly students of interest' do
+    #         result = Visualization.student_demographic_query(["US", "KR"], ["male", "other"], [2017, 2016])
+    #         intl = result.where.not(country: "US").count
+    #         f = result.where(gender: "female").count
+    #         c = result.by_year(2017, field: :graduation_date).count
+    #         expect(intl).to eq(0)
+    #         expect(f).to eq(0)
+    #         expect(c).to eq(50)
+    #     end
 
-        it 'should return the entire demograpic corretly' do
-            result = Visualization.student_demographic_query(["US", "intl"], ["male", "other", "female"], [2017, 2016, 2015])
-            expect(result.count).to eq(100)
+    #     it 'should return the entire demograpic corretly' do
+    #         result = Visualization.student_demographic_query(["US", "intl"], ["male", "other", "female"], [2017, 2016, 2015])
+    #         expect(result.count).to eq(100)
           
-        end
+    #     end
 
-        it 'should return the international student data correctly' do
-            result = Visualization.student_demographic_query(["intl"], ["male", "other", "female"], [2017, 2016, 2015])
-            expect(result.count).to eq(50)
-        end
-    end
+    #     it 'should return the international student data correctly' do
+    #         result = Visualization.student_demographic_query(["intl"], ["male", "other", "female"], [2017, 2016, 2015])
+    #         expect(result.count).to eq(50)
+    #     end
+    # end
 
-    describe 'json_by_category' do
-        it 'should return correct json according to category' do
-            result = Visualization.student_demographic_query(["US", "intl"], ["male", "other", "female"], [2017, 2016, 2015])
-            json = Visualization.sub_json_by_category(result, "gender", ["male", "female", "other"])
-            expect(json).to include({ name: "male", count: 50, percent: 50.0 })
-            expect(json).to include({ name: "female", count: 50, percent: 50.0 })
-            expect(json).to include({ name: "other", count: 0, percent: 0 })
+    # describe 'json_by_category' do
+    #     it 'should return correct json according to category' do
+    #         result = Visualization.student_demographic_query(["US", "intl"], ["male", "other", "female"], [2017, 2016, 2015])
+    #         json = Visualization.sub_json_by_category(result, "gender", ["male", "female", "other"])
+    #         expect(json).to include({ name: "male", count: 50, percent: 50.0 })
+    #         expect(json).to include({ name: "female", count: 50, percent: 50.0 })
+    #         expect(json).to include({ name: "other", count: 0, percent: 0 })
 
-        end
-    end
+    #     end
+    # end
 
-    describe 'student_demographic_json' do
-        it 'should return correct json for the query' do
-            result = Visualization.student_demographic_json(["US"], ["male"], ["2017"])
-            expect(result[:countries]).to include({name: "US", count: 50, percent: 100.0})
-            expect(result[:genders]).to include({name: "male", count: 50, percent: 100.0})
-            expect(result[:classes]).to include({name: "Class of 2017", count: 50, percent: 100.0})
-            expect(result[:too_few]).to eq(false)
-        end
-    end
+    # describe 'student_demographic_json' do
+    #     it 'should return correct json for the query' do
+    #         result = Visualization.student_demographic_json(["US"], ["male"], ["2017"])
+    #         expect(result[:countries]).to include({name: "US", count: 50, percent: 100.0})
+    #         expect(result[:genders]).to include({name: "male", count: 50, percent: 100.0})
+    #         expect(result[:classes]).to include({name: "Class of 2017", count: 50, percent: 100.0})
+    #         expect(result[:too_few]).to eq(false)
+    #     end
+    # end
 
-    describe 'experience_by_student_filtered_query' do
-        it 'should return correct instances of Experience Activerecord:relation' do
-            result = Visualization.experience_by_student_filtered_query(["US"], ["male"], ["2017"])
-            expect(result).to include(@exp1)
-            expect(result).to include(@exp2)
-        end
-    end
+    # describe 'experience_by_student_filtered_query' do
+    #     it 'should return correct instances of Experience Activerecord:relation' do
+    #         result = Visualization.experience_by_student_filtered_query(["US"], ["male"], ["2017"])
+    #         expect(result).to include(@exp1)
+    #         expect(result).to include(@exp2)
+    #     end
+    # end
 
 end

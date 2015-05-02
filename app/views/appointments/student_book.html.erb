@@ -1,0 +1,19 @@
+<h1>Book an appointment</h1>
+
+<%= form_tag appointment_student_update_path do %>
+  <dl class="dl-horizontal">
+    <dt>Reason </dt>
+    <dd><%= select_tag :reason, options_for_select(
+        [["", ""],
+         ["Internships", "Internships"],
+         ["Job Search Strategies", "Job Search Strategies"],
+         ["Career Exploration", "Career Exploration"],
+         ["Graduate School", "Graduate School"],
+         ["Other", "Other"]],
+         :selected => params[:reason]) %>
+    </dd>
+    <dt>Description </dt>
+    <dd><%= text_field_tag :description, params[:description] %></dd>
+  </dl>
+  <%= submit_tag "Submit", class: "button pull-right blue" %>
+<% end %>

@@ -43,7 +43,7 @@ Scenario: I want to signup but type in invalid email
 Scenario: I want to signup with an existing account
 	Given I am on signup page
 	When I fill in signup form with email "shuang@berkeley.edu"
-	Then I should see "Email already exist."
+	Then I should see "Email already exists."
 
 Scenario: I successfully signed up
 	Given I am on signup page

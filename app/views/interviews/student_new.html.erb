@@ -1,5 +1,4 @@
 <h1> Schedule Interview </h1>
-<%= link_to "Back to My Interviews", interview_student_show_path -%>
 <table class = "table">
   <thead>
     <tr>
@@ -11,34 +10,30 @@
     </tr>
   </thead>
   <tbody>
-    <% for company in @companies -%>
-      <% if company.interviews.length > 0 -%>
-        <tr>
-          <td rowspan = "<%= company.interviews.length+1 -%>">
-          <%if !company.name.nil?
-            company.name 
-            end -%>
-          </td>
-          <% for a in company.interviews -%>
-          <% if a.application == @application %>
-            <tr>
-              <td><%= a.day -%></td>
-              <td><%= ((9*60+40+a.time_slot*20)/60).to_s+':'+((9*60+40+a.time_slot*20)%60).to_s -%></td>
-              <td><%= ((9*60+40+(a.time_slot+1)*20)/60).to_s+':'+((9*60+40+(a.time_slot+1)*20)%60).to_s -%></td>
-              <td>
-                <% if a.student == nil -%>
-                  <%= link_to "Book", interview_student_book_path(a) -%>
-                <% elsif a.student == @student -%>
-                  <%= link_to "Cancel", interview_student_cancel_path(a) -%>
-                <% else -%>
-                  Not available
-                <% end -%>
-              </td>
-            </tr>
-            <% end %>
-          <% end -%>
+      <% for a in @interviews -%>
+          <tr>
+            <td><%= a.company.name %></td>
+            <td><%= a.day -%></td>
+            <td><%= ((9*60+40+a.time_slot*20)/60).to_s+':'+((9*60+40+a.time_slot*20)%60).to_s -%></td>
+            <td><%= ((9*60+40+(a.time_slot+1)*20)/60).to_s+':'+((9*60+40+(a.time_slot+1)*20)%60).to_s -%></td>
+            <td>
+              <% if a.student == nil -%>
+                <%= link_to "Book", interview_student_book_path(a) -%>
+              <% elsif a.student == @student -%>
+                <%= link_to "Cancel", interview_student_cancel_path(a) -%>
+              <% else -%>
+                Not available
+              <% end -%>
+            </td>
+          </tr>
+        <% end %>
         </tr>
-      <% end -%>
-    <% end -%>
   </tbody>
 </table>
+<% if @interviews.nil? or @interviews.length == 0 %>
+  <center><b>You do not have any current interview offers for this application. </b></center>
+<% end %>
+
+<div class="pull-right button-group">
+  <%= link_to "Back", student_view_applications_path(roll_id), class: "button default" %>
+</div>

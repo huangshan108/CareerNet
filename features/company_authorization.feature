@@ -35,7 +35,7 @@ Background: Adding user to  database
     Scenario: company can't edit and delete an event
       When I go to the events page
       And I try Add an event
-      And I should see "You don't have the persmission to perform the action."
+      And I am on the main page
       When I go to the events page
       Then I should see "Resume Workshop"
       When I follow "Resume Workshop"
@@ -44,16 +44,15 @@ Background: Adding user to  database
     Scenario: company can't visit or edit other student's profile
       Given I am on list students page
       When I try to edit view student C profile page
-      And I should see "You don't have the persmission to perform the action."
       And I am on the main page
 
     Scenario: company can't view other students' application or company's applicant
       When I am on the main dashboard page
       When I try visit student C application page
-      And I should see "You don't have the persmission to perform the action."
       And I am on the main page
       When I try visit random company application page
-      And I should see "You don't have the persmission to perform the action."
+      And I am on the main page
+      When I try visit random company application page
       And I am on the main page
 
 
