@@ -3,13 +3,30 @@ require 'faker'
 FactoryGirl.define do  
 
   factory :experience do
+    industry "MyString"
     yr_exp 1
     salary 1
-    city "Berkeley"
-    state "California"
-    country "USA"
-    org_name "My Company"
-    job_title "Software Engineer"
+    city "MyString"
+    state "MyString"
+    country "MyString"
+    org_name "MyString"
+    job_title "MyString"
+    
+  end
+  factory :activity do
+    
+  end
+  factory :project do
+    
+  end
+  factory :workexperience do
+    
+  end
+  factory :studentworkexperience do
+    
+  end
+  factory :work_experience do
+    
   end
 
   factory :visualization do

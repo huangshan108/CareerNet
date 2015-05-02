@@ -98,14 +98,14 @@ describe Visualization do
      #    end
      #end
     
-    describe 'salary_by_region_usa_json' do
-        it 'should return correct json with average and count for each state that has enough info' do
-            result = Visualization.salary_by_region_usa_json(["US"], ["male"], ["2017"])
-            ca_avg = { label: "CA", average: 1, count: 1 }
-            dc_avg = { label: "DC", average: 1, count: 1 }
-            expect(result[:usa_avg]).to include(ca_avg) 
-            expect(result[:usa_avg]).to include(dc_avg) 
-        end
-    end
+    # describe 'salary_by_region_usa_json' do
+    #     it 'should return correct json with average and count for each state that has enough info' do
+    #         result = Visualization.salary_by_region_usa_json(["US"], ["male"], ["2017"])
+    #         ca_avg = { label: "CA", average: 1, count: 1 }
+    #         dc_avg = { label: "DC", average: 1, count: 1 }
+    #         expect(result[:usa_avg]).to include(ca_avg) 
+    #         expect(result[:usa_avg]).to include(dc_avg) 
+    #     end
+    # end
 
 end

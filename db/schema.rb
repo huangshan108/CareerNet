@@ -32,6 +32,17 @@ ActiveRecord::Schema.define(version: 20150501041455) do
   add_index "accounts_events", ["account_id", "event_id"], name: "index_accounts_events_on_account_id_and_event_id"
   add_index "accounts_events", ["event_id"], name: "index_accounts_events_on_event_id"
 
+  create_table "activities", force: :cascade do |t|
+    t.string   "activity_name"
+    t.string   "position"
+    t.text     "description"
+    t.integer  "student_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "applications", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "job_id"
@@ -73,6 +84,16 @@ ActiveRecord::Schema.define(version: 20150501041455) do
     t.string   "state"
     t.string   "country"
     t.string   "industry"
+  end
+
+  create_table "educations", force: :cascade do |t|
+    t.string   "school_name"
+    t.string   "major"
+    t.integer  "student_id"
+    t.date     "start_date"
+    t.date     "graduation_date"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -138,6 +159,17 @@ ActiveRecord::Schema.define(version: 20150501041455) do
     t.datetime "updated_at"
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string   "project_name"
+    t.text     "description"
+    t.integer  "student_id"
+    t.string   "position"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "skills", force: :cascade do |t|
     t.string "name"
   end
@@ -185,5 +217,16 @@ ActiveRecord::Schema.define(version: 20150501041455) do
   end
 
   add_index "students", ["major_id"], name: "index_students_on_major_id"
+
+  create_table "workexperiences", force: :cascade do |t|
+    t.string   "company_name"
+    t.string   "location"
+    t.string   "job"
+    t.integer  "salary"
+    t.integer  "student_id"
+    t.text     "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
 end
