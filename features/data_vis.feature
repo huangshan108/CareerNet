@@ -20,3 +20,12 @@ Scenario: I want to view smart data report
 
   Given I am on smart data report page
   Then I should see "Country"
+
+  Given I am on industry data report page
+  Then I should see "Country"
+
+  Given I am on organization data report page
+  Then I should see "Country"
+
+  Given I am on region data report page
+  Then I should see "Country"
