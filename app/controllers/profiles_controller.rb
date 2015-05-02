@@ -154,4 +154,72 @@ class ProfilesController < ApplicationController
       @college = College.find(id)
     end
   end
+
+  def update_past_experience
+  	student = Student.find(params[:id])
+  	work_experience = {:company_name => params[:company_name],
+                       :student_id => params[:id],
+                       :location => params[:location],
+                       :salary => params[:salary],
+                       :description => params[:description],
+                       :job => params[:job]
+                       }
+    student.workexperiences.create(work_experience);
+    student.save!
+    redirect_to(single_student_profile_path(student))
+  end
+
+  def delete_past_experience
+  	student = Student.find(params[:id])
+    student.workexperiences.destroy(params[:ex_id]);
+    student.save!
+    redirect_to(single_student_profile_path(student))
+  end
+  
+  
+  def update_past_project
+      student = Student.find(params[:id])
+      past_project = {:project_name => params[:project_name],
+          :student_id => params[:id],
+          :position => params[:position],
+          :description => params[:description],
+          :start_date => params[:start_date],
+          :end_date => params[:end_date]
+      }
+      student.projects.create(past_project);
+      student.save!
+      redirect_to(single_student_profile_path(student))
+  end
+  
+  def delete_past_project
+      student = Student.find(params[:id])
+      student.projects.destroy(params[:proj_id]);
+      student.save!
+      redirect_to(single_student_profile_path(student))
+  end
+  
+  
+ def update_past_education
+     student = Student.find(params[:id])
+     past_education = {:school_name => params[:school_name],
+         :student_id => params[:id],
+         :major => params[:major],
+         :start_date => params[:start_date],
+         :graduation_date => params[:graduation_date]
+     }
+     student.educations.create(past_education);
+     student.save!
+     redirect_to(single_student_profile_path(student))
+ end
+ 
+ def delete_past_education
+     student = Student.find(params[:id])
+     student.educations.destroy(params[:edu_id]);
+     student.save!
+     redirect_to(single_student_profile_path(student))
+ end
+
+  
+
+
 end

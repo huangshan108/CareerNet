@@ -5,13 +5,30 @@ FactoryGirl.define do  factory :industry do
   end
   factory :experience do
     industry "MyString"
-yr_exp 1
-salary 1
-city "MyString"
-state "MyString"
-country "MyString"
-org_name "MyString"
-job_title "MyString"
+    yr_exp 1
+    salary 1
+    city "MyString"
+    state "MyString"
+    country "MyString"
+    org_name "MyString"
+    job_title "MyString"
+    
+  end
+  factory :activity do
+    
+  end
+  factory :project do
+    
+  end
+  factory :workexperience do
+    
+  end
+  factory :studentworkexperience do
+    
+  end
+  factory :work_experience do
+    
+>>>>>>> iteration4-1-user-experience
   end
   factory :visualization do
     
