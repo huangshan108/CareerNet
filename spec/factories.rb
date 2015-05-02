@@ -28,7 +28,6 @@ FactoryGirl.define do  factory :industry do
   end
   factory :work_experience do
     
->>>>>>> iteration4-1-user-experience
   end
   factory :visualization do
     
