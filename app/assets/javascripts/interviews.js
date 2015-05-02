@@ -1,3 +1,5 @@
+//= require fullcalendar
+
 $(document).ready(function() {
     var todayDate = new Date();
     todayDate.setHours(0,0,0,0);
@@ -52,21 +54,22 @@ $(document).ready(function() {
           $("#calendar").fullCalendar("unselect");
         },
         eventClick: function (calEvent, jsEvent, view){
-          var result = confirm("Are you sure you want to delete this interview slot?");
-            if (result){
+            if (calEvent.title == "Empty"){
               $.ajax({
                 url: "/interviews/company/" + calEvent.id,
                 type: "POST",
-                dataType: "json",
+                //dataType: "json",
                 data: { "_method": "delete" },
                 success: function() {
-                  alert("Successfully deleted interview slot");
+                  $("#calendar").fullCalendar("removeEvents", calEvent.id);
                 },
                 error: function() {
                   alert("Error. Could not delete interview slot");
                 }
               });
-              $("#calendar").fullCalendar("refetchEvents");
+            }
+            else{
+              window.location = "/interviews/" + calEvent.id;
             }
         },
         slotMinutes: 20,

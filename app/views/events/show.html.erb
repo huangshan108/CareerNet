@@ -1,5 +1,9 @@
 <h1><%= @event.title %></h1>
 
+<h5><% if @current_user.events.include?(@event) %>
+    You are registered for this event.
+    <% end %>
+</h5>
 
 <dl class="dl-horizontal"> 
 	<dt>Start</dt>
@@ -12,7 +16,7 @@
 	<dd><%= @event.description %></dd>
 </dl>
 <div class="pull-right button-group">
-	<%= link_to 'Register', event_register_path(@event), class: "button green" %>
+	<%= link_to 'Register', event_register_path(@event), class: "button green" if !@current_user.events.include?(@event)%>
 	<%if @current_user.account_type == 2%>
     <%= link_to "View Attendees", event_attendees_index_path(@event), class: "button orange" %>
 	  <%= link_to 'Delete', event_path(@event), class: "button red", :method => :delete %>

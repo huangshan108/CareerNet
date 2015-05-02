@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418082139) do
+ActiveRecord::Schema.define(version: 20150501041455) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -32,6 +32,17 @@ ActiveRecord::Schema.define(version: 20150418082139) do
   add_index "accounts_events", ["account_id", "event_id"], name: "index_accounts_events_on_account_id_and_event_id"
   add_index "accounts_events", ["event_id"], name: "index_accounts_events_on_event_id"
 
+  create_table "activities", force: :cascade do |t|
+    t.string   "activity_name"
+    t.string   "position"
+    t.text     "description"
+    t.integer  "student_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "applications", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "job_id"
@@ -48,6 +59,7 @@ ActiveRecord::Schema.define(version: 20150418082139) do
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "reason"
   end
 
   add_index "appointments", ["staff_id"], name: "index_appointments_on_staff_id"
@@ -74,6 +86,16 @@ ActiveRecord::Schema.define(version: 20150418082139) do
     t.string   "industry"
   end
 
+  create_table "educations", force: :cascade do |t|
+    t.string   "school_name"
+    t.string   "major"
+    t.integer  "student_id"
+    t.date     "start_date"
+    t.date     "graduation_date"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -82,6 +104,29 @@ ActiveRecord::Schema.define(version: 20150418082139) do
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "experiences", force: :cascade do |t|
+    t.integer  "student_id"
+    t.string   "org_name"
+    t.string   "job_title"
+    t.integer  "yr_exp"
+    t.integer  "salary"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "industry_id"
+    t.integer  "company_id"
+  end
+
+  add_index "experiences", ["student_id"], name: "index_experiences_on_student_id"
+
+  create_table "industries", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "interviews", force: :cascade do |t|
@@ -114,8 +159,24 @@ ActiveRecord::Schema.define(version: 20150418082139) do
     t.datetime "updated_at"
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string   "project_name"
+    t.text     "description"
+    t.integer  "student_id"
+    t.string   "position"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "skills", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "skills_students", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "skill_id"
   end
 
   create_table "staffs", force: :cascade do |t|
@@ -152,13 +213,20 @@ ActiveRecord::Schema.define(version: 20150418082139) do
     t.integer  "base_salary"
     t.string   "title"
     t.integer  "company_id"
+    t.integer  "class_of"
   end
 
   add_index "students", ["major_id"], name: "index_students_on_major_id"
 
-  create_table "studentskills", force: :cascade do |t|
-    t.integer "student_id"
-    t.integer "skill_id"
+  create_table "workexperiences", force: :cascade do |t|
+    t.string   "company_name"
+    t.string   "location"
+    t.string   "job"
+    t.integer  "salary"
+    t.integer  "student_id"
+    t.text     "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end

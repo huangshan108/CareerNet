@@ -1,5 +1,6 @@
 module References
     #ISO Country Code and Names
+    #This data is no longer needed by seeding cliend data
     COUNTRY = [
   { :name => 'Afghanistan', :iso_two_letter_code => 'AF' },
   { :name => 'Aland Islands', :iso_two_letter_code => 'AX' },

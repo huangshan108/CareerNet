@@ -24,13 +24,21 @@ module NavigationHelpers
     when /^company profile page/ then '/profiles/company/1'
     when /^staff profile page/ then '/profiles/staff/1'
     when /^edit profile page/ then '/profiles/student/1/edit'
+    when /^appointment page/ then '/appointments/1'
+    when /^student appointment page/ then '/appointments/student'
+    when /^student new appointment page/ then '/appointments/student/new'
+    when /^new appointment page/ then '/appointments/student/book/1'
     when /^company edit profile page/ then '/profiles/company/1/edit'
     when /^student appointment page/ then '/appointments/student'
     when /^student new appointment page/ then '/appointments/student/new'
     when /^staff appointment page/ then '/appointments/staff'
+    when /^show interview page/ then '/interviews/1'
     when /^calendar page/ then '/calendar'
     when /^attendees page/ then '/events/1/attendees'
-    when /^smart data report page/ then '/smart-report'
+    when /^smart data report page/ then '/smart-report/overview'
+    when /^industry data report page/ then '/smart-report/industry'
+    when /^organization data report page/ then '/smart-report/organization'
+    when /^region data report page/ then '/smart-report/region'
     when /(.+) view page/ then 
       split_page = page_name.split(' ').map(&:strip)
       job_id = split_page[2]

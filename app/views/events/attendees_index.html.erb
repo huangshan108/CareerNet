@@ -3,20 +3,28 @@
   <thead>
     <tr>
       <th> Attendee Name </th>
-      <th> Account Type </th>
     </tr>
   </thead>
   <tbody>
     <% @attendees.each do |attendee| %>
       <tr>
-        <td><%= attendee.name %></td>
-        <td><%= attendee.account_type %></td>
+        <% case attendee.account_type
+           when 1 %>
+          <td><%= attendee.student.first_name + " " + attendee.student.last_name %></td>
+        <% when 2 %>
+          <td><%= attendee.staff.first_name + " " + attendee.staff.last_name %></td>
+        <% when 3 %>
+          <td><%= attendee.company.name %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('.data-table').dataTable();
+    $('.data-table').dataTable({
+      "pageLength": 25,
+      "lengthMenu": [ 25, 50, 100 ]
+    });
   })
 </script>

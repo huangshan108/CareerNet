@@ -14,16 +14,22 @@ Background: Adding jobs to database
     Given the following accounts exist:
     |name         |email               |account_type |
     |huangshan108 |shuang@berkeley.edu |1            |
+    |staff1       |staff1@berkeley.edu |2            |
 
     Given the following students exist:
     | first_name   | last_name  | college_id   | major_id     | graduation_date   | resume_link |account_id |
     | Mark         | Sharp      | 1            | 1            | 2016-10-10        | example.com |1          |
   
-    And I am on the account_login page
-    Then I enter "shuang@berkeley.edu" into "email" 
-    And I enter "careernet" into "password" 
-    And I press "Log In" button
-    Then I should see "Welcome to CareerNet"
+    Given the following staffs exist:
+    |first_name      |last_name      |email               |account_id |
+    |Fake            |Staff          |staff1@berkeley.edu |2          |
+
+
+And I am on the account_login page
+Then I enter "staff1@berkeley.edu" into "email" 
+And I enter "careernet" into "password" 
+And I press "Log In" button
+Then I should see "Welcome to CareerNet"
 
     Scenario: Go to students page
         Given I am on list students page
@@ -36,8 +42,24 @@ Background: Adding jobs to database
         When I follow "More details"
         Then I should be on student profile page
         And I should see "Mark"
-   
+
+    Scenario: Student cannot view list_students page
+        And I am on logout page
+        And I am on the account_login page
+        Then I enter "shuang@berkeley.edu" into "email" 
+        And I enter "careernet" into "password" 
+        And I press "Log In" button
+        Then I should see "Welcome to CareerNet"
+        Given I am on list students page
+        Then I should see "Unauthorized. Wrong user group."
+
     Scenario: Edit student profile
+        And I am on logout page
+        And I am on the account_login page
+        Then I enter "shuang@berkeley.edu" into "email" 
+        And I enter "careernet" into "password" 
+        And I press "Log In" button
+        Then I should see "Welcome to CareerNet"
         Given I am on student profile page
         When I follow "Edit profile"
         Then I should be on edit profile page

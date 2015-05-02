@@ -9,5 +9,5 @@
 #
 
 class Major < ActiveRecord::Base
-	has_many :students
+    has_many :students
 end

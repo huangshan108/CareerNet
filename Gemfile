@@ -63,7 +63,7 @@ gem 'factory_girl_rails'
 gem 'faker'
 
 # Gem for FullCalendar
-gem 'fullcalendar-rails'
+gem 'fullcalendar-rails', '2.0.2.0'
 gem 'responders'
 gem "cancan"
 
@@ -76,3 +76,14 @@ gem 'active_record_union'
 gem 'annotate', '~> 2.6.6'
 gem 'selenium-webdriver'
 gem "font-awesome-rails"
+
+# Gem for seeding client data
+gem 'roo', '~> 2.0.0'
+
+gem 'descriptive_statistics'
+# Gem for U.S. map d3
+gem 'topojson-rails'
+# Gem for authentication, authorization and switch users
+gem 'devise'
+gem "pundit"
+gem "switch_user"
