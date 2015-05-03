@@ -1,18 +1,17 @@
 <%= javascript_include_tag '/queue.v1.min.js' %>
 <%= javascript_include_tag 'usSalaryMap.js' %>
-
-<div class="col-md-7">
-    <h1>Smart Data Report - Region<i class="fa fa-question-circle help" data-toggle="tooltip" data-placement="right" title="Hover over a state to see the details"></i></h1>
-    <script type="text/javascript">
-    	$(function () {
-    	  $('[data-toggle="tooltip"]').tooltip()
-    	})
-    </script>
-    <%= render 'options' %>
+<div class="row">
+    <div class="col-md-7">
+        <h1>Smart Data Report - Region<i class="fa fa-question-circle help" data-toggle="tooltip" data-placement="right" title="Hover over a state to see the details"></i></h1>
+        <script type="text/javascript">
+        	$(function () {
+        	  $('[data-toggle="tooltip"]').tooltip()
+        	})
+        </script>
+        <%= render 'options' %>
+    </div>
+    <%= render 'available_reports' %>
 </div>
-
-<%= render 'available_reports' %>
-
 <div class='map-container'>
     <div id='usmap'></div>
     <div id='map-detail'>
