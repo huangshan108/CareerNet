@@ -1,5 +1,5 @@
 class MainController < ApplicationController
-  before_action :confirm_logged_in
+  before_action :confirm_logged_in, :except => [:not_found]
   
   def index
     if authorize([:all])
@@ -14,5 +14,9 @@ class MainController < ApplicationController
         @events = @events[0..2]
       end
     end
+  end
+
+  def not_found
+    
   end
 end
