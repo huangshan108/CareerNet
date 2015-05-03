@@ -90,7 +90,6 @@ Scenario: As staff, add notes to students
   And I press "Submit" button
   Given I am on the main page
   And I follow "Post An Appointment"
-  Then I should see "appointment slots"
   When I press the css button ".fc-button.fc-button-next.fc-state-default.fc-corner-right"
   When I press the css button ".fc-slot0 td.fc-widget-content"
   And I press the css button ".fc-event-inner .fc-event-time"
