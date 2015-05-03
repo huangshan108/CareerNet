@@ -212,6 +212,7 @@ input.button:hover {
 }
 
 .sign-in-as {
+  z-index: 100;
   &.normal {
     background-color: #F39C12;
   }

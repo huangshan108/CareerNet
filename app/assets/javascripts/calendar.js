@@ -89,7 +89,7 @@ $(document).ready(function() {
         editable: false,
         durationEditable: false,
         lang: currentLangCode,
-        theme: true, // using JQuery UI
+        // theme: true, // using JQuery UI
         header: {
           left: 'prev,next today',
           center: 'title',
