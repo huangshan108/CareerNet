@@ -25,20 +25,61 @@
 
 <div class="col-sm-8">
   <div class="dashboard-content">
-    <h3>Recent Job Postings</h3>
-    <div class="recent-activity-list">
-      <%@jobs.each do |job| %>
-      <h5><%=link_to job.title, view_single_job_path(job.id)%></a></h3>
-      <h6>Posted by <%= link_to job.company.name, company_profile_path(job.company_id) %> on <%=job.created_at%></h6>
-      <% end %>
-    </div>
-    <h3>Upcoming Events </h3>
-    <div class="recent-activity-list">
-      <%@events.each do |event| %>
-      <h5><%=link_to event.title, event_path(event)%></a></h3>
-      <h6>Starts at <%=event.time_start%></a></h6>
-      <% end %>
-    </div>
+    <h2>Recent Job Postings</h2>
+    <table class="data-table table table-striped">   
+      <thead>
+        <tr>
+          <th> Position </th>
+          <th> Company </th>
+          <th> Salary </th>
+          <th> Updated </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @jobs.each do |job| %>
+          <tr>
+           <% if !job.company.nil? %>
+            <td><%=link_to "#{job.title}", view_single_job_path(job.id) %></td>
+            <td><%= job.company.name %></td>
+            <td><%= job.salary %></td>
+            <td><%= job.updated_at.strftime('%D') %></td>
+            <% end %>
+          </tr>
+          <% end %>
+      </tbody>
+    </table>
+    <hr>
+    <h2>Upcoming Events </h2>
+    <table class="data-table table table-striped">
+      <thead>
+        <tr>
+          <th> Event </th>
+          <th> Time Start </th>
+          <th> Time End </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @events.each do |event| %>
+          <% if !event.title.nil? %>
+            <tr>
+              <td><div class="event_title"><%= link_to event.title, event_path(event) %></div></td>
+              <td><div class="time_start"><%= event.time_start.strftime('%D %H:%M %p') if event.time_start %></div></td>
+              <td><div class="time_end"><%= event.time_end.strftime('%D %H:%M %p') if event.time_end %></div></td>
+            </tr>
+            <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('.data-table').each(function(index, elem) {
+          $(elem).dataTable({
+            "searching": false,
+            "paging": false
+          });
+        });
+      });
+    </script>
   </div>
 </div>
 
