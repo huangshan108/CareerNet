@@ -13,7 +13,7 @@
          :selected => params[:reason]) %>
     </dd>
     <dt>Description </dt>
-    <dd><%= text_field_tag :description, params[:description] %></dd>
+    <dd><%= text_area_tag :description, params[:description] %></dd>
   </dl>
   <%= submit_tag "Submit", class: "button pull-right blue" %>
 <% end %>

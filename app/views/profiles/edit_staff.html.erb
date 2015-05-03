@@ -8,7 +8,7 @@
     	<dd><%= text_field_tag :last_name, params[:last_name], value: @staff.last_name ? @staff.last_name : nil %></dd>
 
 		<dt> Description </dt>
-		<dd><%= text_field_tag :description, params[:description], value: @staff.description %></dd>
+		<dd><%= text_area_tag :description, params[:description], value: @staff.description %></dd>
 
 	</dl>
 
