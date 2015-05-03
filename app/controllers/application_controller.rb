@@ -50,37 +50,37 @@ class ApplicationController < ActionController::Base
     return true
   end
 
-    def account_id
-    if delegation_on?
-      return session[:signed_in_as]
-    else
-        return session[:user_id]
-    end
-    end
+  def account_id
+  if delegation_on?
+    return session[:signed_in_as]
+  else
+      return session[:user_id]
+  end
+  end
 
-    def roll_id
-    return current_user.getUser.id
-    end
+  def roll_id
+  return current_user.getUser.id
+  end
 
-    def logged_in?
-        account_id != nil
-    end
+  def logged_in?
+      account_id != nil
+  end
     
   def delegation_on?
     return !(session[:signed_in_as] == nil)
   end
 
-    # return morning, afternoon or evening
-    def time_period
-        t = Time.new.hour
-        if 5 < t and t <= 12
-            return "Morning"
-        elsif 12 < t and t <= 18
-            return "Afternoon"
-        else
-            return "Evening"
-        end
-    end
+  # return morning, afternoon or evening
+  def time_period
+      t = Time.new.hour
+      if 5 < t and t <= 12
+          return "Morning"
+      elsif 12 < t and t <= 18
+          return "Afternoon"
+      else
+          return "Evening"
+      end
+  end
 
   private
     
