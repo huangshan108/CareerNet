@@ -109,7 +109,7 @@ var USsalaryMap = function (selector, usTopoJSON, stateIdToStateNameMap, stateNa
     this.statePaths = topojson.feature(usTopoJSON, usTopoJSON.objects.states).features.map(function(d) {
         d['label'] = stateIdToStateNameMap.get(d['id']);
         d['average'] = 0;
-        console.log(d);
+        // console.log(d);
         return d;
     });
 
@@ -141,9 +141,9 @@ USsalaryMap.prototype.setupMap = function () {
         .attr("class", "state-group");
 
     //Select objects to displace text
-    this.stateText = d3.select("b#state");
-    this.avgText = d3.select("p#average");
-    this.countText = d3.select("p#count");
+    this.stateText = d3.select("#state");
+    this.avgText = d3.select("#average");
+    this.countText = d3.select("#count");
 
     // Add state paths
     this._states = this.stateGroup.selectAll('path')
@@ -239,15 +239,16 @@ USsalaryMap.prototype.currencyFormatter = d3.format('$,');
 
 //Set inspection Info for states with enough info on the side of the map
 USsalaryMap.prototype.setInspectionInfo = function(stateName, amount, count) {
-    this.stateText.text(stateName);
-    this.avgText.text("Avg. Salary:  " + this.currencyFormatter(amount));
-    this.countText.text("#Offers: " + count);
+    this.stateText.html("<strong>State</strong>: " + stateName);
+    this.avgText.html("<strong>Average Salary</strong>: " + this.currencyFormatter(amount));
+    this.countText.html("<strong>Number of Offers</strong>: " + count);
 };
 
 //Set Info on states that does not have enough data
 USsalaryMap.prototype.setNoDataInfo = function(stateName){
-    this.stateText.text(stateName);
-    this.avgText.text('No data');
+    this.stateText.html("<strong>State</strong>: " + stateName);
+    this.avgText.html("<strong>Average Salary</strong>: " + "N/A");
+    this.countText.html("<strong>Number of Offers</strong>: " + "N/A");
 };
 
 

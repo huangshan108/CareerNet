@@ -65,17 +65,28 @@ i.help {
 
 #map-detail {
     margin-left: 770px;
+    .map-detail-label {
+      text-align: center;
+      font-size: large;
+      padding: 5px;
+      font-weight: 500;
+    }
+    #map-text{
+      border: 1px solid #3498DB;
+      border-radius: 3px;
+      padding: 10px;
+      height: 80px;
+      color: #34495E;
+      #state{
+        
+      }
+      #average, #count {
+        
+      }
+    }
 }
 
-#map-text{
-  background-color: #eee;
-}
 
-b#state{
-  margin-bottom: 15px;
-}
 
-p#average, p#count {
-    margin: 0px;
-}
+
 
