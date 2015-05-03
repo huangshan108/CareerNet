@@ -48,10 +48,11 @@
 
 </dl>
 
-<div class="pull-right button-group">
-  <%= link_to 'Edit profile', edit_company_profile_path(@company), name: "edit-profile-button", class: "button blue" -%>
-</div> 
-
+<% if (is_company? and current_user.getUser.id == @company.id) or is_staff?  %>
+  <div class="pull-right button-group">
+    <%= link_to 'Edit profile', edit_company_profile_path(@company), name: "edit-profile-button", class: "button blue" -%>
+  </div> 
+<% end -%>
 
 <h1> Available Positions </h1>
 <table class="data-table table table-striped">   

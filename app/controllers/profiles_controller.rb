@@ -49,7 +49,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit_company
-    if authorize([:company, :self])
+    if authorize([:staff, :company, :self])
       id = params[:id]
       @company = Company.find(id)
     end
@@ -63,7 +63,7 @@ class ProfilesController < ApplicationController
   end
 
   def update_company
-    if authorize([:company, :self])
+    if authorize([:staff, :company, :self])
       company = Company.find(params[:id])
       company.update_attributes(:name => params[:name],
                                 :city => params[:city],

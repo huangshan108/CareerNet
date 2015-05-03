@@ -29,6 +29,8 @@
 
 </dl>
 
-<div class="pull-right button-group">
-  <%= link_to 'Edit profile', edit_staff_profile_path(@staff), name: "edit-profile-button", class: "button blue" -%>
-</div> 
+<% if is_staff? and current_user.getUser.id == @staff.id  %>
+  <div class="pull-right button-group">
+    <%= link_to 'Edit profile', edit_staff_profile_path(@staff), name: "edit-profile-button", class: "button blue" -%>
+  </div> 
+<% end %>
