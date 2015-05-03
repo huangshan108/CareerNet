@@ -50,7 +50,6 @@ Scenario: Accept interview time with company
   When I follow "View Applications"
   Then I should see "Shan Huang"
   When I follow "View/Schedule Interview"
-  Then I should see "interview slots"
   When I press the css button ".fc-button.fc-button-next.fc-state-default.fc-corner-right"
   When I press the css button ".fc-slot0 td.fc-widget-content"
   And I accept alert

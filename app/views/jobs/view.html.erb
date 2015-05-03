@@ -3,17 +3,19 @@
 <dl class="dl-horizontal"> 
 		<dt>Company</dt>
 		<dd><%= @job.company.name %></dd>
-		<dt>Salary</dt>
-		<dd><%= "$" + @job.salary%></dd>
+		<% if !is_student? %>
+			<dt>Salary</dt>
+			<dd><%= "$" + @job.salary%></dd>
+		<% end %>
  		<dt> Description</dt>
  		<dd><%= @job.description %></dd>
 </dl>
 
 <div class="pull-right button-group">
-   <%if @current_user.account_type == 3 and (@job.company.name.to_s.eql? @company.name.to_s) == true%>
+   <%if is_staff? or (is_company? and @job.company.id == @company.id) %>
 	<%= link_to "Delete", delete_job_path(@job), :method => :delete, class: "button red" %>
    <%end%>
-   <%if @current_user.account_type == 1 || @current_user.account_type == 2 %>
+   <%if is_student? %>
 	<%= link_to "Apply", apply_job_path(:job_id => params[:job_id]), :method => :post, class: "button green" %>
    <%end%>
 	<%= link_to "Back", job_list_path, class: "button default" %>
@@ -21,7 +23,7 @@
 
 <div class="section-break"></div>
 
-<%if @current_user.account_type != 1 %>
+<%if !is_student? %>
 <h1> Job Applications </h1>
 <table class="data-table table table-striped">
 	<thead>

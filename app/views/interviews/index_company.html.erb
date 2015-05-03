@@ -1,4 +1,8 @@
 <%= javascript_include_tag 'interviews.js' %>
-<div style='margin: 40px;'></div>
-<p><b>Drag and drop</b> time slots to <b>create</b> interview slots. <b>Click</b> on interview slots to <b>delete</b>. </p>
+<h1>Create Interviews<i class="fa fa-question-circle help" data-toggle="tooltip" data-placement="right" title="Drag and drop time slots to create interviews. Click on interview slots to delete."></i></h1>
+<script type="text/javascript">
+	$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	})
+</script>
 <div id='calendar'></div>

@@ -19,7 +19,7 @@ $(document).ready(function() {
         header: {
           left: 'prev,next today',
           center: 'title',
-          right: 'Click on interview slots to delete'
+          right: 'month agendaWeek agendaDay'
         },
         selectable: true,
         selectHelper: true,
