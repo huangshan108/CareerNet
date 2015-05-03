@@ -3,8 +3,10 @@
 <dl class="dl-horizontal"> 
 		<dt>Company</dt>
 		<dd><%= @job.company.name %></dd>
-		<dt>Salary</dt>
-		<dd><%= "$" + @job.salary%></dd>
+		<% if !is_student? %>
+			<dt>Salary</dt>
+			<dd><%= "$" + @job.salary%></dd>
+		<% end %>
  		<dt> Description</dt>
  		<dd><%= @job.description %></dd>
 </dl>

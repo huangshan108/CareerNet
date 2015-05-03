@@ -58,8 +58,9 @@
   <thead>
     <tr>
       <th> Position </th>
-      <th> Company </th>
-      <th> Salary </th>
+      <% if !is_student? %>
+        <th> Salary </th>
+      <% end %>
       <th> Updated </th>
     </tr>
   </thead>
@@ -68,8 +69,9 @@
       <tr>
        <% if !job.company.nil? %>
         <td><%=link_to "#{job.title}", view_single_job_path(job.id) %></td>
-        <td><%= job.company.name %></td>
-        <td><%= job.salary %></td>
+        <% if !is_student? %>
+          <td><%= job.salary %></td>
+        <% end %>
         <td><%= job.updated_at.strftime('%D') %></td>
         <% end %>
       </tr>
