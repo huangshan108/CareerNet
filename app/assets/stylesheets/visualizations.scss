@@ -9,9 +9,44 @@ tbody th {
 
 #pieChart {
   text-align: center;
-  margin: 50px 0px;
+  margin: 0px;
   padding-top: 10px;
-  border: 2px solid #ddd;
+/*  border: 2px solid #ddd;*/
+}
+
+.pie-chart-loading {
+  font-size: 20px;
+  padding-top: 200px;
+  position: absolute;
+  height: 505px;
+  width: 1042px;
+  background: rgba(255,255,255, 0.8);
+}
+
+.avaliable-reports {
+  margin-top: 130px;
+  text-align: center;
+  .title {
+    text-align: center;
+    font-size: 20px;
+    margin: 10px 0px;
+  }
+  a {
+    padding: 5px;
+    border: 1px solid #27AE60;
+    color: #27AE60;
+    text-decoration: none;
+  }
+  a.current,
+  a:hover {
+    text-decoration: none;
+    color: white;
+    background-color: #27AE60;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
 }
 
 .single-pie-chart {
@@ -65,17 +100,28 @@ i.help {
 
 #map-detail {
     margin-left: 770px;
+    .map-detail-label {
+      text-align: center;
+      font-size: large;
+      padding: 5px;
+      font-weight: 500;
+    }
+    #map-text{
+      border: 1px solid #3498DB;
+      border-radius: 3px;
+      padding: 10px;
+      height: 80px;
+      color: #34495E;
+      #state{
+        
+      }
+      #average, #count {
+        
+      }
+    }
 }
 
-#map-text{
-  background-color: #eee;
-}
 
-b#state{
-  margin-bottom: 15px;
-}
 
-p#average, p#count {
-    margin: 0px;
-}
+
 

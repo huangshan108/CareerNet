@@ -104,6 +104,8 @@ Rails.application.routes.draw do
   get 'sign-in-as/company/:id' => 'delegation#as_company', :as => :as_company
   get 'cancel-delegation' => 'delegation#switch_back', :as => :cancel_delegation
 
+
+  get 'not_found' => 'main#not_found'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

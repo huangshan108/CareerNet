@@ -1,7 +1,23 @@
-<h1 data-template="<%= @template_name.downcase %>"><%= "Smart Data Report - #{@template_name}" %></h1>
-<%= render 'options' %>
-<div id="pieChart"></div>
-<h1>Detailed View</h1>
+<div class="row">
+	<div class="col-md-7">
+		<h1 data-template="<%= @template_name.downcase %>"><%= "Smart Data Report - #{@template_name}" %></h1>
+		<%= render 'options' %>
+	</div>
+
+	<%= render 'available_reports' %>
+</div>
+<h2>Student Destribution</h2>
+<div id="pieChart">
+	<div class="pie-chart-loading">
+		Loading...
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		$("#pieChart").height(505).width(1042);
+	})
+</script>
+<h2>Detailed View</h2>
 <div class="general-stats-table-container">
 </div>
 <%= javascript_include_tag 'visualizations.js' %>

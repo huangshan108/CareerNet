@@ -40,10 +40,10 @@ class ProfilesController < ApplicationController
     if authorize([:staff, :student, :self])
       id = params[:id] # retrieve student ID from URI route
       @student = Student.find(id)
-      @all_schools = College.all
-      @all_majors = Major.all
-      @all_skills = Skill.all
-      @all_companies = Company.all
+      @all_schools = College.select("id", "school_name")
+      @all_majors = Major.select("id", "name")
+      @all_skills = Skill.select("id", "name")
+      @all_companies = Company.select("id", "name")
       @student_skills = @student.skills.all
     end
   end

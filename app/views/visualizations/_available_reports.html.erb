@@ -1,0 +1,16 @@
+<div class="col-md-5">
+    <div class="avaliable-reports">
+        <div class="title">Available Reports</div>
+        <a href="/smart-report/overview">Overview</a>
+        <a href="/smart-report/industry">Industry</a>
+        <a href="/smart-report/organization">Organization</a>
+        <a href="/smart-report/region">Region</a>
+    </div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		var path = window.location.pathname;
+		a_path = ".avaliable-reports a[href=\""+path+"\"]";
+		$(a_path).addClass("current")
+	});
+</script>

@@ -46,6 +46,7 @@ function init(template){
             if (general_stats_template.indexOf(template) != -1 ) {
                 renderTable(json, template);
                 // drawPie(preFormatData(json), "industry");
+                $(".pie-chart-loading").fadeOut(300);
                 var pie = new d3pie("pieChart", getD3PieOptions(json));
             } else if (template == "overview") {
                 drawPie(json['countries'], "country");
@@ -86,25 +87,25 @@ function preFormatData(data) {
 /* Get the default options for d3pie */
 function getDefaultOptions() {
     return {
-        "header": {
-            "title": {
-                "text": "",
-                "fontSize": 24,
-                "font": "Lato"
-            },
-            "subtitle": {
-                "color": "#999999",
-                "fontSize": 12,
-                "font": "Lato"
-            },
-            "titleSubtitlePadding": 9
-        },
-        "footer": {
-            "color": "#999999",
-            "fontSize": 10,
-            "font": "Lato",
-            "location": "bottom-left"
-        },
+        // "header": {
+        //     "title": {
+        //         "text": "",
+        //         "fontSize": 24,
+        //         "font": "Lato"
+        //     },
+        //     "subtitle": {
+        //         "color": "#999999",
+        //         "fontSize": 12,
+        //         "font": "Lato"
+        //     },
+        //     "titleSubtitlePadding": 9
+        // },
+        // "footer": {
+        //     "color": "#999999",
+        //     "fontSize": 10,
+        //     "font": "Lato",
+        //     "location": "bottom-left"
+        // },
         "size": {
             "canvasWidth": 800,
             // "pieInnerRadius": "25%",
@@ -179,7 +180,7 @@ function getD3PieOptions(data) {
     });
     default_option.data.content = content_data;
 
-    default_option.header.title.text = "Student Destributions"
+    // default_option.header.title.text = "Student Destributions"
     console.log(default_option);
     return default_option;
 }
@@ -221,6 +222,7 @@ function formatNum(num, decimal) {
 }
 
 function updateData(template, reqData){
+    $(".pie-chart-loading").fadeIn(300);
     $.ajax({
         type: "GET",
         url: '/smart-report/' + template + '-data',
@@ -234,7 +236,8 @@ function updateData(template, reqData){
             // }
             if (general_stats_template.indexOf(template) != -1 ) {
                 renderTable(json, template);
-                $("#pieChart").empty();
+                $("#pieChart svg").remove();
+                $(".pie-chart-loading").fadeOut(300);
                 var pie = new d3pie("pieChart", getD3PieOptions(json));
             } else if (template == "overview") {
                 updatePie(json['countries'], "country");
