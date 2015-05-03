@@ -5,7 +5,16 @@
 
 <%= render 'available_reports' %>
 
-<div id="pieChart"></div>
+<div id="pieChart">
+	<div class="pie-chart-loading">
+		Loading...
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		$("#pieChart").height(505).width(1042);
+	})
+</script>
 <h1>Detailed View</h1>
 <div class="general-stats-table-container">
 </div>

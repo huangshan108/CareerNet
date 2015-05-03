@@ -46,6 +46,7 @@ function init(template){
             if (general_stats_template.indexOf(template) != -1 ) {
                 renderTable(json, template);
                 // drawPie(preFormatData(json), "industry");
+                $(".pie-chart-loading").hide();
                 var pie = new d3pie("pieChart", getD3PieOptions(json));
             } else if (template == "overview") {
                 drawPie(json['countries'], "country");
@@ -221,6 +222,7 @@ function formatNum(num, decimal) {
 }
 
 function updateData(template, reqData){
+    $(".pie-chart-loading").show();
     $.ajax({
         type: "GET",
         url: '/smart-report/' + template + '-data',
@@ -234,7 +236,8 @@ function updateData(template, reqData){
             // }
             if (general_stats_template.indexOf(template) != -1 ) {
                 renderTable(json, template);
-                $("#pieChart").empty();
+                $("#pieChart svg").remove();
+                $(".pie-chart-loading").hide();
                 var pie = new d3pie("pieChart", getD3PieOptions(json));
             } else if (template == "overview") {
                 updatePie(json['countries'], "country");
