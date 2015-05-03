@@ -181,8 +181,8 @@ USsalaryMap.prototype.render = function (data) {
     // been rendered. (see assignment of this._states)
 
     /** Update phase **/
-    console.log("Update");
-    console.log(this.states);
+    // console.log("Update");
+    // console.log(this.states);
     this.states.transition().duration(500)
         .attr("fill", function(d) {
             return moneyColorScale(d['average']);

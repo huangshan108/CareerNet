@@ -9,9 +9,36 @@ tbody th {
 
 #pieChart {
   text-align: center;
-  margin: 50px 0px;
+  margin: 320px 0px 50px 0px;
   padding-top: 10px;
   border: 2px solid #ddd;
+
+}
+
+.avaliable-reports {
+  margin-top: 130px;
+  text-align: center;
+  .title {
+    text-align: center;
+    font-size: 20px;
+    margin: 10px 0px;
+  }
+  a {
+    padding: 5px;
+    border: 1px solid #27AE60;
+    color: #27AE60;
+    text-decoration: none;
+  }
+  a.current,
+  a:hover {
+    text-decoration: none;
+    color: white;
+    background-color: #27AE60;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
 }
 
 .single-pie-chart {

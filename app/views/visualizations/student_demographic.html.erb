@@ -1,12 +1,14 @@
-<h1 data-template="overview">Smart Data Report - Overview<i class="fa fa-question-circle help" data-toggle="tooltip" data-placement="right" title="Hover over a section on pie chart to see details"></i></h1>
-<script type="text/javascript">
-	$(function () {
-	  $('[data-toggle="tooltip"]').tooltip()
-	})
-</script>
+<div class="col-md-7">
+	<h1 data-template="overview">Smart Data Report - Overview<i class="fa fa-question-circle help" data-toggle="tooltip" data-placement="right" title="Hover over a section on pie chart to see details"></i></h1>
+	<script type="text/javascript">
+		$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
 
-<%= render 'options' %>
-
+	<%= render 'options' %>
+</div>
+<%= render 'available_reports' %>
 <div class="smart-report">
 		<div class="col-md-6">
 	    <div id='major' class="single-pie-chart">
