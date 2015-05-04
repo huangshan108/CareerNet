@@ -136,7 +136,7 @@ input {
 input:focus {
   border-color: #3498DB;
 }
-
+button.button,
 input.button {
   width: initial;
   border: none;
@@ -145,8 +145,11 @@ input.button {
   border-radius: 3px;
   margin: 0px 2px;
 }
-
+button.button:focus,
+input.button:focus,
+button.button:hover,
 input.button:hover {
+  outline: none;
   color: white;
   text-decoration: none;
   background-color: #34495E;

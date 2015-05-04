@@ -32,7 +32,6 @@ Background: Adding jobs to database
     Given I am on student profile page
     And I should see "Past Experience"
     When I click on add experience button
-    Then I should see "Add experience"
     When I fill in the following:
      | company_name| Riot       |
      | salary      | 70000      |
@@ -54,7 +53,6 @@ Background: Adding jobs to database
     Given I am on student profile page
     And I should see "Past Project"
     When I click on add project button
-    Then I should see "Add project"
     When I fill in the following:
      | project_name | website     |
      | position     | full stack  |
@@ -76,7 +74,6 @@ Background: Adding jobs to database
     Given I am on student profile page
     And I should see "Past Education"
     When I click on add education button
-    Then I should see "Add Past Education"
     When I fill in the following:
      | school_name  | Berkeley     |
      | Major        | EECS         |
