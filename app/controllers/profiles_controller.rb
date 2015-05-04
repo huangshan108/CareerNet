@@ -160,14 +160,14 @@ class ProfilesController < ApplicationController
                        :job => params[:job]
                        }
     student.workexperiences.create(work_experience);
-    student.save!
+    student.save
     redirect_to(single_student_profile_path(student))
   end
 
   def delete_past_experience
   	student = Student.find(params[:id])
     student.workexperiences.destroy(params[:ex_id]);
-    student.save!
+    student.save
     redirect_to(single_student_profile_path(student))
   end
   
@@ -182,14 +182,14 @@ class ProfilesController < ApplicationController
           :end_date => params[:end_date]
       }
       student.projects.create(past_project);
-      student.save!
+      student.save
       redirect_to(single_student_profile_path(student))
   end
   
   def delete_past_project
       student = Student.find(params[:id])
       student.projects.destroy(params[:proj_id]);
-      student.save!
+      student.save
       redirect_to(single_student_profile_path(student))
   end
   
@@ -203,14 +203,14 @@ class ProfilesController < ApplicationController
          :graduation_date => params[:graduation_date]
      }
      student.educations.create(past_education);
-     student.save!
+     student.save
      redirect_to(single_student_profile_path(student))
  end
  
  def delete_past_education
      student = Student.find(params[:id])
      student.educations.destroy(params[:edu_id]);
-     student.save!
+     student.save
      redirect_to(single_student_profile_path(student))
  end
 
