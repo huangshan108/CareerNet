@@ -27,27 +27,6 @@
   <% end %>
   </dd>
 
-  <dt> City </dt>
-  <dd>
-    <% if @student.city %>
-      <%= @student.city -%>
-    <% end %>
-  </dd>
-
-  <dt> State </dt>
-  <dd>
-    <% if @student.state %>
-      <%= @student.state -%>
-    <% end %>
-  </dd>
-
-  <dt> Country </dt>
-  <dd>
-    <% if @student.country %>
-      <%= @student.country -%>
-    <% end %>
-  </dd>
-
   <dt> University </dt>
   <dd>
     <% if @student.college %>
@@ -73,34 +52,6 @@
   <dd>
     <% if @student.resume_link %>
       <iframe width="500px" height="630px" src="<%= @student.resume_link %>" type="application/pdf"></iframe>
-    <% end %>
-  </dd>
-
-  <dt> Company </dt>
-  <dd>
-    <% if @student.company %>
-      <%= @student.company.name -%>
-    <% end %>
-  </dd>
-
-  <dt> Salary </dt>
-  <dd>
-    <% if@student.base_salary %>
-      <%= @student.base_salary-%>
-    <% end %>
-  </dd>
-
-  <dt> Years Experience </dt>
-  <dd>
-    <% if@student.years_experience %>
-      <%= @student.years_experience-%>
-    <% end %>
-  </dd>
-
-  <dt> Title </dt>
-  <dd>
-    <% if@student.title %>
-      <%= @student.title-%>
     <% end %>
   </dd>
 </dl>
