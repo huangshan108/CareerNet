@@ -72,7 +72,7 @@
   <dt> Resume Link </dt>
   <dd>
     <% if @student.resume_link %>
-      <%= link_to(@student.resume_link, @student.resume_link) -%>
+      <iframe width="500px" height="630px" src="<%= @student.resume_link %>" type="application/pdf"></iframe>
     <% end %>
   </dd>
 
