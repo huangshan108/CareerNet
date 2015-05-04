@@ -103,76 +103,57 @@
       <%= @student.title-%>
     <% end %>
   </dd>
-<tbody>
-   
-   <h2> Past Experience </h2>
-    <% @student.workexperiences.each do |ex| %>
-  	  <tr class="past_ex">
-  	    <div class="ex_title"> Company Name </div>
-  	    <td><%= ex.company_name %></td>
-  	    <div class="ex_title"> Company Location </div>
-  	    <td><%= ex.location %></td>
-  	    <div class="ex_title"> Salary </div>
-  	    <td><%= ex.salary %></td>
-  	    <div class="ex_title"> Description </div>
-  	    <td><%= ex.description %></td>
-  	    <div class="ex_title"> Job Title </div>
-  	    <td><%= ex.job%></td>
-  	  </tr>
-  	  <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
-  	  <%= form_tag(:action => 'delete_past_experience', :ex_id => ex.id) do %>
-		<button class="blue_button"> Delete </button>
-	  <% end %>
-	  <% end %>
-  	  <br>
-  	  <% end %>
-  </tbody>
-
 </dl>
-<%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
-  <button class="addbutton" name="add_experience"> + </button>
+<div class="pull-right button-group">
+  <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
+</div>
+<h1> Past Experience <span class="addbutton add-new" name="add_experience">+</span></h1>
+
   <%= form_tag(:action => 'update_past_experience', :id => @student.id) do %>
   <div class="past_experience">
       <dl class="exp_form"> 
       </dl>
   </div>
   <div id="update_div">
-    <button class="update_exp_button pull-left">Update</button>
+    <button class="button blue update_exp_button pull-right">Update</button>
   </div>
 <% end %>
 
   <div id="cancel_div">
-    <button class="cancelbutton pull-left">Cancel</button>
-  </div> 
-  <br>
+    <button class="button default cancelbutton pull-right">Cancel</button>
+  </div>
 
 
+<table class="data-table table table-striped">
+  <thead>
+    <tr>
+      <th> Company Name </th>
+      <th> Company Location </th>
+      <th> Salary </th>
+      <th>Job Title</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @student.workexperiences.each do |ex| %>
+    <tr>
+      <td><%= ex.company_name %></td>
+      <td><%= ex.location %></td>
+      <td><%= ex.salary %></td>
+      <td><%= ex.job%></td>
+      <td>
+        <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
+          <%= link_to 'Delete', delete_past_experience_path(:ex_id => ex.id), :method => :post %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 
 <!--   project buttton project section starts here-->
 <div class="past_student_projects">
-  <h2 class="past_proj"> Past Project </h2>
-    <% @student.projects.each do |proj| %>
-      <tr class="past_ex">
-        <div class="ex_title"> Project Name </div>
-        <td><%= proj.project_name %></td>
-        <div class="ex_title"> position </div>
-        <td><%= proj.position %></td>
-        <div class="ex_title"> Description </div>
-        <td><%= proj.description %></td>
-        <div class="ex_title"> Date </div>
-        <td><%= proj.start_date.to_s%> 
-        <%if proj.end_date %>
-        to <%= proj.end_date.to_s%>
-        <%end%> </td>
-      </tr>
-      <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
-      <%= form_tag(:action => 'delete_past_project', :proj_id => proj.id) do %>
-    <button class="blue_button"> Delete </button>
-    <% end %>
-    <% end %>
-      <br>
-      <% end %>
-</div>
+  <h1 class="past_proj"> Past Project <span class="addbutton_project add-new" name="add_project"> + </span></h1>
 
   <%= form_tag(:action => 'update_past_project', :id => @student.id) do %>
   <div class="past_project">
@@ -180,43 +161,55 @@
       </dl>
   </div>
   <div id="update_div_project">
-    <button class="update_proj_button_project pull-left">Update</button>
+    <button class="button blue update_proj_button_project pull-right">Update</button>
   </div>
 <% end %>
 
   <div id="cancel_div_project">
-    <button class="cancelbutton_project pull-left">Cancel</button>
+    <button class="button default cancelbutton_project pull-right">Cancel</button>
   </div> 
-<br>
-<br>
-<button class="addbutton_project pull-left" name="add_project"> + </button>
-<br>
 
+  <table class="data-table table table-striped">
+    <thead>
+      <tr>
+        <th> Project Name </th>
+        <th> Position </th>
+        <th> Description </th>
+        <th> Start Date</th>
+        <th> End Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @student.projects.each do |proj| %>
+        <tr>
+          <td><%= proj.project_name %></td>
+          <td><%= proj.position %></td>
+          <td><%= proj.description %></td>
+          <td>
+            <% if proj.start_date %>
+              <%= proj.start_date.to_s%> 
+            <% end %>
+          </td>
+          <td>
+            <%if proj.end_date %>
+              <%= proj.end_date.to_s%>
+            <% end %> 
+          </td>
+          <td>
+            <% if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i)) %>
+              <%= link_to "Delete", delete_past_project_path(:proj_id => proj.id), :method => :post %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<!-- starting past education -->
 <!--   project buttton project section starts here-->
 <div class="past_student_education">
-  <h2 class="past_proj"> Past Education </h2>
-    <% @student.educations.each do |edu| %>
-      <tr class="past_ex">
-        <div class="ex_title"> School Name </div>
-        <td><%= edu.school_name %></td>
-        <div class="ex_title"> major </div>
-        <td><%= edu.major %></td>
-        <div class="ex_title"> Date </div>
-        <td><%= edu.start_date.to_s%> 
-        <%if edu.graduation_date %>
-        to <%= edu.graduation_date.to_s%>
-        <%end%> </td>
-      </tr>
-      <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
-      <%= form_tag(:action => 'delete_past_education', :edu_id => edu.id) do %>
-    <button class="blue_button"> Delete </button>
-    <% end %>
-    <% end %>
-      <br>
-      <% end %>
-</div>
+  <h1 class="past_proj"> Past Education <span class="addbutton_education add-new" name="add_project"> + </span> </h1>
 
   <%= form_tag(:action => 'update_past_education', :id => @student.id) do %>
   <div class="past_education">
@@ -224,29 +217,51 @@
       </dl>
   </div>
   <div id="update_div_education">
-    <button class="update_edu_button_education pull-left">Update</button>
+    <button class="button blue update_edu_button_education pull-right">Update</button>
   </div>
 <% end %>
 
   <div id="cancel_div_education">
-    <button class="cancelbutton_education pull-left">Cancel</button>
-  </div> 
-  <br>
-  <br>
-<button class="addbutton_education pull-left" name="add_project"> + </button>
-<br>
+    <button class="button default cancelbutton_education pull-right">Cancel</button>
+  </div>
 
-
-
-
-
-<!-- end past education -->
-
-<div class="pull-right button-group">
-  <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
+  <table class="data-table table table-striped">
+    <thead>
+      <tr>
+        <th> School Name </th>
+        <th> Major </th>
+        <th> Description </th>
+        <th> Start Date</th>
+        <th> Graduation Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @student.educations.each do |edu| %>
+        <tr class="past_ex">
+          <td><%= edu.school_name %></td>
+          <td><%= edu.major %></td>
+          <td>
+            <% if edu.start_date %>
+              <%= edu.start_date.to_s%>
+            <% end %>
+          </td>
+          <td>
+            <%if edu.graduation_date %>
+              <%= edu.graduation_date.to_s%>
+            <% end %>
+          </td>
+          <td>
+          <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
+            <%= link_to "Delete", delete_past_education_path(:edu_id => edu.id), :method => :post %>
+          <% end %>
+          </td>
+      <% end %>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<%end%>
-<!-- end of the project section -->
+
 
 <script>
   var is_added = false;
@@ -264,18 +279,17 @@
       // $(".past_experience").html('experience_form.html.erb');
       //$("form").clone().appendTo('.past_experience');
       if(is_added == false){
-          $( ".past_experience" ).append('<dl class="exp_form">' + 
-     '<h3> Add experience </h3>' +
+          $( ".past_experience" ).append('<dl class="dl-horizontal exp_form">' + 
      '<dt>Company </dt>' +
-     '<dd><%= text_field_tag :company_name, params[:company_name],placeholder: "Company Name" %></dd>' +
+     '<dd><%= text_field_tag :company_name, params[:company_name] %></dd>' +
      '<dt>Description </dt>' +
-     '<dd><%= text_area_tag :description, params[:description], placeholder: "Description" %></dd>' +
+     '<dd><textarea name="description", id="description", cols="5" ></textarea></dd>' +
      '<dt>Location </dt>' +
-     '<dd><%= text_field_tag :location, params[:location], placeholder: "Location" %></dd>' +
+     '<dd><%= text_field_tag :location, params[:location] %></dd>' +
      '<dt>Job Title </dt>' +
-     '<dd><%= text_field_tag :job, params[:job], placeholder: "Job Title" %></dd>' +
+     '<dd><%= text_field_tag :job, params[:job] %></dd>' +
      '<dt>Salary </dt>' +
-     '<dd><%= text_field_tag :salary, params[:salary],placeholder: "Salary" %></dd>' +
+     '<dd><%= text_field_tag :salary, params[:salary]%></dd>' +
      '</dl>');
           is_added = true;
           document.getElementById('cancel_div').style.visibility='visible';
@@ -285,18 +299,17 @@
 
   $(".addbutton_project").click(function(){
       if(is_added_project == false){
-          $( ".past_project" ).append('<dl class="project_form">' + 
-     '<h3> Add project </h3>' +
+          $( ".past_project" ).append('<dl class="dl-horizontal project_form">' + 
      '<dt>Project</dt>' +
-     '<dd><%= text_field_tag :project_name, params[:project_name],placeholder: "Project Name" %></dd>' +
+     '<dd><%= text_field_tag :project_name, params[:project_name] %></dd>' +
      '<dt>Description</dt>' +
-     '<dd><%= text_area_tag :description, params[:description], placeholder: "Description" %></dd>' +
+     '<dd><textarea name="description", id="description", cols="5" ></textarea></dd>' +
      '<dt>Position</dt>' +
-     '<dd><%= text_field_tag :position, params[:position], placeholder: "Position" %></dd>' +
+     '<dd><%= text_field_tag :position, params[:position] %></dd>' +
      '<dt>Start Date</dt>' +
-     '<dd><%= text_field_tag :start_date, params[:start_date], placeholder: "Start Date" %></dd>' +
+     '<dd><%= text_field_tag :start_date, params[:start_date] %></dd>' +
      '<dt>End Date</dt>' +
-     '<dd><%= text_field_tag :end_date, params[:end_date],placeholder: "End Date" %></dd>' +
+     '<dd><%= text_field_tag :end_date, params[:end_date] %></dd>' +
      '</dl>');
           is_added_project = true;
           document.getElementById('cancel_div_project').style.visibility='visible';
@@ -307,16 +320,15 @@
 
   $(".addbutton_education").click(function(){
       if(is_added_education == false){
-          $( ".past_education" ).append('<dl class="education_form">' + 
-     '<h3> Add Past Education </h3>' +
+          $( ".past_education" ).append('<dl class="dl-horizontal education_form">' + 
      '<dt>Education</dt>' +
-     '<dd><%= text_field_tag :school_name, params[:school_name],placeholder: "School Name" %></dd>' +
+     '<dd><%= text_field_tag :school_name, params[:school_name] %></dd>' +
      '<dt>Major</dt>' +
-     '<dd><%= text_field_tag :major, params[:major], placeholder: "Major" %></dd>' +
+     '<dd><%= text_field_tag :major, params[:major] %></dd>' +
      '<dt>Starting Date</dt>' +
-     '<dd><%= text_field_tag :start_date, params[:start_date], placeholder: "Staring Date" %></dd>' +
+     '<dd><%= text_field_tag :start_date, params[:start_date] %></dd>' +
      '<dt>Graduation Date</dt>' +
-     '<dd><%= text_field_tag :graduation_date, params[:graduation_date], placeholder: "Graduation Date" %></dd>' +
+     '<dd><%= text_field_tag :graduation_date, params[:graduation_date] %></dd>' +
      '</dl>');
           is_added_education = true;
           document.getElementById('cancel_div_education').style.visibility='visible';
@@ -349,5 +361,14 @@
       document.getElementById('cancel_div_education').style.visibility='hidden';
       document.getElementById('update_div_education').style.visibility='hidden';
     }
+  });
+
+  $(document).ready(function() {
+    $('.data-table').each(function(index, elem) {
+      $(elem).dataTable({
+        "searching": false,
+        "paging": false
+      });
+    });
   });
 </script>
