@@ -109,7 +109,6 @@ class InterviewsController < ApplicationController
       @application = Application.find params[:application_id]
       @interviews = @application.interviews
       if @interviews.any? {|interview| interview.student}
-        flash[:notice] = "You have already scheduled an interview slot."
         redirect_to(interview_student_show_path)
       end
     end
