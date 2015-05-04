@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430042119) do
+ActiveRecord::Schema.define(version: 20150504203737) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -202,17 +202,8 @@ ActiveRecord::Schema.define(version: 20150430042119) do
     t.integer  "account_id"
     t.string   "country"
     t.string   "gender"
-    t.string   "lastemployer"
-    t.string   "city"
-    t.string   "state"
     t.text     "notes"
-    t.string   "ethnicity"
-    t.string   "citizenship"
     t.integer  "years_experience"
-    t.integer  "industry"
-    t.integer  "base_salary"
-    t.string   "title"
-    t.integer  "company_id"
     t.integer  "class_of"
   end
 

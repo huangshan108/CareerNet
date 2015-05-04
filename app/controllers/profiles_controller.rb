@@ -98,13 +98,6 @@ class ProfilesController < ApplicationController
                                 :major_id => params[:major_id],
                                 :graduation_date => params[:graduation_date],
                                 :resume_link => params[:resume_link],
-                                :city => params[:city],
-                                :state => params[:state],
-                                :country => params[:country],
-                                :company_id => params[:company_id],
-                                :base_salary => params[:base_salary],
-                                :years_experience => params[:years_experience],
-                                :title => params[:title],
                                 :notes => params[:notes])
       skill_id_list = student.skill_ids
 
