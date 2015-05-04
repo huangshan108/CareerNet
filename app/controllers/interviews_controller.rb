@@ -108,13 +108,19 @@ class InterviewsController < ApplicationController
       @student = Account.find(session[:user_id]).student
       @application = Application.find params[:application_id]
       @interviews = @application.interviews
+      if @interviews.any? {|interview| interview.student}
+        flash[:notice] = "You have already scheduled an interview slot."
+        redirect_to(interview_student_show_path)
+      end
     end
   end
 
   def student_book
     if authorize([:student])
       interview = Interview.find(params[:id])
-      if interview.student == nil
+      if interview.application.interviews.any? {|interview| interview.student}
+        flash[:notice] = "You have already scheduled an interview slot for this application."
+      elsif interview.student == nil
         interview.update_attribute(:student, current_user.student)
         flash[:notice] = "Interview has been scheduled."
       end
