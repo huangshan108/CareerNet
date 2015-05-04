@@ -98,7 +98,7 @@ class ProfilesController < ApplicationController
                                 :college_id => params[:college_id],
                                 :major_id => params[:major_id],
                                 :graduation_date => params[:graduation_date],
-                                :class_of => Date.parse(params[:graduation_date]).year
+                                :class_of => Date.parse(params[:graduation_date]).year,
                                 :resume_link => params[:resume_link],
                                 :notes => params[:notes])
       skill_id_list = student.skill_ids

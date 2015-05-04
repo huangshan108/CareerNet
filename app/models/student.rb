@@ -14,18 +14,11 @@
 #  account_id       :integer
 #  country          :string
 #  gender           :string
-#  lastemployer     :string
-#  city             :string
-#  state            :string
 #  notes            :text
-#  ethnicity        :string
-#  citizenship      :string
 #  years_experience :integer
-#  industry         :integer
-#  base_salary      :integer
-#  title            :string
-#  company_id       :integer
+#  class_of         :integer
 #
+
 
 
 

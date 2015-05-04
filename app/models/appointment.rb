@@ -7,6 +7,7 @@
 #  student_id  :integer
 #  time_slot   :integer
 #  day         :date
+#  reason      :string
 #  description :text
 #  note        :text
 #  created_at  :datetime
