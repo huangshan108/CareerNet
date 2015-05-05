@@ -1,10 +1,13 @@
 <h1> Student Profile </h1>
+<%= javascript_tag "var all_companies = #{ @all_companies.to_json }; console.log(all_companies);" %>
+
 <script type="text/javascript">
   $(document).ready(function() {
     $('a[name="edit-profile-button"]').click(function() {
       $('.spinner-model').show();
     });
   });
+
 </script>
 
 <dl class="dl-horizontal">
@@ -80,18 +83,18 @@
     <tr>
       <th> Company Name </th>
       <th> Company Location </th>
-      <th> Salary </th>
       <th>Job Title</th>
+      <th> Salary </th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
-  <% @student.workexperiences.each do |ex| %>
+  <% @student.experiences.each do |ex| %>
     <tr>
-      <td><%= ex.company_name %></td>
-      <td><%= ex.location %></td>
+      <td><%= Company.find(ex.company_id).name %></td>
+      <td><%= "" ||+ ex.city ||+ ", " ||+  ex.state ||+ ", " + ex.country %></td>
+      <td><%= ex.job_title%></td>
       <td><%= ex.salary %></td>
-      <td><%= ex.job%></td>
       <td>
         <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
           <%= link_to 'Delete', delete_past_experience_path(:ex_id => ex.id), :method => :post %>
@@ -231,20 +234,34 @@
       //$("form").clone().appendTo('.past_experience');
       if(is_added == false){
           $( ".past_experience" ).append('<dl class="dl-horizontal exp_form">' + 
-     '<dt>Company </dt>' +
-     '<dd><%= text_field_tag :company_name, params[:company_name] %></dd>' +
-     '<dt>Description </dt>' +
-     '<dd><textarea name="description", id="description", cols="5" ></textarea></dd>' +
-     '<dt>Location </dt>' +
-     '<dd><%= text_field_tag :location, params[:location] %></dd>' +
-     '<dt>Job Title </dt>' +
-     '<dd><%= text_field_tag :job, params[:job] %></dd>' +
-     '<dt>Salary </dt>' +
-     '<dd><%= text_field_tag :salary, params[:salary]%></dd>' +
-     '</dl>');
+             '<dt>Company </dt>' +
+             '<dd><%= text_field_tag :company_name, params[:company_id],placeholder: "Company Name" %></dd>' +
+             '<dt>City </dt>' +
+             '<dd><%= text_field_tag :city, params[:city], placeholder: "Location" %></dd>' +
+             '<dt>State </dt>' +
+             '<dd><%= text_field_tag :state, params[:state], placeholder: "Location" %></dd>' +
+             '<dt>Country </dt>' +
+             '<dd><%= text_field_tag :country, params[:country], placeholder: "Location" %></dd>' +
+             '<dt>Job Title </dt>' +
+             '<dd><%= text_field_tag :job_title, params[:job_title], placeholder: "Job Title" %></dd>' +
+             '<dt>Salary </dt>' +
+             '<dd><%= text_field_tag :salary, params[:salary],placeholder: "Salary" %></dd>' +
+        '</dl>');
           is_added = true;
           document.getElementById('cancel_div').style.visibility='visible';
           document.getElementById('update_div').style.visibility='visible';
+
+          for (var i = 0; i < all_companies.length; i++){
+            all_companies[i].label = all_companies[i].name
+          }
+
+          $("#company_name").autocomplete({
+            minLength: 3,
+            source: all_schools,
+            select: function(event, ui) {
+              $("#company_id").val(ui.item.id)
+            }
+          });
       }
   });
 

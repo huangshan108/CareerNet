@@ -29,6 +29,7 @@ class ProfilesController < ApplicationController
     if authorize([:staff])
       redirect_to(list_students_path(1))
     end
+    @all_companies = Company.select("id", "name")
   end
 
   def companies
@@ -152,21 +153,22 @@ class ProfilesController < ApplicationController
 
   def update_past_experience
   	student = Student.find(params[:id])
-  	work_experience = {:company_name => params[:company_name],
+  	experience = {:company_id => params[:company_id],
                        :student_id => params[:id],
-                       :location => params[:location],
+                       :city => params[:city],
+                       :state => params[:state],
+                       :country => params[:country],
                        :salary => params[:salary],
-                       :description => params[:description],
-                       :job => params[:job]
+                       :job_title => params[:job_title]
                        }
-    student.workexperiences.create(work_experience);
+    student.experiences.create(experience);
     student.save
     redirect_to(single_student_profile_path(student))
   end
 
   def delete_past_experience
   	student = Student.find(params[:id])
-    student.workexperiences.destroy(params[:ex_id]);
+    student.experiences.destroy(params[:ex_id]);
     student.save
     redirect_to(single_student_profile_path(student))
   end

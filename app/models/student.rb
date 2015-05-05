@@ -42,9 +42,7 @@ class Student < ActiveRecord::Base
   has_many :companies, :through => :interviews
     
   has_and_belongs_to_many :skills
-  has_many :experiences
-
-	has_many :workexperiences, dependent: :destroy
+  has_many :experiences, dependent: :destroy
 
 	has_many :projects, dependent: :destroy
 

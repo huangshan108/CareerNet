@@ -1,12 +1,14 @@
 '<dl class="exp_form">' + 
      '<dt>Company </dt>' +
-     '<dd><%= text_field_tag :company_name, params[:company_name],placeholder: "Company Name" %></dd>' +
-     '<dt>Description </dt>' +
-     '<dd><%= text_area_tag :description, params[:description], placeholder: "Description" %></dd>' +
-     '<dt>Location </dt>' +
-     '<dd><%= text_field_tag :location, params[:location], placeholder: "Location" %></dd>' +
+     '<dd><%= text_field_tag :company_name, params[:company_id],placeholder: "Company Name" %></dd>' +
+     '<dt>City </dt>' +
+     '<dd><%= text_field_tag :city, params[:city], placeholder: "Location" %></dd>' +
+     '<dt>State </dt>' +
+     '<dd><%= text_field_tag :state, params[:state], placeholder: "Location" %></dd>' +
+     '<dt>Country </dt>' +
+     '<dd><%= text_field_tag :country, params[:country], placeholder: "Location" %></dd>' +
      '<dt>Job Title </dt>' +
-     '<dd><%= text_field_tag :job, params[:job], placeholder: "Job Title" %></dd>' +
+     '<dd><%= text_field_tag :job_title, params[:job_title], placeholder: "Job Title" %></dd>' +
      '<dt>Salary </dt>' +
      '<dd><%= text_field_tag :salary, params[:salary],placeholder: "Salary" %></dd>' +
      '<%= submit_tag "Update", class: "button blue pull-right"%>' +
