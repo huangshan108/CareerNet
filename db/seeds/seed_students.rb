@@ -73,11 +73,13 @@ sheet.each(last_name: 'Last_Name', first_name: 'First_Name', gender: 'Gender',
     begin
         experience[:company_id] = Company.find_by_name(hash[:company].strip).id
     rescue
+        experience[:company_id] = rand(Company.count) + 1
     end
     experience[:job_title] = hash[:job_title]
     begin
         experience[:industry_id] = indestries_map[hash[:industry]]    
     rescue
+        experience[:industry_id] = rand(Industry.count) + 1
     end
     experience[:yr_exp] = hash[:yr_exp]
     experience[:salary] = hash[:salary]

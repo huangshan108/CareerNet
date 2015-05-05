@@ -8,7 +8,7 @@
 			<dd><%= "$" + @job.salary%></dd>
 		<% end %>
  		<dt> Description</dt>
- 		<dd><%= @job.description %></dd>
+ 		<dd><%= @job.description.html_safe %></dd>
 </dl>
 
 <div class="pull-right button-group">
