@@ -264,3 +264,24 @@ textarea {
     }
   }
 }
+
+.hide-spinner {
+  font-size: 15px;
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 1px 4px 2px 4px;
+  margin-left: 20px;
+  border-radius: 3px;
+  position: relative;
+  top: -2px;
+  &:hover {
+    background-color: white;
+    color: black;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    cursor: pointer;
+  }
+}
