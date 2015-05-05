@@ -26,3 +26,5 @@ Student.all.count.times do |id|
         Experience.create! experience
     end
 end
+
+puts "Done!"
