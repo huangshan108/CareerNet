@@ -105,7 +105,7 @@
 
     <% if @current_user.account_type == 2 %>
       <dt>Staff Notes </dt>
-      <dd><%= text_field_tag :notes, params[:notes], value: @student.notes %></dd>
+      <dd><%= text_area_tag :notes, params[:notes], value: @student.notes %></dd>
     <% end %>
 
     <div class="pull-right button-group">

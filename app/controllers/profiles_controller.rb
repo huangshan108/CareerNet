@@ -1,3 +1,4 @@
+require 'date'
 class ProfilesController < ApplicationController  
   before_action :confirm_logged_in
 
@@ -7,6 +8,7 @@ class ProfilesController < ApplicationController
       @id_1 = params[:id]
       @student = Student.find(id)
       @current_user = current_user
+      @all_companies = Company.select("id", "name")
     end
   end
 
@@ -97,14 +99,8 @@ class ProfilesController < ApplicationController
                                 :college_id => params[:college_id],
                                 :major_id => params[:major_id],
                                 :graduation_date => params[:graduation_date],
+                                :class_of => Date.parse(params[:graduation_date]).year,
                                 :resume_link => params[:resume_link],
-                                :city => params[:city],
-                                :state => params[:state],
-                                :country => params[:country],
-                                :company_id => params[:company_id],
-                                :base_salary => params[:base_salary],
-                                :years_experience => params[:years_experience],
-                                :title => params[:title],
                                 :notes => params[:notes])
       skill_id_list = student.skill_ids
 
@@ -157,22 +153,23 @@ class ProfilesController < ApplicationController
 
   def update_past_experience
   	student = Student.find(params[:id])
-  	work_experience = {:company_name => params[:company_name],
+  	experience = {:company_id => params[:company_id],
                        :student_id => params[:id],
-                       :location => params[:location],
+                       :city => params[:city],
+                       :state => params[:state],
+                       :country => params[:country],
                        :salary => params[:salary],
-                       :description => params[:description],
-                       :job => params[:job]
+                       :job_title => params[:job_title]
                        }
-    student.workexperiences.create(work_experience);
-    student.save!
+    student.experiences.create(experience);
+    student.save
     redirect_to(single_student_profile_path(student))
   end
 
   def delete_past_experience
   	student = Student.find(params[:id])
-    student.workexperiences.destroy(params[:ex_id]);
-    student.save!
+    student.experiences.destroy(params[:ex_id]);
+    student.save
     redirect_to(single_student_profile_path(student))
   end
   
@@ -187,14 +184,14 @@ class ProfilesController < ApplicationController
           :end_date => params[:end_date]
       }
       student.projects.create(past_project);
-      student.save!
+      student.save
       redirect_to(single_student_profile_path(student))
   end
   
   def delete_past_project
       student = Student.find(params[:id])
       student.projects.destroy(params[:proj_id]);
-      student.save!
+      student.save
       redirect_to(single_student_profile_path(student))
   end
   
@@ -208,14 +205,14 @@ class ProfilesController < ApplicationController
          :graduation_date => params[:graduation_date]
      }
      student.educations.create(past_education);
-     student.save!
+     student.save
      redirect_to(single_student_profile_path(student))
  end
  
  def delete_past_education
      student = Student.find(params[:id])
      student.educations.destroy(params[:edu_id]);
-     student.save!
+     student.save
      redirect_to(single_student_profile_path(student))
  end
 

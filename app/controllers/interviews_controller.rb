@@ -19,7 +19,7 @@ class InterviewsController < ApplicationController
       endslot = Interview.string_to_timeslot(endtime_str)
       error = false
       while timeslot < endslot do
-        interview_params = { day: starttime_str, time_slot: timeslot, company: curr_company, application_id: session[:application_id]}
+        interview_params = { day: starttime_str, time_slot: timeslot, company: curr_company, application_id: session[:application_id], status: "Pending"}
         @intr = Interview.new(interview_params)
         timeslot += 1
         error = @intr.save and error
@@ -73,8 +73,8 @@ class InterviewsController < ApplicationController
   end
 
   def company_update
-    Interview.find(params[:id]).update_attributes([:description => params[:description], :note => params[:note]])
-    redirect_to(company_appointments_path)
+    Interview.find(params[:id]).update_attributes(:description => params[:description], :status => params[:status], :note => params[:note])
+    redirect_to(company_interviews_path)
   end
 
   def destroy
@@ -108,13 +108,18 @@ class InterviewsController < ApplicationController
       @student = Account.find(session[:user_id]).student
       @application = Application.find params[:application_id]
       @interviews = @application.interviews
+      if @interviews.any? {|interview| interview.student}
+        redirect_to(interview_student_show_path)
+      end
     end
   end
 
   def student_book
     if authorize([:student])
       interview = Interview.find(params[:id])
-      if interview.student == nil
+      if interview.application.interviews.any? {|interview| interview.student}
+        flash[:notice] = "You have already scheduled an interview slot for this application."
+      elsif interview.student == nil
         interview.update_attribute(:student, current_user.student)
         flash[:notice] = "Interview has been scheduled."
       end

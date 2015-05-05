@@ -1,10 +1,13 @@
 <h1> Student Profile </h1>
+<%= javascript_tag "var all_companies = #{ @all_companies.to_json }; console.log(all_companies);" %>
+
 <script type="text/javascript">
   $(document).ready(function() {
     $('a[name="edit-profile-button"]').click(function() {
       $('.spinner-model').show();
     });
   });
+
 </script>
 
 <dl class="dl-horizontal">
@@ -25,27 +28,6 @@
       <span class="skill-tag"><%= skill.name %></span>
     <% end %>
   <% end %>
-  </dd>
-
-  <dt> City </dt>
-  <dd>
-    <% if @student.city %>
-      <%= @student.city -%>
-    <% end %>
-  </dd>
-
-  <dt> State </dt>
-  <dd>
-    <% if @student.state %>
-      <%= @student.state -%>
-    <% end %>
-  </dd>
-
-  <dt> Country </dt>
-  <dd>
-    <% if @student.country %>
-      <%= @student.country -%>
-    <% end %>
   </dd>
 
   <dt> University </dt>
@@ -75,34 +57,6 @@
       <iframe width="500px" height="630px" src="<%= @student.resume_link %>" type="application/pdf"></iframe>
     <% end %>
   </dd>
-
-  <dt> Company </dt>
-  <dd>
-    <% if @student.company %>
-      <%= @student.company.name -%>
-    <% end %>
-  </dd>
-
-  <dt> Salary </dt>
-  <dd>
-    <% if@student.base_salary %>
-      <%= @student.base_salary-%>
-    <% end %>
-  </dd>
-
-  <dt> Years Experience </dt>
-  <dd>
-    <% if@student.years_experience %>
-      <%= @student.years_experience-%>
-    <% end %>
-  </dd>
-
-  <dt> Title </dt>
-  <dd>
-    <% if@student.title %>
-      <%= @student.title-%>
-    <% end %>
-  </dd>
 </dl>
 <div class="pull-right button-group">
   <%= link_to 'Edit profile', edit_student_profile_path(@student), name: "edit-profile-button", class: "button blue" -%>
@@ -129,18 +83,30 @@
     <tr>
       <th> Company Name </th>
       <th> Company Location </th>
-      <th> Salary </th>
       <th>Job Title</th>
+      <th> Salary </th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
-  <% @student.workexperiences.each do |ex| %>
+  <% @student.experiences.each do |ex| %>
     <tr>
-      <td><%= ex.company_name %></td>
-      <td><%= ex.location %></td>
+      <% if ex.company_id != nil and ex.company_id != 0%>
+      <td><%= Company.find(ex.company_id).name %></td>
+      <% else %>
+      <td> Company </td>
+      <% end %>
+      <% if ex.country and ex.state and ex.city %>
+      <td><%= ex.city + ", " +  ex.state + ", " + ex.country %></td>
+      <% elsif ex.country and ex.state %>
+      <td><%= ex.state + ", " + ex.country %></td>
+      <% elsif ex.country %>
+      <td><%= ex.country %></td>
+      <% else %>
+      <td></td>
+      <% end %>
+      <td><%= ex.job_title%></td>
       <td><%= ex.salary %></td>
-      <td><%= ex.job%></td>
       <td>
         <%if (@current_user.account_type == 2 || (@current_user.account_type == 1 and roll_id.to_i == @id_1.to_i))  %>
           <%= link_to 'Delete', delete_past_experience_path(:ex_id => ex.id), :method => :post %>
@@ -280,20 +246,35 @@
       //$("form").clone().appendTo('.past_experience');
       if(is_added == false){
           $( ".past_experience" ).append('<dl class="dl-horizontal exp_form">' + 
-     '<dt>Company </dt>' +
-     '<dd><%= text_field_tag :company_name, params[:company_name] %></dd>' +
-     '<dt>Description </dt>' +
-     '<dd><textarea name="description", id="description", cols="5" ></textarea></dd>' +
-     '<dt>Location </dt>' +
-     '<dd><%= text_field_tag :location, params[:location] %></dd>' +
-     '<dt>Job Title </dt>' +
-     '<dd><%= text_field_tag :job, params[:job] %></dd>' +
-     '<dt>Salary </dt>' +
-     '<dd><%= text_field_tag :salary, params[:salary]%></dd>' +
-     '</dl>');
+             '<dt>Company </dt>' +
+             '<dd><%= text_field_tag :company_name, params[:company_name],placeholder: "Company Name" %></dd>' +
+             '<%= hidden_field_tag :company_id, params[:company_id], id: "company_id"%>' +
+             '<dt>City </dt>' +
+             '<dd><%= text_field_tag :city, params[:city], placeholder: "Location" %></dd>' +
+             '<dt>State </dt>' +
+             '<dd><%= text_field_tag :state, params[:state], placeholder: "Location" %></dd>' +
+             '<dt>Country </dt>' +
+             '<dd><%= text_field_tag :country, params[:country], placeholder: "Location" %></dd>' +
+             '<dt>Job Title </dt>' +
+             '<dd><%= text_field_tag :job_title, params[:job_title], placeholder: "Job Title" %></dd>' +
+             '<dt>Salary </dt>' +
+             '<dd><%= text_field_tag :salary, params[:salary],placeholder: "Salary" %></dd>' +
+        '</dl>');
           is_added = true;
           document.getElementById('cancel_div').style.visibility='visible';
           document.getElementById('update_div').style.visibility='visible';
+
+          for (var i = 0; i < all_companies.length; i++){
+            all_companies[i].label = all_companies[i].name
+          }
+
+          $("#company_name").autocomplete({
+            minLength: 3,
+            source: all_companies,
+            select: function(event, ui) {
+              $("#company_id").val(ui.item.id)
+            }
+          });
       }
   });
 
