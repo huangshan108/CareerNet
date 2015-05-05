@@ -12,8 +12,9 @@
 <div class="spinner-model">
   <div class="spinner-overlay">
     <div class="loading-text">
-      Please wait while the website is loading.
+      Please wait while the website is loading.<span class="hide-spinner">Cancel</span>
     </div>
+
   </div>
   <div class="spinner-container">
     <div class="spinner">
@@ -26,6 +27,9 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('.spinner-model').hide();
+    $('.hide-spinner').click(function() {
+      $('.spinner-model').fadeOut();
+    });
   });
 </script>
 <div class="flash-message">
@@ -52,7 +56,7 @@
       </li>
       <li>                                 
         <i class="fa fa-briefcase"></i>
-        <a href="/jobs" class="nav-text">Browse Jobs</a>
+        <a href="/jobs" class="nav-text browse-jobs">Browse Jobs</a>
       </li>
       <li>                                 
         <i class="fa fa-map-marker"></i>
@@ -91,6 +95,14 @@
     <% end %>
   </ul>
 </nav>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.browse-jobs').click(function() {
+      $('.spinner-model').show();  
+    })
+  });
+</script>
 
 <% if logged_in? and (is_staff? or delegation_on?) %>
 
