@@ -36,7 +36,7 @@
   <tbody>
 	  <% @job.applications.each do |application| %>
 		  <tr>
-		    <td><%=link_to "#{application.student.first_name} #{application.student.last_name}", single_student_profile_path(application.student.account.id) %></td>
+		    <td><%=link_to "#{application.student.first_name} #{application.student.last_name}", single_student_profile_path(application.student_id) %></td>
 		    <td><%= @job.title %></td>
 		    <td><%= application.created_at.strftime('%D') %></td>
 		  </tr>
