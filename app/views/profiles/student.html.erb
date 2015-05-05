@@ -91,8 +91,20 @@
   <tbody>
   <% @student.experiences.each do |ex| %>
     <tr>
+      <% if ex.company_id != nil and ex.company_id != 0%>
       <td><%= Company.find(ex.company_id).name %></td>
-      <td><%= "" ||+ ex.city ||+ ", " ||+  ex.state ||+ ", " + ex.country %></td>
+      <% else %>
+      <td> Company </td>
+      <% end %>
+      <% if ex.country and ex.state and ex.city %>
+      <td><%= ex.city + ", " +  ex.state + ", " + ex.country %></td>
+      <% elsif ex.country and ex.state %>
+      <td><%= ex.state + ", " + ex.country %></td>
+      <% elsif ex.country %>
+      <td><%= ex.country %></td>
+      <% else %>
+      <td></td>
+      <% end %>
       <td><%= ex.job_title%></td>
       <td><%= ex.salary %></td>
       <td>
@@ -235,7 +247,8 @@
       if(is_added == false){
           $( ".past_experience" ).append('<dl class="dl-horizontal exp_form">' + 
              '<dt>Company </dt>' +
-             '<dd><%= text_field_tag :company_name, params[:company_id],placeholder: "Company Name" %></dd>' +
+             '<dd><%= text_field_tag :company_name, params[:company_name],placeholder: "Company Name" %></dd>' +
+             '<%= hidden_field_tag :company_id, params[:company_id], id: "company_id"%>' +
              '<dt>City </dt>' +
              '<dd><%= text_field_tag :city, params[:city], placeholder: "Location" %></dd>' +
              '<dt>State </dt>' +
