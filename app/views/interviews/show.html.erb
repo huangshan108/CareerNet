@@ -2,7 +2,9 @@
 
 <dl class="dl-horizontal">
   <dt>Company </dt>
-  <dd><%= @interview.company.name %></dd>
+  <dd><%= link_to @interview.company.name, company_profile_path(@interview.company_id) %></dd>
+  <dt>Position </dt>
+  <dd><%= link_to @interview.application.job.title, view_single_job_path(@interview.application.job.id) %></dd>
   <dt>Student </dt>
   <dd><%= @interview.student.first_name + ' ' + @interview.student.last_name %></dd>
   <dt>Interview Date</dt>
@@ -13,6 +15,8 @@
   <dd><%= ((9*60+40+(@interview.time_slot+1)*20)/60).to_s+":"+((9*60+40+(@interview.time_slot+1)*20)%60).to_s%></dd>
   <dt>Description </dt>
   <dd><%= @interview.description %>
+  <dt>Status </dt>
+  <dd><%= @interview.status %>
   <dt>Company Feedback </dt>
   <dd><%= @interview.note %>
 </dl>
@@ -21,7 +25,15 @@
   <%= form_tag update_interview_path do %>
     <dl class="dl-horizontal">
       <dt>Add Description </dt>
-      <dd><%= text_area_tag :description, params[:description] %></dd>
+      <dd><%= text_field_tag :description, params[:description] %></dd>
+      <dt>Status </dt>
+      <dd><%= select_tag :status, options_for_select(
+          [["", ""],
+           ["Pending", "Pending"],
+           ["Reject", "Rejected"],
+           ["Extend Offer", "Extended Offer"]],
+           :selected => params[:status]) %>
+      </dd>
       <dt>Add Feedback </dt>
       <dd><%= text_field_tag :note, params[:note] %></dd>
     </dl>

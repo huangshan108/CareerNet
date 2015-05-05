@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20150504223348) do
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   add_index "interviews", ["company_id"], name: "index_interviews_on_company_id"
