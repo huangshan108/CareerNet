@@ -257,7 +257,7 @@
 
           $("#company_name").autocomplete({
             minLength: 3,
-            source: all_schools,
+            source: all_companies,
             select: function(event, ui) {
               $("#company_id").val(ui.item.id)
             }

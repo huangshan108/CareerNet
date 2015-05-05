@@ -8,6 +8,7 @@ class ProfilesController < ApplicationController
       @id_1 = params[:id]
       @student = Student.find(id)
       @current_user = current_user
+      @all_companies = Company.select("id", "name")
     end
   end
 
@@ -29,7 +30,6 @@ class ProfilesController < ApplicationController
     if authorize([:staff])
       redirect_to(list_students_path(1))
     end
-    @all_companies = Company.select("id", "name")
   end
 
   def companies
