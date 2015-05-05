@@ -47,3 +47,16 @@ Application.all.each do |application|
 end
 
 puts "Done!"
+
+
+puts "Seeding Student Skills..."
+
+applications_count = Application.count
+
+Student.all.each do |student|
+	(rand(5) + 3).times do
+		student.skills << Skill.find(rand(15) + 1)
+	end
+end
+
+puts "Done!"
