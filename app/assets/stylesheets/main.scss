@@ -158,6 +158,9 @@ input.button:hover {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+.disabled {
+  cursor: not-allowed;
+}
 
 textarea {
   width: 100%;
