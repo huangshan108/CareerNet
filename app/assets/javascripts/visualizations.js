@@ -114,7 +114,7 @@ function getDefaultOptions() {
         "data": {
             "smallSegmentGrouping": {
                 "enabled": true,
-                "value": 1
+                "value": 0.5
             },
             "sortOrder": "value-desc",
             "content": []
@@ -126,7 +126,7 @@ function getDefaultOptions() {
                 "pieDistance": 32
             },
             "inner": {
-                "hideWhenLessThanPercentage": 3
+                "hideWhenLessThanPercentage": 2
             },
             "mainLabel": {
                 "fontSize": 13
