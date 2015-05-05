@@ -2,23 +2,25 @@
 <table class = "table">
   <thead>
     <tr>
-      <th> Company Name </th>
+      <th> Company </th>
+      <th> Position </th>
       <th> Interview Date </th>
       <th> Starting Time </th>
       <th> Ending Time </th>
       <th> More Info </th>
-      <th></th>
+      <th> Withdraw </th>
     </tr>
   </thead>
   <tbody>
     <% for a in @interviews -%>
       <tr>
-        <td><%= a.company.name -%></td>
+        <td><%= link_to a.company.name, company_profile_path(a.company_id) -%></td>
+        <td><%= link_to a.application.job.title, view_single_job_path(a.application.job.id) %></td>
         <td><%= a.day -%></td>
         <td><%= ((9*60+40+a.time_slot*20)/60).to_s+':'+((9*60+40+a.time_slot*20)%60).to_s -%></td>
         <td><%= ((9*60+40+(a.time_slot+1)*20)/60).to_s+':'+((9*60+40+(a.time_slot+1)*20)%60).to_s -%></td>
         <td><%= link_to "Details", show_interview_path(a) %> </td>
-        <td><%= link_to "Cancel", interview_student_cancel_path(a) -%></td>
+        <td><%= link_to "Withdraw", interview_student_cancel_path(a) -%></td>
       </tr>
     <% end -%>
   </tbody>

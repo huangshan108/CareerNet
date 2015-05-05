@@ -16,8 +16,10 @@
 #  industry   :string
 #
 
+
 class Company < ActiveRecord::Base
 	belongs_to :account
+    belongs_to :experience
 	has_many :jobs
 	has_many :applications
 	has_many :interviews

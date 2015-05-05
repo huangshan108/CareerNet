@@ -13,6 +13,7 @@
 #  password_reset_sent_at :datetime
 #
 
+
 class Account < ActiveRecord::Base
     has_secure_password
     validates :email, presence: true, email: true

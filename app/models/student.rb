@@ -14,18 +14,11 @@
 #  account_id       :integer
 #  country          :string
 #  gender           :string
-#  lastemployer     :string
-#  city             :string
-#  state            :string
 #  notes            :text
-#  ethnicity        :string
-#  citizenship      :string
 #  years_experience :integer
-#  industry         :integer
-#  base_salary      :integer
-#  title            :string
-#  company_id       :integer
+#  class_of         :integer
 #
+
 
 
 
@@ -49,9 +42,7 @@ class Student < ActiveRecord::Base
   has_many :companies, :through => :interviews
     
   has_and_belongs_to_many :skills
-  has_many :experiences
-
-	has_many :workexperiences, dependent: :destroy
+  has_many :experiences, dependent: :destroy
 
 	has_many :projects, dependent: :destroy
 

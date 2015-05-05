@@ -1,8 +1,7 @@
-<h1> Schedule Interview </h1>
+<h1>Interview Schedule - <%= "#{@application.job.company.name}: #{@application.job.title}" %></h1>
 <table class = "table">
   <thead>
     <tr>
-      <th> Company </th>
       <th> Interview Date </th>
       <th> Starting Time </th>
       <th> Ending Time </th>
@@ -12,7 +11,6 @@
   <tbody>
       <% for a in @interviews -%>
           <tr>
-            <td><%= a.company.name %></td>
             <td><%= a.day -%></td>
             <td><%= ((9*60+40+a.time_slot*20)/60).to_s+':'+((9*60+40+a.time_slot*20)%60).to_s -%></td>
             <td><%= ((9*60+40+(a.time_slot+1)*20)/60).to_s+':'+((9*60+40+(a.time_slot+1)*20)%60).to_s -%></td>

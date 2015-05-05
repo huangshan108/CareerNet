@@ -19,4 +19,5 @@
 
 class Experience < ActiveRecord::Base
     belongs_to :student
+    has_one :company
 end
