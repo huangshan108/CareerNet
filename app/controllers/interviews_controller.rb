@@ -15,15 +15,7 @@ class InterviewsController < ApplicationController
     if authorize([:company])
       starttime_str = params[:start].to_s
       endtime_str = params[:end].to_s
-      timeslot = Appointment.string_to_timeslot(starttime_str)
-      endslot = Appointment.string_to_timeslot(endtime_str)
-      error = false
-      while timeslot < endslot do
-        interview_params = { day: starttime_str, time_slot: timeslot, company: current_user.getUser, application_id: session[:application_id], status: "Pending"}
-        @intr = Interview.new(interview_params)
-        timeslot += 1
-        error = @intr.save and error
-      end
+      @intr, error = Interview.new_in_row(starttime_str, endtime_str, current_user.getUser, session[:application_id])
       time_slot_reponse(error)
     end
   end
