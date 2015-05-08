@@ -19,6 +19,19 @@ class Interview < ActiveRecord::Base
     belongs_to :student
     belongs_to :application
 
+    def new_in_row(start, ending, company, application_id)
+      timeslot = Appointment.string_to_timeslot(start)
+      endslot = Appointment.string_to_timeslot(ending)
+      error = false
+      while timeslot < endslot do
+        interview_params = { day: start, time_slot: timeslot, company: company, application_id: application_id, status: "Pending"}
+        intr = Interview.new(interview_params)
+        timeslot += 1
+        error = intr.save and error
+      end
+      [intr, error]
+    end
+
     def as_json(options = {})
 
         title = self.student == nil ? "Empty" : self.student.last_name

@@ -21,7 +21,7 @@ Background: Adding jobs to database
     | first_name   | last_name  | college_id   | major_id     | graduation_date   | resume_link |account_id |
     | Mark         | Sharp      | 1            | 1            | 2016-10-10        | example.com |1          |
   
-    And I am on the account_login page
+    And I am on logout page
     Then I enter "shuang@berkeley.edu" into "email" 
     And I enter "careernet" into "password" 
     And I press "Log In" button
