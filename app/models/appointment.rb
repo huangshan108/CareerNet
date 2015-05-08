@@ -20,19 +20,12 @@ class Appointment < ActiveRecord::Base
 
     def as_json(options = {})
         title = self.student == nil ? "Empty" : self.student.last_name
-        #time_slot 1 -> 10 a.m.
+        # time_slot 1 -> 10 a.m.
         # 20 minute increment until 4p.m.
         # min 0, max 18
         start_datetime = self.day.to_s + " " + Appointment.timeslot_to_string(self.time_slot)
         end_datetime = self.day.to_s + " " + Appointment.timeslot_to_string(self.time_slot + 1)
-        {
-            :title => title,
-            :start => start_datetime,
-            :end => end_datetime,
-            :allDay => false,
-            :id => id,
-            :detailURL => Rails.application.routes.url_helpers.appointments_path
-        }
+        { :title => title, :start => start_datetime, :end => end_datetime, :allDay => false, :id => id, :detailURL => Rails.application.routes.url_helpers.appointments_path }
     end
 
     def self.timeslot_to_string(time_slot)
