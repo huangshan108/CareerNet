@@ -4,9 +4,8 @@ class ProfilesController < ApplicationController
 
   def student
     if authorize([:staff, :company, :student, :self])
-      id = params[:id]
       @id_1 = params[:id]
-      @student = Student.find(id)
+      @student = Student.find(@id_id)
       @current_user = current_user
       @all_companies = Company.select("id", "name")
     end
@@ -14,15 +13,13 @@ class ProfilesController < ApplicationController
 
   def company
     if authorize([:all])
-      id = params[:id]
-      @company = Company.find(id)
+      @company = Company.find(params[:id])
     end
   end
 
   def staff
     if authorize([:all])
-      id = params[:id]
-      @staff = Staff.find(id)
+      @staff = Staff.find(params[:id])
     end
   end
 
@@ -40,8 +37,7 @@ class ProfilesController < ApplicationController
 
   def edit_student
     if authorize([:staff, :student, :self])
-      id = params[:id] # retrieve student ID from URI route
-      @student = Student.find(id)
+      @student = Student.find(params[:id])
       @all_schools = College.select("id", "school_name")
       @all_majors = Major.select("id", "name")
       @all_skills = Skill.select("id", "name")
@@ -52,15 +48,13 @@ class ProfilesController < ApplicationController
 
   def edit_company
     if authorize([:staff, :company, :self])
-      id = params[:id]
-      @company = Company.find(id)
+      @company = Company.find(params[:id])
     end
   end
 
   def edit_staff
     if authorize([:staff, :self])
-      id = params[:id]
-      @staff = Staff.find(id)
+      @staff = Staff.find(params[:id])
     end
   end
 
@@ -69,7 +63,6 @@ class ProfilesController < ApplicationController
       company = Company.find(params[:id])
       premitted_attributes = [:name, :city, :state, :country, :industry, :website]
       company.update_attributes(create_new_attrs(premitted_attributes, params))
-      company.save
       flash[:notice] = "Profile Updated!"
       redirect_to(company_profile_path(company))
     end
@@ -80,7 +73,6 @@ class ProfilesController < ApplicationController
       staff = Staff.find(params[:id])
       premitted_attributes = [:first_name, :last_name, :description]
       staff.update_attributes(create_new_attrs(premitted_attributes, params))
-      staff.save
       flash[:notice] = "Profile Updated!"
       redirect_to(staff_profile_path(staff))
     end
@@ -119,8 +111,7 @@ class ProfilesController < ApplicationController
 
   def school
     if authorize([:all])
-      id = params[:id] # retrieve student ID from URI route
-      @college = College.find(id)
+      @college = College.find(params[:id])
     end
   end
 
@@ -167,12 +158,11 @@ class ProfilesController < ApplicationController
     redirect_to(single_student_profile_path(student))
   end
   
-  
- def update_past_education
+  def update_past_education
    student = Student.find(params[:id])
    premitted_attributes = [:school_name, :student_id, :major, :start_date, :graduation_date]
    student.educations.create(create_new_attrs(premitted_attributes, params))
    student.save
    redirect_to(single_student_profile_path(student))
- end
+  end
 end
