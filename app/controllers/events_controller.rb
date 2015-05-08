@@ -40,12 +40,22 @@ class EventsController < ApplicationController
 
   def create
     if authorize([:staff, :company])
-      @time_start = Time.new(params[:time_start]["{:prompt=>true}(1i)"].to_i, params[:time_start]["{:prompt=>true}(2i)"].to_i, params[:time_start]["{:prompt=>true}(3i)"].to_i, params[:time_start]["{:prompt=>true}(4i)"].to_i, params[:time_start]["{:prompt=>true}(5i)"].to_i)
-      @time_end = Time.new(params[:time_end]["{:prompt=>true}(1i)"].to_i, params[:time_end]["{:prompt=>true}(2i)"].to_i, params[:time_end]["{:prompt=>true}(3i)"].to_i, params[:time_end]["{:prompt=>true}(4i)"].to_i, params[:time_end]["{:prompt=>true}(5i)"].to_i)
-      @event = Event.create(:title => params[:title], :time_start => @time_start, :time_end => @time_end, :description => params[:description], :location => params[:location])
+      @time_start = Time.new(generate_time_arr(params, 5))
+      @time_end = Time.new(generate_time_arr(params, 5))
+      premitted_attributes = [:title, :description, :location]
+      @event = Event.create(:time_start => @time_start, :time_end => @time_end)
+      @event.update_attributes(create_new_attrs(premitted_attributes, params))
       flash[:notice] = "Successfully created event."
       redirect_to events_path
     end
+  end
+
+  def generate_time_arr(params, times)
+    arr = []
+    times.times do |i|
+      arr << params[:time_start]["{:prompt=>true}(1#{i})"].to_i
+    end
+    arr
   end
 
   def destroy
