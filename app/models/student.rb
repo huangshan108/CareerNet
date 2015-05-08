@@ -50,23 +50,4 @@ class Student < ActiveRecord::Base
 
 	has_many :educations, dependent: :destroy
 
-
-  def getInterviews(start_date, end_date)
-    self.interviews.select{|i| 
-      i.day >= start_date.to_date and i.day <= end_date.to_date
-    }
-  end
-
-  def getEvents(start_date, end_date)
-    self.account.events.select{ |e|
-      e.time_start >= start_date.to_date and e.time_end <= end_date.to_date
-    }
-  end
-
-  def getAppointments(start_date, end_date)
-    self.appointments.select{|a| 
-      a.day >= start_date.to_date and a.day <= end_date.to_date
-    }
-  end
-
 end

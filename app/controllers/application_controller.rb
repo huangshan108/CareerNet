@@ -91,6 +91,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def create_new_attrs(premitted_attributes, params)
+    obj = {}
+    premitted_attributes.each do |attr_field|
+      obj[attr_field] = params[attr_field]
+    end 
+    return obj
+  end
+
   private
 
   def confirm_logged_in

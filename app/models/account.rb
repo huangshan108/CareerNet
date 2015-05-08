@@ -42,5 +42,23 @@ class Account < ActiveRecord::Base
             return nil
         end
     end 
-            
+
+  def getInterviews(start_date, end_date)
+    self.getUser.interviews.select{|i| 
+      i.day >= start_date.to_date and i.day <= end_date.to_date
+    }
+  end
+
+  def getEvents(start_date, end_date)
+    self.getUser.account.events.select{ |e|
+      e.time_start >= start_date.to_date and e.time_end <= end_date.to_date
+    }
+  end
+
+  def getAppointments(start_date, end_date)
+    self.getUser.appointments.select{|a| 
+      a.day >= start_date.to_date and a.day <= end_date.to_date
+    }
+  end
+    
 end
