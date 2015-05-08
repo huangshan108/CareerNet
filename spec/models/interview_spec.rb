@@ -34,43 +34,6 @@ describe Interview do
 
   end
 
-  describe 'string_to_timeslot' do
-      it 'should return 4 for 11:00:00' do
-          @result = Interview.string_to_timeslot("11:00:00")
-          expect(@result).to eq(4)
-      end
-
-      it 'should return 5 for 11:20:00' do
-          @result = Interview.string_to_timeslot("11:20:00")
-          expect(@result).to eq(5)
-          @result = Interview.string_to_timeslot("11:40:00")
-          expect(@result).to eq(6)
-          @result = Interview.string_to_timeslot("12:00:00")
-          expect(@result).to eq(7)
-      end
-
-      it 'should return 0 when input in bogus' do
-        @result = Interview.string_to_timeslot("cat")
-        expect(@result).to eq(0)
-      end
-
-      it 'should return 0 when appointment time not within range' do
-        @result = Interview.string_to_timeslot("18:20:00")
-        expect(@result).to eq(0)
-      end
-  end
-
-  describe 'timeslot_to_string' do
-    it 'should have basic functionality' do
-          @result = Interview.timeslot_to_string(5)
-          expect(@result).to eq("11:20:00")
-          @result = Interview.timeslot_to_string(6)
-          expect(@result).to eq("11:40:00")
-          @result = Interview.timeslot_to_string(7)
-          expect(@result).to eq("12:00:00")
-    end
-  end
-
   describe 'as_json' do
     before :each do
       @day = "2015-2-3".to_date
