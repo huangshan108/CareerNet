@@ -82,9 +82,7 @@ class ProfilesController < ApplicationController
     if authorize([:student, :self])
       student = Student.find(params[:id])
       premitted_attributes = [:first_name, :last_name, :college_id, :major_id, :graduation_date, :class_of, :resume_link, :notes]
-      if params[:graduation_date]
-        student.update_attributes(:class_of => Date.parse(params[:graduation_date]).year)
-      end
+      student.update_attributes(:class_of => Date.parse(params[:graduation_date]).year)
       student.update_attributes(create_new_attrs(premitted_attributes, params))
       flash[:notice] = "Profile Updated!"
       redirect_to(single_student_profile_path(student))
