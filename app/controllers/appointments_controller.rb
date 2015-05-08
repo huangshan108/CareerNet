@@ -98,7 +98,7 @@ class AppointmentsController < ApplicationController
   def student_update
     appointment = Appointment.find(params[:id])
     if appointment.student == nil
-      appointment.update_attributes(:student => Account.find(session[:user_id]).student, :reason => params[:reason], :description => params[:description])
+      appointment.update_attributes(:student => current_user.student, :reason => params[:reason], :description => params[:description])
       flash[:notice] = "Appointment has been made."
       redirect_to(appointment_student_show_path)
     else
