@@ -28,6 +28,20 @@ class Appointment < ActiveRecord::Base
         { :title => title, :start => start_datetime, :end => end_datetime, :allDay => false, :id => id, :detailURL => Rails.application.routes.url_helpers.appointments_path }
     end
 
+    def self.new_in_row(start, ending, staff)
+      timeslot = Appointment.string_to_timeslot(start)
+      endslot = Appointment.string_to_timeslot(ending)
+      error = false
+      while timeslot < endslot do
+        appt_params = { day: start, time_slot: timeslot, staff: staff}
+        appt = Appointment.new(appt_params)
+        timeslot += 1
+        error = appt.save and error
+      end
+      [appt, error]
+    end
+
+
     def self.timeslot_to_string(time_slot)
         hour = (time_slot - 1) / 3 + 10 
         min = (time_slot - 1)  % 3 * 20

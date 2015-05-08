@@ -25,15 +25,9 @@ class AppointmentsController < ApplicationController
     if authorize([:staff])
       starttime_str = params[:start].to_s
       endtime_str = params[:end].to_s
-      timeslot = Appointment.string_to_timeslot(starttime_str)
-      endslot = Appointment.string_to_timeslot(endtime_str)
-      error = false
-      while timeslot < endslot do
-        appt_params = { day: starttime_str, time_slot: timeslot, staff: current_user.getUser }
-        @appt = Appointment.new(appt_params)
-        timeslot += 1
-        error = @appt.save and error
-      end
+      new_in_row = Appointment.new_in_row(starttime_str, endtime_str, current_user.getUser)
+      @appt = new_in_row[0]
+      error = new_in_row[1]
       time_slot_reponse(error)
     end
   end
@@ -67,7 +61,8 @@ class AppointmentsController < ApplicationController
 
   def destroy
     if authorize([:staff])
-      Appointment.find(params[:id]).destroy
+      error = Appointment.find(params[:id]).destroy
+      render :json => error
     end
   end
 

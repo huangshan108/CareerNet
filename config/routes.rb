@@ -64,7 +64,7 @@ Rails.application.routes.draw do
   post 'appointments/staff/new' => 'appointments#staff_new', :as => :new_staff_appointments
   get 'appointments/:id' => 'appointments#show', :as => :show_appointment
   post 'appointments/:id' => 'appointments#staff_update', :as => :update_appointment
-  delete 'appointments/staff/:id' => 'appointments#destroy', :as => :cancel_appointment
+  delete 'appointments/staff/:id' => 'appointments#destroy', :defaults => { :format => 'json' }, :as => :cancel_appointment
 
   get 'appointments' => 'appointments#index', :as => :appointments
 
