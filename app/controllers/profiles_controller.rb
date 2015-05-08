@@ -67,12 +67,8 @@ class ProfilesController < ApplicationController
   def update_company
     if authorize([:staff, :company, :self])
       company = Company.find(params[:id])
-      company.update_attributes(:name => params[:name],
-                                :city => params[:city],
-                                :state => params[:state],
-                                :country => params[:country],
-                                :industry => params[:industry],
-                                :website => params[:website])
+      premitted_attributes = [:name, :city, :state, :country, :industry, :website]
+      company.update_attributes(create_new_attrs(premitted_attributes, params))
       company.save
       flash[:notice] = "Profile Updated!"
       redirect_to(company_profile_path(company))
@@ -82,9 +78,8 @@ class ProfilesController < ApplicationController
   def update_staff
     if authorize([:staff, :self])
       staff = Staff.find(params[:id])
-      staff.update_attributes(:first_name => params[:first_name],
-                              :last_name => params[:last_name],
-                              :description => params[:description])
+      premitted_attributes = [:first_name, :last_name, :description]
+      staff.update_attributes(create_new_attrs(premitted_attributes, params))
       staff.save
       flash[:notice] = "Profile Updated!"
       redirect_to(staff_profile_path(staff))
@@ -94,42 +89,20 @@ class ProfilesController < ApplicationController
   def update_student
     if authorize([:student, :self])
       student = Student.find(params[:id])
-      student.update_attributes(:first_name => params[:first_name],
-                                :last_name => params[:last_name],
-                                :college_id => params[:college_id],
-                                :major_id => params[:major_id],
-                                :graduation_date => params[:graduation_date],
-                                :class_of => Date.parse(params[:graduation_date]).year,
-                                :resume_link => params[:resume_link],
-                                :notes => params[:notes])
-      skill_id_list = student.skill_ids
-
-      if not params[:add_skill_name].empty?
-        if Skill.where(:name => params[:add_skill_name]).empty?
-          skill = {}
-          skill[:name] = params[:add_skill_name]
-          s = Skill.create(skill)
-          s.update_attributes(:id => s.id)
-          skill_id_list << s.id.to_i
-          student.skill_ids = skill_id_list
-        else
-          if not skill_id_list.include? Skill.where(:name => params[:add_skill_name]).first.id
-            skill_id_list << Skill.where(:name => params[:add_skill_name]).first.id
-            student.skill_ids = skill_id_list
-          end
-        end
-      end
-      if not params[:remove_skill_name].empty?
-        if not Skill.where(:name => params[:remove_skill_name]).empty?
-          s_id = student.skills.where(:name => params[:remove_skill_name]).first.id
-          skill_id_list.delete(s_id.to_i)
-          student.skill_ids = skill_id_list
-        end
-      end      
-      student.save
+      premitted_attributes = [:first_name, :last_name, :college_id, :major_id, :graduation_date, :class_of, :resume_link, :notes]
+      student.update_attributes(:class_of => Date.parse(params[:graduation_date]).year)
+      student.update_attributes(create_new_attrs(premitted_attributes, params))
       flash[:notice] = "Profile Updated!"
       redirect_to(single_student_profile_path(student))
     end
+  end
+
+  def create_new_attrs(premitted_attributes, params)
+    obj = {}
+    premitted_attributes.each do |attr_field|
+      obj[attr_field] = params[attr_field]
+    end 
+    return obj
   end
 
   def list_students
@@ -153,44 +126,43 @@ class ProfilesController < ApplicationController
 
   def update_past_experience
   	student = Student.find(params[:id])
-  	experience = {:company_id => params[:company_id],
-                       :student_id => params[:id],
-                       :city => params[:city],
-                       :state => params[:state],
-                       :country => params[:country],
-                       :salary => params[:salary],
-                       :job_title => params[:job_title]
-                       }
-    student.experiences.create(experience);
+    premitted_attributes = [:company_id, :student_id, :city, :state, :country, :salary, :job_title]
+    student.experiences.create(create_new_attrs(premitted_attributes, params))
     student.save
     redirect_to(single_student_profile_path(student))
   end
 
   def delete_past_experience
-  	student = Student.find(params[:id])
-    student.experiences.destroy(params[:ex_id]);
+    delete_past("experience")
+  end
+
+  def delete_past_education
+    delete_past("education")
+  end
+  
+  def delete_past(field)
+    student = Student.find(params[:id])
+    case field
+    when "experience"
+      student.experiences.destroy(params[:ex_id])      
+    when "education"
+      student.educations.destroy(params[:edu_id])
+    end
     student.save
     redirect_to(single_student_profile_path(student))
   end
   
-  
   def update_past_project
     student = Student.find(params[:id])
-    past_project = {:project_name => params[:project_name],
-        :student_id => params[:id],
-        :position => params[:position],
-        :description => params[:description],
-        :start_date => params[:start_date],
-        :end_date => params[:end_date]
-    }
-    student.projects.create(past_project);
+    premitted_attributes = [:project_name, :student_id, :position, :description, :start_date, :end_date]
+    student.projects.create(create_new_attrs(premitted_attributes, params))
     student.save
     redirect_to(single_student_profile_path(student))
   end
   
   def delete_past_project
     student = Student.find(params[:id])
-    student.projects.destroy(params[:proj_id]);
+    student.projects.destroy(params[:proj_id])
     student.save
     redirect_to(single_student_profile_path(student))
   end
@@ -198,25 +170,9 @@ class ProfilesController < ApplicationController
   
  def update_past_education
    student = Student.find(params[:id])
-   past_education = {:school_name => params[:school_name],
-       :student_id => params[:id],
-       :major => params[:major],
-       :start_date => params[:start_date],
-       :graduation_date => params[:graduation_date]
-   }
-   student.educations.create(past_education);
+   premitted_attributes = [:school_name, :student_id, :major, :start_date, :graduation_date]
+   student.educations.create(create_new_attrs(premitted_attributes, params))
    student.save
    redirect_to(single_student_profile_path(student))
  end
- 
- def delete_past_education
-   student = Student.find(params[:id])
-   student.educations.destroy(params[:edu_id]);
-   student.save
-   redirect_to(single_student_profile_path(student))
- end
-
-  
-
-
 end
