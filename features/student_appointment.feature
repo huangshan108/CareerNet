@@ -64,6 +64,7 @@ Then I should see "Welcome to CareerNet"
         When I follow "Edit profile"
         Then I should be on edit profile page
         When I fill in First Name with "Amy"
+        When I enter "2017-04-17" into "graduation_date"
         And I press "Submit"
         Then I should see "Amy"
 

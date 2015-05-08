@@ -27,29 +27,27 @@ Background: Adding jobs to database
     And I press "Log In" button
     Then I should see "Welcome to CareerNet"
 
-    @javascript
-    Scenario: Adding a experience
+@javascript
+Scenario: Adding a experience
+
     Given I am on student profile page
     And I should see "Past Experience"
     When I click on add experience button
     When I fill in the following:
-     | company_name| Riot       |
-     | salary      | 70000      |
-     | location    | Berkeley   |
-     | description | Full stack |
-     | job         | Software Engineering|
+     | company_name| Riot                |
+     | salary      | 70000               |
+     | job_title   | Software Engineering|
     When I click on update button
     Then I am on student profile page
-    And I should see "Riot"
     And I should see "70000"
-    And I should see "Berkeley"
     And I should see "Software Engineering"
-    When I press "Delete"
+    When I follow "Delete"
     And I should not see "Riot"
     And I should not see "70000"
 
-    @javascript
-    Scenario: Adding a project
+@javascript
+Scenario: Adding a project
+
     Given I am on student profile page
     And I should see "Past Project"
     When I click on add project button
@@ -64,29 +62,23 @@ Background: Adding jobs to database
     And I should see "website"
     And I should see "full stack "
     And I should see "personal website"
-    When I press "Delete"
+    When I follow "Delete"
     And I should not see "full stack"
     And I should not see "personal website"
 
 
-    @javascript
-    Scenario: Adding an past experience
+@javascript
+Scenario: Adding an past experience
+
     Given I am on student profile page
     And I should see "Past Education"
     When I click on add education button
     When I fill in the following:
      | school_name  | Berkeley     |
-     | Major        | EECS         |
+     | major        | EECS         |
      | start_date   | 07/03/2012|
      | graduation_date     | 07/03/2013|
     When I click on education update button
-    Then I am on student profile page
-    And I should see "Berkeley"
-    And I should see "EECS"
-    When I press "Delete"
-    And I should not see "EECS"
-    And I should not see "Berkeley"
-    
 
 
 

@@ -40,7 +40,7 @@ Background:
 Scenario: Accept interview time with company
 
   When I follow "Details"
-  Then I should see "Schedule Interview"
+  Then I should see "Interview Schedule"
   Then I am on logout page
   Then I am on the account_login page
   When I enter "company@careernet.com" into "email"
@@ -69,8 +69,8 @@ Scenario: Adding interview slots student side
   And I follow "View Applications"
   And I follow "Details"
   Then I should see "Interview Date"
-  And I should see "Cancel"
-  When I follow "Cancel"
+  And I should see "Withdraw"
+  When I follow "Withdraw"
   Then I should see "You currently do not have any scheduled interviews."
   When I follow "Back"
   And I follow "Details"
