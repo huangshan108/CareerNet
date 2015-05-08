@@ -3,13 +3,10 @@ require 'faker'
 FactoryGirl.define do  
 
   factory :experience do
-    industry "MyString"
-    yr_exp 1
     salary 1
     city "MyString"
     state "MyString"
     country "MyString"
-    org_name "MyString"
     job_title "MyString"
     
   end
