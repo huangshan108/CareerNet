@@ -1,6 +1,7 @@
 # CareerNet
 
 [![Build Status](https://travis-ci.org/huangshan108/CareerNet.svg?branch=master)](https://travis-ci.org/huangshan108/CareerNet)
+[![Code Climate](https://codeclimate.com/github/huangshan108/CareerNet/badges/gpa.svg)](https://codeclimate.com/github/huangshan108/CareerNet)
 
 Herokuapp Link: http://careernet.herokuapp.com/
 

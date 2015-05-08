@@ -20,16 +20,15 @@ class CalendarController < ApplicationController
     end
 
     def serveData(type)
-        currentUser = current_user.getUser
         data = []
         if params[:confirmed] == 'true'
             case type
             when :events
-                data = currentUser.getEvents(params[:start], params[:end])
+                data = current_user.getEvents(params[:start], params[:end])
             when :appointments
-                data = currentUser.getAppointments(params[:start], params[:end])
+                data = !is_company? ? current_user.getAppointments(params[:start], params[:end]) : []
             when :interviews
-                data = currentUser.getInterviews(params[:start], params[:end])
+                data = !is_staff? ? current_user.getInterviews(params[:start], params[:end]) : []
             else
             end
         else

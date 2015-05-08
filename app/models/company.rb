@@ -25,22 +25,6 @@ class Company < ActiveRecord::Base
 	has_many :interviews
 	has_many :students, :foreign_key => :company_id, :class_name => "Experience"
 
-    def getInterviews(start_date, end_date)
-        self.interviews.select{|i| 
-            i.day >= start_date.to_date and i.day <= end_date.to_date
-        }
-    end
-
-    def getEvents(start_date, end_date)
-        self.account.events.select{ |e|
-            e.time_start >= start_date.to_date and e.time_end <= end_date.to_date
-        }
-    end
-
-    def getAppointments(start_date, end_date)
-        []
-    end
-
   def self.get_company_vis_data(countries, genders, classes)
 		response = GeneralStats.get_vis_data("Company", countries, genders, classes)
 		# possible pre processing before return
