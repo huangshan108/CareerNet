@@ -15,41 +15,22 @@ class InterviewsController < ApplicationController
     if authorize([:company])
       starttime_str = params[:start].to_s
       endtime_str = params[:end].to_s
-      timeslot = Interview.string_to_timeslot(starttime_str)
-      endslot = Interview.string_to_timeslot(endtime_str)
+      timeslot = Appointment.string_to_timeslot(starttime_str)
+      endslot = Appointment.string_to_timeslot(endtime_str)
       error = false
       while timeslot < endslot do
-        interview_params = { day: starttime_str, time_slot: timeslot, company: curr_company, application_id: session[:application_id], status: "Pending"}
+        interview_params = { day: starttime_str, time_slot: timeslot, company: current_user.getUser, application_id: session[:application_id], status: "Pending"}
         @intr = Interview.new(interview_params)
         timeslot += 1
         error = @intr.save and error
       end
-
-      respond_to do |format|
-        if error
-            format.json { render json: {msg: 'You have successfully registed your slot.'} }
-        else
-            format.json { render json: {msg: 'Error. Your interview slot was not registered.'}, :status => 500 }
-        end
-      end
-    end
-  end
-
-  def curr_company
-    if authorize([:company])
-      @account = current_user
-      if @account.company == nil
-          Company.new(account: @account)
-      else
-          @account.company
-      end
+      time_slot_reponse(error)
     end
   end
 
   def index_company
     if authorize([:company])
-      @company = curr_company
-      @interviews = @company.interviews.between(params[:start], params[:end]) if (params[:start] && params[:end])
+      @interviews = current_user.getUser.interviews.between(params[:start], params[:end]) if (params[:start] && params[:end])
 
       respond_to do |format|
         format.html

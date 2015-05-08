@@ -29,36 +29,18 @@ class AppointmentsController < ApplicationController
       endslot = Appointment.string_to_timeslot(endtime_str)
       error = false
       while timeslot < endslot do
-        appt_params = { day: starttime_str, time_slot: timeslot, staff: curr_staff }
+        appt_params = { day: starttime_str, time_slot: timeslot, staff: current_user.getUser }
         @appt = Appointment.new(appt_params)
         timeslot += 1
         error = @appt.save and error
       end
-      
-      respond_to do |format|
-        if error
-            format.json { render json: {msg: 'You have successfully registed your slot.'} }
-        else
-            format.json { render json: {msg: 'Error. Your appointment was not registered.'}, :status => 500 }
-        end
-      end
-    end
-  end
-
-  def curr_staff
-    if authorize([:staff])
-      @account = current_user
-      if @account.staff == nil
-          Staff.new(account: @account)
-      else
-          @account.staff
-      end
+      time_slot_reponse(error)
     end
   end
 
   def index_staff
     if authorize([:staff])
-      @staff = curr_staff
+      @staff = current_user.getUser
       @appointments = @staff.appointments.between(params[:start], params[:end]) \
        if (params[:start] && params[:end])
 
@@ -86,9 +68,6 @@ class AppointmentsController < ApplicationController
   def destroy
     if authorize([:staff])
       Appointment.find(params[:id]).destroy
-      respond_to do |format|
-          format.json { render :json => true }
-      end
     end
   end
 

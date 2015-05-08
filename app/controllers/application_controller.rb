@@ -103,6 +103,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def time_slot_reponse(error)
+    respond_to do |format|
+      if error
+          format.json { render json: {msg: 'You have successfully registed your slot.'} }
+      else
+          format.json { render json: {msg: 'Error. Your interview slot was not registered.'}, :status => 500 }
+      end
+    end
+  end
+
   # Private method used to login as a fake user
   # Credit: http://library.edgecase.com/oath-and-capybara
   private
