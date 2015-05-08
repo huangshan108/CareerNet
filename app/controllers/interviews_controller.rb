@@ -78,7 +78,7 @@ class InterviewsController < ApplicationController
 
   def student_new
     if authorize([:student])
-      @student = Account.find(session[:user_id]).student
+      @student = current_user.student
       @application = Application.find params[:application_id]
       @interviews = @application.interviews
       if @interviews.any? {|interview| interview.student}
